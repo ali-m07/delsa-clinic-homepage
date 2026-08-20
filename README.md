@@ -1,9 +1,9 @@
 # کلینیک دلسا — سایت جدید (جایگزین WordPress)
 
-[![CI](https://github.com/delsaclinic/delsa-clinic-homepage/actions/workflows/ci.yml/badge.svg)](https://github.com/delsaclinic/delsa-clinic-homepage/actions/workflows/ci.yml)
-[![Pages](https://github.com/delsaclinic/delsa-clinic-homepage/actions/workflows/pages.yml/badge.svg)](https://github.com/delsaclinic/delsa-clinic-homepage/actions/workflows/pages.yml)
+[![CI](https://github.com/ali-m07/delsa-clinic-homepage/actions/workflows/ci.yml/badge.svg)](https://github.com/ali-m07/delsa-clinic-homepage/actions/workflows/ci.yml)
+[![Pages](https://github.com/ali-m07/delsa-clinic-homepage/actions/workflows/pages.yml/badge.svg)](https://github.com/ali-m07/delsa-clinic-homepage/actions/workflows/pages.yml)
 
-**پیش‌نمایش استاتیک:** https://delsaclinic.github.io/delsa-clinic-homepage/
+**پیش‌نمایش استاتیک:** https://ali-m07.github.io/delsa-clinic-homepage/
 
 ## ساختار
 

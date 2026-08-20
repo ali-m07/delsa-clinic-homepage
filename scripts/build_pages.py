@@ -29,7 +29,7 @@ from sqlmodel import Session, select  # noqa: E402
 from app.database import engine  # noqa: E402
 
 # https://<user>.github.io/<repo>/
-REPO = os.environ.get("GITHUB_REPOSITORY", "delsaclinic/delsa-clinic-homepage")
+REPO = os.environ.get("GITHUB_REPOSITORY", "ali-m07/delsa-clinic-homepage")
 REPO_NAME = REPO.split("/")[-1] if "/" in REPO else REPO
 BASE_HREF = os.environ.get("PAGES_BASE_URL", f"https://delsaclinic.github.io/{REPO_NAME}/").rstrip("/") + "/"
 
