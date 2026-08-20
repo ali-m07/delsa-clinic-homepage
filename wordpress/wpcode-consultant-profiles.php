@@ -16,8 +16,8 @@ if (!defined('ABSPATH')) {
 }
 
 final class Delsa_Consultant_Profiles {
-  const TRANSIENT = 'delsa_consultant_profile_ids_v13';
-  const VERSION = '2.3.3';
+  const TRANSIENT = 'delsa_consultant_profile_ids_v14';
+  const VERSION = '2.3.4';
 
   /**
    * ۵ مشاور اصلی — slug انگلیسی (CPT /consultant/…)
@@ -1410,80 +1410,84 @@ body.delsa-consultant-profile .hentry{
   overflow:hidden;
   display:grid;
   grid-template-columns:1fr;
-  gap:1.25rem;
+  gap:1rem;
   align-items:center;
-  margin:0 0 0;
-  padding:clamp(1.25rem, 3vw, 2rem) clamp(1.15rem, 4vw, 3rem);
+  margin:0;
+  padding:1.1rem clamp(1.15rem, 4vw, 2.5rem);
   border-radius:0;
   color:#fff;
   background:linear-gradient(125deg, #0A1B2E 0%, #163A4A 55%, #1A5F5A 100%);
   box-shadow:none;
+  min-height:0;
 }
 @media(min-width:720px){
   .delsa-cp__hero{
-    grid-template-columns:minmax(220px,280px) minmax(0,1fr);
-    gap:clamp(1.25rem, 3vw, 2.5rem);
-    min-height:320px;
+    grid-template-columns:140px minmax(0,1fr);
+    gap:1.15rem;
+    padding:1.15rem clamp(1.25rem, 4vw, 2.75rem);
+    min-height:0;
   }
 }
 .delsa-cp__photo{
-  border-radius:18px;
+  border-radius:14px;
   overflow:hidden;
-  aspect-ratio:4/5;
+  aspect-ratio:1/1;
   background:rgba(255,255,255,.08);
-  max-width:240px;
+  max-width:160px;
   width:100%;
   margin-inline:auto;
-  box-shadow:0 12px 32px rgba(0,0,0,.22);
+  box-shadow:0 8px 22px rgba(0,0,0,.2);
 }
 @media(min-width:720px){
-  .delsa-cp__photo{max-width:none;margin:0}
+  .delsa-cp__photo{max-width:none;margin:0;aspect-ratio:4/5;max-height:190px}
 }
 .delsa-cp__photo img{
   width:100%;height:100%;object-fit:cover;object-position:center top;display:block;
 }
 .delsa-cp__hero-main{position:relative;z-index:1;min-width:0}
-.delsa-cp__crumb{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin:0 0 .5rem;font-size:13px;font-weight:500;color:rgba(255,255,255,.55)}
-.delsa-cp__crumb a{color:rgba(255,255,255,.88);text-decoration:none}
+.delsa-cp__crumb{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin:0 0 .35rem;font-size:12px;font-weight:500;color:rgba(255,255,255,.7)}
+.delsa-cp__crumb a{color:rgba(255,255,255,.92);text-decoration:none}
 .delsa-cp__label{
   display:inline-flex !important;
   align-items:center !important;
-  margin:0 0 .55rem !important;
-  padding:.4rem 1rem !important;
+  margin:0 0 .4rem !important;
+  padding:.3rem .85rem !important;
   font-size:12px !important;
   font-weight:700 !important;
   color:#0A1B2E !important;
-  background:var(--cp-teal) !important;
+  background:#5EE0D6 !important;
   border-radius:999px !important;
 }
 .delsa-cp__title{
-  margin:0 0 .4rem;
-  font-size:clamp(1.75rem,1.3rem + 1.6vw,2.6rem);
+  margin:0 0 .3rem;
+  font-size:clamp(1.45rem,1.2rem + 1vw,2rem);
   font-weight:800;
-  line-height:1.2;
+  line-height:1.25;
   color:#fff;
-  letter-spacing:-.03em;
+  letter-spacing:-.02em;
 }
 .delsa-cp__role{
-  margin:0 0 1.1rem;
-  font-size:1.02rem;
-  font-weight:500;
-  line-height:1.75;
-  color:rgba(255,255,255,.9);
+  margin:0 0 .85rem;
+  font-size:1.05rem !important;
+  font-weight:600 !important;
+  line-height:1.65;
+  color:#FFFFFF !important;
+  opacity:1 !important;
   max-width:40rem;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
 }
-.delsa-cp__hero-actions{display:flex;flex-wrap:wrap;gap:.65rem}
+.delsa-cp__hero-actions{display:flex;flex-wrap:wrap;gap:.55rem}
 .delsa-cp__hero-btn{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:.75rem 1.35rem;font-size:14px;font-weight:700;text-decoration:none !important;
-  border-radius:12px;color:#0A1B2E !important;background:var(--cp-teal) !important;
+  padding:.65rem 1.2rem;font-size:14px;font-weight:700;text-decoration:none !important;
+  border-radius:12px;color:#0A1B2E !important;background:#5EE0D6 !important;
 }
-.delsa-cp__hero-btn--ghost{color:#fff !important;background:transparent !important;border:1.5px solid rgba(255,255,255,.5) !important}
+.delsa-cp__hero-btn--ghost{color:#fff !important;background:transparent !important;border:1.5px solid rgba(255,255,255,.65) !important}
 .delsa-cp__card{
   background:#fff;
   border:0;
   border-radius:0;
-  padding:clamp(1.35rem, 3vw, 2rem) clamp(1.15rem, 4vw, 3rem) 2rem;
+  padding:clamp(1.35rem, 2.5vw, 1.85rem) clamp(1.15rem, 4vw, 2.75rem) 1.75rem;
   box-shadow:none;
   overflow:hidden;
   max-width:none;
@@ -1493,9 +1497,9 @@ body.delsa-consultant-profile .entry-content h2,
 body.delsa-consultant-profile .entry-content h3,
 body.delsa-consultant-profile .delsa-cp__card h2,
 body.delsa-consultant-profile .delsa-cp__card h3{
-  margin:1.35rem 0 .55rem !important;padding:0 0 .4rem !important;
+  margin:1.25rem 0 .55rem !important;padding:0 0 .4rem !important;
   font-family:var(--cp-font) !important;
-  font-size:clamp(1.05rem, .95rem + .4vw, 1.2rem) !important;
+  font-size:1.2rem !important;
   font-weight:800 !important;color:var(--cp-ink) !important;
   border-bottom:2px solid #d8f0ed !important;text-align:right !important;
   letter-spacing:-.02em !important;
@@ -1505,35 +1509,35 @@ body.delsa-consultant-profile .delsa-cp__card h2:first-child{margin-top:0 !impor
 body.delsa-consultant-profile .entry-content p,
 body.delsa-consultant-profile .delsa-cp__card p{
   font-family:var(--cp-font) !important;
-  font-size:1rem !important;
+  font-size:1.12rem !important;
   font-weight:400 !important;
-  line-height:1.9 !important;
-  color:var(--cp-muted) !important;
+  line-height:1.95 !important;
+  color:#2A3B4A !important;
   text-align:justify !important;
 }
 body.delsa-consultant-profile .entry-content ul,
 body.delsa-consultant-profile .delsa-cp__card ul{
-  margin:.35rem 0 1rem !important;padding:0 1.15rem 0 0 !important;
+  margin:.35rem 0 1rem !important;padding:0 1.2rem 0 0 !important;
   list-style:disc !important;
 }
 body.delsa-consultant-profile .entry-content li,
 body.delsa-consultant-profile .delsa-cp__card li{
-  margin:0 0 .45rem !important;
+  margin:0 0 .5rem !important;
   font-family:var(--cp-font) !important;
-  font-size:1rem !important;
+  font-size:1.1rem !important;
   font-weight:400 !important;
-  line-height:1.85 !important;
-  color:var(--cp-muted) !important;
+  line-height:1.9 !important;
+  color:#2A3B4A !important;
 }
 .delsa-cp__cta{
   display:flex;flex-wrap:wrap;gap:.75rem;
   margin:0;
-  padding:0 clamp(1.15rem, 4vw, 3rem) 2rem;
+  padding:0 clamp(1.15rem, 4vw, 2.75rem) 2rem;
   background:#fff;
 }
 .delsa-cp__btn{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:.8rem 1.4rem;font-size:14px;font-weight:700;text-decoration:none !important;
+  padding:.8rem 1.4rem;font-size:15px;font-weight:700;text-decoration:none !important;
   border-radius:12px;color:#fff !important;background:var(--cp-teal);
   font-family:var(--cp-font) !important;
 }
