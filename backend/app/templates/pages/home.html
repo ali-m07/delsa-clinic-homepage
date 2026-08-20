@@ -23,13 +23,24 @@
       <p class="hero__lead" data-hero-item>مسیر سلامت روان را ساده، امن و تخصصی طی کنید؛ با تیمی که واقعاً کنارتان می‌ماند.</p>
       <div class="hero__actions" data-hero-item>
         <a href="{{ book_url }}" class="btn btn--primary">درخواست وقت ملاقات</a>
-        <a href="tel:{{ settings.phone_mobile }}" class="btn btn--ghost">تماس مستقیم</a>
+        <a href="tel:{{ settings.phone_mobile }}" class="btn btn--ghost" aria-label="تماس مستقیم تلفنی با شماره {{ settings.phone_mobile }}">تماس مستقیم {{ settings.phone_mobile }}</a>
       </div>
     </div>
   </div>
 
   <div class="hero__dots" id="hero-dots" role="tablist" aria-label="اسلایدهای فضای کلینیک"></div>
 </section>
+
+<div class="home-contact" data-reveal>
+  <div class="container home-contact__inner">
+    <a class="home-contact__phone dir-ltr" href="tel:{{ settings.phone_mobile }}">{{ settings.phone_mobile }}</a>
+    {% if settings.phone_landline %}
+    <span class="home-contact__sep" aria-hidden="true">·</span>
+    <a class="home-contact__phone dir-ltr" href="tel:{{ settings.phone_landline }}">{{ settings.phone_landline }}</a>
+    {% endif %}
+    <span class="home-contact__note">تماس مستقیم با پذیرش</span>
+  </div>
+</div>
 
 <section class="trust-strip" aria-label="آمار کلینیک">
   <div class="container">
@@ -82,7 +93,7 @@
     <div class="section__head" data-reveal>
       <p class="section__kicker">چرا ما</p>
       <h2>چرا دلسا</h2>
-      <p>اعتماد، تخصص و دسترسی آسان — در فضایی که برای شنیده شدن طراحی شده است</p>
+      <p>اعتماد، تخصص و دسترسی آسان، در فضایی که برای شنیده شدن طراحی شده است</p>
     </div>
     <div class="why-grid">
       <article class="why-card" data-reveal>
@@ -157,20 +168,26 @@
       <p>سه قدم ساده تا شروع همراهی تخصصی</p>
     </div>
     <ol class="steps">
-      <li class="step" data-reveal>
-        <span class="step__num">۱</span>
-        <h3>درخواست وقت</h3>
-        <p>فرم آنلاین را پر کنید یا تماس بگیرید</p>
+      <li data-reveal>
+        <a class="step" href="{{ book_url }}">
+          <span class="step__num">۱</span>
+          <h3>درخواست وقت</h3>
+          <p>فرم آنلاین را پر کنید یا تماس بگیرید</p>
+          <span class="step__hint">رفتن به فرم نوبت</span>
+        </a>
       </li>
-      <li class="step" data-reveal>
-        <span class="step__num">۲</span>
-        <h3>هماهنگی جلسه</h3>
-        <p>تیم پذیرش زمان و دپارتمان مناسب را هماهنگ می‌کند</p>
+      <li data-reveal>
+        <a class="step" href="{{ book_url }}">
+          <span class="step__num">۲</span>
+          <h3>هماهنگی جلسه</h3>
+          <p>تیم پذیرش زمان و دپارتمان مناسب را هماهنگ می‌کند</p>
+          <span class="step__hint">شروع هماهنگی</span>
+        </a>
       </li>
       <li class="step" data-reveal>
         <span class="step__num">۳</span>
         <h3>شروع جلسات</h3>
-        <p>حضوری، تلفنی یا آنلاین — متناسب با نیاز شما</p>
+        <p>حضوری، تلفنی یا آنلاین، متناسب با نیاز شما</p>
       </li>
     </ol>
   </div>

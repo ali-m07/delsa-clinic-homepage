@@ -1,6 +1,6 @@
-<!-- DELSA homepage، یک فایل برای پیست در Elementor HTML Widget -->
-<!-- بدون هدر/فوتر، کل محتوا را یک‌جا کپی کنید -->
-<!-- اگر انیمیشن کار نکرد: همین <script> را در Elementor → Custom Code → Footer هم بگذارید -->
+<!-- DELSA homepage · Elementor HTML Widget · v3.6.1 -->
+<!-- پنل‌های کادر‌دار، فشرده، روشن — کل محتوا را یک‌جا پیست کنید -->
+<!-- اگر انیمیشن کار نکرد: همین اسکریپت پایین را در Elementor → Custom Code → Footer هم بگذارید -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,532 +8,584 @@
 
 <style id="delsa-home-css">
 :root {
-      --navy: #0F2740;
-      --navy-deep: #0A1B2E;
-      --teal: #1FA8A0;
-      --teal-deep: #178F88;
-      --muted: #5B6B7C;
-      --cream: #F7F8FA;
-      --cream-2: #EEF1F4;
-      --terracotta: #C4846A;
-      --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --font: "Vazirmatn", Tahoma, sans-serif;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    .delsa-home {
-      font-family: var(--font);
-      color: var(--navy);
-      background:
-        radial-gradient(ellipse 80% 45% at 100% -10%, rgba(31,168,160,.09), transparent 55%),
-        #F7F8FA;
-      line-height: 1.7;
-      letter-spacing: -.01em;
-      -webkit-font-smoothing: antialiased;
-      text-align: right;
-      direction: rtl;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    ul, ol { margin: 0; padding: 0; list-style: none; }
-    .wrap {
-      width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
-      margin-inline: auto;
-    }
-    .wrap--narrow { width: min(720px, calc(100% - clamp(2rem, 6vw, 4.5rem))); }
-    .dir-ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
+  --navy: #0F2740;
+  --navy-deep: #0A1B2E;
+  --teal: #1FA8A0;
+  --teal-deep: #178F88;
+  --muted: #5B6B7C;
+  --ivory: #F3F5F7;
+  --panel: #FFFFFF;
+  --line: rgba(15,39,64,.12);
+  --terracotta: #C4846A;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --font: "Vazirmatn", Tahoma, sans-serif;
+  --radius: 16px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+.delsa-home {
+  font-family: var(--font);
+  color: var(--navy);
+  background: var(--ivory);
+  line-height: 1.7;
+  letter-spacing: -.01em;
+  -webkit-font-smoothing: antialiased;
+  text-align: right;
+  direction: rtl;
+  margin: 0; padding: 0;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+.wrap {
+  width: min(1080px, calc(100% - 1.75rem));
+  margin-inline: auto;
+}
+.wrap--narrow { width: min(720px, calc(100% - 1.75rem)); }
+.dir-ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: .95rem 1.7rem; border-radius: 14px;
-      font-size: 1.05rem; font-weight: 700; font-family: inherit; border: 0;
-      transition: transform .22s var(--ease), box-shadow .25s, background .25s, border-color .25s;
-    }
-    .btn--primary {
-      background: var(--teal); color: #fff;
-      box-shadow: 0 12px 30px rgba(31,168,160,.28);
-    }
-    .btn--primary:hover { background: var(--teal-deep); transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 40px rgba(31,168,160,.4); }
-    .btn--ghost {
-      color: #fff; border: 1px solid rgba(255,255,255,.5);
-      background: rgba(255,255,255,.1);
-    }
-    .btn--ghost:hover { background: rgba(255,255,255,.2); transform: scale(1.04); }
-    .btn--on-teal { background: #fff; color: var(--navy-deep); box-shadow: none; }
-    .btn--on-teal:hover { background: #F7F1E8; }
+.elementor-widget-html,
+.elementor-widget-html > .elementor-widget-container,
+.elementor-element:has(> .elementor-widget-html) {
+  margin: 0 !important; padding: 0 !important;
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .78rem 1.35rem; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; font-family: inherit; border: 0;
+  transition: transform .2s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+}
+.btn--primary {
+  background: var(--teal); color: #fff;
+  box-shadow: 0 10px 22px rgba(31,168,160,.25);
+}
+.btn--primary:hover { background: var(--teal-deep); transform: translateY(-1px); }
+.btn--ghost {
+  color: #fff; border: 1.5px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.16); backdrop-filter: blur(8px);
+}
+.btn--ghost:hover { background: rgba(255,255,255,.24); }
+
+/* Hero */
+.hero {
+  position: relative; margin: 0;
+  min-height: clamp(420px, 62svh, 580px);
+  display: flex; align-items: flex-end;
+  padding: clamp(4rem, 9vh, 5.5rem) 0 1.2rem;
+  overflow: hidden; color: #fff;
+  width: 100vw; max-width: 100vw;
+  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+}
+@media (min-width: 768px) {
+  .hero { min-height: clamp(460px, 64vh, 620px); padding-bottom: 1.35rem; }
+}
+.hero__media { position: absolute; inset: 0; overflow: hidden; }
+.hero__reel { position: absolute; inset: 0; will-change: transform; }
+.hero__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 38%; opacity: 0;
+}
+.hero__photo.is-active { opacity: 1; z-index: 1; }
+.hero__photo.is-leaving { z-index: 2; }
+.hero__mesh {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 78% 18%, rgba(194,164,107,.14), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 18% 78%, rgba(31,168,160,.12), transparent 55%);
+  mix-blend-mode: soft-light;
+}
+.hero__veil {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(0deg, rgba(10,27,46,.50) 0%, rgba(10,27,46,.34) 45%, rgba(10,27,46,.40) 100%),
+    linear-gradient(90deg, rgba(10,27,46,.22) 0%, rgba(10,27,46,.34) 42%, rgba(10,27,46,.58) 100%);
+}
+.hero__shine {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,.12) 48%, transparent 64%);
+}
+.hero__inner {
+  position: relative; z-index: 5;
+  width: min(1080px, calc(100% - 1.75rem));
+  margin-inline: auto;
+}
+.hero__copy {
+  max-width: 36rem; position: relative; z-index: 6;
+  text-shadow: 0 2px 18px rgba(8,18,24,.45), 0 10px 36px rgba(8,18,24,.35);
+}
+@media (max-width: 767px) {
+  .hero { padding: 4.5rem 0 1.15rem; }
+  .hero__actions .btn { flex: 1 1 auto; min-height: 2.75rem; }
+}
+.hero__brand {
+  margin: 0 0 .45rem;
+  font-size: clamp(2.4rem, 1.5rem + 3.2vw, 3.8rem);
+  font-weight: 800; letter-spacing: -.055em; line-height: .95;
+}
+.hero__title {
+  margin: 0 0 .85rem;
+  font-size: clamp(1.4rem, 1.12rem + 1.2vw, 2rem);
+  font-weight: 650; letter-spacing: -.03em; line-height: 1.32;
+  max-width: 15ch; color: #fff;
+}
+.hero__lead {
+  margin: 0 0 1.15rem; max-width: 34rem;
+  font-size: clamp(.98rem, .94rem + .18vw, 1.08rem);
+  line-height: 1.75; color: rgba(255,255,255,.88); font-weight: 450;
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.hero__dots {
+  position: absolute; z-index: 6; left: 50%; bottom: .55rem;
+  transform: translateX(-50%); display: flex; gap: .4rem; opacity: 0;
+}
+.hero__dots.is-ready { opacity: 1; }
+.hero__dot {
+  width: 20px; height: 7px; border-radius: 999px; border: 0; padding: 0;
+  background: rgba(255,255,255,.35); cursor: pointer;
+  transform: scaleX(.42); transform-origin: center;
+  transition: transform .4s var(--ease), background .35s;
+}
+.hero__dot.is-active { background: #fff; transform: scaleX(1); }
 
 
-    /* Kill Elementor default gaps around the HTML widget */
-    .elementor-widget-html,
-    .elementor-widget-html > .elementor-widget-container,
-    .elementor-element:has(> .elementor-widget-html) {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    .delsa-home { margin: 0; padding: 0; }
+.home-contact {
+  background: #fff; border-bottom: 1px solid var(--line);
+}
+.home-contact__inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: .45rem .85rem; padding: .7rem 0; font-size: .95rem;
+}
+.home-contact__phone {
+  font-weight: 750; color: var(--navy); text-decoration: underline; text-underline-offset: 3px;
+}
+.home-contact__phone:hover { color: var(--teal-deep); }
+.home-contact__sep { color: rgba(15,39,64,.35); }
+.home-contact__note { color: #3F4F5E; font-weight: 500; }
 
-    /* Hero، height follows content; no empty grey band under CTAs */
-    .hero {
-      position: relative;
-      margin: 0;
-      min-height: clamp(480px, 72svh, 680px);
-      height: auto;
-      display: flex;
-      align-items: flex-end;
-      padding: clamp(4.5rem, 10vh, 6rem) 0 1.35rem;
-      overflow: hidden;
-      color: #fff;
-    }
-    @media (min-width: 768px) {
-      .hero { min-height: clamp(520px, 74vh, 720px); padding: clamp(5rem, 11vh, 6.5rem) 0 1.5rem; }
-    }
-    .hero__media { position: absolute; inset: 0; overflow: hidden; }
-    .hero__reel { position: absolute; inset: 0; will-change: transform; }
-    .hero__photo {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; object-position: center 38%; opacity: 0;
-    }
-    .hero__photo.is-active { opacity: 1; z-index: 1; }
-    .hero__photo.is-leaving { z-index: 2; }
-    .hero__mesh {
-      position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 45% at 78% 18%, rgba(194,164,107,.14), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 18% 78%, rgba(31,168,160,.12), transparent 55%);
-      mix-blend-mode: soft-light;
-    }
-    .hero__veil {
-      position: absolute; inset: 0; z-index: 3; pointer-events: none;
-      /* Only shade the copy side — no gray floor strip under the CTAs */
-      background:
-        linear-gradient(90deg,
-          transparent 0%,
-          transparent 42%,
-          rgba(18,42,50,.28) 72%,
-          rgba(18,42,50,.52) 100%);
-    }
-    .hero__shine {
-      position: absolute; inset: 0; z-index: 4; pointer-events: none;
-      background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,.14) 48%, transparent 64%);
-    }
-    .hero__inner {
-      position: relative; z-index: 5;
-      width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
-      margin-inline: auto;
-      padding-bottom: 0;
-    }
-    .hero__copy {
-      max-width: 36rem; position: relative; z-index: 6;
-      text-shadow: 0 10px 36px rgba(8,18,24,.35);
-    }
-    @media (max-width: 767px) {
-      .hero { padding: 5rem 0 1.75rem; }
-      .hero__actions .btn { flex: 1 1 auto; min-height: 2.75rem; }
-    }
-    .hero__brand {
-      margin: 0 0 .55rem;
-      font-size: clamp(2.85rem, 1.7rem + 4vw, 4.5rem);
-      font-weight: 800; letter-spacing: -.055em; line-height: .95;
-    }
-    .hero__title {
-      margin: 0 0 .9rem;
-      font-size: clamp(1.5rem, 1.15rem + 1.35vw, 2.15rem);
-      font-weight: 600; letter-spacing: -.03em; line-height: 1.35;
-      max-width: 15ch; color: rgba(255,255,255,.96);
-    }
-    .hero__lead {
-      margin: 0 0 1.35rem; max-width: 34rem;
-      font-size: clamp(1.08rem, 1rem + .3vw, 1.22rem); line-height: 1.85; color: rgba(255,255,255,.92);
-    }
-    .hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-    .hero__dots {
-      position: absolute; z-index: 6; left: 50%; bottom: .65rem;
-      transform: translateX(-50%); display: flex; gap: .45rem; opacity: 0;
-    }
-    .hero__dots.is-ready { opacity: 1; }
-    .hero__dot {
-      width: 22px; height: 8px; border-radius: 999px; border: 0; padding: 0;
-      background: rgba(255,255,255,.35); cursor: pointer;
-      transform: scaleX(.42); transform-origin: center;
-      transition: transform .4s var(--ease), background .35s;
-    }
-    .hero__dot.is-active { background: #fff; transform: scaleX(1); }
+/* Body stack — framed panels */
+.home-body { padding: 1.4rem 0 5.25rem; background: var(--ivory); }
+@media (max-width: 1023px) {
+  .home-body { padding-bottom: 6.75rem; }
+}
+.home-stack { display: grid; gap: 1.85rem; }
 
-    /* Trust */
-    .trust {
-      padding: 1.35rem 0 1.1rem;
-      border-bottom: 1px solid rgba(36,59,72,.08);
-      background: linear-gradient(180deg, #F3F5F7 0%, #F7F8FA 100%);
-    }
-    .trust__inner {
-      display: grid; gap: 1rem; grid-template-columns: 1fr;
-    }
-    @media (min-width: 700px) {
-      .trust__inner { grid-template-columns: repeat(3, 1fr); gap: 0; }
-      .trust__inner > li + li { border-right: 1px solid rgba(36,59,72,.1); }
-    }
-    .trust__inner > li { padding: .35rem 1rem; text-align: center; }
-    .trust__inner strong {
-      display: block; font-size: clamp(1.85rem, 1.45rem + 1.3vw, 2.45rem);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.05;
-      color: var(--teal-deep);
-    }
-    .trust__inner span {
-      display: block; margin-top: .3rem; font-size: 1rem; color: rgba(26,47,58,.72);
-    }
+.home-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.2rem 1.4rem;
+  box-shadow: 0 8px 24px rgba(15,39,64,.04);
+}
+.home-panel--cta {
+  text-align: center;
+  padding: 1.4rem 1.2rem 1.5rem;
+  background: linear-gradient(160deg, #FFFFFF 0%, #F4F8F8 100%);
+}
+.home-panel__head {
+  display: flex; align-items: flex-start; gap: .85rem;
+  margin: 0 0 1rem; padding-bottom: .85rem;
+  border-bottom: 1px solid var(--line);
+}
+.home-panel__head--center {
+  flex-direction: column; align-items: center; text-align: center;
+  border-bottom: 0; padding-bottom: 0; margin-bottom: .65rem;
+}
+.home-kicker {
+  margin: 0 0 .25rem; font-size: .82rem; font-weight: 700;
+  color: var(--teal-deep); letter-spacing: .03em;
+}
+.home-panel__head h2 {
+  margin: 0; font-size: clamp(1.7rem, 1.35rem + 1.15vw, 2.35rem);
+  font-weight: 800; letter-spacing: -.045em; line-height: 1.12;
+}
+.home-panel__lead {
+  margin: .6rem 0 0; color: #3F4F5E;
+  font-size: .95rem; line-height: 1.75; max-width: 36rem; font-weight: 450;
+}
+.home-panel__head--center .home-panel__lead { margin-inline: auto; }
 
-    /* Sections */
-    .section { padding: clamp(3rem, 5.5vw, 4.5rem) 0; }
-    .section--warm { background: linear-gradient(180deg, #FFFFFF 0%, #F7F8FA 100%); }
-    .section--soft {
-      background: linear-gradient(180deg, rgba(31,168,160,.05), transparent), #F3F5F7;
-    }
-    .section__kicker {
-      margin: 0 0 .55rem; font-size: .92rem; font-weight: 700;
-      color: var(--teal-deep); letter-spacing: .04em;
-    }
-    .section__head { margin-bottom: 1.85rem; max-width: 44rem; }
-    .section__head--center { text-align: center; margin-inline: auto; }
-    .section__head h2 {
-      margin: 0; font-size: clamp(1.95rem, 1.4rem + 1.5vw, 2.75rem);
-      font-weight: 800; letter-spacing: -.045em; line-height: 1.12;
-    }
-    .section__head p { margin: .7rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1rem + .2vw, 1.15rem); max-width: 38rem; line-height: 1.85; }
-    .section__head p.section__kicker { margin: 0 0 .55rem; color: var(--teal-deep); line-height: 1.4; }
+/* Trust */
+.trust-row {
+  display: grid; gap: 0; grid-template-columns: 1fr;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; background: #fff;
+}
+@media (min-width: 700px) {
+  .trust-row { grid-template-columns: repeat(3, 1fr); }
+  .trust-row > li + li { border-right: 1px solid var(--line); }
+}
+.trust-row > li { padding: .95rem 1rem; text-align: center; background: #fff; }
+.trust-row strong {
+  display: block; font-size: clamp(1.7rem, 1.35rem + 1.1vw, 2.2rem);
+  font-weight: 800; letter-spacing: -.04em; line-height: 1.05; color: var(--teal-deep);
+}
+.trust-row span {
+  display: block; margin-top: .35rem; font-size: .95rem; color: #2F3F4E; font-weight: 600;
+}
 
-    /* Services */
-    .services-grid {
-      display: grid; gap: .85rem; grid-template-columns: 1fr;
-    }
-    @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-    @media (min-width: 980px) { .services-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-    .tile {
-      display: flex; flex-direction: column; border-radius: 18px; overflow: hidden;
-      background: #fff; border: 1px solid rgba(15,39,64,.08);
-      box-shadow: 0 10px 28px rgba(15,39,64,.06);
-      transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
-    }
-    .tile:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 22px 48px rgba(15,39,64,.12);
-      border-color: rgba(31,168,160,.35);
-    }
-    .tile__media { position: relative; aspect-ratio: 16/11; overflow: hidden; background: #ddd5c8; }
-    .tile__media img {
-      width: 100%; height: 100%; object-fit: cover;
-      transform: scale(1.03); transition: transform .8s var(--ease);
-    }
-    .tile:hover .tile__media img { transform: scale(1.08); }
-    .tile__shade {
-      position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(180deg, transparent 50%, rgba(26,47,58,.28) 100%);
-    }
-    .tile__body { padding: 1.05rem 1.1rem 1.2rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
-    .tile__body h3 { margin: 0; font-size: 1.15rem; font-weight: 750; }
-    .tile__body p { margin: 0; font-size: .98rem; color: var(--muted); line-height: 1.75; flex: 1; }
-    .tile__cta { margin-top: .4rem; font-size: .95rem; font-weight: 700; color: var(--teal-deep); }
+/* Services */
+.services-grid { display: grid; gap: .7rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 980px) { .services-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.tile {
+  display: flex; flex-direction: column; border-radius: 14px; overflow: hidden;
+  background: #FAFBFC; border: 1px solid var(--line);
+  transition: transform .25s var(--ease), box-shadow .25s, border-color .25s;
+}
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(15,39,64,.1);
+  border-color: rgba(31,168,160,.4);
+}
+.tile__media { position: relative; aspect-ratio: 16/11; overflow: hidden; background: #ddd5c8; }
+.tile__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.tile:hover .tile__media img { transform: scale(1.05); }
+.tile__shade {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(26,47,58,.22) 100%);
+}
+.tile__body { padding: .9rem 1rem 1.05rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+.tile__body h3 { margin: 0; font-size: 1.08rem; font-weight: 750; }
+.tile__body p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; flex: 1; }
+.tile__cta {
+  margin-top: .6rem; align-self: flex-start;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .5rem 1.05rem; border-radius: 12px;
+  font-size: .92rem; font-weight: 700; color: #fff;
+  background: var(--teal); box-shadow: 0 8px 18px rgba(31,168,160,.22);
+}
+.tile:hover .tile__cta { background: var(--teal-deep); }
 
-    /* Why */
-    .why-grid { display: grid; gap: .75rem; }
-    @media (min-width: 800px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
-    .why-card {
-      padding: 1.15rem 1.2rem; border-radius: 18px; background: #fff;
-      border: 1px solid rgba(15,39,64,.08);
-    }
-    .why-card__icon {
-      width: 36px; height: 36px; border-radius: 11px; margin-bottom: .6rem;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(196,132,106,.16); color: var(--terracotta);
-    }
-    .why-card h3 { margin: 0 0 .4rem; font-size: 1.12rem; font-weight: 750; }
-    .why-card p { margin: 0; font-size: 1rem; color: var(--muted); line-height: 1.75; }
-    .quote {
-      margin: 1rem 0 0; padding: 1.35rem 1.4rem; border-radius: 20px;
-      background: linear-gradient(120deg, #F7FBFA, #EEF7F6);
-      border: 1px solid rgba(58,143,138,.16);
-    }
-    .quote p {
-      margin: 0 0 .6rem; font-size: clamp(1.1rem, 1rem + .45vw, 1.3rem);
-      font-weight: 550; line-height: 1.8;
-    }
-    .quote figcaption { font-size: .95rem; color: var(--muted); }
+/* Why */
+.why-grid { display: grid; gap: .65rem; }
+@media (min-width: 800px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+.why-card {
+  padding: 1rem 1.05rem; border-radius: 12px; background: #FAFBFC;
+  border: 1px solid var(--line);
+}
+.why-card__icon {
+  width: 42px; height: 42px; border-radius: 12px; margin-bottom: .6rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(196,132,106,.2); color: #A86B52; font-size: 1.15rem;
+  font-weight: 700;
+}
+.why-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; font-weight: 750; }
+.why-card p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; }
+.quote {
+  margin: .85rem 0 0; padding: 1.05rem 1.15rem; border-radius: 12px;
+  background: #F4F8F8; border: 1px solid rgba(58,143,138,.18);
+}
+.quote p {
+  margin: 0 0 .45rem; font-size: 1.05rem; font-weight: 550; line-height: 1.75;
+}
+.quote figcaption { font-size: .88rem; color: var(--muted); }
 
-    /* Space */
-    .space-mosaic { display: grid; gap: .55rem; grid-template-columns: 1fr 1fr; }
-    @media (min-width: 800px) {
-      .space-mosaic {
-        grid-template-columns: 1.55fr 1fr 1fr;
-        grid-template-rows: 190px 190px;
-      }
-      .space-mosaic__main { grid-row: span 2; }
-    }
-    .space-mosaic figure {
-      margin: 0; overflow: hidden; border-radius: 16px; min-height: 140px;
-    }
-    .space-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+/* Space */
+.space-mosaic { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
+@media (min-width: 800px) {
+  .space-mosaic {
+    grid-template-columns: 1.55fr 1fr 1fr;
+    grid-template-rows: 170px 170px;
+  }
+  .space-mosaic__main { grid-row: span 2; }
+}
+.space-mosaic figure {
+  margin: 0; overflow: hidden; border-radius: 12px; min-height: 120px;
+  border: 1px solid var(--line);
+}
+.space-mosaic img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* CTA band — light, not dark */
-    .cta-band {
-      padding: 0 0 clamp(2.5rem, 4vw, 3.5rem);
-      background: #FFFFFF; color: var(--navy);
-    }
-    .cta-band__box {
-      text-align: center;
-      padding: clamp(2.25rem, 3.5vw, 3rem) 1.6rem;
-      border-radius: 24px;
-      background:
-        radial-gradient(ellipse 70% 80% at 50% 0%, rgba(31,168,160,.1), transparent 60%),
-        linear-gradient(160deg, #FFFFFF 0%, #F4F7F9 100%);
-      border: 1px solid rgba(15,39,64,.09);
-      box-shadow: 0 18px 44px rgba(15,39,64,.07);
-    }
-    .cta-band__box .section__kicker { margin-bottom: .65rem; }
-    .cta-band__copy {
-      margin: 0 auto 1.35rem; max-width: 36rem;
-      font-size: clamp(1.55rem, 1.25rem + .9vw, 2.05rem);
-      font-weight: 800; letter-spacing: -.04em; line-height: 1.2;
-    }
-    .cta-band__copy span {
-      display: block; margin-top: .55rem; font-size: 1.08rem;
-      font-weight: 450; letter-spacing: 0; color: var(--muted); line-height: 1.85;
-    }
+/* CTA */
+.cta-lead {
+  margin: 0 auto 1rem; max-width: 34rem; color: var(--muted);
+  font-size: 1.02rem; line-height: 1.8;
+}
+.cta-title {
+  margin: 0 0 .35rem; font-size: clamp(1.4rem, 1.2rem + .7vw, 1.95rem);
+  font-weight: 800; letter-spacing: -.04em; line-height: 1.2;
+}
 
-    /* Steps */
-    .steps { display: grid; gap: .7rem; }
-    @media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
-    .step {
-      padding: 1.25rem 1.1rem; border-radius: 18px; background: #fff;
-      border: 1px solid rgba(15,39,64,.09); text-align: center;
-    }
-    .step__num {
-      display: inline-flex; width: 42px; height: 42px; align-items: center; justify-content: center;
-      border-radius: 50%; background: var(--navy); color: #fff; font-weight: 800; margin-bottom: .7rem;
-      box-shadow: 0 0 0 6px rgba(58,143,138,.14);
-    }
-    .step h3 { margin: 0 0 .4rem; font-size: 1.12rem; font-weight: 750; }
-    .step p { margin: 0; font-size: 1rem; color: var(--muted); line-height: 1.75; }
+/* Steps */
+.steps { display: grid; gap: .65rem; }
+@media (min-width: 800px) { .steps { grid-template-columns: repeat(3, 1fr); gap: .75rem; } }
+.step, a.step {
+  display: block; padding: 1.05rem 1rem; border-radius: 12px; background: #FAFBFC;
+  border: 1px solid var(--line); text-align: center; color: inherit;
+  transition: border-color .25s, transform .25s var(--ease), box-shadow .25s;
+}
+a.step:hover {
+  border-color: rgba(31,168,160,.45); transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(15,39,64,.08);
+}
+a.step .step__hint {
+  display: block; margin-top: .45rem; font-size: .82rem; font-weight: 700; color: var(--teal-deep);
+}
+.step__num {
+  display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center;
+  border-radius: 50%; background: var(--navy); color: #fff; font-weight: 800; margin-bottom: .55rem;
+  box-shadow: 0 0 0 5px rgba(58,143,138,.14); font-size: .95rem;
+}
+.step h3 { margin: 0 0 .3rem; font-size: 1.05rem; font-weight: 750; }
+.step p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; }
 
-    /* FAQ */
-    .faq { display: grid; gap: .65rem; }
-    .faq details {
-      border: 1px solid rgba(15,39,64,.09); border-radius: 16px;
-      background: #fff; overflow: hidden;
-    }
-    .faq summary {
-      cursor: pointer; list-style: none; padding: 1rem 1.15rem;
-      font-weight: 700; font-size: 1.05rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after {
-      content: "+"; width: 28px; height: 28px; border-radius: 50%;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(58,143,138,.1); color: var(--teal-deep); flex: 0 0 auto;
-    }
-    .faq details[open] summary::after { content: "–"; }
-    .faq__body { padding: 0 1.15rem 1.05rem; color: var(--muted); font-size: 1.02rem; line-height: 1.85; }
-    .faq__body p { margin: 0; }
+/* FAQ */
+.faq { display: grid; gap: .55rem; }
+.faq details {
+  border: 1px solid var(--line); border-radius: 12px;
+  background: #FAFBFC; overflow: hidden;
+}
+.faq summary {
+  cursor: pointer; list-style: none; padding: 1.1rem 1.2rem;
+  font-weight: 750; font-size: 1.1rem; color: var(--navy);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; width: 40px; height: 40px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(31,168,160,.18); color: var(--teal-deep); flex: 0 0 auto;
+  font-size: 1.45rem; font-weight: 700; line-height: 1;
+  transition: transform .3s var(--ease), background .25s;
+}
+.faq details[open] summary::after {
+  content: "–"; background: rgba(31,168,160,.28); transform: rotate(180deg);
+}
+.faq__body {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .4s var(--ease);
+}
+.faq details[open] .faq__body { grid-template-rows: 1fr; }
+.faq__body > p {
+  overflow: hidden; margin: 0; padding: 0 1.2rem 1.15rem;
+  color: #3F4F5E; font-size: 1.05rem; line-height: 1.85;
+}
 
-    /* Floats */
-    .whatsapp-float {
-      position: fixed; left: 1rem; bottom: 1rem; z-index: 9000;
-      width: 54px; height: 54px; border-radius: 50%;
-      background: #25D366; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 12px 28px rgba(37,211,102,.35);
-    }
-    .mobile-cta {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 8990;
-      display: flex; background: #FFFCFA;
-      border-top: 1px solid rgba(36,59,72,.1);
-      transform: translateY(110%); transition: transform .3s var(--ease);
-    }
-    .mobile-cta.visible { transform: none; }
-    .mobile-cta a {
-      flex: 1; text-align: center; padding: .95rem; font-weight: 700; font-size: 14px;
-    }
-    .mobile-cta__call { color: var(--navy); border-left: 1px solid rgba(36,59,72,.1); }
-    .mobile-cta__book { background: var(--teal); color: #fff; }
-    @media (min-width: 1024px) { .mobile-cta { display: none; } }
+.wa-dock {
+  position: fixed; left: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 9000; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem;
+}
+@media (max-width: 1023px) {
+  .wa-dock { bottom: calc(5.1rem + env(safe-area-inset-bottom, 0px)); left: .85rem; }
+}
+.whatsapp-float {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #25D366; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 28px rgba(37,211,102,.35);
+}
+.wa-dock__close {
+  width: 22px; height: 22px; border-radius: 50%; border: 0; padding: 0;
+  background: rgba(15,39,64,.72); color: #fff; font-size: 12px; line-height: 1;
+  cursor: pointer; align-self: flex-end;
+}
+.wa-dock.is-hidden { display: none; }
+.mobile-cta {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 8990;
+  display: flex; background: #fff;
+  border-top: 1px solid var(--line);
+  transform: translateY(110%); transition: transform .3s var(--ease);
+}
+.mobile-cta.visible { transform: none; }
+.mobile-cta a {
+  flex: 1; text-align: center; padding: .9rem; font-weight: 700; font-size: .98rem;
+}
+.mobile-cta__call { color: var(--navy); border-left: 1px solid var(--line); }
+.mobile-cta__book { background: var(--teal); color: #fff; }
+@media (min-width: 1024px) { .mobile-cta { display: none; } }
 
-    [data-reveal] {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .85s var(--ease), transform .85s var(--ease);
-    }
-    [data-reveal].is-in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      [data-reveal] { opacity: 1; transform: none; transition: none; }
-    }
-    .delsa-home .hero {
-      width: 100vw;
-      max-width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-    }
-
+[data-reveal] {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
 </style>
 
-<div class="delsa-home" id="delsa-home" data-home-version="3.4.0" dir="rtl" lang="fa">
+<div class="delsa-home" id="delsa-home" data-home-version="3.6.1" dir="rtl" lang="fa">
 <main id="main">
-    <section class="hero" id="hero">
-      <div class="hero__media" aria-hidden="true">
-        <div class="hero__reel" id="hero-reel">
-          <img class="hero__photo is-active" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="">
-          <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="">
-          <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="">
-          <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="">
-          <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="">
-        </div>
-        <div class="hero__mesh"></div>
-        <div class="hero__veil"></div>
-        <div class="hero__shine"></div>
+  <section class="hero" id="hero">
+    <div class="hero__media" aria-hidden="true">
+      <div class="hero__reel" id="hero-reel">
+        <img class="hero__photo is-active" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="">
+        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="">
+        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="">
+        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="">
+        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="">
       </div>
-      <div class="hero__inner">
-        <div class="hero__copy" data-hero-copy>
-          <p class="hero__brand" data-hero-item>کلینیک دلسا</p>
-          <h1 class="hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
-          <p class="hero__lead" data-hero-item>مسیر سلامت روان را ساده، امن و تخصصی طی کنید؛ با تیمی که واقعاً کنارتان می‌ماند.</p>
-          <div class="hero__actions" data-hero-item>
-            <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
-            <a class="btn btn--ghost" href="tel:09025680372">تماس مستقیم</a>
+      <div class="hero__mesh"></div>
+      <div class="hero__veil"></div>
+      <div class="hero__shine"></div>
+    </div>
+    <div class="hero__inner">
+      <div class="hero__copy" data-hero-copy>
+        <p class="hero__brand" data-hero-item>کلینیک دلسا</p>
+        <h1 class="hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
+        <p class="hero__lead" data-hero-item>مسیر سلامت روان را ساده، امن و تخصصی طی کنید؛ با تیمی که واقعاً کنارتان می‌ماند.</p>
+        <div class="hero__actions" data-hero-item>
+          <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
+          <a class="btn btn--ghost" href="tel:+989025680372" aria-label="تماس مستقیم تلفنی با شماره ۰۹۰۲۵۶۸۰۳۷۲">تماس مستقیم ۰۹۰۲-۵۶۸۰۳۷۲</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__dots" id="hero-dots" role="tablist" aria-label="اسلایدهای فضای کلینیک"></div>
+  </section>
+
+  <div class="home-contact" data-reveal>
+    <div class="wrap home-contact__inner">
+      <a class="home-contact__phone dir-ltr" href="tel:+989025680372">۰۹۰۲-۵۶۸۰۳۷۲</a>
+      <span class="home-contact__sep" aria-hidden="true">·</span>
+      <a class="home-contact__phone dir-ltr" href="tel:+982188682003">۰۲۱-۸۸۶۸۲۰۰۳</a>
+      <span class="home-contact__note">تماس مستقیم با پذیرش</span>
+    </div>
+  </div>
+
+  <div class="home-body">
+    <div class="wrap home-stack">
+
+      <ul class="trust-row" aria-label="آمار کلینیک" data-reveal>
+        <li><strong data-count="15" data-prefix="+">۰</strong><span>سال تجربه تخصصی</span></li>
+        <li><strong data-count="6">۰</strong><span>دپارتمان چندتخصصی</span></li>
+        <li><strong data-count="24" data-suffix="/۷">۰</strong><span>پشتیبانی هماهنگی</span></li>
+      </ul>
+
+      <section class="home-panel" id="services" data-reveal aria-labelledby="home-services-title">
+        <header class="home-panel__head">
+          <div>
+            <p class="home-kicker">دپارتمان‌ها</p>
+            <h2 id="home-services-title">خدمات تخصصی کلینیک</h2>
+            <p class="home-panel__lead">شش دپارتمان تخصصی؛ برای فرد، رابطه، کودک و مسیر رشد.</p>
           </div>
-        </div>
-      </div>
-      <div class="hero__dots" id="hero-dots" role="tablist" aria-label="اسلایدهای فضای کلینیک"></div>
-    </section>
-
-    <section class="trust" aria-label="آمار کلینیک">
-      <div class="wrap">
-        <ul class="trust__inner">
-          <li data-reveal><strong data-count="15" data-prefix="+">۰</strong><span>سال تجربه تخصصی</span></li>
-          <li data-reveal><strong data-count="6">۰</strong><span>دپارتمان چندتخصصی</span></li>
-          <li data-reveal><strong data-count="24" data-suffix="/۷">۰</strong><span>پشتیبانی هماهنگی</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section section--warm" id="services">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="section__kicker">دپارتمان‌ها</p>
-          <h2>خدمات تخصصی کلینیک</h2>
-          <p>شش دپارتمان تخصصی؛ برای فرد، رابطه، کودک و مسیر رشد.</p>
-        </div>
+        </header>
         <div class="services-grid">
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/anxiety.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>روان‌درمانی</h3><p>اگر احساساتتان سنگین شده، با رویکرد علمی کنارتان هستیم.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B2%D9%88%D8%AC-%D9%88-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B2%D9%88%D8%AC-%D9%88-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/couple.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>زوج و خانواده</h3><p>برای بهبود رابطه و گفت‌وگوی سالم‌تر، همراهتان هستیم.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%DA%A9%D9%88%D8%AF%DA%A9-%D9%88-%D9%86%D9%88%D8%AC%D9%88%D8%A7%D9%86/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%DA%A9%D9%88%D8%AF%DA%A9-%D9%88-%D9%86%D9%88%D8%AC%D9%88%D8%A7%D9%86/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/child.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>کودک و نوجوان</h3><p>در مسیر رشد سالم فرزندتان، پشتیبان شما.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/brain.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>روان‌پزشکی</h3><p>ارزیابی و درمان تخصصی، با آرامش و دقت.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%AA%D8%B1%DA%A9-%D8%A7%D8%B9%D8%AA%DB%8C%D8%A7%D8%AF/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%AA%D8%B1%DA%A9-%D8%A7%D8%B9%D8%AA%DB%8C%D8%A7%D8%AF/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/freedom.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>ترک اعتیاد</h3><p>درمان و حمایت همراه با احترام و محرمانگی.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
-          <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87-%D8%B4%D8%BA%D9%84%DB%8C/">
+          <a class="tile" href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87-%D8%B4%D8%BA%D9%84%DB%8C/">
             <div class="tile__media"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/support.png" alt="" loading="lazy"><span class="tile__shade"></span></div>
             <div class="tile__body"><h3>مشاوره شغلی</h3><p>راهنمایی برای انتخاب، تغییر یا ادامه مسیر حرفه‌ای.</p><span class="tile__cta">مشاهده دپارتمان</span></div>
           </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section section--soft" id="why">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="section__kicker">چرا ما</p>
-          <h2>چرا دلسا</h2>
-          <p>اعتماد، تخصص و دسترسی آسان، در فضایی که برای شنیده شدن طراحی شده است</p>
-        </div>
+      <section class="home-panel" id="why" data-reveal aria-labelledby="home-why-title">
+        <header class="home-panel__head">
+          <div>
+            <p class="home-kicker">چرا ما</p>
+            <h2 id="home-why-title">چرا دلسا</h2>
+            <p class="home-panel__lead">اعتماد، تخصص و دسترسی آسان، در فضایی که برای شنیده شدن طراحی شده است.</p>
+          </div>
+        </header>
         <div class="why-grid">
-          <article class="why-card" data-reveal>
+          <article class="why-card">
             <div class="why-card__icon" aria-hidden="true">✦</div>
             <h3>تیم تخصصی</h3>
             <p>روان‌شناسان و روان‌پزشکان مجرب با رویکرد علمی و انسانی</p>
           </article>
-          <article class="why-card" data-reveal>
+          <article class="why-card">
             <div class="why-card__icon" aria-hidden="true">◷</div>
             <h3>هماهنگی سریع</h3>
             <p>ثبت درخواست آنلاین و پاسخگویی تیم پذیرش در اسرع وقت</p>
           </article>
-          <article class="why-card" data-reveal>
+          <article class="why-card">
             <div class="why-card__icon" aria-hidden="true">◎</div>
             <h3>حضوری و آنلاین</h3>
             <p>انتخاب روش مشاوره متناسب با شرایط و نیاز شما</p>
           </article>
         </div>
-        <figure class="quote" data-reveal>
+        <figure class="quote">
           <blockquote>
             <p>«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
             <figcaption>مراجع کلینیک دلسا</figcaption>
           </blockquote>
         </figure>
-      </div>
-    </section>
+      </section>
 
-    <section class="section" id="space">
-      <div class="wrap">
-        <div class="section__head" data-reveal>
-          <p class="section__kicker">محیط</p>
-          <h2>فضای کلینیک</h2>
-          <p>اتاق‌هایی با نور ملایم، رنگ‌های آرام و محیطی امن برای گفت‌وگو</p>
-        </div>
+      <section class="home-panel" id="space" data-reveal aria-labelledby="home-space-title">
+        <header class="home-panel__head">
+          <div>
+            <p class="home-kicker">محیط</p>
+            <h2 id="home-space-title">فضای کلینیک</h2>
+            <p class="home-panel__lead">اتاق‌هایی با نور ملایم، رنگ‌های آرام و محیطی امن برای گفت‌وگو.</p>
+          </div>
+        </header>
         <div class="space-mosaic">
-          <figure class="space-mosaic__main" data-reveal><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="اتاق مشاوره" loading="lazy"></figure>
-          <figure data-reveal><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="" loading="lazy"></figure>
-          <figure data-reveal><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="" loading="lazy"></figure>
-          <figure data-reveal><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="" loading="lazy"></figure>
-          <figure data-reveal><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png" alt="" loading="lazy"></figure>
+          <figure class="space-mosaic__main"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="اتاق مشاوره" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png" alt="" loading="lazy"></figure>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="cta-band" aria-label="درخواست وقت">
-      <div class="wrap">
-        <div class="cta-band__box" data-reveal>
-          <p class="section__kicker">نوبت‌دهی</p>
-          <p class="cta-band__copy">
-            آماده‌اید شروع کنید؟
-            <span>هماهنگی نوبت حضوری، تلفنی یا آنلاین در چند دقیقه</span>
-          </p>
-          <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
-        </div>
-      </div>
-    </section>
+      <section class="home-panel home-panel--cta" data-reveal aria-labelledby="home-cta-title">
+        <header class="home-panel__head home-panel__head--center">
+          <div>
+            <p class="home-kicker">نوبت‌دهی</p>
+            <h2 id="home-cta-title" class="cta-title">آماده‌اید شروع کنید؟</h2>
+          </div>
+        </header>
+        <p class="cta-lead">هماهنگی نوبت حضوری، تلفنی یا آنلاین در چند دقیقه.</p>
+        <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
+      </section>
 
-    <section class="section section--warm" id="how">
-      <div class="wrap">
-        <div class="section__head section__head--center" data-reveal>
-          <p class="section__kicker">مسیر شروع</p>
-          <h2>چطور کار می‌کند؟</h2>
-          <p>سه قدم ساده تا شروع همراهی تخصصی</p>
-        </div>
+      <section class="home-panel" id="how" data-reveal aria-labelledby="home-how-title">
+        <header class="home-panel__head home-panel__head--center">
+          <div>
+            <p class="home-kicker">مسیر شروع</p>
+            <h2 id="home-how-title">چطور کار می‌کند؟</h2>
+            <p class="home-panel__lead">سه قدم ساده تا شروع همراهی تخصصی.</p>
+          </div>
+        </header>
         <ol class="steps">
-          <li class="step" data-reveal><span class="step__num">۱</span><h3>درخواست وقت</h3><p>فرم آنلاین را پر کنید یا تماس بگیرید</p></li>
-          <li class="step" data-reveal><span class="step__num">۲</span><h3>هماهنگی جلسه</h3><p>تیم پذیرش زمان و دپارتمان مناسب را هماهنگ می‌کند</p></li>
-          <li class="step" data-reveal><span class="step__num">۳</span><h3>شروع جلسات</h3><p>حضوری، تلفنی یا آنلاین، متناسب با نیاز شما</p></li>
+          <li>
+            <a class="step" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">
+              <span class="step__num">۱</span><h3>درخواست وقت</h3>
+              <p>فرم آنلاین را پر کنید یا تماس بگیرید</p>
+              <span class="step__hint">رفتن به فرم نوبت</span>
+            </a>
+          </li>
+          <li>
+            <a class="step" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">
+              <span class="step__num">۲</span><h3>هماهنگی جلسه</h3>
+              <p>تیم پذیرش زمان و دپارتمان مناسب را هماهنگ می‌کند</p>
+              <span class="step__hint">شروع هماهنگی</span>
+            </a>
+          </li>
+          <li class="step">
+            <span class="step__num">۳</span><h3>شروع جلسات</h3>
+            <p>حضوری، تلفنی یا آنلاین، متناسب با نیاز شما</p>
+          </li>
         </ol>
-      </div>
-    </section>
+      </section>
 
-    <section class="section section--soft" id="faq">
-      <div class="wrap wrap--narrow">
-        <div class="section__head section__head--center" data-reveal>
-          <p class="section__kicker">راهنما</p>
-          <h2>پرسش‌های رایج</h2>
-        </div>
-        <div class="faq" data-reveal>
+      <section class="home-panel" id="faq" data-reveal aria-labelledby="home-faq-title">
+        <header class="home-panel__head home-panel__head--center">
+          <div>
+            <p class="home-kicker">راهنما</p>
+            <h2 id="home-faq-title">پرسش‌های رایج</h2>
+          </div>
+        </header>
+        <div class="faq wrap--narrow" style="width:100%;max-width:720px;margin-inline:auto">
           <details>
             <summary>اولین جلسه چطور برگزار می‌شود؟</summary>
             <div class="faq__body"><p>در جلسه اول، مشاور یا درمانگر با شما گفت‌وگو می‌کند تا نیازتان را بشناسد و مسیر درمان را توضیح دهد. فضای کلینیک آرام، محرمانه و بدون قضاوت است.</p></div>
@@ -547,15 +599,18 @@
             <div class="faq__body"><p>هر سه روش حضوری، تلفنی و آنلاین در دسترس است. هنگام هماهنگی نوبت، روش مناسب خود را انتخاب می‌کنید.</p></div>
           </details>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  
+    </div>
+  </div>
+</main>
 
-  <a class="whatsapp-float" href="https://wa.me/989025680372" target="_blank" rel="noopener" aria-label="واتساپ">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
+  <div class="wa-dock" id="wa-dock">
+    <button type="button" class="wa-dock__close" id="wa-close" aria-label="بستن واتساپ">×</button>
+    <a class="whatsapp-float" href="https://wa.me/989025680372" target="_blank" rel="noopener" aria-label="گفت‌وگو در واتساپ">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+  </div>
   <div class="mobile-cta" id="mobile-cta">
     <a class="mobile-cta__call" href="tel:09025680372">تماس</a>
     <a class="mobile-cta__book" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت</a>
@@ -579,6 +634,21 @@
     var gsap = window.gsap;
     var hasGsap = !!gsap && !reduceMotion;
     if (hasGsap && window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
+
+
+    var waDock = document.getElementById("wa-dock");
+    var waClose = document.getElementById("wa-close");
+    try {
+      if (waDock && localStorage.getItem("delsa_wa_hidden") === "1") {
+        waDock.classList.add("is-hidden");
+      }
+    } catch (e) {}
+    if (waClose && waDock) {
+      waClose.addEventListener("click", function () {
+        waDock.classList.add("is-hidden");
+        try { localStorage.setItem("delsa_wa_hidden", "1"); } catch (e) {}
+      });
+    }
 
     var mobileCta = document.getElementById("mobile-cta");
     var hero = document.getElementById("hero");
@@ -762,3 +832,4 @@
     .catch(start);
 })();
 </script>
+

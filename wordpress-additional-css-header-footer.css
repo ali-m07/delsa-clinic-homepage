@@ -114,14 +114,26 @@ header#site-header {
   padding-right: 1.25rem !important;
 }
 #site-header > div > div {
-  display: flex !important;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: stretch !important;
   min-height: 64px !important;
   gap: 1rem !important;
+  width: 100% !important;
 }
 @media (min-width: 1024px) {
   #site-header > div > div { min-height: 72px !important; }
+}
+body.admin-bar #site-header.site-header,
+body.admin-bar header#site-header {
+  top: 32px !important;
+}
+@media (max-width: 782px) {
+  body.admin-bar #site-header.site-header,
+  body.admin-bar header#site-header {
+    top: 46px !important;
+  }
 }
 #site-header .site-header__logo-link {
   display: flex !important;
@@ -154,14 +166,17 @@ header#site-header {
 #site-header nav[aria-label="منوی اصلی"] {
   display: none !important;
 }
-@media (min-width: 1280px) {
+@media (min-width: 1100px) {
   #site-header nav[aria-label="منوی اصلی"] {
     display: flex !important;
     align-items: center !important;
-    gap: 1.5rem !important;
-    flex: 1 1 auto !important;
     justify-content: center !important;
-    margin: 0 1rem !important;
+    gap: 1.35rem !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    justify-self: center !important;
+    margin: 0 !important;
+    min-width: 0 !important;
   }
   #site-header #sidebar-open { display: none !important; }
 }
@@ -176,7 +191,7 @@ header#site-header {
   width: 24px !important;
   height: 24px !important;
 }
-@media (max-width: 1279px) {
+@media (max-width: 1099px) {
   #site-header #sidebar-open {
     display: inline-flex !important;
     align-items: center !important;
@@ -197,15 +212,25 @@ header#site-header {
 #site-header .site-header__phone {
   display: none !important;
   text-decoration: none !important;
-  font-size: 13px !important;
-  color: #2456a3 !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  color: #0F2740 !important;
   font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+  letter-spacing: -0.01em !important;
+  padding: 0.35rem 0.55rem !important;
+  border-radius: 10px !important;
+  background: rgba(31, 168, 160, 0.1) !important;
+  border: 1px solid rgba(31, 168, 160, 0.22) !important;
 }
-@media (min-width: 768px) {
+#site-header .site-header__phone:hover {
+  color: #178F88 !important;
+  background: rgba(31, 168, 160, 0.16) !important;
+}
+@media (min-width: 640px) {
   #site-header .site-header__phone {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
+    gap: 0.45rem !important;
   }
 }
 #site-header .site-header__cta,
@@ -330,8 +355,23 @@ footer#contact .footer-brand__desc {
   color: rgba(255, 255, 255, 0.45) !important;
 }
 footer#contact .site-footer__phone-main,
+footer#contact a[href^="tel"],
+footer#contact .footer-phone-main {
+  color: #ffffff !important;
+  font-weight: 750 !important;
+  font-size: 15px !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
 footer#contact .site-footer__email-link {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+footer#contact .footer-maps-btn,
+footer#contact a.footer-maps-btn {
+  min-height: 2.5rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 10px !important;
 }
 footer#contact ul {
   list-style: none !important;

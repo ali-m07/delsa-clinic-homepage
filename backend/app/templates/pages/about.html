@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ page.meta_title or page.title }} | کلینیک دلسا{% endblock %}
 {% block content %}
-<div class="delsa-about" dir="rtl" data-da-version="3.5.0">
+<div class="delsa-about" dir="rtl" data-da-version="3.5.9">
   <section class="da-hero" aria-labelledby="da-title">
     <div class="da-hero__media" aria-hidden="true">
       <img class="da-hero__photo" src="/static/img/clinic/room-01.png" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
@@ -21,32 +21,27 @@
     <div class="da-wrap da-stack">
       <section class="da-panel" data-da-reveal aria-labelledby="da-story-title">
         <header class="da-panel__head">
-          <span class="da-panel__idx" aria-hidden="true">۰۱</span>
           <div>
             <p class="da-kicker">درباره ما</p>
             <h2 id="da-story-title">اینجا کنار شماییم</h2>
           </div>
         </header>
-        <div class="da-story__grid">
-          <div class="da-story__copy">
-            <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی.</p>
-            <p>فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
-          </div>
-          <figure class="da-story__media">
-            <img src="/static/img/clinic/room-08.png" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
-          </figure>
+        <div class="da-story__copy">
+          <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی. فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
         </div>
-        <div class="da-gallery" aria-label="فضای کلینیک">
-          <img src="/static/img/clinic/room-05.png" alt="" width="640" height="420" loading="lazy" decoding="async">
-          <img src="/static/img/clinic/room-02.png" alt="" width="640" height="420" loading="lazy" decoding="async">
-          <img src="/static/img/clinic/room-06.png" alt="" width="640" height="420" loading="lazy" decoding="async">
+        <div class="da-mosaic" aria-label="فضای کلینیک">
+          <img class="da-mosaic__main" src="/static/img/clinic/room-08.png" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
+          <div class="da-mosaic__stack">
+            <img src="/static/img/clinic/room-05.png" alt="" width="640" height="420" loading="lazy" decoding="async">
+            <img src="/static/img/clinic/room-02.png" alt="" width="640" height="420" loading="lazy" decoding="async">
+            <img src="/static/img/clinic/room-06.png" alt="" width="640" height="420" loading="lazy" decoding="async">
+          </div>
         </div>
       </section>
 
       <section class="da-panel" data-da-reveal aria-labelledby="da-team-title">
         <header class="da-panel__head da-panel__head--row">
           <div class="da-panel__head-main">
-            <span class="da-panel__idx" aria-hidden="true">۰۲</span>
             <div>
               <p class="da-kicker">مشاوران</p>
               <h2 id="da-team-title">تیم ما</h2>
@@ -75,7 +70,6 @@
 
       <section class="da-panel da-panel--cta" data-da-reveal aria-labelledby="da-cta-title">
         <header class="da-panel__head da-panel__head--center">
-          <span class="da-panel__idx" aria-hidden="true">۰۳</span>
           <div>
             <p class="da-kicker">نوبت‌دهی</p>
             <h2 id="da-cta-title">وقت یک گفت‌وگوی امن است؟</h2>

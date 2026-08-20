@@ -27,10 +27,25 @@
   var closeBtn = document.getElementById('sidebar-close');
   var mobileBar = document.getElementById('mobile-cta-bar');
   var waFloat = document.getElementById('whatsapp-float');
+  var waDock = document.getElementById('wa-dock');
+  var waClose = document.getElementById('wa-close');
+
+  try {
+    if (waDock && localStorage.getItem('delsa_wa_hidden') === '1') {
+      waDock.classList.add('is-hidden');
+    }
+  } catch (e) {}
+  if (waClose && waDock) {
+    waClose.addEventListener('click', function () {
+      waDock.classList.add('is-hidden');
+      try { localStorage.setItem('delsa_wa_hidden', '1'); } catch (e) {}
+    });
+  }
 
   function setOverlay(active) {
     if (mobileBar) mobileBar.classList.toggle('hidden-by-overlay', active);
     if (waFloat) waFloat.classList.toggle('hidden-by-overlay', active);
+    if (waDock) waDock.classList.toggle('hidden-by-overlay', active);
   }
 
   if (sidebar && backdrop && openBtn && closeBtn) {
