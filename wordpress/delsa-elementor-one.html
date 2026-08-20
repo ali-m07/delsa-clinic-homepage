@@ -8,13 +8,13 @@
 
 <style id="delsa-home-css">
 :root {
-      --navy: #1F3642;
-      --navy-deep: #152833;
-      --teal: #2F8A84;
-      --teal-deep: #26736E;
-      --muted: #5E6F7A;
-      --cream: #FBF8F3;
-      --cream-2: #F5F1EA;
+      --navy: #0F2740;
+      --navy-deep: #0A1B2E;
+      --teal: #1FA8A0;
+      --teal-deep: #178F88;
+      --muted: #5B6B7C;
+      --cream: #F7F8FA;
+      --cream-2: #EEF1F4;
       --terracotta: #C4846A;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --font: "Vazirmatn", Tahoma, sans-serif;
@@ -24,8 +24,11 @@
     .delsa-home {
       font-family: var(--font);
       color: var(--navy);
-      background: linear-gradient(180deg, #FBF8F3 0%, #F7F3EC 100%);
-      line-height: 1.75;
+      background:
+        radial-gradient(ellipse 80% 45% at 100% -10%, rgba(31,168,160,.09), transparent 55%),
+        #F7F8FA;
+      line-height: 1.7;
+      letter-spacing: -.01em;
       -webkit-font-smoothing: antialiased;
       text-align: right;
       direction: rtl;
@@ -43,15 +46,15 @@
     /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      padding: .88rem 1.55rem; border-radius: 999px;
+      padding: .95rem 1.7rem; border-radius: 14px;
       font-size: 14px; font-weight: 700; font-family: inherit; border: 0;
       transition: transform .22s var(--ease), box-shadow .25s, background .25s, border-color .25s;
     }
     .btn--primary {
       background: var(--teal); color: #fff;
-      box-shadow: 0 12px 36px rgba(58,143,138,.28);
+      box-shadow: 0 12px 30px rgba(31,168,160,.28);
     }
-    .btn--primary:hover { background: var(--teal-deep); transform: scale(1.04); }
+    .btn--primary:hover { background: var(--teal-deep); transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 40px rgba(31,168,160,.4); }
     .btn--ghost {
       color: #fff; border: 1px solid rgba(255,255,255,.5);
       background: rgba(255,255,255,.1);
@@ -78,12 +81,12 @@
       height: auto;
       display: flex;
       align-items: flex-end;
-      padding: clamp(4.5rem, 10vh, 6rem) 0 1.5rem;
+      padding: clamp(4.5rem, 10vh, 6rem) 0 1.35rem;
       overflow: hidden;
       color: #fff;
     }
     @media (min-width: 768px) {
-      .hero { min-height: clamp(520px, 74vh, 700px); padding: clamp(5rem, 11vh, 6.5rem) 0 2rem; }
+      .hero { min-height: clamp(520px, 74vh, 720px); padding: clamp(5rem, 11vh, 6.5rem) 0 1.5rem; }
     }
     .hero__media { position: absolute; inset: 0; overflow: hidden; }
     .hero__reel { position: absolute; inset: 0; will-change: transform; }
@@ -96,16 +99,19 @@
     .hero__mesh {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.18), transparent 55%),
-        radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.14), transparent 55%);
+        radial-gradient(ellipse 55% 45% at 78% 18%, rgba(194,164,107,.14), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 18% 78%, rgba(31,168,160,.12), transparent 55%);
       mix-blend-mode: soft-light;
     }
     .hero__veil {
       position: absolute; inset: 0; z-index: 3; pointer-events: none;
-      /* Darken only the copy side، not a thick empty strip under the buttons */
+      /* Only shade the copy side — no gray floor strip under the CTAs */
       background:
-        linear-gradient(90deg, rgba(16,32,40,.08) 0%, rgba(16,32,40,.22) 48%, rgba(16,32,40,.62) 100%),
-        linear-gradient(180deg, rgba(16,32,40,.12) 0%, transparent 40%, rgba(16,32,40,.28) 100%);
+        linear-gradient(90deg,
+          transparent 0%,
+          transparent 42%,
+          rgba(18,42,50,.28) 72%,
+          rgba(18,42,50,.52) 100%);
     }
     .hero__shine {
       position: absolute; inset: 0; z-index: 4; pointer-events: none;
@@ -127,14 +133,14 @@
     }
     .hero__brand {
       margin: 0 0 .55rem;
-      font-size: clamp(2.5rem, 1.6rem + 3.4vw, 3.85rem);
-      font-weight: 800; letter-spacing: -.045em; line-height: 1.02;
+      font-size: clamp(2.85rem, 1.7rem + 4vw, 4.5rem);
+      font-weight: 800; letter-spacing: -.055em; line-height: .95;
     }
     .hero__title {
-      margin: 0 0 .75rem;
-      font-size: clamp(1.15rem, 1rem + .85vw, 1.55rem);
-      font-weight: 500; letter-spacing: -.02em; line-height: 1.4;
-      max-width: 18ch; color: rgba(255,255,255,.94);
+      margin: 0 0 .85rem;
+      font-size: clamp(1.35rem, 1.1rem + 1.15vw, 1.95rem);
+      font-weight: 600; letter-spacing: -.03em; line-height: 1.35;
+      max-width: 14ch; color: rgba(255,255,255,.96);
     }
     .hero__lead {
       margin: 0 0 1.2rem; max-width: 32rem;
@@ -158,7 +164,7 @@
     .trust {
       padding: 1.35rem 0 1.1rem;
       border-bottom: 1px solid rgba(36,59,72,.08);
-      background: linear-gradient(180deg, #F8F4EE 0%, #FBF8F3 100%);
+      background: linear-gradient(180deg, #F3F5F7 0%, #F7F8FA 100%);
     }
     .trust__inner {
       display: grid; gap: 1rem; grid-template-columns: 1fr;
@@ -169,26 +175,27 @@
     }
     .trust__inner > li { padding: .35rem 1rem; text-align: center; }
     .trust__inner strong {
-      display: block; font-size: clamp(1.65rem, 1.35rem + 1vw, 2.1rem);
-      font-weight: 800; letter-spacing: -.03em; line-height: 1.1;
+      display: block; font-size: clamp(1.85rem, 1.45rem + 1.3vw, 2.45rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.05;
+      color: var(--teal-deep);
     }
     .trust__inner span {
       display: block; margin-top: .25rem; font-size: .9rem; color: rgba(26,47,58,.72);
     }
 
     /* Sections */
-    .section { padding: 2rem 0; }
-    .section--warm { background: #F8F4ED; }
+    .section { padding: clamp(2.75rem, 5vw, 4rem) 0; }
+    .section--warm { background: #F5F7F9; }
     .section--soft {
-      background: linear-gradient(180deg, rgba(58,143,138,.05), transparent), #F5F1EA;
+      background: linear-gradient(180deg, rgba(31,168,160,.05), transparent), #F3F5F7;
     }
-    .section__head { margin-bottom: 1.1rem; max-width: 40rem; }
+    .section__head { margin-bottom: 1.6rem; max-width: 42rem; }
     .section__head--center { text-align: center; margin-inline: auto; }
     .section__head h2 {
-      margin: 0; font-size: clamp(1.4rem, 1.15rem + 1vw, 1.95rem);
-      font-weight: 800; letter-spacing: -.03em; line-height: 1.25;
+      margin: 0; font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.55rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1.15;
     }
-    .section__head p { margin: .4rem 0 0; color: var(--muted); font-size: 14.5px; }
+    .section__head p { margin: .65rem 0 0; color: var(--muted); font-size: 1.02rem; max-width: 36rem; }
 
     /* Services */
     .services-grid {
@@ -197,22 +204,22 @@
     @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
     @media (min-width: 980px) { .services-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
     .tile {
-      display: flex; flex-direction: column; border-radius: 22px; overflow: hidden;
-      background: #FFFCFA; border: 1px solid rgba(36,59,72,.08);
-      box-shadow: 0 14px 36px rgba(19,42,55,.08);
+      display: flex; flex-direction: column; border-radius: 18px; overflow: hidden;
+      background: #fff; border: 1px solid rgba(15,39,64,.08);
+      box-shadow: 0 10px 28px rgba(15,39,64,.06);
       transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
     }
     .tile:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 22px 50px rgba(19,42,55,.12);
-      border-color: rgba(58,143,138,.28);
+      transform: translateY(-7px);
+      box-shadow: 0 22px 48px rgba(15,39,64,.12);
+      border-color: rgba(31,168,160,.35);
     }
     .tile__media { position: relative; aspect-ratio: 16/11; overflow: hidden; background: #ddd5c8; }
     .tile__media img {
       width: 100%; height: 100%; object-fit: cover;
       transform: scale(1.03); transition: transform .8s var(--ease);
     }
-    .tile:hover .tile__media img { transform: scale(1.05); }
+    .tile:hover .tile__media img { transform: scale(1.08); }
     .tile__shade {
       position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(180deg, transparent 50%, rgba(26,47,58,.28) 100%);
@@ -370,7 +377,7 @@
         <div class="hero__copy" data-hero-copy>
           <p class="hero__brand" data-hero-item>کلینیک دلسا</p>
           <h1 class="hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
-          <p class="hero__lead" data-hero-item>همراهی تخصصی در مسیر سلامت روان، با تیمی که به آرامش، تخصص و احترام شما متعهد است.</p>
+          <p class="hero__lead" data-hero-item>مسیر سلامت روان را ساده، امن و تخصصی طی کنید؛ با تیمی که واقعاً کنارتان می‌ماند.</p>
           <div class="hero__actions" data-hero-item>
             <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
             <a class="btn btn--ghost" href="tel:09025680372">تماس مستقیم</a>
@@ -394,7 +401,7 @@
       <div class="wrap">
         <div class="section__head" data-reveal>
           <h2>خدمات تخصصی کلینیک</h2>
-          <p>شش دپارتمان برای نیازهای فردی، خانوادگی و رشدی، با رویکرد علمی و انسانی</p>
+          <p>شش دپارتمان تخصصی؛ برای فرد، رابطه، کودک و مسیر رشد.</p>
         </div>
         <div class="services-grid">
           <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C/">

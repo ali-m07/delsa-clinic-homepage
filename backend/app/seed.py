@@ -137,7 +137,7 @@ DEPARTMENTS = [
 
 CONSULTANTS = [
     {
-        "slug": 'الهام-مصباحی',
+        "slug": 'elham-mesbahi',
         "name": 'الهام مصباحی',
         "role": 'طرحواره\u200cدرمانگر',
         "department_slug": 'روان-درمانی',
@@ -152,7 +152,7 @@ CONSULTANTS = [
 """,
     },
     {
-        "slug": 'حسن-اکبرزاده',
+        "slug": 'hasan-akbarzadeh',
         "name": 'حسن اکبرزاده',
         "role": 'مسئول گروه تخصصی مشاوره دلسا',
         "department_slug": 'روان-درمانی',
@@ -200,7 +200,7 @@ CONSULTANTS = [
 """,
     },
     {
-        "slug": 'دکتر-رباب-حامدی',
+        "slug": 'robab-hamedi',
         "name": 'دکتر رباب حامدی',
         "role": 'روان\u200cشناس',
         "department_slug": 'زوج-و-خانواده',
@@ -251,7 +251,7 @@ CONSULTANTS = [
 """,
     },
     {
-        "slug": 'مریم-صالحی',
+        "slug": 'maryam-salehi',
         "name": 'مریم صالحی',
         "role": 'روان\u200cشناس سلامت',
         "department_slug": 'روان-درمانی',
@@ -301,7 +301,7 @@ CONSULTANTS = [
 """,
     },
     {
-        "slug": 'فاطمه-حسین-پور',
+        "slug": 'fatemeh-hosseinpour',
         "name": 'فاطمه حسین\u200cپور',
         "role": 'روان\u200cشناس',
         "department_slug": 'کودک-و-نوجوان',

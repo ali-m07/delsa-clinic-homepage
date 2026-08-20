@@ -172,7 +172,7 @@
           window.clearInterval(slideTimer);
           slideTimer = window.setInterval(function () {
             goToSlide(slideIndex + 1);
-          }, 5200);
+          }, 4800);
         }
       });
       dotsWrap.appendChild(btn);
@@ -209,7 +209,7 @@
         if (slides.length > 1) {
           slideTimer = window.setInterval(function () {
             goToSlide(slideIndex + 1);
-          }, 5200);
+          }, 4800);
         }
         // Parallax only the photo reel (not the copy / CTAs)
         if (reel && window.ScrollTrigger) {
@@ -257,10 +257,10 @@
           opacity: 1,
           y: 0,
           duration: 0.7,
-          stagger: 0.12,
-          ease: 'power3.out',
+          stagger: 0.1,
+          ease: 'back.out(1.4)',
         },
-        'boot+=0.62'
+        'boot+=0.55'
       )
       // Dots
       .to(dotsWrap, { opacity: 1, y: 0, duration: 0.55 }, 'boot+=1.15');
@@ -373,8 +373,8 @@
         var x = (e.clientX - rect.left) / rect.width - 0.5;
         var y = (e.clientY - rect.top) / rect.height - 0.5;
         gsap.to(card, {
-          rotateY: x * -5,
-          rotateX: y * 5,
+          rotateY: x * -8,
+          rotateX: y * 8,
           transformPerspective: 800,
           duration: 0.35,
           ease: 'power2.out',
