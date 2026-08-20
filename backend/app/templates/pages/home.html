@@ -2,15 +2,18 @@
 {% block title %}کلینیک دلسا | مشاوره و روان‌درمانی{% endblock %}
 {% block content %}
 
-<!-- HERO -->
-<section id="hero" class="hero-section hero-bg" style="background-image:url('{{ settings.hero_image_url }}')">
+<!-- HERO — real clinic room -->
+<section
+  id="hero"
+  class="hero-section hero-bg"
+  style="background-image:url('/static/img/clinic/room-01.png')"
+>
   <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-atmosphere" aria-hidden="true"></div>
   <div class="hero-inner">
     <div class="hero-main">
       <div class="hero-main__content">
         <h1 class="hero-brand">کلینیک دلسا</h1>
-        <p>همراه شما در مسیر سلامت روان — مشاوره و روان‌درمانی تخصصی در تهران</p>
+        <p>فضایی آرام برای شنیده شدن — مشاوره و روان‌درمانی تخصصی در سعادت‌آباد</p>
         <div class="hero-cta-row">
           <a href="{{ book_url }}" class="btn-primary">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
@@ -21,26 +24,44 @@
             تماس مستقیم
           </a>
         </div>
-        <a href="#services" class="hero-explore-btn">مشاهده خدمات کلینیک ↓</a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="trust-strip" aria-label="نکات اعتماد">
-  <ul class="trust-strip__inner">
-    <li><strong>+۱۵ سال</strong><span>سابقه در سلامت روان</span></li>
-    <li><strong>{{ departments|length }} دپارتمان</strong><span>تیم چندتخصصی</span></li>
-    <li><strong>پشتیبانی سریع</strong><span>هماهنگی در اسرع وقت</span></li>
-  </ul>
-</div>
+<!-- SPACE — clinic photos -->
+<section id="space" class="space-section">
+  <div class="container">
+    <div class="section-head" data-aos="fade-up">
+      <h2>فضای کلینیک</h2>
+      <p class="section-sub">اتاق‌های مشاوره با طراحی آرام، نور ملایم و محیطی امن برای گفت‌وگو</p>
+    </div>
+    <div class="space-grid" data-aos="fade-up" data-aos-delay="60">
+      <a class="space-grid__item" href="/درباره-ما" aria-label="اتاق مشاوره ۱">
+        <img src="/static/img/clinic/room-08.png" alt="اتاق مشاوره با مبل‌های فیروزه‌ای" loading="eager">
+      </a>
+      <a class="space-grid__item" href="/درباره-ما" aria-label="اتاق مشاوره ۲">
+        <img src="/static/img/clinic/room-02.png" alt="اتاق مشاوره با نور طبیعی" loading="lazy">
+      </a>
+      <a class="space-grid__item" href="/درباره-ما" aria-label="اتاق مشاوره ۳">
+        <img src="/static/img/clinic/room-05.png" alt="اتاق مشاوره مدرن" loading="lazy">
+      </a>
+      <a class="space-grid__item" href="/درباره-ما" aria-label="اتاق مشاوره ۴">
+        <img src="/static/img/clinic/room-06.png" alt="اتاق مشاوره با دیوار سنگی" loading="lazy">
+      </a>
+      <a class="space-grid__item" href="/درباره-ما" aria-label="اتاق مشاوره ۵">
+        <img src="/static/img/clinic/room-03.png" alt="اتاق کودک و نوجوان" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section id="services" class="section bg-sand">
   <div class="container">
     <div class="section-head" data-aos="fade-up">
       <h2>خدمات اصلی کلینیک</h2>
-      <p class="section-sub">دپارتمان‌های تخصصی برای نیازهای مختلف فردی، خانوادگی و رشدی</p>
+      <p class="section-sub">دپارتمان‌های تخصصی برای نیازهای فردی، خانوادگی و رشدی</p>
     </div>
     <div class="services-grid" data-aos="fade-up" data-aos-delay="80">
       {% for dept in departments %}
@@ -140,7 +161,6 @@
 </section>
 
 {% if articles %}
-<!-- BLOG PREVIEW -->
 <section class="section bg-sand">
   <div class="container">
     <div class="section-head section-head--between">
@@ -164,7 +184,6 @@
 </section>
 {% endif %}
 
-<!-- Mobile CTA -->
 <div id="mobile-cta-bar" class="mobile-cta-bar">
   <a href="tel:{{ settings.phone_mobile }}" class="mobile-cta-bar__call">تماس</a>
   <a href="{{ book_url }}" class="mobile-cta-bar__book">درخواست وقت</a>
