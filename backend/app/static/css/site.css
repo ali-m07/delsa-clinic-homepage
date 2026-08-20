@@ -1387,3 +1387,204 @@ button.btn--primary:hover { background: var(--teal-deep); }
 .dir-ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
 .text-center { text-align: center; }
 .hero-trust, .testimonial-band, .hero-explore-btn { display: none; }
+
+/* ═══ About page (full composition, warm light) ═══ */
+.delsa-about {
+  --da-navy: var(--navy);
+  --da-teal: var(--teal);
+  --da-teal-deep: var(--teal-deep);
+  --da-ivory: var(--ivory);
+  --da-ivory-2: var(--ivory-2);
+  --da-muted: var(--muted);
+  margin: calc(-1 * var(--hdr-h)) calc(50% - 50vw) 0;
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: clip;
+  background: var(--da-ivory);
+  color: var(--da-navy);
+}
+.delsa-about .da-wrap { width: min(1120px, calc(100% - 2.5rem)); margin: 0 auto; }
+.delsa-about .da-section { padding: 3.25rem 0; }
+@media (min-width: 900px) { .delsa-about .da-section { padding: 4.25rem 0; } }
+.delsa-about .da-section-title {
+  margin: 0 0 .65rem;
+  font-size: clamp(1.45rem, 1.2rem + .7vw, 1.85rem);
+  font-weight: 750; line-height: 1.4;
+}
+.delsa-about .da-section-lead {
+  margin: 0 0 2rem; max-width: 36rem;
+  font-size: 1rem; color: var(--da-muted); line-height: 1.85;
+}
+.delsa-about .da-hero {
+  position: relative;
+  height: calc(340px + var(--hdr-h));
+  min-height: calc(340px + var(--hdr-h));
+  max-height: calc(340px + var(--hdr-h));
+  display: flex; align-items: flex-end; color: #fff; overflow: hidden;
+  padding-top: var(--hdr-h);
+}
+.delsa-about .da-hero__media { position: absolute; inset: 0; overflow: hidden; }
+.delsa-about .da-hero__photo,
+.delsa-about .da-hero__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+  transform: scale(1.12); transform-origin: 50% 42%;
+  animation: da-ken 14s ease-in-out infinite alternate;
+}
+.delsa-about .da-hero__veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(105deg, rgba(10,27,46,.82) 0%, rgba(15,39,64,.55) 42%, rgba(15,39,64,.22) 72%, rgba(15,39,64,.08) 100%),
+    linear-gradient(0deg, rgba(10,27,46,.5) 0%, transparent 48%);
+  opacity: 0; animation: da-fade .9s var(--ease) .1s forwards;
+}
+.delsa-about .da-hero__inner {
+  position: relative; z-index: 1;
+  width: min(1120px, calc(100% - 2.5rem));
+  margin: 0 auto; padding: 1.75rem 0 1.5rem;
+}
+.delsa-about .da-hero__brand {
+  margin: 0 0 .55rem;
+  font-size: clamp(1.05rem, .95rem + .4vw, 1.25rem);
+  font-weight: 750; letter-spacing: -.02em;
+}
+.delsa-about .da-hero h1 {
+  margin: 0 0 .55rem;
+  font-size: clamp(1.65rem, 1.35rem + 1vw, 2.15rem);
+  font-weight: 800; line-height: 1.25; letter-spacing: -.03em;
+}
+.delsa-about .da-hero__lead {
+  margin: 0 0 1rem; max-width: 34rem;
+  font-size: .95rem; line-height: 1.8; color: rgba(255,255,255,.86);
+}
+.delsa-about .da-hero__actions { display: flex; flex-wrap: wrap; gap: .65rem; }
+@keyframes da-ken { from { transform: scale(1.12); } to { transform: scale(1.04); } }
+@keyframes da-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes da-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.delsa-about [data-da-reveal] { opacity: 0; transform: translateY(18px); }
+.delsa-about [data-da-reveal].is-in { animation: da-up .7s var(--ease) forwards; }
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(1) { animation-delay: .05s; }
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(2) { animation-delay: .14s; }
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(3) { animation-delay: .24s; }
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(4) { animation-delay: .34s; }
+@media (prefers-reduced-motion: reduce) {
+  .delsa-about .da-hero__photo,
+  .delsa-about .da-hero__media img { animation: none; transform: none; }
+  .delsa-about .da-hero__veil,
+  .delsa-about [data-da-reveal] { opacity: 1; transform: none; animation: none; }
+}
+.delsa-about .da-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .85rem 1.45rem; border-radius: 14px;
+  font-size: .9rem; font-weight: 700; transition: transform .25s var(--ease), background .25s var(--ease);
+}
+.delsa-about .da-btn--primary { background: var(--da-teal); color: #fff; }
+.delsa-about .da-btn--primary:hover { background: var(--da-teal-deep); transform: translateY(-1px); }
+.delsa-about .da-btn--ghost {
+  background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45);
+}
+.delsa-about .da-btn--ghost:hover { background: rgba(255,255,255,.1); }
+.delsa-about .da-btn--soft {
+  background: rgba(31,168,160,.12); color: var(--da-teal-deep);
+  border: 1.5px solid rgba(31,168,160,.28);
+}
+.delsa-about .da-btn--soft:hover { background: rgba(31,168,160,.18); }
+.delsa-about .da-space__copy .da-btn { margin-top: 1rem; }
+.delsa-about .da-intro {
+  background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(31,168,160,.08), transparent 55%), var(--da-ivory);
+}
+.delsa-about .da-intro__grid { display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 900px) {
+  .delsa-about .da-intro__grid { grid-template-columns: 1.05fr .95fr; gap: 3rem; }
+}
+.delsa-about .da-intro__copy h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.45rem, 1.2rem + .7vw, 1.9rem);
+  font-weight: 750; line-height: 1.4;
+}
+.delsa-about .da-intro__copy p {
+  margin: 0 0 1rem; font-size: 1.02rem; line-height: 2; color: rgba(15,39,64,.78);
+}
+.delsa-about .da-intro__copy p:last-child { margin-bottom: 0; }
+.delsa-about .da-intro__media {
+  margin: 0; border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 5/4; box-shadow: var(--shadow); background: #d7e2ea;
+}
+.delsa-about .da-intro__media img { width: 100%; height: 100%; object-fit: cover; }
+.delsa-about .da-pillars { background: var(--da-ivory-2); }
+.delsa-about .da-pillars__grid { display: grid; gap: 1.5rem; }
+@media (min-width: 760px) {
+  .delsa-about .da-pillars__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; }
+}
+.delsa-about .da-pillar h3 { margin: 0 0 .55rem; font-size: 1.1rem; font-weight: 750; }
+.delsa-about .da-pillar p { margin: 0; font-size: .95rem; line-height: 1.9; color: var(--da-muted); }
+.delsa-about .da-space { background: var(--da-ivory); }
+.delsa-about .da-space__grid { display: grid; gap: 1.25rem; align-items: center; }
+@media (min-width: 900px) {
+  .delsa-about .da-space__grid { grid-template-columns: 1fr 1fr 1.05fr; gap: 1.5rem; }
+  .delsa-about .da-space__shot--offset { transform: translateY(1.25rem); }
+}
+.delsa-about .da-space__shot {
+  margin: 0; border-radius: var(--radius); overflow: hidden;
+  aspect-ratio: 4/3; box-shadow: var(--shadow); background: #d7e2ea;
+}
+.delsa-about .da-space__shot img { width: 100%; height: 100%; object-fit: cover; }
+.delsa-about .da-space__copy h2 {
+  margin: 0 0 .85rem;
+  font-size: clamp(1.35rem, 1.15rem + .55vw, 1.7rem); font-weight: 750;
+}
+.delsa-about .da-space__copy p {
+  margin: 0; font-size: 1rem; line-height: 1.95; color: rgba(15,39,64,.78);
+}
+.delsa-about .da-team {
+  background: radial-gradient(ellipse 55% 40% at 0% 0%, rgba(31,168,160,.1), transparent 55%), var(--da-ivory-2);
+}
+.delsa-about .da-team__head { max-width: 36rem; margin: 0 0 2rem; }
+.delsa-about .da-team__head h2 {
+  margin: 0 0 .65rem;
+  font-size: clamp(1.45rem, 1.2rem + .7vw, 1.85rem); font-weight: 750;
+}
+.delsa-about .da-team__head p { margin: 0; color: var(--da-muted); line-height: 1.85; }
+.delsa-about .da-team__grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 560px) {
+  .delsa-about .da-team__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 980px) {
+  .delsa-about .da-team__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
+}
+.delsa-about .da-person__link { display: block; color: inherit; }
+.delsa-about .da-person__photo {
+  margin: 0 0 .85rem; border-radius: 16px; overflow: hidden;
+  aspect-ratio: 4/5; background: #d7e2ea; box-shadow: var(--shadow);
+}
+.delsa-about .da-person__photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  transition: transform .55s var(--ease);
+}
+.delsa-about .da-person__link:hover .da-person__photo img { transform: scale(1.04); }
+.delsa-about .da-person h3 { margin: 0 0 .35rem; font-size: 1rem; font-weight: 750; }
+.delsa-about .da-person p { margin: 0; font-size: .8125rem; line-height: 1.7; color: var(--da-muted); }
+.delsa-about .da-team__more { margin-top: 2rem; text-align: center; }
+.delsa-about .da-final { padding-bottom: 4.5rem; background: var(--da-ivory); }
+.delsa-about .da-final__inner {
+  text-align: center; padding: 2.75rem 1.5rem; border-radius: 22px; color: #fff;
+  background:
+    linear-gradient(135deg, rgba(15,39,64,.96), rgba(23,100,110,.92)),
+    url('/static/img/clinic/room-06.png') center/cover;
+  box-shadow: var(--shadow);
+}
+.delsa-about .da-final__inner h2 {
+  margin: 0 0 .65rem;
+  font-size: clamp(1.4rem, 1.2rem + .6vw, 1.8rem); font-weight: 750;
+}
+.delsa-about .da-final__inner p {
+  margin: 0 0 1.35rem; color: rgba(255,255,255,.82); line-height: 1.85;
+}
+@media (max-width: 640px) {
+  .delsa-about .da-hero {
+    height: calc(300px + var(--hdr-h));
+    min-height: calc(300px + var(--hdr-h));
+    max-height: calc(300px + var(--hdr-h));
+  }
+  .delsa-about .da-hero__inner { padding: 1.35rem 0 1.25rem; }
+  .delsa-about .da-btn { width: 100%; }
+}

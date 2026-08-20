@@ -1,15 +1,110 @@
 {% extends "base.html" %}
 {% block title %}{{ page.meta_title or page.title }} | کلینیک دلسا{% endblock %}
 {% block content %}
-<section class="dept-hero">
-  <div class="container">
-    <p class="dept-hero__label">کلینیک دلسا</p>
-    <h1>{{ page.title }}</h1>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="card prose">{{ page.body_html|safe }}</div>
-  </div>
-</section>
+<div class="delsa-about" dir="rtl">
+  <section class="da-hero" aria-labelledby="da-title">
+    <div class="da-hero__media" aria-hidden="true">
+      <img class="da-hero__photo" src="/static/img/clinic/room-01.png" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
+    </div>
+    <div class="da-hero__veil" aria-hidden="true"></div>
+    <div class="da-hero__inner">
+      <p class="da-hero__brand" data-da-reveal>کلینیک دلسا</p>
+      <h1 id="da-title" data-da-reveal>درباره ما</h1>
+      <p class="da-hero__lead" data-da-reveal>گروه تخصصی مشاوره و خدمات روان‌شناختی در سعادت‌آباد — همراه شما در مسیر شناخت، تغییر و بهتر زندگی کردن.</p>
+      <div class="da-hero__actions" data-da-reveal>
+        <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">درخواست وقت ملاقات</a>
+        <a class="da-btn da-btn--ghost" href="/مشاوران">مشاهده مشاوران</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-section da-intro" data-da-reveal>
+    <div class="da-wrap">
+      <div class="da-intro__grid">
+        <div class="da-intro__copy">
+          <h2>مرکز تخصصی مشاوره و روان‌شناسی</h2>
+          <p>در کلینیک دلسا، خدمات روان‌شناسی و مشاوره — فردی، زوج، خانواده، کودک و نوجوان — توسط متخصصین با تجربه و فارغ‌التحصیل رشته‌های روان‌شناسی و مشاوره ارائه می‌شود.</p>
+          <p>تیم ما با رویکردهای به‌روز، سنجش دقیق و فضای امن و محرمانه، کنار شماست تا مسیر تغییر را قدم‌به‌قدم طی کنید.</p>
+        </div>
+        <figure class="da-intro__media">
+          <img src="/static/img/clinic/room-08.png" alt="فضای کلینیک دلسا" width="900" height="720" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-section da-pillars" data-da-reveal>
+    <div class="da-wrap">
+      <h2 class="da-section-title">چرا دلسا</h2>
+      <p class="da-section-lead">سه اصل ساده که کار ما را شکل می‌دهد.</p>
+      <div class="da-pillars__grid">
+        <article class="da-pillar">
+          <h3>علم و تجربه</h3>
+          <p>مداخلات مبتنی بر رویکردهای معتبر روان‌شناسی، با تیمی که سال‌ها در دانشگاه و کلینیک کار کرده است.</p>
+        </article>
+        <article class="da-pillar">
+          <h3>فضای امن</h3>
+          <p>محرمانگی، احترام و بدون قضاوت — تا بتوانید با خیال راحت حرف بزنید و دیده شوید.</p>
+        </article>
+        <article class="da-pillar">
+          <h3>همراهی واقعی</h3>
+          <p>از اولین تماس تا ادامه مسیر درمان، همراهی شفاف و قابل اتکا برای شما و خانواده‌تان.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-section da-space" data-da-reveal>
+    <div class="da-wrap da-space__grid">
+      <figure class="da-space__shot">
+        <img src="/static/img/clinic/room-05.png" alt="اتاق مشاوره کلینیک دلسا" width="800" height="600" loading="lazy" decoding="async">
+      </figure>
+      <figure class="da-space__shot da-space__shot--offset">
+        <img src="/static/img/clinic/room-02.png" alt="فضای آرام کلینیک دلسا" width="800" height="600" loading="lazy" decoding="async">
+      </figure>
+      <div class="da-space__copy">
+        <h2>فضایی آرام برای شروع</h2>
+        <p>کلینیک در سعادت‌آباد، خیابان علامه جنوبی قرار دارد؛ محیطی آرام و حرفه‌ای برای جلسات حضوری، با امکان هماهنگی نوبت آنلاین.</p>
+        <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">رزرو نوبت</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-section da-team" data-da-reveal>
+    <div class="da-wrap">
+      <div class="da-team__head">
+        <h2>تیم مشاوران</h2>
+        <p>متخصصین دلسا با سوابق دانشگاهی و بالینی، آماده همراهی شما هستند.</p>
+      </div>
+      <div class="da-team__grid">
+        {% for person in consultants %}
+        <article class="da-person">
+          <a class="da-person__link" href="/مشاور/{{ person.slug }}">
+            <div class="da-person__photo">
+              {% if person.image_url %}
+              <img src="{{ person.image_url }}" alt="{{ person.name }}" width="320" height="400" loading="lazy" decoding="async">
+              {% endif %}
+            </div>
+            <h3>{{ person.name }}</h3>
+            {% if person.role %}
+            <p>{{ person.role }}</p>
+            {% endif %}
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+      <div class="da-team__more">
+        <a class="da-btn da-btn--primary" href="/مشاوران">همه مشاوران</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="da-section da-final" data-da-reveal>
+    <div class="da-wrap da-final__inner">
+      <h2>آماده‌اید شروع کنید؟</h2>
+      <p>برای رزرو وقت، فرم نوبت‌دهی را پر کنید یا با کلینیک تماس بگیرید.</p>
+      <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">فرم نوبت‌دهی</a>
+    </div>
+  </section>
+</div>
 {% endblock %}

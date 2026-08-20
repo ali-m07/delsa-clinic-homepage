@@ -143,6 +143,9 @@ def about_page(request: Request, session: Session = Depends(get_session)):
         raise HTTPException(status_code=404, detail="صفحه پیدا نشد")
     ctx = site_context(session, request)
     ctx["page"] = page
+    ctx["consultants"] = session.exec(
+        select(Consultant).where(Consultant.published == True).order_by(Consultant.sort_order)
+    ).all()
     return templates.TemplateResponse("pages/about.html", ctx)
 
 

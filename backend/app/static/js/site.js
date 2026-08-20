@@ -385,4 +385,30 @@
       });
     });
   }
+
+  // About page reveals
+  (function () {
+    var root = document.querySelector('.delsa-about');
+    if (!root) return;
+    var nodes = Array.prototype.slice.call(root.querySelectorAll('[data-da-reveal]'));
+    function show(el) { el.classList.add('is-in'); }
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      nodes.forEach(show);
+      return;
+    }
+    root.querySelectorAll('.da-hero [data-da-reveal]').forEach(function (el, i) {
+      window.setTimeout(function () { show(el); }, 80 + i * 90);
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        show(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+    nodes.forEach(function (el) {
+      if (el.closest('.da-hero')) return;
+      io.observe(el);
+    });
+  })();
 })();
