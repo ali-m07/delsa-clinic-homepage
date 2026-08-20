@@ -535,37 +535,20 @@ html.js-motion .reveal.is-in {
   line-height: 1.7;
 }
 
-/* Services — horizontal editorial rail */
-.services-section { overflow: hidden; }
-.services-hint {
-  margin: 0;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.services-rail {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: .25rem 0 1rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
-.services-rail::-webkit-scrollbar { height: 6px; }
-.services-rail::-webkit-scrollbar-thumb {
-  background: rgba(58, 143, 138, 0.35);
-  border-radius: 999px;
-}
-.services-rail__track {
-  display: flex;
+/* Services — image grid */
+.services-section { overflow: visible; }
+.services-grid {
+  display: grid;
   gap: .85rem;
-  width: max-content;
-  padding-inline: max(1rem, calc((100vw - 1140px) / 2));
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 980px) {
+  .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .service-tile {
-  flex: 0 0 min(78vw, 300px);
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   border-radius: 22px;
@@ -576,29 +559,26 @@ html.js-motion .reveal.is-in {
   color: inherit;
   transition: transform .35s var(--ease), box-shadow .35s;
 }
-@media (min-width: 900px) {
-  .service-tile { flex-basis: 280px; }
-}
 .service-tile:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow);
 }
 .service-tile__media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
   background: #ddd5c8;
 }
 .service-tile__media img {
   width: 100%; height: 100%;
   object-fit: cover;
-  transform: scale(1.04);
+  transform: scale(1.03);
   transition: transform .8s var(--ease);
 }
-.service-tile:hover .service-tile__media img { transform: scale(1.1); }
+.service-tile:hover .service-tile__media img { transform: scale(1.08); }
 .service-tile__shade {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(26,47,58,.35) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(26,47,58,.28) 100%);
   pointer-events: none;
 }
 .service-tile__body {
