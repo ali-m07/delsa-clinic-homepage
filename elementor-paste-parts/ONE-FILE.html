@@ -8,10 +8,10 @@
 
 <style id="delsa-home-css">
 :root {
-      --navy: #243B48;
-      --navy-deep: #1A2F3A;
-      --teal: #3A8F8A;
-      --teal-deep: #2F7571;
+      --navy: #1F3642;
+      --navy-deep: #152833;
+      --teal: #2F8A84;
+      --teal-deep: #26736E;
       --muted: #5E6F7A;
       --cream: #FBF8F3;
       --cream-2: #F5F1EA;
@@ -74,7 +74,7 @@
     .hero {
       position: relative;
       margin: 0;
-      min-height: clamp(400px, 56vh, 560px);
+      min-height: clamp(480px, 72svh, 680px);
       height: auto;
       display: flex;
       align-items: flex-end;
@@ -83,7 +83,7 @@
       color: #fff;
     }
     @media (min-width: 768px) {
-      .hero { padding: clamp(5rem, 11vh, 6.5rem) 0 1.75rem; }
+      .hero { min-height: clamp(520px, 74vh, 700px); padding: clamp(5rem, 11vh, 6.5rem) 0 2rem; }
     }
     .hero__media { position: absolute; inset: 0; overflow: hidden; }
     .hero__reel { position: absolute; inset: 0; will-change: transform; }
@@ -127,7 +127,7 @@
     }
     .hero__brand {
       margin: 0 0 .55rem;
-      font-size: clamp(2.35rem, 1.55rem + 3.2vw, 3.55rem);
+      font-size: clamp(2.5rem, 1.6rem + 3.4vw, 3.85rem);
       font-weight: 800; letter-spacing: -.045em; line-height: 1.02;
     }
     .hero__title {
@@ -212,7 +212,7 @@
       width: 100%; height: 100%; object-fit: cover;
       transform: scale(1.03); transition: transform .8s var(--ease);
     }
-    .tile:hover .tile__media img { transform: scale(1.1); }
+    .tile:hover .tile__media img { transform: scale(1.05); }
     .tile__shade {
       position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(180deg, transparent 50%, rgba(26,47,58,.28) 100%);
