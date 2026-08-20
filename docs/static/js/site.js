@@ -73,7 +73,7 @@
   }
 
   // ─── Hero: real GSAP master timeline ─────────────────────
-  var glass = document.querySelector('[data-hero-glass]');
+  var glass = document.querySelector('[data-hero-copy]');
   var heroItems = Array.prototype.slice.call(document.querySelectorAll('[data-hero-item]'));
   var slides = Array.prototype.slice.call(document.querySelectorAll('[data-hero-slide]'));
   var dotsWrap = document.getElementById('hero-dots');
@@ -191,7 +191,7 @@
     if (veil) gsap.set(veil, { opacity: 0 });
     if (mesh) gsap.set(mesh, { opacity: 0, scale: 1.08 });
     if (shine) gsap.set(shine, { opacity: 0, xPercent: 40 });
-    if (glass) gsap.set(glass, { opacity: 0, y: 36, scale: 0.92, filter: 'blur(8px)' });
+    if (glass) gsap.set(glass, { opacity: 0, y: 28 });
     if (heroItems.length) gsap.set(heroItems, { opacity: 0, y: 22 });
     if (dotsWrap) gsap.set(dotsWrap, { opacity: 0, y: 12 });
 
@@ -199,17 +199,8 @@
       defaults: { ease: 'power3.out' },
       onComplete: function () {
         if (dotsWrap) dotsWrap.classList.add('is-ready');
-        // Keep CTAs fully visible — never scrub glass opacity away
         if (glass) {
-          gsap.set(glass, { clearProps: 'opacity,filter', opacity: 1, y: 0, scale: 1 });
-          gsap.to(glass, {
-            boxShadow:
-              '0 28px 70px rgba(10,24,32,0.34), inset 0 1px 0 rgba(255,255,255,0.4)',
-            duration: 1.2,
-            yoyo: true,
-            repeat: -1,
-            ease: 'sine.inOut',
-          });
+          gsap.set(glass, { clearProps: 'opacity', opacity: 1, y: 0 });
         }
         if (heroItems.length) {
           gsap.set(heroItems, { clearProps: 'opacity', opacity: 1, y: 0 });
@@ -220,7 +211,7 @@
             goToSlide(slideIndex + 1);
           }, 5200);
         }
-        // Parallax only the photo reel (not the glass / CTAs)
+        // Parallax only the photo reel (not the copy / CTAs)
         if (reel && window.ScrollTrigger) {
           gsap.to(reel, {
             yPercent: 12,
@@ -248,20 +239,18 @@
       .to(veil, { opacity: 1, duration: 1.1 }, 'boot+=0.15')
       .to(mesh, { opacity: 1, scale: 1, duration: 1.4 }, 'boot+=0.2')
       .to(shine, { opacity: 1, xPercent: -30, duration: 1.6, ease: 'power1.inOut' }, 'boot+=0.35')
-      // Glass card arrives
+      // Copy arrives on the photo (no glass card)
       .to(
         glass,
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          filter: 'blur(0px)',
-          duration: 0.95,
+          duration: 0.9,
           ease: 'power3.out',
         },
         'boot+=0.45'
       )
-      // Copy stagger inside glass
+      // Copy stagger
       .to(
         heroItems,
         {

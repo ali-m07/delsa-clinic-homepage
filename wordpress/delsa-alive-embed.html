@@ -44,15 +44,19 @@
   /* Hero */
   .delsa-hero {
     position: relative;
-    min-height: 420px;
+    min-height: min(92svh, 760px);
     display: flex;
     align-items: flex-end;
-    padding: 2.25rem 0 2.4rem;
+    padding: 2.5rem 0 3.5rem;
     overflow: hidden;
     color: #fff;
   }
   @media (min-width: 768px) {
-    .delsa-hero { min-height: 540px; max-height: 640px; }
+    .delsa-hero {
+      min-height: min(88vh, 820px);
+      max-height: none;
+      padding-bottom: 4.25rem;
+    }
   }
   .delsa-hero__media { position: absolute; inset: 0; overflow: hidden; }
   .delsa-hero__reel { position: absolute; inset: -4% 0; will-change: transform; }
@@ -67,68 +71,56 @@
   .delsa-hero__mesh {
     position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
-      radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.32), transparent 55%),
-      radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.26), transparent 55%);
+      radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.22), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.18), transparent 55%);
     mix-blend-mode: soft-light;
   }
   .delsa-hero__veil {
     position: absolute; inset: 0; z-index: 3; pointer-events: none;
     background:
-      linear-gradient(180deg, rgba(26,47,58,.22) 0%, rgba(26,47,58,.34) 45%, rgba(26,47,58,.72) 100%),
-      linear-gradient(105deg, rgba(26,47,58,.5) 0%, rgba(26,47,58,.14) 58%, transparent 100%);
+      linear-gradient(90deg, rgba(16, 32, 40, 0.12) 0%, rgba(16, 32, 40, 0.28) 42%, rgba(16, 32, 40, 0.72) 100%),
+      linear-gradient(180deg, rgba(16, 32, 40, 0.18) 0%, transparent 28%, rgba(16, 32, 40, 0.55) 100%);
   }
   .delsa-hero__shine {
     position: absolute; inset: 0; z-index: 4; pointer-events: none;
-    background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,.2) 48%, transparent 64%);
+    background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,.14) 48%, transparent 64%);
   }
   .delsa-hero__inner {
     position: relative; z-index: 5;
     width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
     margin-inline: auto;
   }
-  .delsa-hero__glass {
-    max-width: 38rem;
-    padding: 1.25rem 1.35rem 1.4rem;
-    border-radius: 26px;
-    background: rgba(255,252,250,.14);
-    border: 1px solid rgba(255,255,255,.28);
-    box-shadow: 0 24px 60px rgba(10,24,32,.28), inset 0 1px 0 rgba(255,255,255,.28);
-    backdrop-filter: blur(18px) saturate(1.25);
-    -webkit-backdrop-filter: blur(18px) saturate(1.25);
-    transform-origin: center bottom;
+  .delsa-hero__copy {
+    max-width: 36rem;
     position: relative;
     z-index: 6;
+    text-shadow: 0 10px 36px rgba(8, 18, 24, 0.35);
   }
   @media (max-width: 767px) {
-    .delsa-hero { min-height: 88svh; padding-bottom: 3.25rem; }
-    .delsa-hero__glass {
-      background: rgba(18, 36, 46, 0.52);
-      border-color: rgba(255,255,255,.34);
-      backdrop-filter: blur(22px) saturate(1.3);
-      -webkit-backdrop-filter: blur(22px) saturate(1.3);
-    }
+    .delsa-hero { min-height: 88svh; padding-bottom: 3.75rem; }
     .delsa-hero__actions .delsa-btn {
       flex: 1 1 auto;
       min-height: 2.75rem;
     }
   }
   .delsa-hero__brand {
-    margin: 0 0 .4rem;
-    font-size: clamp(1.85rem, 1.25rem + 2.2vw, 2.7rem);
-    font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+    margin: 0 0 .55rem;
+    font-size: clamp(2.35rem, 1.55rem + 3.2vw, 3.55rem);
+    font-weight: 800; letter-spacing: -0.045em; line-height: 1.02;
   }
   .delsa-hero__title {
-    margin: 0 0 .65rem;
-    font-size: clamp(1.2rem, 1.05rem + 1.05vw, 1.75rem);
-    font-weight: 600; letter-spacing: -0.025em; line-height: 1.35;
+    margin: 0 0 .75rem;
+    font-size: clamp(1.15rem, 1rem + 0.85vw, 1.55rem);
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1.4;
     max-width: 18ch;
+    color: rgba(255,255,255,.94);
   }
   .delsa-hero__lead {
-    margin: 0 0 1.05rem;
-    max-width: 34rem;
-    font-size: .98rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,.88);
+    margin: 0 0 1.2rem;
+    max-width: 32rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,.86);
   }
   .delsa-hero__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
   .delsa-btn {
@@ -158,13 +150,11 @@
   }
   .delsa-hero__dots {
     position: absolute; z-index: 6;
-    left: 50%; bottom: 1rem;
+    left: 50%; bottom: 1.15rem;
     transform: translateX(-50%);
     display: flex; gap: .45rem;
-    padding: .35rem .5rem;
-    border-radius: 999px;
-    background: rgba(26,47,58,.28);
-    backdrop-filter: blur(8px);
+    padding: 0;
+    background: transparent;
     opacity: 0;
   }
   .delsa-hero__dots.is-ready { opacity: 1; }
@@ -180,31 +170,29 @@
   /* Trust */
   .delsa-trust {
     position: relative; z-index: 2;
-    margin-top: -1.35rem;
-    padding: 0 0 1.5rem;
+    margin-top: 0;
+    padding: 1.35rem 0 1.1rem;
+    border-bottom: 1px solid rgba(36, 59, 72, 0.08);
+    background: linear-gradient(180deg, #F8F4EE 0%, #FBF8F3 100%);
   }
   .delsa-trust__inner {
-    display: grid; gap: .65rem; grid-template-columns: 1fr;
-    padding: 1rem; border-radius: 22px;
-    background: rgba(255,252,250,.94);
-    border: 1px solid rgba(36,59,72,.08);
-    box-shadow: 0 18px 48px rgba(19,42,55,.1);
+    list-style: none; margin: 0;
+    display: grid; gap: 1rem; grid-template-columns: 1fr;
+    padding: 0; background: transparent; border: 0; box-shadow: none; border-radius: 0;
   }
   @media (min-width: 700px) {
-    .delsa-trust__inner { grid-template-columns: repeat(3, 1fr); }
+    .delsa-trust__inner { grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .delsa-trust__inner > li + li { border-right: 1px solid rgba(36, 59, 72, 0.1); }
   }
-  .delsa-stat {
-    padding: .85rem 1rem; border-radius: 16px;
-    background: linear-gradient(160deg, #FBF8F3, #F3EEE6);
-    border: 1px solid rgba(36,59,72,.06);
-    transition: transform .35s var(--ease), box-shadow .35s;
+  .delsa-trust__inner > li { padding: .35rem 1rem; text-align: center; }
+  .delsa-trust__inner strong {
+    display: block;
+    font-size: clamp(1.65rem, 1.35rem + 1vw, 2.1rem);
+    font-weight: 800; letter-spacing: -.03em; color: var(--navy); line-height: 1.1;
   }
-  .delsa-stat:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 28px rgba(19,42,55,.07); }
-  .delsa-stat strong {
-    display: block; font-size: 1.45rem; font-weight: 800;
-    letter-spacing: -.03em; margin-bottom: .15rem; color: var(--navy);
+  .delsa-trust__inner span {
+    display: block; margin-top: .25rem; font-size: .9rem; color: rgba(26, 47, 58, 0.72);
   }
-  .delsa-stat span { font-size: 12.5px; color: var(--muted); }
 
   /* Services */
   .delsa-services { padding: 1.75rem 0 2.5rem; background: #F8F4ED; }
@@ -280,7 +268,7 @@
     </div>
 
     <div class="delsa-hero__inner">
-      <div class="delsa-hero__glass" data-hero-glass>
+      <div class="delsa-hero__copy" data-hero-copy>
         <p class="delsa-hero__brand" data-hero-item>کلینیک دلسا</p>
         <h1 class="delsa-hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
         <p class="delsa-hero__lead" data-hero-item>همراهی تخصصی در مسیر سلامت روان — با تیمی که به آرامش، تخصص و احترام شما متعهد است.</p>
@@ -298,15 +286,15 @@
   <section class="delsa-trust" aria-label="آمار کلینیک">
     <div class="wrap">
       <ul class="delsa-trust__inner">
-        <li class="delsa-stat" data-reveal>
+        <li data-reveal>
           <strong data-count="15" data-prefix="+">۰</strong>
           <span>سال تجربه تخصصی</span>
         </li>
-        <li class="delsa-stat" data-reveal>
+        <li data-reveal>
           <strong data-count="6">۰</strong>
           <span>دپارتمان چندتخصصی</span>
         </li>
-        <li class="delsa-stat" data-reveal>
+        <li data-reveal>
           <strong data-count="24" data-suffix="/۷">۰</strong>
           <span>پشتیبانی هماهنگی</span>
         </li>
@@ -405,7 +393,7 @@
   if (hasGsap && window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
 
   var hero = document.getElementById('delsa-hero');
-  var glass = root.querySelector('[data-hero-glass]');
+  var glass = root.querySelector('[data-hero-copy]');
   var heroItems = Array.prototype.slice.call(root.querySelectorAll('[data-hero-item]'));
   var slides = Array.prototype.slice.call(root.querySelectorAll('[data-hero-slide]'));
   var dotsWrap = document.getElementById('delsa-hero-dots');
@@ -495,7 +483,7 @@
     if (veil) gsap.set(veil, { opacity: 0 });
     if (mesh) gsap.set(mesh, { opacity: 0, scale: 1.08 });
     if (shine) gsap.set(shine, { opacity: 0, xPercent: 40 });
-    if (glass) gsap.set(glass, { opacity: 0, y: 36, scale: 0.92, filter: 'blur(8px)' });
+    if (glass) gsap.set(glass, { opacity: 0, y: 28 });
     if (heroItems.length) gsap.set(heroItems, { opacity: 0, y: 22 });
     if (dotsWrap) gsap.set(dotsWrap, { opacity: 0, y: 12 });
 
@@ -503,13 +491,7 @@
       defaults: { ease: 'power3.out' },
       onComplete: function () {
         if (dotsWrap) dotsWrap.classList.add('is-ready');
-        if (glass) {
-          gsap.set(glass, { clearProps: 'opacity,filter', opacity: 1, y: 0, scale: 1 });
-          gsap.to(glass, {
-            boxShadow: '0 28px 70px rgba(10,24,32,0.34), inset 0 1px 0 rgba(255,255,255,0.4)',
-            duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut'
-          });
-        }
+        if (glass) gsap.set(glass, { clearProps: 'opacity', opacity: 1, y: 0 });
         if (heroItems.length) gsap.set(heroItems, { clearProps: 'opacity', opacity: 1, y: 0 });
         startKenBurns(slides[slideIndex]);
         if (slides.length > 1) {
@@ -528,7 +510,7 @@
       .to(veil, { opacity: 1, duration: 1.1 }, 'boot+=0.15')
       .to(mesh, { opacity: 1, scale: 1, duration: 1.4 }, 'boot+=0.2')
       .to(shine, { opacity: 1, xPercent: -30, duration: 1.6, ease: 'power1.inOut' }, 'boot+=0.35')
-      .to(glass, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.95 }, 'boot+=0.45')
+      .to(glass, { opacity: 1, y: 0, duration: 0.9 }, 'boot+=0.45')
       .to(heroItems, { opacity: 1, y: 0, duration: 0.7, stagger: 0.12 }, 'boot+=0.62')
       .to(dotsWrap, { opacity: 1, y: 0, duration: 0.55 }, 'boot+=1.15');
   } else {
