@@ -574,6 +574,44 @@ html.js-motion .reveal.is-in {
 }
 .space-mosaic figure:hover img { transform: scale(1.05); }
 
+.cta-band {
+  margin: 0;
+  padding: 1.15rem 0;
+  background:
+    linear-gradient(115deg, rgba(27, 58, 75, 0.96), rgba(47, 117, 113, 0.92));
+  color: #fff;
+}
+.cta-band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .85rem 1.25rem;
+}
+.cta-band__copy {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+.cta-band__copy span {
+  display: block;
+  margin-top: .2rem;
+  font-size: 13.5px;
+  font-weight: 450;
+  color: rgba(255,255,255,.72);
+}
+.cta-band .btn--primary {
+  background: #fff;
+  color: var(--navy-deep);
+  box-shadow: none;
+}
+.cta-band .btn--primary:hover {
+  background: #F7F1E8;
+  transform: translateY(-1px);
+}
+
 /* Steps */
 .steps {
   display: grid; gap: .7rem;
@@ -931,7 +969,7 @@ button.btn--primary:hover { background: var(--teal-deep); }
 
 .mobile-cta-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9990;
-  display: flex; background: rgba(250,248,245,.96);
+  display: flex; background: rgba(232, 223, 210, .96);
   border-top: 1px solid var(--line);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 -8px 28px rgba(19,42,55,.1);

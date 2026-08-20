@@ -145,13 +145,4 @@
       },
     });
   }
-
-  gsap.to('.stat-card', {
-    y: -4,
-    duration: 2.4,
-    yoyo: true,
-    repeat: -1,
-    ease: 'sine.inOut',
-    stagger: 0.35,
-  });
 })();
