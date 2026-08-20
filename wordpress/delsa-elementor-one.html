@@ -1,18 +1,13 @@
-<!-- نسخه یک‌تکه بدون هدر/فوتر — کل فایل را کپی کنید -->
+<!-- DELSA homepage، یک فایل برای پیست در Elementor HTML Widget -->
+<!-- بدون هدر/فوتر، کل محتوا را یک‌جا کپی کنید -->
+<!-- اگر انیمیشن کار نکرد: همین <script> را در Elementor → Custom Code → Footer هم بگذارید -->
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>کلینیک دلسا | مشاوره و روان‌درمانی</title>
-  <meta name="description" content="کلینیک دلسا — مشاوره و روان‌درمانی تخصصی در سعادت‌آباد">
-  <link rel="icon" href="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style id="delsa-home-css">
+:root {
       --navy: #243B48;
       --navy-deep: #1A2F3A;
       --teal: #3A8F8A;
@@ -26,13 +21,14 @@
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
+    .delsa-home {
       font-family: var(--font);
       color: var(--navy);
       background: linear-gradient(180deg, #FBF8F3 0%, #F7F3EC 100%);
       line-height: 1.75;
       -webkit-font-smoothing: antialiased;
+      text-align: right;
+      direction: rtl;
     }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
@@ -44,20 +40,53 @@
     .wrap--narrow { width: min(720px, calc(100% - clamp(2rem, 6vw, 4.5rem))); }
     .dir-ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
 
-    /* Hero */
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .88rem 1.55rem; border-radius: 999px;
+      font-size: 14px; font-weight: 700; font-family: inherit; border: 0;
+      transition: transform .22s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+    }
+    .btn--primary {
+      background: var(--teal); color: #fff;
+      box-shadow: 0 12px 36px rgba(58,143,138,.28);
+    }
+    .btn--primary:hover { background: var(--teal-deep); transform: scale(1.04); }
+    .btn--ghost {
+      color: #fff; border: 1px solid rgba(255,255,255,.5);
+      background: rgba(255,255,255,.1);
+    }
+    .btn--ghost:hover { background: rgba(255,255,255,.2); transform: scale(1.04); }
+    .btn--on-teal { background: #fff; color: var(--navy-deep); box-shadow: none; }
+    .btn--on-teal:hover { background: #F7F1E8; }
+
+
+    /* Kill Elementor default gaps around the HTML widget */
+    .elementor-widget-html,
+    .elementor-widget-html > .elementor-widget-container,
+    .elementor-element:has(> .elementor-widget-html) {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .delsa-home { margin: 0; padding: 0; }
+
+    /* Hero، height follows content; no empty grey band under CTAs */
     .hero {
       position: relative;
-      margin-top: 0;
-      min-height: min(92svh, 760px);
-      display: flex; align-items: flex-end;
-      padding: 2.5rem 0 3.5rem;
-      overflow: hidden; color: #fff;
+      margin: 0;
+      min-height: clamp(400px, 56vh, 560px);
+      height: auto;
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(4.5rem, 10vh, 6rem) 0 1.5rem;
+      overflow: hidden;
+      color: #fff;
     }
     @media (min-width: 768px) {
-      .hero { min-height: min(88vh, 820px); padding-bottom: 4.25rem; }
+      .hero { padding: clamp(5rem, 11vh, 6.5rem) 0 1.75rem; }
     }
     .hero__media { position: absolute; inset: 0; overflow: hidden; }
-    .hero__reel { position: absolute; inset: -4% 0; will-change: transform; }
+    .hero__reel { position: absolute; inset: 0; will-change: transform; }
     .hero__photo {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; object-position: center 38%; opacity: 0;
@@ -67,15 +96,16 @@
     .hero__mesh {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background:
-        radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.22), transparent 55%),
-        radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.18), transparent 55%);
+        radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.18), transparent 55%),
+        radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.14), transparent 55%);
       mix-blend-mode: soft-light;
     }
     .hero__veil {
       position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      /* Darken only the copy side، not a thick empty strip under the buttons */
       background:
-        linear-gradient(90deg, rgba(16,32,40,.12) 0%, rgba(16,32,40,.28) 42%, rgba(16,32,40,.72) 100%),
-        linear-gradient(180deg, rgba(16,32,40,.18) 0%, transparent 28%, rgba(16,32,40,.55) 100%);
+        linear-gradient(90deg, rgba(16,32,40,.08) 0%, rgba(16,32,40,.22) 48%, rgba(16,32,40,.62) 100%),
+        linear-gradient(180deg, rgba(16,32,40,.12) 0%, transparent 40%, rgba(16,32,40,.28) 100%);
     }
     .hero__shine {
       position: absolute; inset: 0; z-index: 4; pointer-events: none;
@@ -85,13 +115,14 @@
       position: relative; z-index: 5;
       width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
       margin-inline: auto;
+      padding-bottom: 0;
     }
     .hero__copy {
       max-width: 36rem; position: relative; z-index: 6;
       text-shadow: 0 10px 36px rgba(8,18,24,.35);
     }
     @media (max-width: 767px) {
-      .hero { min-height: 88svh; padding-bottom: 3.75rem; }
+      .hero { padding: 5rem 0 1.75rem; }
       .hero__actions .btn { flex: 1 1 auto; min-height: 2.75rem; }
     }
     .hero__brand {
@@ -111,7 +142,7 @@
     }
     .hero__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
     .hero__dots {
-      position: absolute; z-index: 6; left: 50%; bottom: 1.15rem;
+      position: absolute; z-index: 6; left: 50%; bottom: .65rem;
       transform: translateX(-50%); display: flex; gap: .45rem; opacity: 0;
     }
     .hero__dots.is-ready { opacity: 1; }
@@ -311,16 +342,17 @@
     @media (prefers-reduced-motion: reduce) {
       [data-reveal] { opacity: 1; transform: none; transition: none; }
     }
-  </style>
-</head>
-<body>
-  <a class="skip" href="#main" style="position:absolute;inset-inline-start:-999px">رفتن به محتوا</a>
+    .delsa-home .hero {
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
 
-  
+</style>
 
-  
-
-  <main id="main">
+<div class="delsa-home" id="delsa-home" dir="rtl" lang="fa">
+<main id="main">
     <section class="hero" id="hero">
       <div class="hero__media" aria-hidden="true">
         <div class="hero__reel" id="hero-reel">
@@ -338,7 +370,7 @@
         <div class="hero__copy" data-hero-copy>
           <p class="hero__brand" data-hero-item>کلینیک دلسا</p>
           <h1 class="hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
-          <p class="hero__lead" data-hero-item>همراهی تخصصی در مسیر سلامت روان — با تیمی که به آرامش، تخصص و احترام شما متعهد است.</p>
+          <p class="hero__lead" data-hero-item>همراهی تخصصی در مسیر سلامت روان، با تیمی که به آرامش، تخصص و احترام شما متعهد است.</p>
           <div class="hero__actions" data-hero-item>
             <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
             <a class="btn btn--ghost" href="tel:09025680372">تماس مستقیم</a>
@@ -362,7 +394,7 @@
       <div class="wrap">
         <div class="section__head" data-reveal>
           <h2>خدمات تخصصی کلینیک</h2>
-          <p>شش دپارتمان برای نیازهای فردی، خانوادگی و رشدی — با رویکرد علمی و انسانی</p>
+          <p>شش دپارتمان برای نیازهای فردی، خانوادگی و رشدی، با رویکرد علمی و انسانی</p>
         </div>
         <div class="services-grid">
           <a class="tile" data-reveal href="https://delsaclinic.com/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C/">
@@ -397,7 +429,7 @@
       <div class="wrap">
         <div class="section__head" data-reveal>
           <h2>چرا دلسا</h2>
-          <p>اعتماد، تخصص و دسترسی آسان — در فضایی که برای شنیده شدن طراحی شده است</p>
+          <p>اعتماد، تخصص و دسترسی آسان، در فضایی که برای شنیده شدن طراحی شده است</p>
         </div>
         <div class="why-grid">
           <article class="why-card" data-reveal>
@@ -460,7 +492,7 @@
         <ol class="steps">
           <li class="step" data-reveal><span class="step__num">۱</span><h3>درخواست وقت</h3><p>فرم آنلاین را پر کنید یا تماس بگیرید</p></li>
           <li class="step" data-reveal><span class="step__num">۲</span><h3>هماهنگی جلسه</h3><p>تیم پذیرش زمان و دپارتمان مناسب را هماهنگ می‌کند</p></li>
-          <li class="step" data-reveal><span class="step__num">۳</span><h3>شروع جلسات</h3><p>حضوری، تلفنی یا آنلاین — متناسب با نیاز شما</p></li>
+          <li class="step" data-reveal><span class="step__num">۳</span><h3>شروع جلسات</h3><p>حضوری، تلفنی یا آنلاین، متناسب با نیاز شما</p></li>
         </ol>
       </div>
     </section>
@@ -497,12 +529,22 @@
     <a class="mobile-cta__call" href="tel:09025680372">تماس</a>
     <a class="mobile-cta__book" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت</a>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script>
-  (function () {
+<script>
+(function () {
+  function loadScript(src) {
+    return new Promise(function (resolve) {
+      var s = document.createElement("script");
+      s.src = src;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { resolve(); };
+      document.head.appendChild(s);
+    });
+  }
+  function start() {
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     var gsap = window.gsap;
     var hasGsap = !!gsap && !reduceMotion;
     if (hasGsap && window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
@@ -682,7 +724,10 @@
     } else {
       counters.forEach(animateCount);
     }
-  })();
-  </script>
-</body>
-</html>
+  }
+  loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js")
+    .then(function () { return loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"); })
+    .then(start)
+    .catch(start);
+})();
+</script>

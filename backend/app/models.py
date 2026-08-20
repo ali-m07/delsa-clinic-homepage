@@ -56,7 +56,7 @@ class Page(SQLModel, table=True):
 class SiteSettings(SQLModel, table=True):
     id: Optional[int] = Field(default=1, primary_key=True)
     phone_mobile: str = "۰۹۰۲-۵۶۸۰۳۷۲"
-    phone_landline: str = "۰۲۱-۸۸۶۸۲۰۰۳"
+    phone_landline: str = ""
     phone_landline2: str = "۰۲۱-۲۲۰۹۱۷۴۳"
     email: str = "info@delsaclinic.com"
     address: str = (

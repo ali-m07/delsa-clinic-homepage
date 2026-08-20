@@ -29,7 +29,9 @@
         <div class="footer-phones">
           <p class="footer-phones-label">تلفن</p>
           <a href="tel:{{ settings.phone_mobile }}" class="footer-phone-main dir-ltr">{{ settings.phone_mobile }}</a>
+          {% if settings.phone_landline %}
           <a href="tel:{{ settings.phone_landline }}" class="footer-phone-sub dir-ltr">{{ settings.phone_landline }}</a>
+          {% endif %}
           {% if settings.phone_landline2 %}
           <a href="tel:{{ settings.phone_landline2 }}" class="footer-phone-sub dir-ltr">{{ settings.phone_landline2 }}</a>
           {% endif %}

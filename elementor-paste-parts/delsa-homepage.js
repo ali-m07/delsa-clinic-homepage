@@ -1,7 +1,3 @@
-<!-- DELSA part 5/5 — ویجت HTML #5 -->
-<!-- هر ویجت: بلوک‌های CSS کامل و بسته — Elementor هر ویجت را جدا wrap می‌کند -->
-<!-- Scripts — Elementor اغلب <script> ویجت را حذف می‌کند؛ در آن صورت همین کد را در Elementor → Custom Code → Footer بگذارید -->
-<script>
 (function () {
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
@@ -206,4 +202,3 @@
     .then(start)
     .catch(start);
 })();
-</script>
