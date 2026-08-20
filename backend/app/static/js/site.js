@@ -166,6 +166,21 @@
     }, 3200);
   }
 
+  // Horizontal services rail — scroll-linked nudge + wheel support
+  var rail = document.querySelector('[data-services-rail]');
+  if (rail && !reduceMotion) {
+    rail.addEventListener(
+      'wheel',
+      function (e) {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        var rtl = getComputedStyle(document.documentElement).direction === 'rtl';
+        rail.scrollBy({ left: e.deltaY * (rtl ? 1 : -1) });
+        e.preventDefault();
+      },
+      { passive: false }
+    );
+  }
+
   // Optional GSAP enrichment
   if (!window.gsap || reduceMotion) return;
   var gsap = window.gsap;
@@ -184,7 +199,23 @@
     });
   }
 
-  gsap.utils.toArray('.service-card, .consultant-card, .why-card').forEach(function (card) {
+  if (rail && window.ScrollTrigger) {
+    gsap.from('.service-tile', {
+      opacity: 0,
+      y: 28,
+      scale: 0.96,
+      duration: 0.7,
+      stagger: 0.08,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.services-section',
+        start: 'top 78%',
+        once: true,
+      },
+    });
+  }
+
+  gsap.utils.toArray('.service-tile, .consultant-card, .why-card').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
       var rect = card.getBoundingClientRect();
       var x = (e.clientX - rect.left) / rect.width - 0.5;

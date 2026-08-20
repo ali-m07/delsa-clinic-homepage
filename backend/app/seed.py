@@ -7,8 +7,8 @@ from sqlmodel import Session, select
 from app.database import engine, init_db
 from app.models import Article, Consultant, Department, Page, SiteSettings
 
-IMG = "https://delsaclinic.com/wp-content/uploads/2017/03/gallery-7-1-370x385.jpg"
-CONSULTANT_IMG = "https://delsaclinic.com/wp-content/uploads/2022/10/maryam-salehi-240x274.jpg"
+IMG = "/static/img/services/clinic.png"
+CONSULTANT_IMG = "/static/img/consultants/maryam-salehi.png"
 
 CAREER_BODY = """
 <h2>مشاوره شغلی چیست؟</h2>
@@ -49,7 +49,7 @@ DEPARTMENTS = [
 </ul>
 <p>تیم روان‌درمانی دلسا با رویکردهای شناختی-رفتاری، طرحواره‌درمانی و درمان مبتنی بر ذهن‌آگاهی همراه شماست.</p>
 """,
-        "image_url": IMG,
+        "image_url": "/static/img/services/anxiety.png",
     },
     {
         "slug": "روانپزشکی",
@@ -66,7 +66,7 @@ DEPARTMENTS = [
 <li>همکاری نزدیک با تیم روان‌درمانی</li>
 </ul>
 """,
-        "image_url": IMG,
+        "image_url": "/static/img/services/brain.png",
     },
     {
         "slug": "زوج-و-خانواده",
@@ -83,7 +83,7 @@ DEPARTMENTS = [
 <li>مدیریت تعارض و بحران‌های رابطه</li>
 </ul>
 """,
-        "image_url": IMG,
+        "image_url": "/static/img/services/couple.png",
     },
     {
         "slug": "کودک-و-نوجوان",
@@ -100,7 +100,7 @@ DEPARTMENTS = [
 <li>مشاوره والدین</li>
 </ul>
 """,
-        "image_url": IMG,
+        "image_url": "/static/img/services/child.png",
     },
     {
         "slug": "ترک-اعتیاد",
@@ -117,7 +117,7 @@ DEPARTMENTS = [
 <li>پیگیری و پیشگیری از عود</li>
 </ul>
 """,
-        "image_url": IMG,
+        "image_url": "/static/img/services/freedom.png",
     },
     {
         "slug": "مشاوره-شغلی",
@@ -129,7 +129,7 @@ DEPARTMENTS = [
             "که در انتخاب، تغییر یا ادامه مسیر حرفه‌ای خود به همراهی حرفه‌ای نیاز دارند."
         ),
         "body_html": CAREER_BODY,
-        "image_url": IMG,
+        "image_url": "/static/img/services/support.png",
         "meta_title": "مشاوره شغلی | کلینیک دلسا",
         "meta_description": "مشاوره شغلی در کلینیک دلسا: انتخاب شغل، تغییر مسیر حرفه‌ای و مدیریت استرس کاری.",
     },
