@@ -43,7 +43,7 @@ def test_home(client):
     response = client.get("/")
     assert response.status_code == 200
     assert "کلینیک دلسا" in response.text
-    assert "خدمات اصلی کلینیک" in response.text
+    assert "خدمات تخصصی کلینیک" in response.text
 
 
 def test_career_department(client):

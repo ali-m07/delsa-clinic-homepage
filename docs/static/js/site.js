@@ -1,8 +1,9 @@
-/* site.js — interactions + GSAP motion */
+/* site.js — motion that works even without GSAP */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js-motion');
 
   // Header scroll
   var header = document.getElementById('site-header');
@@ -56,39 +57,85 @@
   // Mobile CTA
   var hero = document.getElementById('hero');
   if (mobileBar && hero && window.matchMedia('(max-width: 1023px)').matches) {
-    var obs = new IntersectionObserver(function (entries) {
+    var barObs = new IntersectionObserver(function (entries) {
       mobileBar.classList.toggle('visible', !entries[0].isIntersecting);
     }, { threshold: 0 });
-    obs.observe(hero);
+    barObs.observe(hero);
   }
 
-  // GSAP motion
-  if (!window.gsap) return;
+  // Reveal on scroll (always works)
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  function showReveal(el) {
+    el.classList.add('is-in');
+  }
+
+  if (reduceMotion) {
+    reveals.forEach(showReveal);
+  } else {
+    // Hero text first, staggered
+    var heroReveals = reveals.filter(function (el) {
+      return el.closest('.hero');
+    });
+    heroReveals.forEach(function (el, i) {
+      window.setTimeout(function () {
+        showReveal(el);
+      }, 120 + i * 110);
+    });
+
+    var rest = reveals.filter(function (el) {
+      return !el.closest('.hero');
+    });
+    if ('IntersectionObserver' in window) {
+      var revObs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              showReveal(entry.target);
+              revObs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      );
+      rest.forEach(function (el) {
+        revObs.observe(el);
+      });
+    } else {
+      rest.forEach(showReveal);
+    }
+  }
+
+  // Safety: never leave content invisible
+  window.setTimeout(function () {
+    reveals.forEach(showReveal);
+  }, 2500);
+
+  // Hero cinematic reel (photo crossfade = video-like motion)
+  var slides = Array.prototype.slice.call(document.querySelectorAll('[data-hero-slide]'));
+  if (slides.length > 1 && !reduceMotion) {
+    var index = 0;
+    window.setInterval(function () {
+      var current = slides[index];
+      index = (index + 1) % slides.length;
+      var next = slides[index];
+      current.classList.remove('is-active');
+      current.classList.add('is-leaving');
+      next.classList.add('is-active');
+      window.setTimeout(function () {
+        current.classList.remove('is-leaving');
+      }, 1400);
+    }, 4200);
+  }
+
+  // Optional GSAP enrichment
+  if (!window.gsap || reduceMotion) return;
   var gsap = window.gsap;
   if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
 
-  if (reduceMotion) {
-    gsap.set('.reveal', { clearProps: 'all', opacity: 1, transform: 'none' });
-    return;
-  }
-
-  // Hero entrance
-  var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  var heroPhoto = document.querySelector('.hero__photo');
-  if (heroPhoto) {
-    heroTl.fromTo(heroPhoto, { scale: 1.08 }, { scale: 1.02, duration: 1.6 }, 0);
-  }
-  heroTl.fromTo(
-    '.hero .reveal',
-    { opacity: 0, y: 22, scale: 0.97 },
-    { opacity: 1, y: 0, scale: 1, duration: 0.85, stagger: 0.08 },
-    0.15
-  );
-
-  // Soft parallax on hero photo
-  if (heroPhoto && window.ScrollTrigger) {
-    gsap.to(heroPhoto, {
-      yPercent: 8,
+  var activePhoto = document.querySelector('.hero__photo.is-active');
+  if (activePhoto && window.ScrollTrigger) {
+    gsap.to('.hero__reel', {
+      yPercent: 10,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
@@ -99,25 +146,12 @@
     });
   }
 
-  // Scroll reveals
-  if (window.ScrollTrigger) {
-    gsap.utils.toArray('.section .reveal, .space-mosaic .reveal, .quote-card.reveal').forEach(function (el) {
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 20, scale: 0.98 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.75,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            once: true,
-          },
-        }
-      );
-    });
-  }
+  gsap.to('.stat-card', {
+    y: -4,
+    duration: 2.4,
+    yoyo: true,
+    repeat: -1,
+    ease: 'sine.inOut',
+    stagger: 0.35,
+  });
 })();
