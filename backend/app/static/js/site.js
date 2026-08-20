@@ -1,11 +1,11 @@
-/* site.js — motion that works even without GSAP */
+/* site.js — alive motion for Delsa */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js-motion');
 
-  // Header scroll
+  // Header
   var header = document.getElementById('site-header');
   if (header) {
     var onScroll = function () {
@@ -63,52 +63,101 @@
     barObs.observe(hero);
   }
 
-  // Reveal on scroll
-  var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  function showReveal(el) {
+  function showIn(el) {
     el.classList.add('is-in');
   }
 
+  // Hero entrance
+  var glass = document.querySelector('[data-hero-glass]');
+  var heroItems = Array.prototype.slice.call(document.querySelectorAll('[data-hero-item]'));
   if (reduceMotion) {
-    reveals.forEach(showReveal);
+    if (glass) showIn(glass);
+    heroItems.forEach(showIn);
   } else {
-    var heroReveals = reveals.filter(function (el) {
-      return el.closest('.hero') || el.closest('.trust-strip');
+    if (glass) {
+      window.setTimeout(function () { showIn(glass); }, 80);
+    }
+    heroItems.forEach(function (el, i) {
+      window.setTimeout(function () { showIn(el); }, 220 + i * 120);
     });
-    heroReveals.forEach(function (el, i) {
-      window.setTimeout(function () {
-        showReveal(el);
-      }, 80 + i * 90);
-    });
+  }
 
-    var rest = reveals.filter(function (el) {
-      return !el.closest('.hero') && !el.closest('.trust-strip');
+  // Scroll reveals
+  var reveals = Array.prototype.slice.call(
+    document.querySelectorAll('[data-reveal], .reveal')
+  );
+  if (reduceMotion) {
+    reveals.forEach(showIn);
+  } else if ('IntersectionObserver' in window) {
+    var revObs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          showIn(entry.target);
+          revObs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+    reveals.forEach(function (el) {
+      if (el.closest('.hero')) return;
+      revObs.observe(el);
     });
-    if ('IntersectionObserver' in window) {
-      var revObs = new IntersectionObserver(
+  } else {
+    reveals.forEach(showIn);
+  }
+  window.setTimeout(function () { reveals.forEach(showIn); }, 2800);
+
+  // Count-up stats
+  function toFa(n) {
+    return String(n).replace(/\d/g, function (d) {
+      return '۰۱۲۳۴۵۶۷۸۹'[d];
+    });
+  }
+
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    if (!target && target !== 0) return;
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduceMotion) {
+      el.textContent = prefix + toFa(target) + suffix;
+      return;
+    }
+    var start = null;
+    var dur = 1100;
+    function frame(ts) {
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + toFa(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+  if (counters.length) {
+    if (reduceMotion) {
+      counters.forEach(animateCount);
+    } else if ('IntersectionObserver' in window) {
+      var cObs = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              showReveal(entry.target);
-              revObs.unobserve(entry.target);
-            }
+            if (!entry.isIntersecting) return;
+            animateCount(entry.target);
+            cObs.unobserve(entry.target);
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+        { threshold: 0.4 }
       );
-      rest.forEach(function (el) {
-        revObs.observe(el);
-      });
+      counters.forEach(function (el) { cObs.observe(el); });
     } else {
-      rest.forEach(showReveal);
+      counters.forEach(animateCount);
     }
   }
 
-  window.setTimeout(function () {
-    reveals.forEach(showReveal);
-  }, 2200);
-
-  // Hero cinematic reel
+  // Hero reel
   var slides = Array.prototype.slice.call(document.querySelectorAll('[data-hero-slide]'));
   var dotsWrap = document.getElementById('hero-dots');
   var index = 0;
@@ -118,27 +167,26 @@
     if (!dotsWrap) return;
     Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
       dot.classList.toggle('is-active', i === active);
+      dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
     });
   }
 
   function goTo(nextIndex) {
-    if (!slides.length) return;
+    if (slides.length < 2) return;
     var current = slides[index];
     index = (nextIndex + slides.length) % slides.length;
     var next = slides[index];
     if (current === next) return;
     current.classList.remove('is-active');
     current.classList.add('is-leaving');
-    // restart ken-burns
     next.style.animation = 'none';
-    // force reflow
     void next.offsetWidth;
     next.style.animation = '';
     next.classList.add('is-active');
     setDots(index);
     window.setTimeout(function () {
       current.classList.remove('is-leaving');
-    }, 950);
+    }, 1200);
   }
 
   if (slides.length > 1 && dotsWrap) {
@@ -146,14 +194,13 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'hero__dot' + (i === 0 ? ' is-active' : '');
+      btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-label', 'اسلاید ' + (i + 1));
       btn.addEventListener('click', function () {
         goTo(i);
         if (timer) {
           window.clearInterval(timer);
-          timer = window.setInterval(function () {
-            goTo(index + 1);
-          }, 3200);
+          timer = window.setInterval(function () { goTo(index + 1); }, 4500);
         }
       });
       dotsWrap.appendChild(btn);
@@ -161,19 +208,27 @@
   }
 
   if (slides.length > 1 && !reduceMotion) {
-    timer = window.setInterval(function () {
-      goTo(index + 1);
-    }, 3200);
+    timer = window.setInterval(function () { goTo(index + 1); }, 4500);
   }
 
-  // Optional GSAP enrichment
+  // FAQ soft open (details)
+  document.querySelectorAll('.faq__item').forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (!item.open) return;
+      document.querySelectorAll('.faq__item[open]').forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
+  // GSAP enrichment
   if (!window.gsap || reduceMotion) return;
   var gsap = window.gsap;
   if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
 
   if (document.querySelector('.hero__reel') && window.ScrollTrigger) {
     gsap.to('.hero__reel', {
-      yPercent: 8,
+      yPercent: 12,
       ease: 'none',
       scrollTrigger: {
         trigger: '.hero',
@@ -184,36 +239,21 @@
     });
   }
 
-  if (window.ScrollTrigger) {
-    gsap.from('.service-tile', {
-      opacity: 0,
-      y: 24,
-      duration: 0.65,
-      stagger: 0.07,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.services-section',
-        start: 'top 80%',
-        once: true,
-      },
-    });
-  }
-
-  gsap.utils.toArray('.service-tile, .consultant-card, .why-card').forEach(function (card) {
+  gsap.utils.toArray('.service-tile, .why-card, .article-card, .step').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
       var rect = card.getBoundingClientRect();
       var x = (e.clientX - rect.left) / rect.width - 0.5;
       var y = (e.clientY - rect.top) / rect.height - 0.5;
       gsap.to(card, {
-        rotateY: x * -4,
-        rotateX: y * 4,
-        transformPerspective: 700,
+        rotateY: x * -5,
+        rotateX: y * 5,
+        transformPerspective: 800,
         duration: 0.35,
         ease: 'power2.out',
       });
     });
     card.addEventListener('mouseleave', function () {
-      gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.45, ease: 'power3.out' });
+      gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
     });
   });
 })();
