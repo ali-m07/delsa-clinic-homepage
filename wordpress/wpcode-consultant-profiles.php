@@ -4,11 +4,10 @@
  * نوع: PHP Snippet
  * محل: Run Everywhere
  *
- * - صفحات پروفایل مشاور: هیرو + کارت محتوا
- * - صفحه /مشاوران/: گرید خودکار از همه پروفایل‌ها
- * - فهرست /مشاوران/: ۵ نفر اصلی + هر مشاور دیگری که از محتوا/لینک/صفحه پیدا شود
- * - کارت نرم برای کسانی که هنوز صفحه ندارند ولی در Elementor آمده‌اند
- * - پروفایل و فهرست جدا هستند؛ فهرست همه را جمع می‌کند
+ * - فهرست /consultant/: خودکار از همهٔ مشاوران CPT
+ * - مشاور جدید با Publish در ادمین، بدون ویرایش PHP، به لیست اضافه می‌شود
+ * - پروفایل: هیرو + کارت محتوا
+ * - ریدایرکت ۳۰۱ برگه‌های قدیمی هم‌نام به CPT
  */
 
 if (!defined('ABSPATH')) {
@@ -16,323 +15,109 @@ if (!defined('ABSPATH')) {
 }
 
 final class Delsa_Consultant_Profiles {
-  const TRANSIENT = 'delsa_consultant_profile_ids_v15';
-  const VERSION = '2.3.5';
+  const TRANSIENT = 'delsa_consultant_profile_ids_v18';
+  const VERSION = '2.4.0';
 
-  /**
-   * ۵ مشاور اصلی — slug انگلیسی (CPT /consultant/…)
-   * aliases = نامک‌های قدیمی فارسی برگه، برای ریدایرکت/کشف موقت
-   */
-  private static function core_team() {
-    return [
-      [
-        'key' => 'elham',
-        'slug' => 'elham-mesbahi',
-        'aliases' => ['الهام-مصباحی'],
-        'id' => 1314,
-        'name' => 'الهام مصباحی',
-        'role' => 'مشاور فردی، زوج‌درمانگر',
-        'image' => 'https://delsaclinic.com/wp-content/uploads/2026/08/دکتر-الهام-مصباحی.jpeg',
-      ],
-      [
-        'key' => 'hasan',
-        'slug' => 'hasan-akbarzadeh',
-        'aliases' => ['حسن-اکبرزاده', 'hassan-akbarzadeh'],
-        'id' => 1303,
-        'name' => 'حسن اکبرزاده',
-        'role' => 'مشاور خانواده و ازدواج',
-        'image' => '',
-      ],
-      [
-        'key' => 'robab',
-        'slug' => 'robab-hamedi',
-        'aliases' => ['دکتر-رباب-حامدی', 'dr-robab-hamedi'],
-        'id' => 1939,
-        'name' => 'دکتر رباب حامدی',
-        'role' => 'زوج‌درمانی و اختلالات اضطرابی',
-        'image' => '',
-      ],
-      [
-        'key' => 'maryam',
-        'slug' => 'maryam-salehi',
-        'aliases' => ['مریم-صالحی'],
-        'id' => 1286,
-        'name' => 'مریم صالحی',
-        'role' => 'روان‌شناس سلامت',
-        'image' => '',
-      ],
-      [
-        'key' => 'fatemeh',
-        'slug' => 'fatemeh-hosseinpour',
-        'aliases' => ['فاطمه-حسینپور', 'فاطمه-حسین-پور', 'fatemeh-hossein-pour'],
-        'id' => 0,
-        'name' => 'فاطمه حسین‌پور',
-        'role' => 'مشاور کودک و نوجوان',
-        'image' => 'https://delsaclinic.com/wp-content/uploads/2026/08/خانم-فاطمه-حسین-پور-1.jpeg',
-      ],
-    ];
+  /** آدرس فهرست مشاوران — آرشیو CPT */
+  private static function listing_url() {
+    $archive = get_post_type_archive_link('delsa_consultant');
+    if (is_string($archive) && $archive !== '') {
+      return $archive;
+    }
+    return home_url('/%d9%85%d8%b4%d8%a7%d9%88%d8%b1%d8%a7%d9%86/');
   }
 
-  private static function core_slugs() {
-    $slugs = [];
-    foreach (self::core_team() as $row) {
-      if (!empty($row['slug'])) {
-        $slugs[] = (string) $row['slug'];
-      }
-      foreach ((array) ($row['aliases'] ?? []) as $alias) {
-        if ($alias !== '') {
-          $slugs[] = (string) $alias;
-        }
-      }
-    }
-    return array_values(array_unique($slugs));
-  }
-
-  private static function core_ids() {
-    return array_values(array_filter(array_map(static function ($row) {
-      return (int) ($row['id'] ?? 0);
-    }, self::core_team())));
-  }
-
-  /** پیدا کردن صفحه/پست مشاور با slug انگلیسی، alias فارسی، id یا عنوان */
-  private static function resolve_core_page(array $row) {
-    $id = (int) ($row['id'] ?? 0);
-    if ($id && get_post_status($id) === 'publish' && in_array(get_post_type($id), ['page', 'delsa_consultant'], true)) {
-      return $id;
-    }
-
-    $slug = (string) ($row['slug'] ?? '');
-    $slug_variants = array_values(array_unique(array_filter(array_merge(
-      [$slug],
-      (array) ($row['aliases'] ?? []),
-      [
-        str_replace(['‌', ' '], ['-', '-'], $slug),
-        str_replace('-', '', $slug),
-      ]
-    ))));
-
-    // اول CPT با slug انگلیسی، بعد برگه
-    foreach ($slug_variants as $try) {
-      $posts = get_posts([
-        'name' => $try,
-        'post_type' => 'delsa_consultant',
-        'post_status' => 'publish',
-        'numberposts' => 1,
-      ]);
-      if ($posts) {
-        return (int) $posts[0]->ID;
-      }
-    }
-    foreach ($slug_variants as $try) {
-      $p = get_page_by_path($try);
-      if ($p && get_post_status($p->ID) === 'publish') {
-        return (int) $p->ID;
-      }
-    }
-
-    $name = self::normalize_name($row['name'] ?? '');
-    if ($name === '') {
+  /** پیدا کردن CPT مشاور با نام (برای ریدایرکت برگهٔ قدیمی) */
+  private static function find_cpt_by_name($name) {
+    $name = self::normalize_name($name);
+    if ($name === '' || self::is_blocked_name($name)) {
       return 0;
     }
-
-    foreach (['delsa_consultant', 'page'] as $ptype) {
-      $items = get_posts([
-        'post_type' => $ptype,
-        'post_status' => 'publish',
-        'numberposts' => 100,
-      ]);
-      foreach ($items as $page) {
-        $title = self::normalize_name($page->post_title);
-        if ($title === $name || mb_strpos($title, $name) !== false || mb_strpos($name, $title) !== false) {
-          if ((int) $page->ID === self::listing_page_id()) {
-            continue;
-          }
-          return (int) $page->ID;
-        }
+    $posts = get_posts([
+      'post_type' => 'delsa_consultant',
+      'post_status' => 'publish',
+      'numberposts' => 100,
+      'suppress_filters' => true,
+    ]);
+    foreach ($posts as $post) {
+      $title = self::normalize_name($post->post_title);
+      if ($title === $name || mb_strpos($title, $name) !== false || mb_strpos($name, $title) !== false) {
+        return (int) $post->ID;
       }
     }
     return 0;
   }
 
-  /** کارت‌های ثابت ۵ نفر برای صفحهٔ /مشاوران/ */
-  public static function core_listing_cards() {
-    $book = home_url('/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/');
+  /** ریدایرکت ۳۰۱ برگهٔ قدیمی ← CPT هم‌نام */
+  public static function redirect_legacy_profiles() {
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+      return;
+    }
+    if (!is_singular('page')) {
+      return;
+    }
+
+    $current_id = (int) get_the_ID();
+    if (!$current_id || $current_id === self::listing_page_id()) {
+      return;
+    }
+    if (in_array($current_id, self::excluded_page_ids(), true)) {
+      return;
+    }
+    if (!self::is_consultant_page($current_id)) {
+      return;
+    }
+
+    $cpt_id = self::find_cpt_by_name(get_the_title($current_id));
+    if (!$cpt_id || $cpt_id === $current_id) {
+      return;
+    }
+
+    $target = get_permalink($cpt_id);
+    if ($target) {
+      wp_safe_redirect($target, 301);
+      exit;
+    }
+  }
+
+  /** همهٔ مشاوران منتشرشدهٔ CPT — منبع اصلی فهرست */
+  public static function cpt_listing_cards() {
+    $posts = get_posts([
+      'post_type' => 'delsa_consultant',
+      'post_status' => 'publish',
+      'numberposts' => 100,
+      'orderby' => [
+        'menu_order' => 'ASC',
+        'title' => 'ASC',
+      ],
+      'suppress_filters' => true,
+    ]);
+
     $cards = [];
-    foreach (self::core_team() as $row) {
-      $pid = self::resolve_core_page($row);
-      $fallback = (string) ($row['image'] ?? '');
-      $image = $fallback;
-      $url = $book;
-      $name = (string) ($row['name'] ?? '');
-      $role = (string) ($row['role'] ?? '');
-
-      if ($pid) {
-        $data = self::profile_card_data($pid);
-        if ($data) {
-          $name = $data['name'] ?: $name;
-          $url = $data['url'] ?: $url;
-          // اگر عکس ثابت در هسته تعریف شده، همان ارجح است
-          if ($fallback === '' && $data['image'] !== '') {
-            $image = $data['image'];
-          }
-          // نقش کوتاه ثابت؛ بیو را روی کارت نریز
-          if ($role === '' && $data['role'] !== '' && mb_strlen($data['role']) <= 80) {
-            $role = $data['role'];
-          }
-        }
-      }
-
-      $cards[] = [
-        'id' => $pid,
-        'name' => $name,
-        'url' => $url,
-        'image' => $image,
-        'role' => $role,
-      ];
-    }
-    return $cards;
-  }
-
-  /** نام‌ها و عکس‌های داخل محتوای /مشاوران/ (حتی بدون صفحهٔ جدا) */
-  public static function discover_soft_cards_from_listing() {
-    $listing_id = self::listing_page_id();
-    if (!$listing_id) {
-      return [];
-    }
-
-    $blob = '';
-    $meta = get_post_meta($listing_id, '_elementor_data', true);
-    if ($meta) {
-      $blob .= is_string($meta) ? $meta : wp_json_encode($meta);
-    }
-    $post = get_post($listing_id);
-    if ($post) {
-      $blob .= "\n" . (string) $post->post_content;
-    }
-    if ($blob === '') {
-      return [];
-    }
-
-    $book = home_url('/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/');
-    $found = [];
-
-    if (preg_match_all('#(?:elementor-heading-title[^>]*>|"title"\s*:\s*")([^"\\<]{3,80})#u', $blob, $matches)) {
-      foreach ($matches[1] as $raw) {
-        $name = trim(wp_strip_all_tags(html_entity_decode($raw, ENT_QUOTES, 'UTF-8')));
-        $name = preg_replace('/\s+/u', ' ', $name);
-        if (!self::is_valid_person_name($name)) {
-          continue;
-        }
-        if (preg_match('/مشاوران|تیم|خانه|فرم|نوبت|دپارتمان|درباره|وبلاگ|خدمات|سوابق|متخصصین/ui', $name)) {
-          continue;
-        }
-
-        $key = self::normalize_name($name);
-        if ($key === '' || isset($found[$key]) || self::is_blocked_name($key)) {
-          continue;
-        }
-
-        $image = '';
-        $parts = preg_split('/\s+/u', $key);
-        $search = $parts ? end($parts) : $key;
-        if ($search && preg_match('#https?://[^"\'\\\\\s<>]*' . preg_quote($search, '#') . '[^"\'\\\\\s<>]*\.(?:jpe?g|png|webp)#iu', $blob, $im)) {
-          $image = esc_url_raw($im[0]);
-        }
-
-        $url = $book;
-        $pid = 0;
-        foreach (get_pages(['post_status' => 'publish', 'number' => 200]) as $page) {
-          $t = self::normalize_name($page->post_title);
-          if ($t === '' ) {
-            continue;
-          }
-          if ($t === $key || mb_strpos($t, $key) !== false || mb_strpos($key, $t) !== false) {
-            if (!self::is_consultant_page((int) $page->ID)) {
-              continue;
-            }
-            $pid = (int) $page->ID;
-            $url = get_permalink($pid);
-            $thumb = get_the_post_thumbnail_url($pid, 'large');
-            if ($thumb) {
-              $image = $thumb;
-            }
-            break;
-          }
-        }
-
-        $found[$key] = [
-          'id' => $pid,
-          'name' => $name,
-          'url' => $url,
-          'image' => $image,
-          'role' => '',
-        ];
-      }
-    }
-
-    return array_values($found);
-  }
-
-  /** همهٔ کارت‌های فهرست: هسته + صفحات + کشف نرم از محتوا */
-  public static function listing_all_cards() {
-    $cards = self::core_listing_cards();
-    $seen_names = [];
-    $seen_ids = [];
-    foreach ($cards as $c) {
-      $seen_names[self::normalize_name($c['name'])] = true;
-      if (!empty($c['id'])) {
-        $seen_ids[(int) $c['id']] = true;
-      }
-    }
-
-    foreach (self::profile_ids() as $pid) {
-      $pid = (int) $pid;
-      if (!$pid || isset($seen_ids[$pid]) || !self::is_consultant_page($pid)) {
-        continue;
-      }
-      $data = self::profile_card_data($pid);
-      if (!$data) {
-        continue;
-      }
-      if (self::is_blocked_name($data['name'])) {
-        continue;
-      }
-      $nk = self::normalize_name($data['name']);
-      if ($nk !== '' && isset($seen_names[$nk])) {
+    foreach ($posts as $post) {
+      $data = self::profile_card_data((int) $post->ID);
+      if (!$data || self::is_blocked_name($data['name'])) {
         continue;
       }
       if ($data['role'] !== '' && mb_strlen($data['role']) > 90) {
         $data['role'] = mb_substr($data['role'], 0, 90) . '…';
       }
       $cards[] = $data;
-      $seen_ids[$pid] = true;
-      if ($nk !== '') {
-        $seen_names[$nk] = true;
-      }
     }
-
-    foreach (self::discover_soft_cards_from_listing() as $soft) {
-      $nk = self::normalize_name($soft['name']);
-      if ($nk === '' || isset($seen_names[$nk])) {
-        continue;
-      }
-      if (!empty($soft['id']) && isset($seen_ids[(int) $soft['id']])) {
-        continue;
-      }
-      $cards[] = $soft;
-      $seen_names[$nk] = true;
-      if (!empty($soft['id'])) {
-        $seen_ids[(int) $soft['id']] = true;
-      }
-    }
-
     return $cards;
+  }
+
+  /** فهرست = فقط CPT؛ مشاور جدید با Publish خودکار اضافه می‌شود */
+  public static function listing_all_cards() {
+    return self::cpt_listing_cards();
   }
 
   public static function init() {
     add_action('save_post_page', [__CLASS__, 'bust_cache']);
+    add_action('save_post_delsa_consultant', [__CLASS__, 'bust_cache']);
     add_action('trashed_post', [__CLASS__, 'bust_cache']);
     add_action('deleted_post', [__CLASS__, 'bust_cache']);
+    add_action('template_redirect', [__CLASS__, 'redirect_legacy_profiles'], 1);
     add_filter('body_class', [__CLASS__, 'body_class']);
     add_action('wp_enqueue_scripts', [__CLASS__, 'assets'], 40);
     add_filter('the_content', [__CLASS__, 'wrap_content'], 20);
@@ -370,77 +155,19 @@ final class Delsa_Consultant_Profiles {
       return $memo;
     }
 
-    $listing_id = self::listing_page_id();
     $ids = [];
-
-    // ۱) پنج مشاور اصلی (resolve واقعی — نه attachment اشتباه)
-    foreach (self::core_team() as $row) {
-      $pid = self::resolve_core_page($row);
-      if ($pid) {
-        $ids[] = $pid;
-      }
-    }
-
-    // ۳) زیرصفحات /مشاوران/ → مشاور جدید خودکار اضافه می‌شود
-    if ($listing_id) {
-      $children = get_pages([
-        'child_of' => $listing_id,
-        'post_status' => 'publish',
-        'number' => 100,
-        'sort_column' => 'menu_order,post_title',
-      ]);
-      foreach ($children as $child) {
-        $ids[] = (int) $child->ID;
-      }
-
-      // ۴) لینک‌های داخل صفحهٔ فهرست (Elementor / محتوا)
-      $blob = '';
-      $meta = get_post_meta($listing_id, '_elementor_data', true);
-      if ($meta) {
-        $blob .= is_string($meta) ? $meta : wp_json_encode($meta);
-      }
-      $post = get_post($listing_id);
-      if ($post) {
-        $blob .= "\n" . (string) $post->post_content;
-      }
-
-      if ($blob !== '' && preg_match_all('#https?://[^"\'\\\\\s<>]+#u', $blob, $m)) {
-        foreach ($m[0] as $url) {
-          $pid = self::page_id_from_url($url, $listing_id);
-          if (!$pid || in_array($pid, self::excluded_page_ids(), true)) {
-            continue;
-          }
-          $slug = (string) get_post_field('post_name', $pid);
-          $title = trim((string) get_the_title($pid));
-          if ($slug === '' || strpos($slug, 'دپارتمان-') === 0) {
-            continue;
-          }
-          if ($title === '' || preg_match('/فرم|نوبت|درباره|تماس|وبلاگ|دپارتمان|خانه|مشاوران/ui', $title)) {
-            continue;
-          }
-          $ids[] = $pid;
-        }
-      }
-    }
-
-    // ۵) همهٔ صفحات/پست‌های مشاور publish
     foreach (get_posts([
-      'post_type' => ['page', 'delsa_consultant'],
+      'post_type' => 'delsa_consultant',
       'post_status' => 'publish',
-      'numberposts' => 200,
-    ]) as $page) {
-      if (self::is_consultant_page((int) $page->ID)) {
-        $ids[] = (int) $page->ID;
+      'numberposts' => 100,
+      'suppress_filters' => true,
+    ]) as $post) {
+      if (!self::is_blocked_name($post->post_title)) {
+        $ids[] = (int) $post->ID;
       }
     }
 
-    $ids = array_values(array_unique(array_filter(array_map('intval', $ids))));
-    if ($listing_id) {
-      $ids = array_values(array_diff($ids, [$listing_id]));
-    }
-    $ids = array_values(array_filter($ids, [__CLASS__, 'is_consultant_page']));
-
-    $ids = self::sort_profile_ids($ids);
+    $ids = self::sort_profile_ids(array_values(array_unique(array_filter($ids))));
 
     update_option('delsa_consultant_profile_ids', $ids, false);
     set_transient(self::TRANSIENT, $ids, WEEK_IN_SECONDS);
@@ -448,27 +175,9 @@ final class Delsa_Consultant_Profiles {
     return $memo;
   }
 
-  /** اول ۵ نفر اصلی به ترتیب ثابت، بعد بقیه با menu_order */
+  /** ترتیب با menu_order (Order در ادیتور وردپرس) */
   private static function sort_profile_ids(array $ids) {
-    $rank = [];
-    foreach (self::core_team() as $i => $row) {
-      $rank[(string) ($row['slug'] ?? '')] = $i;
-      foreach ((array) ($row['aliases'] ?? []) as $alias) {
-        $rank[(string) $alias] = $i;
-      }
-      if (!empty($row['id'])) {
-        $rank['id:' . (int) $row['id']] = $i;
-      }
-    }
-
-    usort($ids, function ($a, $b) use ($rank) {
-      $sa = (string) get_post_field('post_name', $a);
-      $sb = (string) get_post_field('post_name', $b);
-      $ra = $rank[$sa] ?? $rank['id:' . (int) $a] ?? 1000;
-      $rb = $rank[$sb] ?? $rank['id:' . (int) $b] ?? 1000;
-      if ($ra !== $rb) {
-        return $ra <=> $rb;
-      }
+    usort($ids, static function ($a, $b) {
       $oa = (int) get_post_field('menu_order', $a);
       $ob = (int) get_post_field('menu_order', $b);
       if ($oa !== $ob) {
@@ -476,7 +185,6 @@ final class Delsa_Consultant_Profiles {
       }
       return strcasecmp((string) get_the_title($a), (string) get_the_title($b));
     });
-
     return array_values($ids);
   }
 
@@ -572,18 +280,12 @@ final class Delsa_Consultant_Profiles {
       return false;
     }
 
-    // پنج نفر اصلی
-    if (in_array($slug, self::core_slugs(), true) || in_array($post_id, self::core_ids(), true)) {
-      return true;
-    }
-
-    // مشاور جدید: زیرصفحهٔ /مشاوران/
+    // زیرصفحهٔ قدیمی /مشاوران/ یا صفحهٔ شخصی شبیه پروفایل
     $listing = self::listing_page_id();
     if ($listing && (int) get_post_field('post_parent', $post_id) === $listing) {
       return true;
     }
 
-    // هر صفحهٔ شخصی شبیه پروفایل مشاور
     if (preg_match('/\s/u', $title) && mb_strlen($title) >= 5) {
       return true;
     }
@@ -613,6 +315,9 @@ final class Delsa_Consultant_Profiles {
   }
 
   public static function is_listing() {
+    if (is_post_type_archive('delsa_consultant')) {
+      return true;
+    }
     if (!is_singular('page')) {
       return false;
     }
@@ -665,10 +370,6 @@ final class Delsa_Consultant_Profiles {
     }
 
     $thumb = get_the_post_thumbnail_url($post_id, 'large');
-    $forced = self::forced_consultant_image($post_id);
-    if ($forced !== '') {
-      $thumb = $forced;
-    }
     if (!$thumb) {
       $blob = (string) $post->post_content;
       $meta = get_post_meta($post_id, '_elementor_data', true);
@@ -851,7 +552,7 @@ final class Delsa_Consultant_Profiles {
     $cards = [];
 
     if ($args['context'] === 'listing' && !$args['ids']) {
-      // هر مشاوری که از هسته / صفحات / محتوای فهرست پیدا شود
+      // خودکار از همهٔ CPTهای مشاور (+ fallback)
       $cards = self::listing_all_cards();
     } else {
       $source_ids = $args['ids'] ? array_map('intval', (array) $args['ids']) : self::profile_ids();
@@ -942,15 +643,11 @@ final class Delsa_Consultant_Profiles {
     $content = self::strip_empty_list_items($content);
 
     $book = home_url('/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/');
-    $list = home_url('/%d9%85%d8%b4%d8%a7%d9%88%d8%b1%d8%a7%d9%86/');
+    $list = self::listing_url();
     $post_id = get_the_ID();
     $name = get_the_title($post_id);
     $role = self::consultant_specialty($post_id);
-    // عکس اجباری هسته (مثلاً فاطمه) بر تصویر شاخص اشتباه تم اولویت دارد
-    $thumb = self::forced_consultant_image($post_id);
-    if ($thumb === '') {
-      $thumb = get_the_post_thumbnail_url($post_id, 'large');
-    }
+    $thumb = get_the_post_thumbnail_url($post_id, 'large');
     if (!$thumb) {
       $data = self::profile_card_data($post_id);
       if ($data && $data['image'] !== '') {
@@ -1001,7 +698,7 @@ final class Delsa_Consultant_Profiles {
     return $top . $content . $bottom;
   }
 
-  /** تخصص کوتاه از متای CPT یا هسته */
+  /** تخصص کوتاه از متای CPT یا excerpt */
   private static function consultant_specialty($post_id) {
     $post_id = (int) $post_id;
     $keys = [
@@ -1017,34 +714,9 @@ final class Delsa_Consultant_Profiles {
         return trim($val);
       }
     }
-    foreach (self::core_team() as $row) {
-      $pid = self::resolve_core_page($row);
-      if ($pid && $pid === $post_id && !empty($row['role'])) {
-        return (string) $row['role'];
-      }
-      if (self::normalize_name($row['name'] ?? '') === self::normalize_name(get_the_title($post_id))) {
-        return (string) ($row['role'] ?? '');
-      }
-    }
-    return '';
-  }
-
-  /** عکس ثابت هسته — برای وقتی تصویر شاخص وردپرس اشتباه است */
-  private static function forced_consultant_image($post_id) {
-    $post_id = (int) $post_id;
-    $title = self::normalize_name(get_the_title($post_id));
-    foreach (self::core_team() as $row) {
-      $img = (string) ($row['image'] ?? '');
-      if ($img === '') {
-        continue;
-      }
-      $pid = self::resolve_core_page($row);
-      if ($pid && $pid === $post_id) {
-        return $img;
-      }
-      if ($title !== '' && self::normalize_name($row['name'] ?? '') === $title) {
-        return $img;
-      }
+    $excerpt = trim(wp_strip_all_tags(strip_shortcodes((string) get_post_field('post_excerpt', $post_id))));
+    if ($excerpt !== '' && mb_strlen($excerpt) <= 90) {
+      return $excerpt;
     }
     return '';
   }
