@@ -22,8 +22,9 @@ backend/uploads/*
 .vscode/
 *.swp
 
-# Build
+# Build — keep static CSS/JS + key HTML pages for GitHub Pages
 docs/*.html
+!docs/index.html
 docs/دپارتمان-*/
 docs/مشاور*/
 docs/consultants/

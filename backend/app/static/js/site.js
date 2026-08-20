@@ -6,10 +6,10 @@
   if (window.AOS) {
     var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     AOS.init({
-      duration: prefersReduced ? 0 : 1100,
+      duration: prefersReduced ? 0 : 780,
       easing: 'ease-out-cubic',
       once: true,
-      offset: 50,
+      offset: 40,
       disable: prefersReduced,
     });
   }
