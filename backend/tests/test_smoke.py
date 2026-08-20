@@ -8,11 +8,21 @@ from app.seed import seed
 from sqlmodel import Session, select, text
 
 
+TABLES = (
+    "appointmentrequest",
+    "consultant",
+    "department",
+    "article",
+    "page",
+    "sitesettings",
+)
+
+
 @pytest.fixture(autouse=True)
 def fresh_db():
     init_db()
     with Session(engine) as session:
-        for table in ("consultant", "department", "article"):
+        for table in TABLES:
             session.exec(text(f"DELETE FROM {table}"))
         session.commit()
     seed()
@@ -32,6 +42,7 @@ def test_home(client):
     response = client.get("/")
     assert response.status_code == 200
     assert "کلینیک دلسا" in response.text
+    assert "خدمات اصلی کلینیک" in response.text
 
 
 def test_career_department(client):
@@ -43,4 +54,36 @@ def test_career_department(client):
 def test_consultants(client):
     response = client.get("/مشاوران")
     assert response.status_code == 200
-    assert "سپیده آزرم" in response.text
+    assert "مریم صالحی" in response.text
+
+
+def test_about(client):
+    response = client.get("/درباره-ما")
+    assert response.status_code == 200
+    assert "درباره کلینیک دلسا" in response.text
+
+
+def test_blog(client):
+    response = client.get("/blog")
+    assert response.status_code == 200
+    assert "وبلاگ" in response.text
+
+
+def test_appointment_form(client):
+    response = client.get("/فرم-نوبت-دهی")
+    assert response.status_code == 200
+    assert "فرم نوبت" in response.text
+
+
+def test_appointment_submit(client):
+    response = client.post(
+        "/فرم-نوبت-دهی",
+        data={
+            "full_name": "تست کاربر",
+            "phone": "09123456789",
+            "department": "روان‌درمانی",
+        },
+        follow_redirects=False,
+    )
+    assert response.status_code == 303
+    assert response.headers["location"].endswith("success=1")

@@ -31,7 +31,10 @@ from app.database import engine  # noqa: E402
 # https://<user>.github.io/<repo>/
 REPO = os.environ.get("GITHUB_REPOSITORY", "ali-m07/delsa-clinic-homepage")
 REPO_NAME = REPO.split("/")[-1] if "/" in REPO else REPO
-BASE_HREF = os.environ.get("PAGES_BASE_URL", f"https://delsaclinic.github.io/{REPO_NAME}/").rstrip("/") + "/"
+BASE_HREF = os.environ.get(
+    "PAGES_BASE_URL",
+    f"https://ali-m07.github.io/{REPO_NAME}/",
+).rstrip("/") + "/"
 
 
 def patch_html(html: str) -> str:
@@ -72,6 +75,9 @@ def main() -> None:
     write_page(client, "/", DOCS / "index.html")
     write_page(client, "/مشاوران", DOCS / "consultants" / "index.html")
     write_page(client, "/دپارتمان‌ها", DOCS / "departments" / "index.html")
+    write_page(client, "/فرم-نوبت-دهی", DOCS / "فرم-نوبت-دهی" / "index.html")
+    write_page(client, "/درباره-ما", DOCS / "درباره-ما" / "index.html")
+    write_page(client, "/blog", DOCS / "blog" / "index.html")
 
     with Session(engine) as session:
         departments = session.exec(select(Department).order_by(Department.sort_order)).all()
@@ -84,6 +90,12 @@ def main() -> None:
         for person in consultants:
             write_page(client, f"/مشاور/{person.slug}", DOCS / "مشاور" / person.slug / "index.html")
 
+        from app.models import Article
+
+        articles = session.exec(select(Article)).all()
+        for article in articles:
+            write_page(client, f"/blog/{article.slug}", DOCS / "blog" / article.slug / "index.html")
+
     if STATIC_SRC.exists():
         if STATIC_DST.exists():
             shutil.rmtree(STATIC_DST)
@@ -92,8 +104,16 @@ def main() -> None:
     # Landing note for WP migration
     readme = DOCS / "README.md"
     readme.write_text(
-        f"# Static preview\n\nGenerated site: [{BASE_HREF}]({BASE_HREF})\n\n"
-        "Full CMS runs via FastAPI (`backend/`). Admin is not available in static export.\n",
+        f"# پیش‌نمایش استاتیک — کلینیک دلسا\n\n"
+        f"**آدرس:** [{BASE_HREF}]({BASE_HREF})\n\n"
+        "## صفحات\n\n"
+        "- `/` — صفحه اصلی\n"
+        "- `/فرم-نوبت-دهی` — فرم نوبت (نمایش؛ ارسال فقط روی سرور FastAPI)\n"
+        "- `/درباره-ما` — درباره ما\n"
+        "- `/blog` — وبلاگ\n"
+        "- `/مشاوران` — لیست مشاوران\n"
+        "- `/دپارتمان-{slug}` — صفحات دپارتمان\n\n"
+        "CMS کامل و پنل ادمین روی FastAPI (`backend/`) اجرا می‌شود.\n",
         encoding="utf-8",
     )
     print("Done.")

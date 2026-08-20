@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}وبلاگ | کلینیک دلسا{% endblock %}
+{% block content %}
+<section class="dept-hero">
+  <div class="container">
+    <p class="dept-hero__label">مقالات</p>
+    <h1>وبلاگ کلینیک دلسا</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    {% if articles %}
+    <div class="dept-grid">
+      {% for article in articles %}
+      <a class="dept-card" href="/blog/{{ article.slug }}">
+        {% if article.image_url %}
+        <img src="{{ article.image_url }}" alt="{{ article.title }}">
+        {% endif %}
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.excerpt[:140] }}{% if article.excerpt|length > 140 %}…{% endif %}</p>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="card"><p>هنوز مقاله‌ای منتشر نشده. از پنل ادمین مقاله اضافه کنید.</p></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

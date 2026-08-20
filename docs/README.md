@@ -1,5 +1,14 @@
-# Static preview
+# پیش‌نمایش استاتیک — کلینیک دلسا
 
-Generated site: [https://delsaclinic.github.io/delsaclinic/](https://delsaclinic.github.io/delsaclinic/)
+**آدرس:** [https://ali-m07.github.io/delsa-clinic-homepage/](https://ali-m07.github.io/delsa-clinic-homepage/)
 
-Full CMS runs via FastAPI (`backend/`). Admin is not available in static export.
+## صفحات
+
+- `/` — صفحه اصلی
+- `/فرم-نوبت-دهی` — فرم نوبت (نمایش؛ ارسال فقط روی سرور FastAPI)
+- `/درباره-ما` — درباره ما
+- `/blog` — وبلاگ
+- `/مشاوران` — لیست مشاوران
+- `/دپارتمان-{slug}` — صفحات دپارتمان
+
+CMS کامل و پنل ادمین روی FastAPI (`backend/`) اجرا می‌شود.

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ page.meta_title or page.title }} | کلینیک دلسا{% endblock %}
+{% block content %}
+<section class="dept-hero">
+  <div class="container">
+    <p class="dept-hero__label">کلینیک دلسا</p>
+    <h1>{{ page.title }}</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="card prose">{{ page.body_html|safe }}</div>
+  </div>
+</section>
+{% endblock %}

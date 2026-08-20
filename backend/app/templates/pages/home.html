@@ -1,29 +1,131 @@
 {% extends "base.html" %}
 {% block title %}کلینیک دلسا | مشاوره و روان‌درمانی{% endblock %}
 {% block content %}
-<section class="hero">
-  <div class="container">
+<section class="home-hero" style="background-image: url('{{ settings.hero_image_url }}')">
+  <div class="home-hero__overlay"></div>
+  <div class="container home-hero__inner">
     <p class="hero__label">کلینیک تخصصی</p>
-    <h1>کلینیک دلسا</h1>
-    <p class="hero__lead">مشاوره، روان‌درمانی و خدمات تخصصی روان‌شناختی</p>
-    <a class="btn btn--primary" href="{{ book_url }}">درخواست وقت ملاقات</a>
+    <h1>به کلینیک دلسا خوش آمدید</h1>
+    <p class="hero__lead">همراه شما در مسیر سلامت روان</p>
+    <div class="home-hero__actions">
+      <a class="btn btn--primary" href="{{ book_url }}">درخواست وقت ملاقات</a>
+      <a class="btn btn--outline" href="tel:{{ settings.phone_mobile|replace('-','')|replace('۰','0') }}">تماس مستقیم</a>
+    </div>
+    <ul class="home-trust">
+      <li><strong>+۱۵ سال</strong><span>سابقه در سلامت روان</span></li>
+      <li><strong>{{ departments|length }} دپارتمان</strong><span>تیم چندتخصصی</span></li>
+      <li><strong>پشتیبانی سریع</strong><span>هماهنگی در اسرع وقت</span></li>
+    </ul>
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="services">
   <div class="container">
-    <h2 class="section__title">دپارتمان‌های کلینیک</h2>
+    <p class="section__label">خدمات تخصصی</p>
+    <h2 class="section__title">خدمات اصلی کلینیک</h2>
     <div class="dept-grid">
-      {% for dept in departments %}
-      <a class="dept-card" href="/دپارتمان-{{ dept.slug }}">
-        {% if dept.image_url %}
-        <img src="{{ dept.image_url }}" alt="{{ dept.title }}">
-        {% endif %}
+      {% for dept in departments[:5] %}
+      <a class="dept-card dept-card--service" href="/دپارتمان-{{ dept.slug }}">
+        <span class="dept-card__num">{% set nums = ['۰۱','۰۲','۰۳','۰۴','۰۵','۰۶','۰۷'] %}{{ nums[loop.index0] }}</span>
         <h3>{{ dept.nav_label or dept.title }}</h3>
-        <p>{{ dept.intro[:120] }}{% if dept.intro|length > 120 %}…{% endif %}</p>
+        <p>{{ dept.intro[:100] }}{% if dept.intro|length > 100 %}…{% endif %}</p>
+        <span class="dept-card__link">مشاهده دپارتمان</span>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
+
+<section class="section section--white">
+  <div class="container">
+    <p class="section__label section__label--center">چرا دلسا</p>
+    <h2 class="section__title section__title--center">اعتماد، تخصص و دسترسی آسان</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>تیم تخصصی و با تجربه</h3>
+        <p>روان‌شناسان و روان‌پزشکان مجرب با رویکردی علمی و انسانی</p>
+      </div>
+      <div class="why-card">
+        <h3>نوبت‌دهی آنلاین و پشتیبانی سریع</h3>
+        <p>ثبت درخواست آنلاین و هماهنگی سریع — پاسخگویی در اسرع وقت</p>
+      </div>
+      <div class="why-card">
+        <h3>خدمات حضوری، تلفنی و آنلاین</h3>
+        <p>انتخاب روش مشاوره متناسب با شرایط و نیاز شما</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="testimonial-band">
+  <div class="container">
+    <blockquote>
+      <p>«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
+      <cite>— مراجع کلینیک دلسا</cite>
+    </blockquote>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <p class="section__label section__label--center">مسیر دریافت خدمت</p>
+    <h2 class="section__title section__title--center">چطور کار می‌کند؟</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-card__num">۱</span>
+        <h3>درخواست وقت</h3>
+        <p>فرم آنلاین را پر کنید یا تماس بگیرید</p>
+        <a href="tel:{{ settings.phone_mobile }}">{{ settings.phone_mobile }}</a>
+      </div>
+      <div class="step-card">
+        <span class="step-card__num">۲</span>
+        <h3>هماهنگی جلسه</h3>
+        <p>تیم پذیرش با شما تماس می‌گیرد و زمان مناسب را هماهنگ می‌کند</p>
+      </div>
+      <div class="step-card">
+        <span class="step-card__num">۳</span>
+        <h3>شروع جلسات</h3>
+        <p>مشاوره حضوری، تلفنی یا آنلاین — متناسب با نیاز شما</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container container--narrow">
+    <p class="section__label section__label--center">سوالات متداول</p>
+    <h2 class="section__title section__title--center">پرسش‌های رایج</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>اولین جلسه چطور برگزار می‌شود؟</summary>
+        <p>در جلسه اول، مشاور با شما گفت‌وگو می‌کند تا نیازتان را بشناسد و مسیر درمان را توضیح دهد. فضای کلینیک آرام، محرمانه و بدون قضاوت است.</p>
+      </details>
+      <details class="faq-item">
+        <summary>محرمانگی اطلاعات چگونه حفظ می‌شود؟</summary>
+        <p>تمام اطلاعات شما طبق اصول حرفه‌ای روان‌شناسی محرمانه باقی می‌ماند.</p>
+      </details>
+      <details class="faq-item">
+        <summary>مشاوره آنلاین دارید یا فقط حضوری؟</summary>
+        <p>هر سه روش حضوری، تلفنی و آنلاین در دسترس است. هنگام هماهنگی نوبت، روش مناسب را انتخاب می‌کنید.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% if articles %}
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">آخرین مقالات</h2>
+    <div class="dept-grid">
+      {% for article in articles %}
+      <a class="dept-card" href="/blog/{{ article.slug }}">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.excerpt[:120] }}{% if article.excerpt|length > 120 %}…{% endif %}</p>
+      </a>
+      {% endfor %}
+    </div>
+    <p class="text-center" style="margin-top:1rem"><a href="/blog">همه مقالات ←</a></p>
+  </div>
+</section>
+{% endif %}
 {% endblock %}

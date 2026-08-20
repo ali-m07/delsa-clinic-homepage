@@ -2,7 +2,7 @@
   <div class="delsa-h__wrap">
     <div class="delsa-h__bar">
       <a class="delsa-h__logo" href="/">
-        <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="کلینیک دلسا" width="40" height="40">
+        <img src="{{ settings.logo_url }}" alt="کلینیک دلسا" width="40" height="40">
         <span>
           <span class="delsa-h__title">کلینیک دلسا</span>
           <span class="delsa-h__tag">مشاوره و روان‌درمانی</span>
@@ -34,7 +34,7 @@
   <div class="delsa-s__head">
     <div class="delsa-s__row">
       <a class="delsa-s__brand" href="/">
-        <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="">
+        <img src="{{ settings.logo_url }}" alt="">
         کلینیک دلسا
       </a>
       <button class="delsa-s__close" type="button" data-sidebar-close>✕</button>
@@ -42,11 +42,13 @@
   </div>
   <nav class="delsa-s__nav">
     <a href="/">خانه</a>
+    <a href="/درباره-ما">درباره ما</a>
     <span class="delsa-s__label">دپارتمان‌ها</span>
     {% for dept in departments %}
     <a class="sub" href="/دپارتمان-{{ dept.slug }}">{{ dept.nav_label or dept.title }}</a>
     {% endfor %}
     <a href="/مشاوران">مشاوران</a>
+    <a href="/blog">وبلاگ</a>
     <a href="{{ book_url }}">درخواست وقت</a>
   </nav>
 </aside>

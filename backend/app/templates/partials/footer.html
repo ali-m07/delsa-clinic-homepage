@@ -3,10 +3,17 @@
     <div class="delsa-f__grid">
       <div>
         <div class="delsa-f__brand-row">
-          <img class="delsa-f__logo" src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="">
+          <img class="delsa-f__logo" src="{{ settings.logo_url }}" alt="">
           <p class="delsa-f__name">کلینیک دلسا</p>
         </div>
         <p class="delsa-f__desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+        <ul class="delsa-f__quick">
+          <li><a href="/">خانه</a></li>
+          <li><a href="/مشاوران">مشاوران</a></li>
+          <li><a href="/blog">وبلاگ</a></li>
+          <li><a href="/درباره-ما">درباره ما</a></li>
+          <li><a href="{{ book_url }}">فرم نوبت‌دهی</a></li>
+        </ul>
       </div>
       <div>
         <h4>دپارتمان‌ها</h4>
@@ -18,10 +25,22 @@
       </div>
       <div>
         <h4>تماس</h4>
-        <p><a href="tel:02112345678">۰۲۱-۱۲۳۴۵۶۷۸</a></p>
+        <p class="delsa-f__address">{{ settings.address }}</p>
+        <p><a href="tel:{{ settings.phone_mobile }}">{{ settings.phone_mobile }}</a></p>
+        <p><a href="tel:{{ settings.phone_landline }}">{{ settings.phone_landline }}</a></p>
+        {% if settings.phone_landline2 %}
+        <p><a href="tel:{{ settings.phone_landline2 }}">{{ settings.phone_landline2 }}</a></p>
+        {% endif %}
+        <p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>
         <p><a href="{{ book_url }}">رزرو نوبت آنلاین</a></p>
       </div>
+      {% if settings.map_embed_url %}
+      <div class="delsa-f__map">
+        <iframe src="{{ settings.map_embed_url }}" loading="lazy" title="موقعیت کلینیک دلسا"></iframe>
+      </div>
+      {% endif %}
     </div>
-    <p class="delsa-f__copy">© {{ departments[0].title and "کلینیک دلسا" or "کلینیک دلسا" }}</p>
+    <p class="delsa-f__copy">© کلینیک دلسا</p>
   </div>
 </footer>
+<a href="https://wa.me/{{ settings.whatsapp }}" class="whatsapp-float" target="_blank" rel="noopener" aria-label="واتساپ">💬</a>

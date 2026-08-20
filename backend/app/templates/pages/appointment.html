@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}فرم نوبت‌دهی | کلینیک دلسا{% endblock %}
+{% block content %}
+<section class="form-hero">
+  <div class="container container--narrow text-center">
+    <p class="hero__label">رزرو وقت</p>
+    <h1>فرم نوبت‌دهی آنلاین</h1>
+    <p class="hero__lead">فرم زیر را تکمیل کنید، تیم پذیرش با شما تماس می‌گیرد.</p>
+    <p class="form-fee">هزینه رزرو نوبت: {{ settings.booking_fee_note }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow">
+    {% if success %}
+    <div class="alert alert--success">
+      درخواست شما ثبت شد. به‌زودی با شما تماس می‌گیریم.
+    </div>
+    {% endif %}
+    {% if error %}
+    <div class="alert alert--error">{{ error }}</div>
+    {% endif %}
+
+    {% if not success %}
+    <form class="appointment-form card" method="post" action="{{ book_url }}">
+      <div class="form-row">
+        <label for="full_name">نام و نام خانوادگی *</label>
+        <input class="form-input" type="text" id="full_name" name="full_name" required
+               value="{{ form.full_name if form else '' }}">
+      </div>
+      <div class="form-row">
+        <label for="phone">شماره تماس *</label>
+        <input class="form-input" type="tel" id="phone" name="phone" required dir="ltr"
+               value="{{ form.phone if form else '' }}">
+      </div>
+      <div class="form-row">
+        <label for="email">ایمیل</label>
+        <input class="form-input" type="email" id="email" name="email" dir="ltr"
+               value="{{ form.email if form else '' }}">
+      </div>
+      <div class="form-row">
+        <label for="department">دپارتمان مورد نظر</label>
+        <select class="form-input" id="department" name="department">
+          <option value="">انتخاب کنید</option>
+          {% for dept in departments %}
+          <option value="{{ dept.nav_label or dept.title }}"
+            {% if form and form.department == (dept.nav_label or dept.title) %}selected{% endif %}>
+            {{ dept.nav_label or dept.title }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="province">استان</label>
+          <input class="form-input" type="text" id="province" name="province"
+                 value="{{ form.province if form else '' }}">
+        </div>
+        <div class="form-row">
+          <label for="city">شهر</label>
+          <input class="form-input" type="text" id="city" name="city"
+                 value="{{ form.city if form else '' }}">
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="preferred_date">تاریخ ترجیحی</label>
+        <input class="form-input" type="text" id="preferred_date" name="preferred_date"
+               placeholder="مثلاً ۱۴۰۴/۰۶/۰۱"
+               value="{{ form.preferred_date if form else '' }}">
+      </div>
+      <div class="form-row">
+        <label for="session_type">نوع جلسه</label>
+        <select class="form-input" id="session_type" name="session_type">
+          <option value="">انتخاب کنید</option>
+          {% for opt in ['حضوری', 'تلفنی', 'آنلاین'] %}
+          <option value="{{ opt }}" {% if form and form.session_type == opt %}selected{% endif %}>{{ opt }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="notes">توضیحات</label>
+        <textarea class="form-input" id="notes" name="notes" rows="4">{{ form.notes if form else '' }}</textarea>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">ارسال درخواست</button>
+    </form>
+    {% endif %}
+
+    <p class="form-help">
+      سوالی دارید؟
+      <a href="tel:{{ settings.phone_mobile }}">{{ settings.phone_mobile }}</a>
+      —
+      <a href="https://wa.me/{{ settings.whatsapp }}" target="_blank" rel="noopener">واتساپ</a>
+    </p>
+  </div>
+</section>
+{% endblock %}
