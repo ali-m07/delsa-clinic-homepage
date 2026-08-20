@@ -456,13 +456,6 @@ html:not(.js-gsap) .hero__glass {
 @media (prefers-reduced-motion: reduce) {
   .hero__glass { animation: none; }
 }
-.hero__dots {
-  opacity: 0;
-}
-html.js-gsap .hero__dots.is-ready,
-html:not(.js-gsap) .hero__dots {
-  opacity: 1;
-}
 .hero__brand {
   margin: 0 0 .4rem;
   font-size: clamp(1.85rem, 1.25rem + 2.2vw, 2.7rem);
