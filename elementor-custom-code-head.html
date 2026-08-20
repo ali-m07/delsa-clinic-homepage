@@ -1,0 +1,29 @@
+<!-- Elementor → Custom Code → Head → Entire Site (یا فقط صفحه اصلی) -->
+<!-- قبل از wp-i18n-js-after و contact-form-7-js-translations اجرا شود -->
+<script id="delsa-wp-i18n-shim">
+(function (w) {
+  w.wp = w.wp || {};
+  if (!w.wp.i18n || typeof w.wp.i18n.__ !== 'function') {
+    w.wp.i18n = {
+      setLocaleData: function () {},
+      __: function (t) { return t; },
+      _x: function (t) { return t; },
+      _n: function (s, p, n) { return Number(n) === 1 ? s : p; },
+      sprintf: function (f) {
+        var a = [].slice.call(arguments, 1), i = 0;
+        return String(f).replace(/%s/g, function () {
+          return a[i++] != null ? a[i - 1] : '';
+        });
+      }
+    };
+  }
+  w.wp.hooks = w.wp.hooks || {
+    addAction: function () {},
+    addFilter: function () {},
+    doAction: function () {},
+    applyFilters: function (v) { return v; },
+    removeAction: function () {},
+    removeFilter: function () {}
+  };
+})(window);
+</script>

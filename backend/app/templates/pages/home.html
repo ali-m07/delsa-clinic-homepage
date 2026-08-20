@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}کلینیک دلسا | مشاوره و روان‌درمانی{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <p class="hero__label">کلینیک تخصصی</p>
+    <h1>کلینیک دلسا</h1>
+    <p class="hero__lead">مشاوره، روان‌درمانی و خدمات تخصصی روان‌شناختی</p>
+    <a class="btn btn--primary" href="{{ book_url }}">درخواست وقت ملاقات</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__title">دپارتمان‌های کلینیک</h2>
+    <div class="dept-grid">
+      {% for dept in departments %}
+      <a class="dept-card" href="/دپارتمان-{{ dept.slug }}">
+        {% if dept.image_url %}
+        <img src="{{ dept.image_url }}" alt="{{ dept.title }}">
+        {% endif %}
+        <h3>{{ dept.nav_label or dept.title }}</h3>
+        <p>{{ dept.intro[:120] }}{% if dept.intro|length > 120 %}…{% endif %}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

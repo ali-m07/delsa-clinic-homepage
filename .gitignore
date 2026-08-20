@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# App data
+backend/delsa.db
+backend/.env
+.env
+.env.*
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Build
+docs/*.html
+docs/دپارتمان-*/
+docs/مشاور*/
+docs/consultants/
+!docs/.gitkeep
+
+# Secrets
+*.pem
+*.key
+credentials.json

@@ -1,0 +1,260 @@
+(function () {
+  var GF_FORM_ID = 1;
+
+  function onReady(fn) {
+    var hasRun = false;
+    function runOnce() {
+      if (hasRun) return;
+      hasRun = true;
+      fn();
+    }
+    if (document.readyState !== 'loading') {
+      runOnce();
+    } else {
+      document.addEventListener('DOMContentLoaded', runOnce, { once: true });
+    }
+    document.addEventListener('DOMContentLiteSpeedLoaded', runOnce, { once: true });
+  }
+
+  function fieldLabelText(field) {
+    var label = field.querySelector('.gfield_label, .gform-field-label, label');
+    return label ? label.textContent.replace(/\*/g, '').trim() : '';
+  }
+
+  function reorderProvinceCityFields() {
+    var form = document.querySelector('.gf-modal-form .gform_fields') || document.querySelector('.gform_fields');
+    if (!form) return;
+
+    var fields = Array.prototype.slice.call(form.querySelectorAll(':scope > .gfield'));
+    var findField = function (keyword) {
+      return fields.find(function (field) {
+        return fieldLabelText(field).indexOf(keyword) !== -1;
+      });
+    };
+
+    var province = findField('استان');
+    var city = findField('شهر');
+    if (province && city && province !== city) {
+      if (fields.indexOf(province) > fields.indexOf(city)) {
+        form.insertBefore(province, city);
+      }
+    }
+
+    form.querySelectorAll('.ginput_container_address').forEach(function (container) {
+      var state = container.querySelector('.ginput_address_state, .address_state');
+      var cityEl = container.querySelector('.ginput_address_city, .address_city');
+      if (state && cityEl && state !== cityEl) {
+        var stateFirst = state.compareDocumentPosition(cityEl) & Node.DOCUMENT_POSITION_FOLLOWING;
+        if (!stateFirst) container.insertBefore(state, cityEl);
+      }
+    });
+  }
+
+  function initGravityFormWidgets() {
+    if (typeof jQuery === 'undefined') return;
+    reorderProvinceCityFields();
+
+    var $ = jQuery;
+    var $province = $('#gform_' + GF_FORM_ID).find('select').filter(function () {
+      var label = $(this).closest('.gfield').find('label').first().text() || '';
+      return label.indexOf('استان') !== -1;
+    }).first();
+
+    if ($province.length) {
+      $province.off('change.delsaCity').on('change.delsaCity', reorderProvinceCityFields);
+    }
+
+    if (typeof window.gformInitDatepicker === 'function') {
+      window.gformInitDatepicker();
+    }
+
+    if (typeof $.fn.persianDatepicker === 'function') {
+      $('#gform_' + GF_FORM_ID).find('.ginput_container_date input[type="text"], .gfield--type-date input[type="text"]').each(function () {
+        var $input = $(this);
+        if (!$input.data('persianDatepicker')) {
+          try {
+            $input.persianDatepicker();
+          } catch (e) {}
+        }
+      });
+    }
+  }
+
+  function initDelsaPage() {
+    var header = document.getElementById('site-header');
+    if (header) {
+      var onScroll = function () {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    var sidebar = document.getElementById('sidebar');
+    var sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    var sidebarOpenBtn = document.getElementById('sidebar-open');
+    var sidebarCloseBtn = document.getElementById('sidebar-close');
+    var mobileCtaBar = document.getElementById('mobile-cta-bar');
+    var heroSection = document.getElementById('hero');
+    var whatsappFloat = document.getElementById('whatsapp-float');
+    var appointmentModal = document.getElementById('appointment-modal');
+
+    function hideFloatingUi() {
+      if (mobileCtaBar) mobileCtaBar.classList.add('hidden-by-overlay');
+      if (whatsappFloat) whatsappFloat.classList.add('hidden-by-overlay');
+    }
+
+    function showFloatingUi() {
+      if (sidebar && sidebar.classList.contains('open')) return;
+      if (appointmentModal && appointmentModal.classList.contains('active')) return;
+      if (mobileCtaBar) mobileCtaBar.classList.remove('hidden-by-overlay');
+      if (whatsappFloat) whatsappFloat.classList.remove('hidden-by-overlay');
+    }
+
+    if (appointmentModal) {
+      var openAppointmentBtns = document.querySelectorAll('.js-open-appointment');
+
+      function closeAppointmentModal() {
+        appointmentModal.classList.remove('active');
+        appointmentModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        showFloatingUi();
+      }
+
+      function openAppointmentModal() {
+        if (sidebar && sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+          if (sidebarBackdrop) sidebarBackdrop.classList.remove('open');
+          sidebar.setAttribute('aria-hidden', 'true');
+          if (sidebarBackdrop) sidebarBackdrop.setAttribute('aria-hidden', 'true');
+        }
+        appointmentModal.classList.add('active');
+        appointmentModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        hideFloatingUi();
+        var panel = appointmentModal.querySelector('.modal-panel');
+        if (panel) panel.focus();
+        setTimeout(initGravityFormWidgets, 50);
+        setTimeout(initGravityFormWidgets, 350);
+      }
+
+      openAppointmentBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          openAppointmentModal();
+        });
+      });
+
+      appointmentModal.querySelectorAll('[data-close-modal]').forEach(function (el) {
+        el.addEventListener('click', closeAppointmentModal);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && appointmentModal.classList.contains('active')) {
+          closeAppointmentModal();
+        }
+      });
+
+      if (typeof jQuery !== 'undefined') {
+        jQuery(document).on('gform_confirmation_loaded', function (event, formId) {
+          if (Number(formId) === GF_FORM_ID) {
+            setTimeout(closeAppointmentModal, 2500);
+          }
+        });
+      }
+    }
+
+    if (mobileCtaBar && heroSection && window.matchMedia('(max-width: 1023px)').matches) {
+      document.body.classList.add('has-mobile-cta');
+      var heroObserver = new IntersectionObserver(function (entries) {
+        mobileCtaBar.classList.toggle('visible', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      heroObserver.observe(heroSection);
+    } else if (mobileCtaBar) {
+      document.body.classList.remove('has-mobile-cta');
+    }
+
+    if (!sidebar || !sidebarBackdrop || !sidebarOpenBtn || !sidebarCloseBtn) return;
+
+    function updateMobileCtaOverlay() {
+      if (!mobileCtaBar) return;
+      var hidden =
+        sidebar.classList.contains('open') ||
+        (appointmentModal && appointmentModal.classList.contains('active'));
+      mobileCtaBar.classList.toggle('hidden-by-overlay', hidden);
+      if (whatsappFloat) whatsappFloat.classList.toggle('hidden-by-overlay', hidden);
+    }
+
+    function openSidebar() {
+      if (appointmentModal && appointmentModal.classList.contains('active')) {
+        appointmentModal.classList.remove('active');
+        appointmentModal.setAttribute('aria-hidden', 'true');
+      }
+      sidebar.classList.add('open');
+      sidebarBackdrop.classList.add('open');
+      sidebar.setAttribute('aria-hidden', 'false');
+      sidebarBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      updateMobileCtaOverlay();
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarBackdrop.classList.remove('open');
+      sidebar.setAttribute('aria-hidden', 'true');
+      sidebarBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      updateMobileCtaOverlay();
+    }
+
+    sidebarOpenBtn.addEventListener('click', openSidebar);
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebar.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeSidebar);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+    });
+  }
+
+  function bindGravityFormHooks() {
+    if (typeof jQuery === 'undefined') return;
+    jQuery(document).on('gform_post_render', function (event, formId) {
+      if (Number(formId) !== GF_FORM_ID) return;
+      initGravityFormWidgets();
+    });
+    jQuery(function () {
+      [0, 300, 800].forEach(function (ms) {
+        setTimeout(initGravityFormWidgets, ms);
+      });
+    });
+  }
+
+  function loadAos() {
+    if (typeof AOS !== 'undefined') {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      AOS.init({
+        duration: reduced ? 0 : 1100,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 50,
+        disable: reduced
+      });
+      document.documentElement.classList.add('delsa-aos-ready');
+      return;
+    }
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
+    s.async = true;
+    s.onload = loadAos;
+    document.body.appendChild(s);
+  }
+
+  onReady(function () {
+    /* Shared header/sidebar behavior must also work on internal pages. */
+    initDelsaPage();
+    bindGravityFormHooks();
+    loadAos();
+  });
+})();

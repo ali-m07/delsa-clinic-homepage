@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="کلینیک دلسا — گروه تخصصی مشاوره و خدمات روان‌شناختی در تهران">
+  <title>کلینیک دلسا | مشاوره و روان‌درمانی</title>
+
+  <link rel="preload" as="image" href="https://delsaclinic.com/wp-content/uploads/2023/11/photo_2023-11-17_16-26-59.jpg" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    /* Softer AOS entrances — subtle fade + 18px lift max */
+    [data-aos="fade-up"] {
+      transform: translate3d(0, 18px, 0);
+    }
+    [data-aos="fade-up"].aos-animate {
+      transform: translate3d(0, 0, 0);
+    }
+    body[data-aos-easing="ease-out-cubic"] [data-aos],
+    [data-aos] {
+      transition-property: opacity, transform;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body {
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      background: #f8fbfc;
+      color: #1B4283;
+      -webkit-font-smoothing: antialiased;
+      --header-h: 64px;
+    }
+    @media (min-width: 1024px) {
+      body { --header-h: 72px; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #eef8f7; }
+    ::-webkit-scrollbar-thumb { background: #4CC9C0; border-radius: 3px; }
+
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(27, 66, 131, 0.08);
+      transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .site-header.scrolled {
+      box-shadow: 0 4px 24px rgba(27, 66, 131, 0.08);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      min-width: 240px;
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.1);
+      box-shadow: 0 16px 48px rgba(27, 66, 131, 0.12);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.4s;
+      z-index: 60;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 11px 20px;
+      font-size: 13px;
+      color: #1B4283;
+      transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), color 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding-right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      border-bottom: 1px solid rgba(27, 66, 131, 0.06);
+    }
+    .nav-dropdown-menu a:last-child { border-bottom: none; }
+    .nav-dropdown-menu a:hover {
+      background: #eef8f7;
+      color: #3ab5ad;
+      padding-right: 24px;
+    }
+
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 47, 92, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+      z-index: 90;
+    }
+    .sidebar-backdrop.open { opacity: 1; visibility: visible; }
+    .sidebar-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(320px, 88vw);
+      height: 100%;
+      background: #1B4283;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .sidebar-panel.open { transform: translateX(0); }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding-right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sidebar-link:hover { color: #4CC9C0; padding-right: 6px; }
+    .sidebar-sublink {
+      display: block;
+      padding: 10px 0 10px 16px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sidebar-sublink:hover { color: #4CC9C0; }
+
+    .nav-dropdown { position: relative; }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover { color: #3ab5ad; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: #4CC9C0;
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Hero image */
+    .hero-bg {
+      background-image: url('https://delsaclinic.com/wp-content/uploads/2023/11/photo_2023-11-17_16-26-59.jpg');
+      background-size: cover;
+      background-position: center 40%;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        105deg,
+        rgba(27, 66, 131, 0.92) 0%,
+        rgba(27, 66, 131, 0.78) 45%,
+        rgba(27, 66, 131, 0.45) 100%
+      );
+      pointer-events: none;
+    }
+    #hero {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    #hero .hero-inner {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    #hero .hero-main h1 {
+      color: #ffffff;
+      font-weight: 600;
+      line-height: 1.28;
+      margin-bottom: 0.75rem;
+    }
+    #hero .hero-main p {
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    #hero .hero-main__content {
+      max-width: 48rem;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+    }
+    .hero-cta-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.625rem;
+      justify-content: center;
+    }
+    @media (min-width: 640px) {
+      .hero-cta-row {
+        flex-direction: row;
+        gap: 0.75rem;
+      }
+    }
+    .hero-section {
+      min-height: calc(100dvh - var(--header-h));
+      min-height: calc(100svh - var(--header-h));
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-inner {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 0 1rem;
+    }
+    @media (min-width: 1024px) {
+      .hero-main { padding: 2rem 0 1.5rem; }
+    }
+    .hero-explore-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      padding: 0.6875rem 1.375rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: background 0.35s, border-color 0.35s, color 0.35s;
+    }
+    .hero-explore-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(76, 201, 192, 0.55);
+      color: #fff;
+    }
+    .hero-trust {
+      flex-shrink: 0;
+      width: 100%;
+      padding: 0.875rem 0 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(18, 47, 92, 0.22);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    @media (min-width: 640px) {
+      .hero-trust { padding: 1rem 0 1.125rem; }
+    }
+    .hero-trust__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem 0.75rem;
+      max-width: 42rem;
+      margin: 0 auto;
+      list-style: none;
+      padding: 0;
+    }
+    .hero-trust__item { text-align: center; }
+    .hero-trust__value {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 0.15rem;
+    }
+    @media (min-width: 640px) {
+      .hero-trust__value { font-size: 1.125rem; }
+    }
+    @media (min-width: 1024px) {
+      .hero-trust__value { font-size: 1.25rem; }
+    }
+    .hero-trust__label {
+      display: block;
+      font-size: 0.625rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.62);
+    }
+    @media (min-width: 640px) {
+      .hero-trust__label { font-size: 0.6875rem; }
+    }
+    @media (max-height: 680px) {
+      .hero-main { padding: 0.875rem 0 0.5rem; }
+      .hero-main h1 { font-size: 1.375rem !important; margin-bottom: 0.375rem !important; }
+      .hero-main p { font-size: 0.875rem !important; margin-bottom: 1rem !important; }
+      .hero-explore-btn { margin-top: 0.75rem; padding: 0.5rem 1rem; font-size: 0.75rem; }
+      .hero-trust { padding: 0.625rem 0 0.75rem; }
+      .hero-trust__value { font-size: 0.8125rem; }
+      .hero-trust__label { font-size: 0.5625rem; }
+    }
+
+    /* WhatsApp float */
+    .whatsapp-float {
+      position: fixed;
+      z-index: 75;
+      left: 1rem;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(37, 211, 102, 0.45);
+    }
+    .whatsapp-float svg { width: 1.5rem; height: 1.5rem; }
+    .whatsapp-float.hidden-by-overlay {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+    }
+    @media (max-width: 1023px) {
+      body.has-mobile-cta .whatsapp-float {
+        bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+      }
+    }
+
+    /* Testimonial */
+    .testimonial-band {
+      background: linear-gradient(135deg, rgba(243, 226, 176, 0.22) 0%, rgba(238, 248, 247, 0.9) 100%);
+      border-top: 1px solid rgba(27, 66, 131, 0.06);
+      border-bottom: 1px solid rgba(27, 66, 131, 0.06);
+      padding: 2rem 0;
+    }
+    @media (min-width: 1024px) {
+      .testimonial-band { padding: 2.5rem 0; }
+    }
+    .testimonial-quote {
+      max-width: 36rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testimonial-quote__text {
+      font-size: 1rem;
+      line-height: 1.85;
+      font-weight: 400;
+      color: #1B4283;
+      margin-bottom: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .testimonial-quote__text { font-size: 1.0625rem; }
+    }
+    .testimonial-quote__cite {
+      font-size: 0.75rem;
+      font-weight: 500;
+      font-style: normal;
+      color: rgba(27, 66, 131, 0.48);
+      letter-spacing: 0.04em;
+    }
+
+    /* Mobile sticky CTA */
+    @media (max-width: 767px) {
+      body.has-mobile-cta { padding-bottom: 4.25rem; }
+    }
+    .mobile-cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      display: none;
+      padding: 0.625rem 1rem calc(0.625rem + env(safe-area-inset-bottom, 0px));
+      background: rgba(255, 255, 255, 0.97);
+      border-top: 1px solid rgba(27, 66, 131, 0.1);
+      box-shadow: 0 -8px 32px rgba(27, 66, 131, 0.1);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .mobile-cta-bar.visible {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      transform: translateY(0);
+    }
+    .mobile-cta-bar.hidden-by-overlay { transform: translateY(100%); }
+    .mobile-cta-bar__call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: #eef8f7;
+      border: 1px solid rgba(76, 201, 192, 0.35);
+      transition: background 0.35s;
+    }
+    .mobile-cta-bar__call:hover { background: #e0f2f0; }
+    .mobile-cta-bar__book {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: #4CC9C0;
+      border: none;
+      text-decoration: none;
+      transition: background 0.35s;
+    }
+    @media (min-width: 1024px) {
+      .mobile-cta-bar { display: none !important; }
+    }
+    .mobile-cta-bar__book:hover { background: #6dd9d2; }
+
+    a.service-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    a.service-card:focus-visible {
+      outline: 2px solid #4CC9C0;
+      outline-offset: 2px;
+    }
+    .service-card__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.75rem;
+      padding: 0.4375rem 0.875rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: rgba(76, 201, 192, 0.1);
+      border: 1px solid rgba(76, 201, 192, 0.32);
+      transition: background 0.35s, border-color 0.35s;
+    }
+    a.service-card:hover .service-card__btn {
+      background: rgba(76, 201, 192, 0.2);
+      border-color: rgba(76, 201, 192, 0.5);
+    }
+    @media (max-width: 1023px) {
+      .service-card__btn {
+        background: rgba(76, 201, 192, 0.14);
+      }
+    }
+
+    /* Brand corner accents (from business card) */
+    .hero-bg::before,
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 3px solid #4CC9C0;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .hero-bg::before {
+      top: 24px;
+      left: 24px;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 12px 0 0 0;
+    }
+    .hero-bg::after {
+      bottom: 24px;
+      right: 24px;
+      border-left: none;
+      border-top: none;
+      border-radius: 0 0 12px 0;
+    }
+
+    .premium-card {
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.08);
+      transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .premium-card:hover {
+      border-color: rgba(76, 201, 192, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 32px rgba(27, 66, 131, 0.07);
+    }
+
+    /* ── Primary service cards ── */
+    .services-grid {
+      display: grid;
+      gap: 0.75rem;
+    }
+    @media (min-width: 640px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    }
+
+    .service-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.07);
+      padding: 1.125rem 1.25rem;
+      overflow: hidden;
+      transition: border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (min-width: 1024px) {
+      .service-card { padding: 1.25rem 1.375rem; }
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(180deg, #4CC9C0 0%, rgba(76, 201, 192, 0.35) 100%);
+      transition: height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .service-card:hover {
+      border-color: rgba(76, 201, 192, 0.28);
+      box-shadow: 0 6px 20px rgba(27, 66, 131, 0.05);
+    }
+    .service-card:hover::before { height: 100%; }
+
+    /* Alternate: soft sand wash on even cards */
+    .service-card:nth-child(even) {
+      background: rgba(255, 255, 255, 0.72);
+    }
+    .service-card:nth-child(even):hover {
+      background: #eef8f7;
+      border-color: rgba(27, 66, 131, 0.1);
+    }
+    .service-card:nth-child(even)::before {
+      background: linear-gradient(180deg, #F3E2B0 0%, rgba(243, 226, 176, 0.25) 100%);
+    }
+
+    .service-card__index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.75rem;
+      height: 1.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #1B4283;
+      background: rgba(76, 201, 192, 0.12);
+      border: 1px solid rgba(76, 201, 192, 0.22);
+    }
+    .service-card__title {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      color: #1B4283;
+      line-height: 1.45;
+      margin-bottom: 0.375rem;
+      letter-spacing: -0.01em;
+    }
+    @media (min-width: 1024px) {
+      .service-card__title { font-size: 1.125rem; }
+    }
+    .service-card__desc {
+      font-size: 0.8125rem;
+      line-height: 1.75;
+      font-weight: 300;
+      color: rgba(27, 66, 131, 0.52);
+    }
+
+    .service-card--featured {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.75rem;
+      padding: 1.125rem 1.25rem;
+      background: linear-gradient(135deg, #fff 0%, #f8fbfc 100%);
+      border: 1px solid rgba(27, 66, 131, 0.09);
+      border-right: 3px solid rgba(243, 226, 176, 0.85);
+    }
+    @media (min-width: 640px) {
+      .service-card--featured {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .service-card--featured::before { display: none; }
+    .service-card--featured:hover {
+      border-right-color: #F3E2B0;
+      background: linear-gradient(135deg, #fff 0%, #eef8f7 100%);
+    }
+
+    /* ── Light secondary: concerns ── */
+    .concerns-grid {
+      display: grid;
+      gap: 0.5rem;
+    }
+    @media (min-width: 640px) {
+      .concerns-grid { grid-template-columns: repeat(2, 1fr); gap: 0.625rem; }
+    }
+
+    .concern-item {
+      position: relative;
+      padding: 0.75rem 0.875rem;
+      background: rgba(248, 251, 252, 0.6);
+      border: 1px solid rgba(27, 66, 131, 0.05);
+      border-radius: 2px;
+      transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding-right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (min-width: 1024px) {
+      .concern-item { padding: 0.8125rem 1rem; }
+    }
+    .concern-item::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background: #4CC9C0;
+      opacity: 0.7;
+      transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .concern-item:hover {
+      background: #fff;
+      border-color: rgba(76, 201, 192, 0.18);
+      padding-right: 1.125rem;
+    }
+    .concern-item:hover::before { height: 55%; }
+    .concern-item__title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(27, 66, 131, 0.82);
+      line-height: 1.55;
+    }
+
+    /* ── Department cards (distinct from services) ── */
+    .dept-card {
+      position: relative;
+      display: block;
+      padding: 1rem 1.125rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dept-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(76, 201, 192, 0.22);
+    }
+    .dept-card__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 0.875rem;
+      background: rgba(76, 201, 192, 0.08);
+      border: 1px solid rgba(76, 201, 192, 0.15);
+      transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dept-card:hover .dept-card__icon {
+      background: rgba(76, 201, 192, 0.14);
+      border-color: rgba(76, 201, 192, 0.35);
+      transform: translateY(-1px);
+    }
+    .dept-card__icon svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      color: rgba(76, 201, 192, 0.92);
+    }
+    .dept-card__label {
+      display: block;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(243, 226, 176, 0.55);
+      margin-bottom: 0.25rem;
+    }
+    .dept-card__title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.45;
+      transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .dept-card:hover .dept-card__title { color: #6dd9d2; }
+
+    /* ── Light secondary: other services ── */
+    .secondary-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .secondary-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    }
+
+    .secondary-item {
+      padding: 0 0 0 0;
+      border-bottom: 1px solid rgba(27, 66, 131, 0.06);
+      padding-bottom: 1.25rem;
+    }
+    @media (min-width: 1024px) {
+      .secondary-item {
+        border-bottom: none;
+        padding-bottom: 0;
+        border-right: 1px solid rgba(27, 66, 131, 0.06);
+        padding-right: 1.75rem;
+      }
+      .secondary-item:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+    .secondary-item__head {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-bottom: 0.625rem;
+    }
+    .secondary-item__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      color: #3ab5ad;
+      background: rgba(76, 201, 192, 0.08);
+      border: 1px solid rgba(76, 201, 192, 0.15);
+      flex-shrink: 0;
+    }
+    .secondary-item__icon svg { width: 0.875rem; height: 0.875rem; }
+    .secondary-item__title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #1B4283;
+      line-height: 1.4;
+    }
+    .secondary-item__desc {
+      font-size: 0.8125rem;
+      line-height: 1.8;
+      font-weight: 300;
+      color: rgba(27, 66, 131, 0.5);
+    }
+    .secondary-item__meta {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #3ab5ad;
+    }
+
+    .btn-primary {
+      background: #4CC9C0;
+      color: #1B4283;
+      transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-primary:hover {
+      background: #6dd9d2;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(76, 201, 192, 0.3);
+    }
+    .btn-outline {
+      border: 1px solid rgba(76, 201, 192, 0.5);
+      transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-outline:hover {
+      background: rgba(76, 201, 192, 0.12);
+      border-color: rgba(76, 201, 192, 0.85);
+    }
+
+    .modal-backdrop .absolute.inset-0 {
+      background: rgba(18, 47, 92, 0.65);
+    }
+    .modal-backdrop {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+    }
+    .modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-panel {
+      opacity: 0;
+      transform: translateY(16px) scale(0.995);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      max-height: min(90vh, 920px);
+      overflow-y: auto;
+    }
+    .modal-backdrop.active .modal-panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Gravity Forms inside modal (WordPress — form ID 1) */
+    .gf-modal-form .gform_wrapper {
+      margin: 0;
+    }
+    .gf-modal-form .gform_heading,
+    .gf-modal-form .gform_description {
+      display: none;
+    }
+    .gf-modal-form .gfield_label,
+    .gf-modal-form .gform-field-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #1B4283;
+    }
+    .gf-modal-form input[type="text"],
+    .gf-modal-form input[type="tel"],
+    .gf-modal-form input[type="email"],
+    .gf-modal-form select,
+    .gf-modal-form textarea {
+      background: #f8fbfc;
+      border: 1px solid rgba(27, 66, 131, 0.12);
+      border-radius: 0;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      width: 100%;
+    }
+    .gf-modal-form input:focus,
+    .gf-modal-form select:focus,
+    .gf-modal-form textarea:focus {
+      outline: none;
+      border-color: #4CC9C0;
+      box-shadow: 0 0 0 3px rgba(76, 201, 192, 0.15);
+    }
+    .gf-modal-form .gform_footer input[type="submit"],
+    .gf-modal-form .gform_button {
+      background: linear-gradient(135deg, #4CC9C0 0%, #3ab5ad 100%);
+      color: #122f5c;
+      border: none;
+      width: 100%;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+    }
+    .gf-modal-form .gform_footer input[type="submit"]:hover,
+    .gf-modal-form .gform_button:hover {
+      filter: brightness(1.03);
+    }
+
+    /* Datepicker above modal */
+    #ui-datepicker-div,
+    .ui-datepicker,
+    .gform-theme-datepicker,
+    .datepicker,
+    .pwt-datepicker-container,
+    .gdatepicker {
+      z-index: 999999 !important;
+    }
+
+    /* GF Address: استان before شهر */
+    .gf-modal-form .ginput_container_address {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .gf-modal-form .ginput_address_state {
+      order: 1 !important;
+    }
+    .gf-modal-form .ginput_address_city {
+      order: 2 !important;
+    }
+
+    /* Form inputs */
+    .form-input {
+      background: #f8fbfc;
+      border: 1px solid rgba(27, 66, 131, 0.12);
+      transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #4CC9C0;
+      box-shadow: 0 0 0 3px rgba(76, 201, 192, 0.15);
+    }
+
+    .hover-soft {
+      transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Section label */
+    .section-label {
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* Stat number */
+    .stat-num {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Section rhythm — tighter for focused homepage */
+    .section {
+      padding-top: 2.75rem;
+      padding-bottom: 2.75rem;
+    }
+    .section-head {
+      margin-bottom: 1.75rem;
+    }
+    @media (min-width: 1024px) {
+      .section {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+      }
+      .section-head {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .services-grid-5 {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .services-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid-5 { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    }
+    @media (min-width: 1280px) {
+      .services-grid-5 { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    .why-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .why-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    }
+
+    .why-card {
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.07);
+      padding: 1.25rem 1.375rem;
+      transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .why-card:hover {
+      border-color: rgba(76, 201, 192, 0.3);
+      box-shadow: 0 8px 24px rgba(27, 66, 131, 0.06);
+    }
+    .why-card__icon {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.875rem;
+      color: #3ab5ad;
+      background: rgba(76, 201, 192, 0.1);
+      border: 1px solid rgba(76, 201, 192, 0.2);
+    }
+    .why-card__title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #1B4283;
+      margin-bottom: 0.375rem;
+      line-height: 1.45;
+    }
+    .why-card__desc {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(27, 66, 131, 0.52);
+    }
+
+    /* How it works */
+    .steps-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+    }
+    .step-card {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.07);
+      padding: 1.375rem 1.25rem;
+      text-align: center;
+      transition: border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .step-card:hover {
+      border-color: rgba(76, 201, 192, 0.35);
+      box-shadow: 0 8px 24px rgba(27, 66, 131, 0.06);
+    }
+    .step-card__num {
+      width: 2.25rem;
+      height: 2.25rem;
+      margin: 0 auto 0.875rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: rgba(243, 226, 176, 0.35);
+      border: 1px solid rgba(243, 226, 176, 0.65);
+    }
+    .step-card__title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #1B4283;
+      margin-bottom: 0.375rem;
+      line-height: 1.45;
+    }
+    .step-card__desc {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(27, 66, 131, 0.52);
+    }
+    .step-card__phone {
+      display: inline-block;
+      margin-top: 0.625rem;
+      padding: 0.375rem 0.875rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: rgba(76, 201, 192, 0.1);
+      border: 1px solid rgba(76, 201, 192, 0.3);
+      letter-spacing: 0.02em;
+      transition: background 0.35s, border-color 0.35s;
+    }
+    .step-card__phone:hover {
+      background: rgba(76, 201, 192, 0.18);
+      border-color: rgba(76, 201, 192, 0.45);
+    }
+
+    /* FAQ accordion */
+    .faq-list {
+      max-width: 40rem;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(27, 66, 131, 0.08);
+    }
+    .faq-item:first-child {
+      border-top: 1px solid rgba(27, 66, 131, 0.08);
+    }
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #1B4283;
+      cursor: pointer;
+      list-style: none;
+      transition: color 0.35s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::marker { content: ''; }
+    .faq-item summary:hover { color: #3ab5ad; }
+    .faq-item[open] summary { color: #3ab5ad; }
+    .faq-item summary::after {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.625rem;
+      height: 1.625rem;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 1;
+      color: #3ab5ad;
+      background: rgba(76, 201, 192, 0.1);
+      border: 1px solid rgba(76, 201, 192, 0.25);
+      content: '+';
+      transition: background 0.35s, transform 0.35s;
+    }
+    .faq-item[open] summary::after {
+      content: '−';
+      background: rgba(76, 201, 192, 0.18);
+    }
+    .faq-item__answer {
+      padding: 0 0 1rem;
+      font-size: 0.8125rem;
+      line-height: 1.8;
+      font-weight: 300;
+      color: rgba(27, 66, 131, 0.58);
+    }
+
+    .cta-band {
+      background: linear-gradient(135deg, #1B4283 0%, #2456a3 55%, #1B4283 100%);
+      border-top: 1px solid rgba(76, 201, 192, 0.15);
+      border-bottom: 1px solid rgba(76, 201, 192, 0.15);
+    }
+
+    .footer-maps-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.875rem;
+      padding: 0.5625rem 1.125rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #1B4283;
+      background: #4CC9C0;
+      border: none;
+      transition: background 0.35s;
+    }
+    .footer-maps-btn:hover { background: #6dd9d2; }
+
+    .footer-map {
+      height: 100%;
+      min-height: 220px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .footer-map iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      border: 0;
+      filter: grayscale(25%) contrast(1.05) brightness(0.92);
+    }
+    @media (min-width: 1024px) {
+      .footer-map { min-height: 320px; }
+      .footer-map iframe { min-height: 320px; }
+    }
+    .footer-brand__logo {
+      width: 3rem;
+      height: 3rem;
+      object-fit: contain;
+      margin-bottom: 0.75rem;
+    }
+
+    .location-box {
+      background: #fff;
+      border: 1px solid rgba(27, 66, 131, 0.08);
+      box-shadow: 0 6px 24px rgba(27, 66, 131, 0.05);
+      padding: 1.5rem 1.75rem;
+    }
+    .location-box__icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eef8f7;
+      border: 1px solid rgba(76, 201, 192, 0.22);
+      color: #1B4283;
+    }
+
+    /* ── WordPress / Elementor embed fixes ── */
+    .elementor-section,
+    .elementor-container,
+    .elementor-column,
+    .elementor-widget-wrap,
+    .elementor-widget-html {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+    }
+    #site-header > div {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    #site-header > div > div {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      min-height: 64px;
+    }
+    @media (min-width: 1024px) {
+      #site-header > div > div { min-height: 72px; }
+    }
+    #site-header .site-header__logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    #site-header .site-header__logo-link img {
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: contain;
+    }
+    #site-header .site-header__title {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1B4283;
+    }
+    #site-header .site-header__tagline {
+      display: none;
+      font-size: 11px;
+      color: rgba(27, 66, 131, 0.6);
+      font-weight: 300;
+    }
+    @media (min-width: 640px) {
+      #site-header .site-header__tagline { display: block; }
+    }
+    @media (min-width: 1280px) {
+      #site-header nav[aria-label="منوی اصلی"] {
+        display: flex !important;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      #sidebar-open { display: none !important; }
+    }
+    @media (max-width: 1279px) {
+      #site-header nav[aria-label="منوی اصلی"] { display: none !important; }
+      #sidebar-open {
+        display: inline-flex !important;
+        padding: 0.5rem;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        color: #1B4283;
+      }
+    }
+    #site-header .site-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      #site-header .site-header__phone {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 13px;
+        color: #2456a3;
+        text-decoration: none;
+      }
+    }
+    @media (max-width: 767px) {
+      #site-header .site-header__phone { display: none !important; }
+    }
+    @media (min-width: 640px) {
+      #site-header .site-header__cta {
+        display: inline-flex !important;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+    @media (max-width: 639px) {
+      #site-header .site-header__cta { display: none !important; }
+    }
+
+    /* ── No-Tailwind fallbacks (Elementor / GF) ── */
+    main section > div {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    #faq {
+      background: #ffffff !important;
+    }
+
+    footer#contact.site-footer,
+    .delsa-footer-wrap {
+      background: #122f5c !important;
+      background-color: #122f5c !important;
+      color: #ffffff !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+      padding: 2.5rem 0 3rem !important;
+      display: block !important;
+      box-sizing: border-box !important;
+    }
+    .elementor-widget-html .delsa-footer-wrap,
+    .elementor-widget-html footer#contact {
+      background: #122f5c !important;
+    }
+    footer#contact .site-footer__container {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    footer#contact .site-footer__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      footer#contact .site-footer__grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+    footer#contact h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(76, 201, 192, 0.65) !important;
+      text-transform: uppercase;
+      margin: 0 0 0.75rem;
+    }
+    footer#contact p,
+    footer#contact li,
+    footer#contact span {
+      color: rgba(255, 255, 255, 0.55);
+    }
+    footer#contact .footer-brand > p:nth-of-type(1) {
+      color: #ffffff !important;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 0.25rem;
+    }
+    footer#contact .footer-brand__desc,
+    footer#contact .footer-brand > p:nth-of-type(2) {
+      color: rgba(255, 255, 255, 0.4) !important;
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    footer#contact .site-footer__phones,
+    footer#contact .site-footer__email {
+      margin-top: 1.25rem;
+    }
+    footer#contact .site-footer__phones-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(76, 201, 192, 0.5) !important;
+      text-transform: uppercase;
+      margin: 0 0 0.35rem;
+    }
+    footer#contact .site-footer__email-link {
+      color: rgba(255, 255, 255, 0.7) !important;
+      font-size: 13px;
+    }
+    footer#contact a {
+      color: rgba(255, 255, 255, 0.65) !important;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer#contact a:hover {
+      color: #4CC9C0 !important;
+    }
+    footer#contact ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    footer#contact ul li {
+      margin-bottom: 0.625rem;
+    }
+    footer#contact ul li a {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+    footer#contact .site-footer__contact-title {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    footer#contact .site-footer__address {
+      color: rgba(255, 255, 255, 0.45) !important;
+      font-size: 13px;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    footer#contact .site-footer__phone-main {
+      color: rgba(255, 255, 255, 0.7) !important;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    footer#contact .site-footer__phone-sub {
+      color: rgba(255, 255, 255, 0.45) !important;
+      font-size: 13px;
+      font-weight: 300;
+    }
+    footer#contact .site-footer__bottom {
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    footer#contact .site-footer__bottom p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.3) !important;
+      margin: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .premium-card:hover,
+      .btn-primary:hover,
+      .service-card:hover {
+        transform: none;
+      }
+      .hero-scroll-hint { animation: none; }
+      .hero-explore-btn:hover { transform: none; }
+      .whatsapp-float:hover { transform: none; }
+    }
+  </style>
+</head>
+<body class="antialiased has-mobile-cta">
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header id="site-header" class="site-header sticky top-0 z-50">
+    <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+      <div class="flex items-center justify-between h-[64px] lg:h-[72px]">
+
+        <!-- Logo -->
+        <a href="https://delsaclinic.com/" class="site-header__logo-link flex items-center gap-3 group shrink-0">
+          <img
+            src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png"
+            alt="لوگوی کلینیک دلسا"
+            width="40"
+            height="40"
+            class="w-10 h-10 object-contain"
+          >
+          <div class="leading-tight">
+            <span class="site-header__title block text-[15px] lg:text-base font-semibold text-ink-900 tracking-tight">کلینیک دلسا</span>
+            <span class="site-header__tagline hidden sm:block text-[11px] text-ink-600/60 font-light">گروه تخصصی روان‌شناسی</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden xl:flex items-center gap-6" aria-label="منوی اصلی">
+          <a href="https://delsaclinic.com/" class="nav-link text-[13px] text-ink-800 font-medium">خانه</a>
+
+          <!-- دپارتمان — hover dropdown -->
+          <div class="nav-dropdown">
+            <button type="button" class="nav-link text-[13px] text-ink-800 font-medium inline-flex items-center gap-1.5 cursor-default bg-transparent border-0 p-0">
+              دپارتمان‌ها
+              <svg class="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86%d9%be%d8%b2%d8%b4%da%a9%db%8c/">دپارتمان روان‌پزشکی</a>
+              <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86-%d8%af%d8%b1%d9%85%d8%a7%d9%86%db%8c/">دپارتمان روان‌درمانی</a>
+              <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b2%d9%88%d8%ac-%d9%88-%d8%ae%d8%a7%d9%86%d9%88%d8%a7%d8%af%d9%87/">دپارتمان زوج و خانواده</a>
+              <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%da%a9%d9%88%d8%af%da%a9-%d9%88-%d9%86%d9%88%d8%ac%d9%88%d8%a7%d9%86/">دپارتمان کودک و نوجوان</a>
+              <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%aa%d8%b1%da%a9-%d8%a7%d8%b9%d8%aa%db%8c%d8%a7%d8%af/">دپارتمان ترک اعتیاد</a>
+            </div>
+          </div>
+
+          <a href="https://delsaclinic.com/%d9%85%d8%b4%d8%a7%d9%88%d8%b1%d8%a7%d9%86/" class="nav-link text-[13px] text-ink-800 font-medium">مشاوران</a>
+          <a href="https://delsaclinic.com/blog/" class="nav-link text-[13px] text-ink-800 font-medium">وبلاگ</a>
+          <a href="https://delsaclinic.com/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/" class="nav-link text-[13px] text-ink-800 font-medium">درباره ما</a>
+          <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="nav-link text-[13px] text-ink-800 font-medium">فرم نوبت‌دهی</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="site-header__actions flex items-center gap-3 lg:gap-5">
+          <a href="tel:+989025680372" class="site-header__phone hidden md:flex items-center gap-2 text-[13px] text-ink-700 hover:text-accent-teal transition-colors">
+            <svg class="w-4 h-4 text-accent-teal/70" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            <span class="dir-ltr font-medium">۰۹۰۲-۵۶۸۰۳۷۲</span>
+          </a>
+          <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="site-header__cta btn-primary hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold text-ink-900">
+            درخواست وقت ملاقات
+          </a>
+          <button type="button" id="sidebar-open" class="xl:hidden p-2 -mr-1 text-ink-800 hover:text-accent-teal transition-colors" aria-label="باز کردن منو">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ MOBILE SIDEBAR ═══════════════════ -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+  <aside id="sidebar" class="sidebar-panel" aria-label="منوی موبایل" aria-hidden="true">
+    <div class="p-6 border-b border-white/8">
+      <div class="flex items-center justify-between mb-6">
+        <a href="https://delsaclinic.com/" class="flex items-center gap-3">
+          <img
+            src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png"
+            alt="لوگوی کلینیک دلسا"
+            width="36"
+            height="36"
+            class="w-9 h-9 object-contain"
+          >
+          <span class="text-white font-semibold text-[15px]">کلینیک دلسا</span>
+        </a>
+        <button type="button" id="sidebar-close" class="p-1.5 text-white/50 hover:text-accent-teal transition-colors" aria-label="بستن منو">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <p class="text-[12px] text-white/35 leading-relaxed">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+    </div>
+
+    <nav class="flex-1 px-6 py-4">
+      <a href="https://delsaclinic.com/" class="sidebar-link">خانه</a>
+
+      <div class="py-2">
+        <p class="text-[10px] font-semibold tracking-widest text-accent-teal/80 uppercase mb-2 pt-2">دپارتمان‌ها</p>
+        <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86%d9%be%d8%b2%d8%b4%da%a9%db%8c/" class="sidebar-sublink">دپارتمان روان‌پزشکی</a>
+        <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86-%d8%af%d8%b1%d9%85%d8%a7%d9%86%db%8c/" class="sidebar-sublink">دپارتمان روان‌درمانی</a>
+        <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b2%d9%88%d8%ac-%d9%88-%d8%ae%d8%a7%d9%86%d9%88%d8%a7%d8%af%d9%87/" class="sidebar-sublink">دپارتمان زوج و خانواده</a>
+        <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%da%a9%d9%88%d8%af%da%a9-%d9%88-%d9%86%d9%88%d8%ac%d9%88%d8%a7%d9%86/" class="sidebar-sublink">دپارتمان کودک و نوجوان</a>
+        <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%aa%d8%b1%da%a9-%d8%a7%d8%b9%d8%aa%db%8c%d8%a7%d8%af/" class="sidebar-sublink">دپارتمان ترک اعتیاد</a>
+      </div>
+
+      <a href="https://delsaclinic.com/%d9%85%d8%b4%d8%a7%d9%88%d8%b1%d8%a7%d9%86/" class="sidebar-link">مشاوران</a>
+      <a href="https://delsaclinic.com/blog/" class="sidebar-link">وبلاگ</a>
+      <a href="https://delsaclinic.com/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/" class="sidebar-link">درباره ما</a>
+      <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="sidebar-link">فرم نوبت‌دهی</a>
+    </nav>
+
+    <div class="p-6 mt-auto border-t border-white/8 space-y-4">
+      <a href="tel:09025680372" class="flex items-center gap-3 text-white/60 hover:text-accent-teal-light transition-colors">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+        <span class="text-sm dir-ltr">۰۹۰۲-۵۶۸۰۳۷۲</span>
+      </a>
+      <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="btn-primary block w-full py-3.5 text-center text-[13px] font-semibold text-white">
+        فرم نوبت‌دهی
+      </a>
+    </div>
+  </aside>
+
+
+<main>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section id="hero" class="hero-section hero-bg">
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="hero-main">
+          <div class="hero-main__content">
+            <h1>
+              به کلینیک دلسا خوش آمدید
+            </h1>
+            <p>
+              همراه شما در مسیر سلامت روان
+            </p>
+            <div class="hero-cta-row">
+              <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-3 sm:px-9 sm:py-3.5 text-[14px] sm:text-[15px] font-semibold text-ink-900">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+                درخواست وقت ملاقات
+              </a>
+              <a href="tel:09025680372" class="btn-outline inline-flex items-center justify-center gap-2 px-7 py-3 sm:px-9 sm:py-3.5 text-[14px] sm:text-[15px] font-medium text-white">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                تماس مستقیم
+              </a>
+            </div>
+            <a href="#services" class="hero-explore-btn">
+              مشاهده خدمات کلینیک
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-trust">
+          <ul class="hero-trust__grid">
+            <li class="hero-trust__item">
+              <span class="hero-trust__value stat-num">+۱۵ سال</span>
+              <span class="hero-trust__label">سابقه در سلامت روان</span>
+            </li>
+            <li class="hero-trust__item">
+              <span class="hero-trust__value">۵ دپارتمان</span>
+              <span class="hero-trust__label">تیم چندتخصصی</span>
+            </li>
+            <li class="hero-trust__item">
+              <span class="hero-trust__value">پشتیبانی سریع</span>
+              <span class="hero-trust__label">هماهنگی در اسرع وقت</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════ MAIN SERVICES (5) ═══════════════════ -->
+    <section id="services" class="section bg-sand-50">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+        <div class="max-w-xl section-head" data-aos="fade-up">
+          <p class="section-label text-accent-teal mb-2">خدمات تخصصی</p>
+          <h2 class="text-2xl lg:text-[2rem] font-semibold text-ink-900 leading-snug">خدمات اصلی کلینیک</h2>
+        </div>
+
+        <div class="services-grid-5">
+          <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86-%d8%af%d8%b1%d9%85%d8%a7%d9%86%db%8c/" class="service-card" data-aos="fade-up" data-aos-delay="0">
+            <span class="service-card__index">۰۱</span>
+            <h3 class="service-card__title">روان‌درمانی</h3>
+            <p class="service-card__desc">اگر احساساتتان سنگین شده، با رویکرد علمی کنارتان هستیم</p>
+            <span class="service-card__btn">مشاهده دپارتمان</span>
+          </a>
+          <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86-%d8%af%d8%b1%d9%85%d8%a7%d9%86%db%8c/" class="service-card" data-aos="fade-up" data-aos-delay="50">
+            <span class="service-card__index">۰۲</span>
+            <h3 class="service-card__title">مشاوره فردی</h3>
+            <p class="service-card__desc">برای تصمیم‌ها و چالش‌های روزمره، گوش می‌دهیم</p>
+            <span class="service-card__btn">مشاهده دپارتمان</span>
+          </a>
+          <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b2%d9%88%d8%ac-%d9%88-%d8%ae%d8%a7%d9%86%d9%88%d8%a7%d8%af%d9%87/" class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="service-card__index">۰۳</span>
+            <h3 class="service-card__title">زوج و خانواده</h3>
+            <p class="service-card__desc">برای بهبود رابطه و گفت‌وگوی سالم‌تر، همراهتان هستیم</p>
+            <span class="service-card__btn">مشاهده دپارتمان</span>
+          </a>
+          <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%da%a9%d9%88%d8%af%da%a9-%d9%88-%d9%86%d9%88%d8%ac%d9%88%d8%a7%d9%86/" class="service-card" data-aos="fade-up" data-aos-delay="150">
+            <span class="service-card__index">۰۴</span>
+            <h3 class="service-card__title">کودک و نوجوان</h3>
+            <p class="service-card__desc">در مسیر رشد سالم فرزندتان، پشتیبان شما</p>
+            <span class="service-card__btn">مشاهده دپارتمان</span>
+          </a>
+          <a href="https://delsaclinic.com/%d8%af%d9%be%d8%a7%d8%b1%d8%aa%d9%85%d8%a7%d9%86-%d8%b1%d9%88%d8%a7%d9%86%d9%be%d8%b2%d8%b4%da%a9%db%8c/" class="service-card" data-aos="fade-up" data-aos-delay="200">
+            <span class="service-card__index">۰۵</span>
+            <h3 class="service-card__title">روان‌پزشکی</h3>
+            <p class="service-card__desc">ارزیابی و درمان تخصصی، با آرامش و دقت</p>
+            <span class="service-card__btn">مشاهده دپارتمان</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════ WHY DELSA (3) ═══════════════════ -->
+    <section id="why-delsa" class="section bg-white">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-lg mx-auto section-head" data-aos="fade-up">
+          <p class="section-label text-accent-teal mb-2">چرا دلسا</p>
+          <h2 class="text-2xl lg:text-[2rem] font-semibold text-ink-900 leading-snug">اعتماد، تخصص و دسترسی آسان</h2>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="why-card__icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
+            </div>
+            <h3 class="why-card__title">تیم تخصصی و با تجربه</h3>
+            <p class="why-card__desc">روان‌شناسان و روان‌پزشکان مجرب با رویکردی علمی و انسانی</p>
+          </div>
+          <div class="why-card" data-aos="fade-up" data-aos-delay="60">
+            <div class="why-card__icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            </div>
+            <h3 class="why-card__title">نوبت‌دهی آنلاین و پشتیبانی سریع</h3>
+            <p class="why-card__desc">ثبت درخواست آنلاین و هماهنگی سریع — پاسخگویی در اسرع وقت</p>
+          </div>
+          <div class="why-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="why-card__icon">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            </div>
+            <h3 class="why-card__title">خدمات حضوری، تلفنی و آنلاین</h3>
+            <p class="why-card__desc">انتخاب روش مشاوره متناسب با شرایط و نیاز شما</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════ TESTIMONIAL ═══════════════════ -->
+    <div class="testimonial-band" data-aos="fade-up">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+        <blockquote class="testimonial-quote">
+          <p class="testimonial-quote__text">«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
+          <cite class="testimonial-quote__cite">— مراجع کلینیک دلسا</cite>
+        </blockquote>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+    <section id="how-it-works" class="section bg-sand-50">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-lg mx-auto section-head" data-aos="fade-up">
+          <p class="section-label text-accent-teal mb-2">مسیر دریافت خدمت</p>
+          <h2 class="text-2xl lg:text-[2rem] font-semibold text-ink-900 leading-snug">چطور کار می‌کند؟</h2>
+          <p class="mt-3 text-[14px] text-ink-600/60 font-light leading-relaxed">سه قدم ساده تا شروع همراهی تخصصی</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="step-card__num">۱</div>
+            <h3 class="step-card__title">درخواست وقت</h3>
+            <p class="step-card__desc">فرم آنلاین را پر کنید یا تماس بگیرید</p>
+            <a href="tel:+989025680372" class="step-card__phone dir-ltr">۰۹۰۲-۵۶۸۰۳۷۲</a>
+          </div>
+          <div class="step-card" data-aos="fade-up" data-aos-delay="60">
+            <div class="step-card__num">۲</div>
+            <h3 class="step-card__title">هماهنگی جلسه</h3>
+            <p class="step-card__desc">تیم پذیرش با شما تماس می‌گیرد و زمان و دپارتمان مناسب را هماهنگ می‌کند</p>
+          </div>
+          <div class="step-card" data-aos="fade-up" data-aos-delay="120">
+            <div class="step-card__num">۳</div>
+            <h3 class="step-card__title">شروع جلسات</h3>
+            <p class="step-card__desc">مشاوره حضوری، تلفنی یا آنلاین — متناسب با نیاز و شرایط شما</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════ FAQ ═══════════════════ -->
+    <section id="faq" class="section bg-white">
+      <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+        <div class="text-center max-w-lg mx-auto section-head" data-aos="fade-up">
+          <p class="section-label text-accent-teal mb-2">سوالات متداول</p>
+          <h2 class="text-2xl lg:text-[2rem] font-semibold text-ink-900 leading-snug">پرسش‌های رایج</h2>
+        </div>
+
+        <div class="faq-list" data-aos="fade-up">
+          <details class="faq-item">
+            <summary>اولین جلسه چطور برگزار می‌شود؟</summary>
+            <p class="faq-item__answer">در جلسه اول، مشاور یا درمانگر با شما گفت‌وگو می‌کند تا نیازتان را بشناسد، تاریخچه را مرور کند و مسیر درمان را توضیح دهد. فضای کلینیک آرام، محرمانه و بدون قضاوت است.</p>
+          </details>
+          <details class="faq-item">
+            <summary>محرمانگی اطلاعات چگونه حفظ می‌شود؟</summary>
+            <p class="faq-item__answer">تمام اطلاعات شما طبق اصول حرفه‌ای روان‌شناسی محرمانه باقی می‌ماند. جزئیات جلسات بدون رضایت شما با شخص ثالث به‌اشتراک گذاشته نمی‌شود.</p>
+          </details>
+          <details class="faq-item">
+            <summary>مشاوره آنلاین دارید یا فقط حضوری؟</summary>
+            <p class="faq-item__answer">هر سه روش حضوری، تلفنی و آنلاین در دسترس است. هنگام هماهنگی نوبت، روشی را انتخاب می‌کنید که برایتان راحت‌تر باشد.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <div class="delsa-footer-wrap" style="background:#122f5c;width:100%;">
+  <footer id="contact" class="site-footer" style="background:#122f5c;color:#fff;width:100%;">
+    <div class="site-footer__container">
+      <div class="site-footer__grid">
+        <div class="footer-brand">
+          <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="لوگوی کلینیک دلسا" width="48" height="48" class="footer-brand__logo">
+          <p>کلینیک دلسا</p>
+          <p class="footer-brand__desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+          <h4>دسترسی سریع</h4>
+          <ul>
+            <li><a href="https://delsaclinic.com/">خانه</a></li>
+            <li><a href="https://delsaclinic.com/%d9%85%d8%b4%d8%a7%d9%88%d8%b1%d8%a7%d9%86/">مشاوران</a></li>
+            <li><a href="https://delsaclinic.com/blog/">وبلاگ</a></li>
+            <li><a href="https://delsaclinic.com/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/">درباره ما</a></li>
+            <li><a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/">فرم نوبت‌دهی</a></li>
+          </ul>
+        </div>
+
+        <div class="site-footer__contact">
+          <h4>ارتباط با ما</h4>
+          <p class="site-footer__contact-title">کلینیک دلسا — سعادت‌آباد</p>
+          <p class="site-footer__address">
+            سعادت‌آباد، خیابان علامه جنوبی، نبش خیابان حق‌طلب غربی، پلاک ۸۰، ساختمان علامه، طبقه ۶، واحد ۴
+          </p>
+          <a href="https://maps.google.com/?q=35.779,51.375" target="_blank" rel="noopener noreferrer" class="footer-maps-btn">
+            مسیریابی در Google Maps
+          </a>
+          <div class="site-footer__phones">
+            <p class="site-footer__phones-label">تلفن</p>
+            <a href="tel:+989025680372" class="site-footer__phone-main dir-ltr" style="color:rgba(255,255,255,.75);">۰۹۰۲-۵۶۸۰۳۷۲</a>
+            <a href="tel:+982188682003" class="site-footer__phone-sub dir-ltr" style="color:rgba(255,255,255,.55);">۰۲۱-۸۸۶۸۲۰۰۳</a>
+          </div>
+          <div class="site-footer__email">
+            <p class="site-footer__phones-label">ایمیل</p>
+            <a href="mailto:info@delsaclinic.com" class="site-footer__email-link dir-ltr">info@delsaclinic.com</a>
+          </div>
+        </div>
+
+        <div class="footer-map">
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=51.365%2C35.774%2C51.385%2C35.784&layer=mapnik&marker=35.779%2C51.375"
+            loading="lazy"
+            title="موقعیت کلینیک دلسا — سعادت‌آباد"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <p>© 2026 Delsa Clinic. All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/989025680372" target="_blank" rel="noopener noreferrer" id="whatsapp-float" class="whatsapp-float" aria-label="پیام در واتساپ">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Mobile sticky CTA (visible after hero scroll) -->
+  <div id="mobile-cta-bar" class="mobile-cta-bar lg:hidden" role="region" aria-label="اقدام سریع">
+    <a href="tel:09025680372" class="mobile-cta-bar__call">
+      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+      تماس
+    </a>
+    <a href="https://delsaclinic.com/%d9%81%d8%b1%d9%85-%d9%86%d9%88%d8%a8%d8%aa-%d8%af%d9%87%db%8c/" class="mobile-cta-bar__book">
+      درخواست وقت
+    </a>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    // ── AOS Init ──
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    AOS.init({
+      duration: prefersReducedMotion ? 0 : 1100,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+      disable: prefersReducedMotion,
+    });
+
+    // ── Header scroll ──
+    const header = document.getElementById('site-header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Sidebar (mobile) ──
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const sidebarOpenBtn = document.getElementById('sidebar-open');
+    const sidebarCloseBtn = document.getElementById('sidebar-close');
+    const mobileCtaBar = document.getElementById('mobile-cta-bar');
+    const heroSection = document.getElementById('hero');
+    const whatsappFloat = document.getElementById('whatsapp-float');
+
+    function updateMobileCtaOverlay() {
+      if (!mobileCtaBar) return;
+      const hidden = sidebar.classList.contains('open');
+      mobileCtaBar.classList.toggle('hidden-by-overlay', hidden);
+      if (whatsappFloat) whatsappFloat.classList.toggle('hidden-by-overlay', hidden);
+    }
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarBackdrop.classList.add('open');
+      sidebar.setAttribute('aria-hidden', 'false');
+      sidebarBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      updateMobileCtaOverlay();
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarBackdrop.classList.remove('open');
+      sidebar.setAttribute('aria-hidden', 'true');
+      sidebarBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      updateMobileCtaOverlay();
+    }
+
+    sidebarOpenBtn.addEventListener('click', openSidebar);
+    sidebarCloseBtn.addEventListener('click', closeSidebar);
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+    sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSidebar));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+    });
+
+    // ── Mobile sticky CTA (show after hero) ──
+    if (mobileCtaBar && heroSection && window.matchMedia('(max-width: 1023px)').matches) {
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        mobileCtaBar.classList.toggle('visible', !entry.isIntersecting);
+      }, { threshold: 0 });
+      heroObserver.observe(heroSection);
+    } else if (mobileCtaBar) {
+      document.body.classList.remove('has-mobile-cta');
+    }
+  </script>
+</body>
+</html>

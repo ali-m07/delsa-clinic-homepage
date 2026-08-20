@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ consultant.name }} | کلینیک دلسا{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container card consultant-profile">
+    <div class="consultant-profile__head">
+      {% if consultant.image_url %}<img src="{{ consultant.image_url }}" alt="{{ consultant.name }}">{% endif %}
+      <div>
+        <h1>{{ consultant.name }}</h1>
+        {% if consultant.role %}<p class="consultant-profile__role">{{ consultant.role }}</p>{% endif %}
+        <a class="btn btn--primary" href="{{ book_url }}">رزرو وقت</a>
+      </div>
+    </div>
+    {% if consultant.bio_html %}
+    <div class="prose">{{ consultant.bio_html | safe }}</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

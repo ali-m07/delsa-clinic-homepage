@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} | کلینیک دلسا{% endblock %}
+{% block content %}
+<article class="section">
+  <div class="container card prose">
+    <h1>{{ article.title }}</h1>
+    {% if article.excerpt %}<p class="article-excerpt">{{ article.excerpt }}</p>{% endif %}
+    {{ article.body_html | safe }}
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}{{ department.meta_title or department.title }} | کلینیک دلسا{% endblock %}
+{% block meta %}
+{% if department.meta_description %}<meta name="description" content="{{ department.meta_description }}">{% endif %}
+{% endblock %}
+{% block content %}
+<section class="dept-hero">
+  <div class="container">
+    <p class="dept-hero__label">دپارتمان تخصصی</p>
+    <h1>{{ department.title }}</h1>
+    <a class="btn btn--primary" href="{{ book_url }}">رزرو وقت در این دپارتمان</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card">
+    <div class="dept-intro">
+      <div class="dept-intro__text">
+        <p>{{ department.intro }}</p>
+        <div class="prose">{{ department.body_html | safe }}</div>
+      </div>
+      {% if department.image_url %}
+      <div class="dept-intro__media">
+        <img src="{{ department.image_url }}" alt="{{ department.title }}">
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if consultants %}
+<section class="section">
+  <div class="container card">
+    <h2 class="section__title">مشاوران این دپارتمان</h2>
+    <div class="team-row">
+      {% for person in consultants if person.published %}
+      <article class="team-card">
+        <a href="/مشاور/{{ person.slug }}">
+          {% if person.image_url %}<img src="{{ person.image_url }}" alt="{{ person.name }}">{% endif %}
+          <h3>{{ person.name }}</h3>
+          {% if person.role %}<p>{{ person.role }}</p>{% endif %}
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<nav class="dept-nav container" aria-label="دپارتمان‌های کلینیک">
+  <p>دپارتمان‌های کلینیک</p>
+  <div class="dept-nav__list">
+    {% for dept in departments %}
+    <a href="/دپارتمان-{{ dept.slug }}"{% if dept.id == department.id %} class="is-active"{% endif %}>{{ dept.nav_label or dept.title }}</a>
+    {% endfor %}
+  </div>
+</nav>
+{% endblock %}

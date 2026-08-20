@@ -1,0 +1,27 @@
+<footer id="delsa-site-footer">
+  <div class="delsa-f__inner">
+    <div class="delsa-f__grid">
+      <div>
+        <div class="delsa-f__brand-row">
+          <img class="delsa-f__logo" src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="">
+          <p class="delsa-f__name">کلینیک دلسا</p>
+        </div>
+        <p class="delsa-f__desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+      </div>
+      <div>
+        <h4>دپارتمان‌ها</h4>
+        <ul>
+          {% for dept in departments %}
+          <li><a href="/دپارتمان-{{ dept.slug }}">{{ dept.nav_label or dept.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h4>تماس</h4>
+        <p><a href="tel:02112345678">۰۲۱-۱۲۳۴۵۶۷۸</a></p>
+        <p><a href="{{ book_url }}">رزرو نوبت آنلاین</a></p>
+      </div>
+    </div>
+    <p class="delsa-f__copy">© {{ departments[0].title and "کلینیک دلسا" or "کلینیک دلسا" }}</p>
+  </div>
+</footer>

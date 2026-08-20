@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}دپارتمان‌ها | کلینیک دلسا{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="section__title">دپارتمان‌های کلینیک</h1>
+    <div class="dept-grid">
+      {% for dept in departments %}
+      <a class="dept-card" href="/دپارتمان-{{ dept.slug }}">
+        <h3>{{ dept.title }}</h3>
+        <p>{{ dept.intro }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
