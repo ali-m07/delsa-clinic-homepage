@@ -1,0 +1,579 @@
+<!--
+  کلینیک دلسا — بلوک هیرو زنده برای وردپرس (بدون هدر/فوتر)
+  ---------------------------------------------------------
+  نصب:
+  1) در Elementor: ویجت HTML  |  یا بلوک «HTML سفارشی» در ویرایشگر
+  2) کل محتوای این فایل را کپی و پیست کنید
+  3) لینک‌های BOOK_URL و TEL و آدرس دپارتمان‌ها را عوض کنید
+  4) اگر عکس‌ها را در Media وردپرس آپلود کردید، URLهای CDN پایین را عوض کنید
+
+  تصاویر فعلاً از GitHub Pages پروژه خوانده می‌شوند.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  .delsa-alive {
+    --navy: #243B48;
+    --navy-deep: #1A2F3A;
+    --teal: #3A8F8A;
+    --teal-deep: #2F7571;
+    --muted: #5E6F7A;
+    --cream: #FBF8F3;
+    --cream-2: #F5F1EA;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --font: 'Vazirmatn', Tahoma, sans-serif;
+    direction: rtl;
+    text-align: right;
+    font-family: var(--font);
+    color: var(--navy);
+    background: linear-gradient(180deg, #FBF8F3 0%, #F7F3EC 100%);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .delsa-alive *, .delsa-alive *::before, .delsa-alive *::after { box-sizing: border-box; }
+  .delsa-alive a { color: inherit; text-decoration: none; }
+  .delsa-alive img { max-width: 100%; display: block; }
+  .delsa-alive ul { margin: 0; padding: 0; list-style: none; }
+  .delsa-alive .wrap {
+    width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
+    margin-inline: auto;
+  }
+
+  /* Hero */
+  .delsa-hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: flex-end;
+    padding: 2.25rem 0 2.4rem;
+    overflow: hidden;
+    color: #fff;
+  }
+  @media (min-width: 768px) {
+    .delsa-hero { min-height: 540px; max-height: 640px; }
+  }
+  .delsa-hero__media { position: absolute; inset: 0; overflow: hidden; }
+  .delsa-hero__reel { position: absolute; inset: -4% 0; will-change: transform; }
+  .delsa-hero__photo {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 38%;
+    opacity: 0; will-change: opacity, transform;
+  }
+  .delsa-hero__photo.is-active { opacity: 1; z-index: 1; }
+  .delsa-hero__photo.is-leaving { z-index: 2; }
+  .delsa-hero__mesh {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 55% at 85% 15%, rgba(194,164,107,.32), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 10% 80%, rgba(58,143,138,.26), transparent 55%);
+    mix-blend-mode: soft-light;
+  }
+  .delsa-hero__veil {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(26,47,58,.22) 0%, rgba(26,47,58,.34) 45%, rgba(26,47,58,.72) 100%),
+      linear-gradient(105deg, rgba(26,47,58,.5) 0%, rgba(26,47,58,.14) 58%, transparent 100%);
+  }
+  .delsa-hero__shine {
+    position: absolute; inset: 0; z-index: 4; pointer-events: none;
+    background: linear-gradient(115deg, transparent 28%, rgba(255,255,255,.2) 48%, transparent 64%);
+  }
+  .delsa-hero__inner {
+    position: relative; z-index: 5;
+    width: min(1140px, calc(100% - clamp(2rem, 6vw, 4.5rem)));
+    margin-inline: auto;
+  }
+  .delsa-hero__glass {
+    max-width: 38rem;
+    padding: 1.25rem 1.35rem 1.4rem;
+    border-radius: 26px;
+    background: rgba(255,252,250,.14);
+    border: 1px solid rgba(255,255,255,.28);
+    box-shadow: 0 24px 60px rgba(10,24,32,.28), inset 0 1px 0 rgba(255,255,255,.28);
+    backdrop-filter: blur(18px) saturate(1.25);
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    transform-origin: center bottom;
+  }
+  .delsa-hero__brand {
+    margin: 0 0 .4rem;
+    font-size: clamp(1.85rem, 1.25rem + 2.2vw, 2.7rem);
+    font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+  }
+  .delsa-hero__title {
+    margin: 0 0 .65rem;
+    font-size: clamp(1.2rem, 1.05rem + 1.05vw, 1.75rem);
+    font-weight: 600; letter-spacing: -0.025em; line-height: 1.35;
+    max-width: 18ch;
+  }
+  .delsa-hero__lead {
+    margin: 0 0 1.05rem;
+    max-width: 34rem;
+    font-size: .98rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,.88);
+  }
+  .delsa-hero__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .delsa-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: .88rem 1.55rem; border-radius: 999px;
+    font-size: 14px; font-weight: 700; font-family: inherit;
+    transition: transform .22s var(--ease), box-shadow .25s, background .25s, border-color .25s;
+  }
+  .delsa-btn:active { transform: scale(.97); }
+  .delsa-btn--primary {
+    background: var(--teal); color: #fff;
+    box-shadow: 0 12px 36px rgba(58,143,138,.28);
+  }
+  .delsa-btn--primary:hover {
+    background: var(--teal-deep);
+    transform: scale(1.05);
+    box-shadow: 0 18px 44px rgba(58,143,138,.42);
+  }
+  .delsa-btn--ghost {
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.5);
+    background: rgba(255,255,255,.1);
+  }
+  .delsa-btn--ghost:hover {
+    background: rgba(255,255,255,.2);
+    transform: scale(1.05);
+  }
+  .delsa-hero__dots {
+    position: absolute; z-index: 6;
+    left: 50%; bottom: 1rem;
+    transform: translateX(-50%);
+    display: flex; gap: .45rem;
+    padding: .35rem .5rem;
+    border-radius: 999px;
+    background: rgba(26,47,58,.28);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+  }
+  .delsa-hero__dots.is-ready { opacity: 1; }
+  .delsa-hero__dot {
+    width: 22px; height: 8px; border-radius: 999px;
+    border: 0; padding: 0; cursor: pointer;
+    background: rgba(255,255,255,.35);
+    transform: scaleX(.42); transform-origin: center;
+    transition: transform .4s var(--ease), background .35s;
+  }
+  .delsa-hero__dot.is-active { background: #fff; transform: scaleX(1); }
+
+  /* Trust */
+  .delsa-trust {
+    position: relative; z-index: 2;
+    margin-top: -1.35rem;
+    padding: 0 0 1.5rem;
+  }
+  .delsa-trust__inner {
+    display: grid; gap: .65rem; grid-template-columns: 1fr;
+    padding: 1rem; border-radius: 22px;
+    background: rgba(255,252,250,.94);
+    border: 1px solid rgba(36,59,72,.08);
+    box-shadow: 0 18px 48px rgba(19,42,55,.1);
+  }
+  @media (min-width: 700px) {
+    .delsa-trust__inner { grid-template-columns: repeat(3, 1fr); }
+  }
+  .delsa-stat {
+    padding: .85rem 1rem; border-radius: 16px;
+    background: linear-gradient(160deg, #FBF8F3, #F3EEE6);
+    border: 1px solid rgba(36,59,72,.06);
+    transition: transform .35s var(--ease), box-shadow .35s;
+  }
+  .delsa-stat:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 28px rgba(19,42,55,.07); }
+  .delsa-stat strong {
+    display: block; font-size: 1.45rem; font-weight: 800;
+    letter-spacing: -.03em; margin-bottom: .15rem; color: var(--navy);
+  }
+  .delsa-stat span { font-size: 12.5px; color: var(--muted); }
+
+  /* Services */
+  .delsa-services { padding: 1.75rem 0 2.5rem; background: #F8F4ED; }
+  .delsa-services__head { margin-bottom: 1.1rem; max-width: 40rem; }
+  .delsa-services__head h2 {
+    margin: 0; font-size: clamp(1.4rem, 1.15rem + 1vw, 1.95rem);
+    font-weight: 800; letter-spacing: -.03em; line-height: 1.25;
+  }
+  .delsa-services__head p { margin: .4rem 0 0; color: var(--muted); font-size: 14.5px; }
+  .delsa-services__grid {
+    display: grid; gap: .85rem; grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .delsa-services__grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (min-width: 980px) { .delsa-services__grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  .delsa-tile {
+    display: flex; flex-direction: column;
+    border-radius: 22px; overflow: hidden;
+    background: #FFFCFA;
+    border: 1px solid rgba(36,59,72,.08);
+    box-shadow: 0 14px 36px rgba(19,42,55,.08);
+    transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
+  }
+  .delsa-tile:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 22px 50px rgba(19,42,55,.12);
+    border-color: rgba(58,143,138,.28);
+  }
+  .delsa-tile__media {
+    position: relative; aspect-ratio: 16/11; overflow: hidden; background: #ddd5c8;
+  }
+  .delsa-tile__media img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.03); transition: transform .8s var(--ease);
+  }
+  .delsa-tile:hover .delsa-tile__media img { transform: scale(1.1); }
+  .delsa-tile__shade {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(26,47,58,.28) 100%);
+    pointer-events: none;
+  }
+  .delsa-tile__body { padding: .95rem 1rem 1.1rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+  .delsa-tile__body h3 { margin: 0; font-size: 1.05rem; font-weight: 750; }
+  .delsa-tile__body p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.7; flex: 1; }
+  .delsa-tile__cta {
+    margin-top: .35rem; font-size: 12.5px; font-weight: 700; color: var(--teal-deep);
+    display: inline-block; transition: transform .35s var(--ease);
+  }
+  .delsa-tile:hover .delsa-tile__cta { transform: translateX(-5px); }
+
+  .delsa-alive [data-reveal] {
+    opacity: 0; transform: translateY(28px) scale(.97);
+    transition: opacity .85s var(--ease), transform .85s var(--ease);
+  }
+  .delsa-alive [data-reveal].is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .delsa-alive [data-reveal] { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<div class="delsa-alive" id="delsa-alive" dir="rtl" lang="fa">
+  <section class="delsa-hero" id="delsa-hero">
+    <div class="delsa-hero__media" aria-hidden="true">
+      <div class="delsa-hero__reel" id="delsa-hero-reel">
+        <img class="delsa-hero__photo is-active" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="">
+        <img class="delsa-hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="">
+        <img class="delsa-hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="">
+        <img class="delsa-hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="">
+        <img class="delsa-hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="">
+      </div>
+      <div class="delsa-hero__mesh"></div>
+      <div class="delsa-hero__veil"></div>
+      <div class="delsa-hero__shine"></div>
+    </div>
+
+    <div class="delsa-hero__inner">
+      <div class="delsa-hero__glass" data-hero-glass>
+        <p class="delsa-hero__brand" data-hero-item>کلینیک دلسا</p>
+        <h1 class="delsa-hero__title" data-hero-item>اینجا امن هستید.<br>اینجا دیده می‌شوید.</h1>
+        <p class="delsa-hero__lead" data-hero-item>همراهی تخصصی در مسیر سلامت روان — با تیمی که به آرامش، تخصص و احترام شما متعهد است.</p>
+        <div class="delsa-hero__actions" data-hero-item>
+          <!-- لینک‌ها را عوض کنید -->
+          <a class="delsa-btn delsa-btn--primary" href="/فرم-نوبت-دهی/">درخواست وقت ملاقات</a>
+          <a class="delsa-btn delsa-btn--ghost" href="tel:02188888888">تماس مستقیم</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="delsa-hero__dots" id="delsa-hero-dots" role="tablist" aria-label="اسلایدهای فضای کلینیک"></div>
+  </section>
+
+  <section class="delsa-trust" aria-label="آمار کلینیک">
+    <div class="wrap">
+      <ul class="delsa-trust__inner">
+        <li class="delsa-stat" data-reveal>
+          <strong data-count="15" data-prefix="+">۰</strong>
+          <span>سال تجربه تخصصی</span>
+        </li>
+        <li class="delsa-stat" data-reveal>
+          <strong data-count="6">۰</strong>
+          <span>دپارتمان چندتخصصی</span>
+        </li>
+        <li class="delsa-stat" data-reveal>
+          <strong data-count="24" data-suffix="/۷">۰</strong>
+          <span>پشتیبانی هماهنگی</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="delsa-services">
+    <div class="wrap">
+      <div class="delsa-services__head" data-reveal>
+        <h2>خدمات تخصصی کلینیک</h2>
+        <p>شش دپارتمان برای نیازهای فردی، خانوادگی و رشدی — با رویکرد علمی و انسانی</p>
+      </div>
+      <div class="delsa-services__grid">
+        <a class="delsa-tile" data-reveal href="/دپارتمان-روان-درمانی/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/anxiety.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>روان‌درمانی</h3>
+            <p>اگر احساساتتان سنگین شده، با رویکرد علمی کنارتان هستیم.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+        <a class="delsa-tile" data-reveal href="/دپارتمان-زوج-و-خانواده/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/couple.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>زوج و خانواده</h3>
+            <p>برای بهبود رابطه و گفت‌وگوی سالم‌تر، همراهتان هستیم.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+        <a class="delsa-tile" data-reveal href="/دپارتمان-کودک-و-نوجوان/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/child.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>کودک و نوجوان</h3>
+            <p>در مسیر رشد سالم فرزندتان، پشتیبان شما.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+        <a class="delsa-tile" data-reveal href="/دپارتمان-روانپزشکی/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/brain.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>روان‌پزشکی</h3>
+            <p>ارزیابی و درمان تخصصی، با آرامش و دقت.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+        <a class="delsa-tile" data-reveal href="/دپارتمان-ترک-اعتیاد/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/freedom.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>ترک اعتیاد</h3>
+            <p>درمان و حمایت همراه با احترام و محرمانگی.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+        <a class="delsa-tile" data-reveal href="/دپارتمان-مشاوره-شغلی/">
+          <div class="delsa-tile__media">
+            <img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/services/support.png" alt="" loading="lazy">
+            <span class="delsa-tile__shade"></span>
+          </div>
+          <div class="delsa-tile__body">
+            <h3>مشاوره شغلی</h3>
+            <p>راهنمایی برای انتخاب، تغییر یا ادامه مسیر حرفه‌ای.</p>
+            <span class="delsa-tile__cta">مشاهده دپارتمان</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  var root = document.getElementById('delsa-alive');
+  if (!root) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gsap = window.gsap;
+  var hasGsap = !!gsap && !reduceMotion;
+  if (hasGsap && window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
+
+  var hero = document.getElementById('delsa-hero');
+  var glass = root.querySelector('[data-hero-glass]');
+  var heroItems = Array.prototype.slice.call(root.querySelectorAll('[data-hero-item]'));
+  var slides = Array.prototype.slice.call(root.querySelectorAll('[data-hero-slide]'));
+  var dotsWrap = document.getElementById('delsa-hero-dots');
+  var reel = document.getElementById('delsa-hero-reel');
+  var veil = root.querySelector('.delsa-hero__veil');
+  var mesh = root.querySelector('.delsa-hero__mesh');
+  var shine = root.querySelector('.delsa-hero__shine');
+  var slideIndex = 0;
+  var slideTimer = null;
+  var kenTween = null;
+  var transitioning = false;
+
+  function showIn(el) { el.classList.add('is-in'); }
+
+  function setDots(active) {
+    if (!dotsWrap) return;
+    Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+      dot.classList.toggle('is-active', i === active);
+    });
+  }
+
+  function startKenBurns(photo) {
+    if (!hasGsap || !photo) return;
+    if (kenTween) kenTween.kill();
+    gsap.set(photo, { scale: 1.16, transformOrigin: '50% 42%' });
+    kenTween = gsap.to(photo, { scale: 1.04, duration: 5.2, ease: 'none' });
+  }
+
+  function goToSlide(nextIndex) {
+    if (slides.length < 2 || transitioning) return;
+    var next = (nextIndex + slides.length) % slides.length;
+    if (next === slideIndex) return;
+    transitioning = true;
+    var current = slides[slideIndex];
+    var upcoming = slides[next];
+    slideIndex = next;
+    setDots(slideIndex);
+
+    if (!hasGsap) {
+      current.classList.remove('is-active');
+      upcoming.classList.add('is-active');
+      transitioning = false;
+      return;
+    }
+
+    if (kenTween) kenTween.kill();
+    current.classList.add('is-leaving');
+    upcoming.classList.add('is-active');
+
+    gsap.timeline({
+      defaults: { ease: 'power2.inOut' },
+      onComplete: function () {
+        current.classList.remove('is-active', 'is-leaving');
+        gsap.set(current, { opacity: 0, scale: 1.16 });
+        transitioning = false;
+        startKenBurns(upcoming);
+      }
+    })
+      .fromTo(upcoming, { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1.12, duration: 1.35, ease: 'power2.out' }, 0)
+      .to(current, { opacity: 0, scale: 1.02, duration: 1.2 }, 0.08)
+      .fromTo(veil, { opacity: 0.85 }, { opacity: 1, duration: 0.55, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 0);
+  }
+
+  if (dotsWrap && slides.length > 1) {
+    slides.forEach(function (_, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'delsa-hero__dot' + (i === 0 ? ' is-active' : '');
+      btn.setAttribute('aria-label', 'اسلاید ' + (i + 1));
+      btn.addEventListener('click', function () {
+        goToSlide(i);
+        if (slideTimer) {
+          clearInterval(slideTimer);
+          slideTimer = setInterval(function () { goToSlide(slideIndex + 1); }, 5200);
+        }
+      });
+      dotsWrap.appendChild(btn);
+    });
+  }
+
+  if (hasGsap && hero) {
+    gsap.set(slides, { opacity: 0, scale: 1.2, transformOrigin: '50% 42%' });
+    if (slides[0]) {
+      slides[0].classList.add('is-active');
+      gsap.set(slides[0], { opacity: 1, scale: 1.18 });
+    }
+    if (veil) gsap.set(veil, { opacity: 0 });
+    if (mesh) gsap.set(mesh, { opacity: 0, scale: 1.08 });
+    if (shine) gsap.set(shine, { opacity: 0, xPercent: 40 });
+    if (glass) gsap.set(glass, { opacity: 0, y: 36, scale: 0.92, filter: 'blur(8px)' });
+    if (heroItems.length) gsap.set(heroItems, { opacity: 0, y: 22 });
+    if (dotsWrap) gsap.set(dotsWrap, { opacity: 0, y: 12 });
+
+    gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      onComplete: function () {
+        if (dotsWrap) dotsWrap.classList.add('is-ready');
+        startKenBurns(slides[slideIndex]);
+        if (slides.length > 1) {
+          slideTimer = setInterval(function () { goToSlide(slideIndex + 1); }, 5200);
+        }
+      }
+    })
+      .addLabel('boot', 0)
+      .to(slides[0], { scale: 1.1, duration: 1.8, ease: 'power2.out' }, 'boot')
+      .to(veil, { opacity: 1, duration: 1.1 }, 'boot+=0.15')
+      .to(mesh, { opacity: 1, scale: 1, duration: 1.4 }, 'boot+=0.2')
+      .to(shine, { opacity: 1, xPercent: -30, duration: 1.6, ease: 'power1.inOut' }, 'boot+=0.35')
+      .to(glass, { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.95 }, 'boot+=0.45')
+      .to(heroItems, { opacity: 1, y: 0, duration: 0.7, stagger: 0.12 }, 'boot+=0.62')
+      .to(dotsWrap, { opacity: 1, y: 0, duration: 0.55 }, 'boot+=1.15')
+      .to(glass, {
+        boxShadow: '0 28px 70px rgba(10,24,32,0.34), inset 0 1px 0 rgba(255,255,255,0.4)',
+        duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut'
+      }, 'boot+=1.4');
+
+    if (reel && window.ScrollTrigger) {
+      gsap.to(reel, {
+        yPercent: 14, ease: 'none',
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.to(glass, {
+        y: -18, opacity: 0.92, ease: 'none',
+        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
+      });
+    }
+  } else {
+    if (glass) gsap ? gsap.set(glass, { clearProps: 'all' }) : null;
+    heroItems.forEach(showIn);
+    if (dotsWrap) dotsWrap.classList.add('is-ready');
+    if (slides[0]) slides[0].classList.add('is-active');
+    if (slides.length > 1 && !reduceMotion) {
+      slideTimer = setInterval(function () { goToSlide(slideIndex + 1); }, 4500);
+    }
+  }
+
+  // reveals + counters
+  var reveals = Array.prototype.slice.call(root.querySelectorAll('[data-reveal]'));
+  if (reduceMotion) {
+    reveals.forEach(showIn);
+  } else if ('IntersectionObserver' in window) {
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        showIn(entry.target);
+        revObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { revObs.observe(el); });
+  } else {
+    reveals.forEach(showIn);
+  }
+
+  function toFa(n) {
+    return String(n).replace(/\d/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+  }
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduceMotion) { el.textContent = prefix + toFa(target) + suffix; return; }
+    var start = null, dur = 1100;
+    function frame(ts) {
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + toFa(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  var counters = Array.prototype.slice.call(root.querySelectorAll('[data-count]'));
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var cObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        animateCount(entry.target);
+        cObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(function (el) { cObs.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
+})();
+</script>
