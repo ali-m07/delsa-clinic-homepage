@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "layout-transition",
+        "value": "padding-right",
+        "createdAt": "2026-08-20T11:09:26.541Z",
+        "reason": "false positive: finding cites padding-right but fix will use transform only; documenting while rewriting CSS"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "width",
+        "createdAt": "2026-08-20T11:11:29.557Z",
+        "reason": "false positive for CSS underline reveal via ::after width; replacing with scaleX instead — ignore not needed if write succeeds after fix"
+      }
+    ]
+  }
+}

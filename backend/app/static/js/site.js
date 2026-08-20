@@ -199,11 +199,39 @@
       defaults: { ease: 'power3.out' },
       onComplete: function () {
         if (dotsWrap) dotsWrap.classList.add('is-ready');
+        // Keep CTAs fully visible — never scrub glass opacity away
+        if (glass) {
+          gsap.set(glass, { clearProps: 'opacity,filter', opacity: 1, y: 0, scale: 1 });
+          gsap.to(glass, {
+            boxShadow:
+              '0 28px 70px rgba(10,24,32,0.34), inset 0 1px 0 rgba(255,255,255,0.4)',
+            duration: 1.2,
+            yoyo: true,
+            repeat: -1,
+            ease: 'sine.inOut',
+          });
+        }
+        if (heroItems.length) {
+          gsap.set(heroItems, { clearProps: 'opacity', opacity: 1, y: 0 });
+        }
         startKenBurns(slides[slideIndex]);
         if (slides.length > 1) {
           slideTimer = window.setInterval(function () {
             goToSlide(slideIndex + 1);
           }, 5200);
+        }
+        // Parallax only the photo reel (not the glass / CTAs)
+        if (reel && window.ScrollTrigger) {
+          gsap.to(reel, {
+            yPercent: 12,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: hero,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
         }
       },
     });
@@ -246,44 +274,7 @@
         'boot+=0.62'
       )
       // Dots
-      .to(dotsWrap, { opacity: 1, y: 0, duration: 0.55 }, 'boot+=1.15')
-      // Soft settle on glass
-      .to(
-        glass,
-        {
-          boxShadow: '0 28px 70px rgba(10,24,32,0.34), inset 0 1px 0 rgba(255,255,255,0.4)',
-          duration: 1.2,
-          yoyo: true,
-          repeat: -1,
-          ease: 'sine.inOut',
-        },
-        'boot+=1.4'
-      );
-
-    // Scroll parallax on photo reel
-    if (reel && window.ScrollTrigger) {
-      gsap.to(reel, {
-        yPercent: 14,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-      gsap.to(glass, {
-        y: -18,
-        opacity: 0.92,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }
+      .to(dotsWrap, { opacity: 1, y: 0, duration: 0.55 }, 'boot+=1.15');
   } else {
     // Fallback without GSAP
     if (glass) showIn(glass);
