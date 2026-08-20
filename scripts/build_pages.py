@@ -40,8 +40,9 @@ BASE_HREF = os.environ.get(
 def patch_html(html: str) -> str:
     if "<base " not in html:
         html = html.replace("<head>", f'<head>\n  <base href="{BASE_HREF}">', 1)
-    html = html.replace('href="/static/', f'href="{BASE_HREF}static/')
-    html = html.replace('src="/static/', f'src="{BASE_HREF}static/')
+    # Make all root-relative links work under GitHub Pages repo path.
+    html = re.sub(r'href="/(?!/|#)', f'href="{BASE_HREF}', html)
+    html = re.sub(r'src="/(?!/)', f'src="{BASE_HREF}', html)
     # Admin/API links stay absolute site paths on real deploy; for static demo disable admin
     html = html.replace(f'href="{BASE_HREF}admin"', 'href="#"')
     return html
