@@ -166,21 +166,6 @@
     }, 3200);
   }
 
-  // Horizontal services rail — scroll-linked nudge + wheel support
-  var rail = document.querySelector('[data-services-rail]');
-  if (rail && !reduceMotion) {
-    rail.addEventListener(
-      'wheel',
-      function (e) {
-        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-        var rtl = getComputedStyle(document.documentElement).direction === 'rtl';
-        rail.scrollBy({ left: e.deltaY * (rtl ? 1 : -1) });
-        e.preventDefault();
-      },
-      { passive: false }
-    );
-  }
-
   // Optional GSAP enrichment
   if (!window.gsap || reduceMotion) return;
   var gsap = window.gsap;
@@ -199,17 +184,16 @@
     });
   }
 
-  if (rail && window.ScrollTrigger) {
+  if (window.ScrollTrigger) {
     gsap.from('.service-tile', {
       opacity: 0,
-      y: 28,
-      scale: 0.96,
-      duration: 0.7,
-      stagger: 0.08,
+      y: 24,
+      duration: 0.65,
+      stagger: 0.07,
       ease: 'power3.out',
       scrollTrigger: {
         trigger: '.services-section',
-        start: 'top 78%',
+        start: 'top 80%',
         once: true,
       },
     });
