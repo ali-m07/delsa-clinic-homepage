@@ -1,19 +1,38 @@
 {% extends "base.html" %}
 {% block title %}{{ consultant.name }} | کلینیک دلسا{% endblock %}
 {% block content %}
-<section class="section">
-  <div class="container card consultant-profile">
-    <div class="consultant-profile__head">
-      {% if consultant.image_url %}<img src="{{ consultant.image_url }}" alt="{{ consultant.name }}">{% endif %}
-      <div>
+<section class="section section--warm section--dense consultant-detail">
+  <div class="container">
+    <div class="consultant-hero reveal">
+      {% if consultant.image_url %}
+      <div class="consultant-hero__media">
+        <img src="{{ consultant.image_url }}" alt="{{ consultant.name }}" width="420" height="480">
+      </div>
+      {% endif %}
+      <div class="consultant-hero__copy">
+        <p class="consultant-hero__eyebrow">مشاور کلینیک دلسا</p>
         <h1>{{ consultant.name }}</h1>
-        {% if consultant.role %}<p class="consultant-profile__role">{{ consultant.role }}</p>{% endif %}
-        <a class="btn btn--primary" href="{{ book_url }}">رزرو وقت</a>
+        {% if consultant.role %}<p class="consultant-hero__role">{{ consultant.role }}</p>{% endif %}
+        <div class="consultant-hero__actions">
+          <a class="btn btn--primary" href="{{ book_url }}">درخواست وقت ملاقات با این مشاور</a>
+          <a class="btn btn--ghost-dark" href="/مشاوران">همه مشاوران</a>
+        </div>
       </div>
     </div>
+
     {% if consultant.bio_html %}
-    <div class="prose">{{ consultant.bio_html | safe }}</div>
+    <div class="consultant-bio prose reveal">{{ consultant.bio_html | safe }}</div>
     {% endif %}
+
+    <div class="cta-band consultant-cta reveal" aria-label="درخواست وقت">
+      <div class="cta-band__inner">
+        <p class="cta-band__copy">
+          درخواست وقت ملاقات با {{ consultant.name }}
+          <span>هماهنگی حضوری، تلفنی یا آنلاین از طریق فرم نوبت</span>
+        </p>
+        <a href="{{ book_url }}" class="btn btn--primary">درخواست وقت ملاقات</a>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

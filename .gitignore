@@ -26,8 +26,6 @@ backend/uploads/*
 docs/*.html
 !docs/index.html
 docs/دپارتمان-*/
-docs/مشاور*/
-docs/consultants/
 !docs/.gitkeep
 
 # Secrets

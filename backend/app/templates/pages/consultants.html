@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 {% block title %}مشاوران | کلینیک دلسا{% endblock %}
 {% block content %}
-<section class="section">
+<section class="section section--warm section--dense consultants-page">
   <div class="container">
-    <h1 class="section__title">مشاوران کلینیک دلسا</h1>
-    <div class="team-row team-row--wrap">
+    <div class="section__head reveal">
+      <h1>مشاوران کلینیک دلسا</h1>
+      <p>تیم تخصصی روان‌شناسی و مشاوره — با تجربه، پروانه اشتغال و رویکرد علمی</p>
+    </div>
+    <div class="consultants-grid">
       {% for person in consultants %}
-      <article class="team-card">
-        <a href="/مشاور/{{ person.slug }}">
-          {% if person.image_url %}<img src="{{ person.image_url }}" alt="{{ person.name }}">{% endif %}
-          <h3>{{ person.name }}</h3>
-          {% if person.role %}<p>{{ person.role }}</p>{% endif %}
+      <article class="consultant-card reveal">
+        <a href="/مشاور/{{ person.slug }}" class="consultant-card__link">
+          <div class="consultant-card__media">
+            {% if person.image_url %}
+            <img src="{{ person.image_url }}" alt="{{ person.name }}" loading="lazy" width="320" height="360">
+            {% endif %}
+          </div>
+          <div class="consultant-card__body">
+            <h2>{{ person.name }}</h2>
+            {% if person.role %}<p class="consultant-card__role">{{ person.role }}</p>{% endif %}
+            <span class="consultant-card__cta">مشاهده سوابق</span>
+          </div>
         </a>
       </article>
       {% endfor %}

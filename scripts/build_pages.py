@@ -74,7 +74,8 @@ def main() -> None:
     client = TestClient(app)
 
     write_page(client, "/", DOCS / "index.html")
-    write_page(client, "/مشاوران", DOCS / "consultants" / "index.html")
+    write_page(client, "/مشاوران", DOCS / "مشاوران" / "index.html")
+    write_page(client, "/consultants", DOCS / "consultants" / "index.html")
     write_page(client, "/دپارتمان‌ها", DOCS / "departments" / "index.html")
     write_page(client, "/فرم-نوبت-دهی", DOCS / "فرم-نوبت-دهی" / "index.html")
     write_page(client, "/درباره-ما", DOCS / "درباره-ما" / "index.html")
