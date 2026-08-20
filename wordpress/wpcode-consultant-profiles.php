@@ -16,8 +16,8 @@ if (!defined('ABSPATH')) {
 }
 
 final class Delsa_Consultant_Profiles {
-  const TRANSIENT = 'delsa_consultant_profile_ids_v14';
-  const VERSION = '2.3.4';
+  const TRANSIENT = 'delsa_consultant_profile_ids_v15';
+  const VERSION = '2.3.5';
 
   /**
    * ۵ مشاور اصلی — slug انگلیسی (CPT /consultant/…)
@@ -966,7 +966,9 @@ final class Delsa_Consultant_Profiles {
     }
 
     $role_html = $role !== ''
-      ? '<p class="delsa-cp__role">' . esc_html($role) . '</p>'
+      ? '<p class="delsa-cp__role" style="color:#ffffff !important;opacity:1 !important;font-size:1.2rem !important;font-weight:700 !important;line-height:1.7 !important;margin:0 0 .85rem !important;text-shadow:0 1px 3px rgba(0,0,0,.35);">'
+        . esc_html($role)
+        . '</p>'
       : '';
 
     $top = '<div class="delsa-cp">'
