@@ -139,10 +139,10 @@ CONSULTANTS = [
     {
         "slug": 'elham-mesbahi',
         "name": 'الهام مصباحی',
-        "role": 'طرحواره\u200cدرمانگر',
+        "role": 'مشاور فردی، زوج‌درمانگر',
         "department_slug": 'روان-درمانی',
         "sort_order": 1,
-        "image_url": '/static/img/consultants/elham-mesbahi.png',
+        "image_url": '/static/img/consultants/elham-mesbahi.jpeg',
         "bio_html": """
 <h2>سوابق تحصیلی و حرفه‌ای</h2>
 <ul>
@@ -154,10 +154,10 @@ CONSULTANTS = [
     {
         "slug": 'hasan-akbarzadeh',
         "name": 'حسن اکبرزاده',
-        "role": 'مسئول گروه تخصصی مشاوره دلسا',
+        "role": 'مشاور خانواده و ازدواج',
         "department_slug": 'روان-درمانی',
         "sort_order": 2,
-        "image_url": '/static/img/consultants/hassan-akbarzadeh.png',
+        "image_url": '/static/img/consultants/hasan-akbarzadeh.jpg',
         "bio_html": """
 <h2>سوابق تحصیلی و حرفه‌ای</h2>
 <ul>
@@ -202,10 +202,10 @@ CONSULTANTS = [
     {
         "slug": 'robab-hamedi',
         "name": 'دکتر رباب حامدی',
-        "role": 'روان\u200cشناس',
+        "role": 'زوج‌درمانی و اختلالات اضطرابی',
         "department_slug": 'زوج-و-خانواده',
         "sort_order": 3,
-        "image_url": '/static/img/consultants/robab-hamedi.png',
+        "image_url": '/static/img/consultants/robab-hamedi.jpg',
         "bio_html": """
 <h2>سوابق تحصیلی و حرفه‌ای</h2>
 <ul>
@@ -253,10 +253,10 @@ CONSULTANTS = [
     {
         "slug": 'maryam-salehi',
         "name": 'مریم صالحی',
-        "role": 'روان\u200cشناس سلامت',
+        "role": 'روان‌شناس سلامت',
         "department_slug": 'روان-درمانی',
         "sort_order": 4,
-        "image_url": '/static/img/consultants/maryam-salehi.png',
+        "image_url": '/static/img/consultants/maryam-salehi.jpg',
         "bio_html": """
 <h2>سوابق تحصیلی و حرفه‌ای</h2>
 <ul>
@@ -303,11 +303,32 @@ CONSULTANTS = [
     {
         "slug": 'fatemeh-hosseinpour',
         "name": 'فاطمه حسین\u200cپور',
-        "role": 'روان\u200cشناس',
+        "role": 'مشاور کودک و نوجوان',
         "department_slug": 'کودک-و-نوجوان',
         "sort_order": 5,
-        "image_url": '/static/img/consultants/fatemeh-hosseinpour.png',
-        "bio_html": "",
+        "image_url": '/static/img/consultants/fatemeh-hosseinpour.jpeg',
+        "bio_html": """
+<h2>درباره مشاور</h2>
+<p>فاطمه حسین‌پور، مشاور کودک و نوجوان در کلینیک دلسا است. تمرکز او بر همراهی با کودکان، نوجوانان و والدین در مسیر رشد سالم هیجانی، رفتاری و ارتباطی است؛ در فضایی امن، محترمانه و متناسب با سن.</p>
+<h2>حوزه تخصصی</h2>
+<ul>
+<li>مشاوره کودک و نوجوان</li>
+<li>مشاوره والدین و فرزندپروری</li>
+<li>مشکلات رفتاری و هیجانی</li>
+<li>اضطراب، استرس تحصیلی و سازگاری</li>
+<li>مهارت‌های ارتباطی و تنظیم هیجان</li>
+</ul>
+<h2>خدمات</h2>
+<ul>
+<li>جلسات مشاوره فردی کودک و نوجوان</li>
+<li>جلسات مشاوره والدین</li>
+<li>ارزیابی و مداخله برای مشکلات رفتاری</li>
+<li>کمک به اضطراب، ترس‌ها و فشار مدرسه</li>
+<li>تقویت مهارت‌های زندگی و ارتباط مؤثر در خانواده</li>
+</ul>
+<h2>رویکرد کاری</h2>
+<p>رویکرد جلسات متناسب با سن کودک یا نوجوان طراحی می‌شود و والدین نیز در مسیر درمان و رشد، همراه نگه داشته می‌شوند. هدف، ایجاد احساس امنیت، فهمیدن نیازها و ساختن مهارت‌های پایدار برای خانه و مدرسه است.</p>
+""",
     },
 ]
 
