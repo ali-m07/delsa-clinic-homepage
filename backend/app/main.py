@@ -10,12 +10,17 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.admin_views import setup_admin
 from app.config import get_settings
 from app.database import engine, get_session, init_db
-from app.models import AppointmentRequest, Article, Consultant, Department, Page, SiteSettings
+from app.models import AppointmentFormField, AppointmentRequest, Article, Consultant, Department, Page, SiteSettings
 from app.uploads import ensure_upload_dir, save_upload
+
+import json as _json
+from datetime import datetime as _dt
 
 BASE_DIR = Path(__file__).resolve().parent
 UPLOAD_DIR = BASE_DIR.parent / "uploads"
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+templates.env.filters["from_json"] = lambda s: _json.loads(s) if s else []
+templates.env.globals["now"] = _dt.utcnow
 
 app = FastAPI(title="Delsa Clinic", docs_url="/api/docs", redoc_url=None)
 settings = get_settings()
@@ -48,9 +53,8 @@ def site_context(session: Session, request: Request) -> dict:
     return {
         "request": request,
         "departments": departments,
-        "site_url": settings["site_url"],
-        "book_url": "/فرم-نوبت-دهی",
         "settings": get_site_settings(session),
+        "book_url": "/فرم-نوبت-دهی",
     }
 
 
@@ -147,50 +151,61 @@ def about_page(request: Request, session: Session = Depends(get_session)):
 def appointment_form(request: Request, session: Session = Depends(get_session)):
     ctx = site_context(session, request)
     ctx["success"] = request.query_params.get("success") == "1"
+    ctx["dynamic_fields"] = session.exec(
+        select(AppointmentFormField)
+        .where(AppointmentFormField.is_active == True)
+        .order_by(AppointmentFormField.sort_order)
+    ).all()
     return templates.TemplateResponse("pages/appointment.html", ctx)
 
 
 @app.post("/فرم-نوبت-دهی", response_class=HTMLResponse)
 @app.post("/appointment", response_class=HTMLResponse)
-def appointment_submit(
-    request: Request,
-    session: Session = Depends(get_session),
-    full_name: str = Form(...),
-    phone: str = Form(...),
-    email: str = Form(""),
-    department: str = Form(""),
-    province: str = Form(""),
-    city: str = Form(""),
-    preferred_date: str = Form(""),
-    session_type: str = Form(""),
-    notes: str = Form(""),
-):
-    if not full_name.strip() or not phone.strip():
+async def appointment_submit(request: Request, session: Session = Depends(get_session)):
+    form_data = await request.form()
+
+    full_name = form_data.get("full_name", "").strip()
+    phone = form_data.get("phone", "").strip()
+    email = form_data.get("email", "").strip()
+    department = form_data.get("department", "").strip()
+    province = form_data.get("province", "").strip()
+    city = form_data.get("city", "").strip()
+    preferred_date = form_data.get("preferred_date", "").strip()
+    session_type = form_data.get("session_type", "").strip()
+    notes = form_data.get("notes", "").strip()
+
+    if not full_name or not phone:
+        dynamic_fields = session.exec(
+            select(AppointmentFormField)
+            .where(AppointmentFormField.is_active == True)
+            .order_by(AppointmentFormField.sort_order)
+        ).all()
         ctx = site_context(session, request)
-        ctx["error"] = "نام و شماره تماس الزامی است."
-        ctx["form"] = {
-            "full_name": full_name,
-            "phone": phone,
-            "email": email,
-            "department": department,
-            "province": province,
-            "city": city,
-            "preferred_date": preferred_date,
-            "session_type": session_type,
-            "notes": notes,
-        }
+        ctx.update({
+            "error": "نام و شماره تماس الزامی است.",
+            "form": dict(form_data),
+            "dynamic_fields": dynamic_fields,
+        })
         return templates.TemplateResponse("pages/appointment.html", ctx)
 
+    # Collect dynamic field values into JSON
+    import json as _json
+    dynamic_fields = session.exec(
+        select(AppointmentFormField).where(AppointmentFormField.is_active == True)
+    ).all()
+    extra = {f.label: form_data.get(f"field_{f.id}", "") for f in dynamic_fields}
+
     record = AppointmentRequest(
-        full_name=full_name.strip(),
-        phone=phone.strip(),
-        email=email.strip(),
-        department=department.strip(),
-        province=province.strip(),
-        city=city.strip(),
-        preferred_date=preferred_date.strip(),
-        session_type=session_type.strip(),
-        notes=notes.strip(),
+        full_name=full_name,
+        phone=phone,
+        email=email,
+        department=department,
+        province=province,
+        city=city,
+        preferred_date=preferred_date,
+        session_type=session_type,
+        notes=notes,
+        extra_data=_json.dumps(extra, ensure_ascii=False) if extra else "",
     )
     session.add(record)
     session.commit()

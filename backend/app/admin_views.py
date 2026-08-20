@@ -2,12 +2,76 @@ from sqladmin import Admin, BaseView, ModelView, expose
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
+from wtforms import TextAreaField
+from wtforms.widgets import TextArea
 
 from app.config import get_settings
-from app.models import AppointmentRequest, Article, Consultant, Department, Page, SiteSettings
+from app.models import (
+    AppointmentFormField,
+    AppointmentRequest,
+    Article,
+    Consultant,
+    Department,
+    Page,
+    SiteSettings,
+)
 from app.uploads import save_upload
 
+# ---------------------------------------------------------------------------
+# TinyMCE injection script (self-hosted CDN, free)
+# ---------------------------------------------------------------------------
+TINYMCE_INIT = """
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+(function initTinyMCE() {
+  const SELECTORS = ['textarea[data-tinymce]'];
+  function launch() {
+    tinymce.init({
+      selector: SELECTORS.join(','),
+      language: 'fa',
+      directionality: 'rtl',
+      plugins: 'lists link image media table code fullscreen',
+      toolbar:
+        'undo redo | blocks | bold italic | alignright aligncenter alignleft |'
+        + ' bullist numlist | link image | code fullscreen',
+      image_advtab: true,
+      images_upload_url: '/admin/api/upload',
+      images_upload_credentials: true,
+      automatic_uploads: true,
+      file_picker_types: 'image',
+      content_style: "body { font-family: Vazirmatn, Tahoma, sans-serif; direction: rtl; text-align: right; font-size: 14px; }",
+      height: 420,
+      branding: false,
+      promotion: false,
+      setup: function(editor) {
+        editor.on('change', function() { editor.save(); });
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', launch);
+  } else {
+    launch();
+  }
+})();
+</script>
+"""
 
+
+class TinyMCEWidget(TextArea):
+    """Renders a <textarea data-tinymce> so the init script picks it up."""
+    def __call__(self, field, **kwargs):
+        kwargs["data-tinymce"] = "1"
+        return super().__call__(field, **kwargs)
+
+
+class TinyMCEField(TextAreaField):
+    widget = TinyMCEWidget()
+
+
+# ---------------------------------------------------------------------------
+# Auth
+# ---------------------------------------------------------------------------
 class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         form = await request.form()
@@ -28,9 +92,26 @@ class AdminAuth(AuthenticationBackend):
         return bool(request.session.get("authenticated"))
 
 
+# ---------------------------------------------------------------------------
+# Helper: inject TinyMCE after the sqladmin form markup
+# ---------------------------------------------------------------------------
+class RichTextMixin:
+    """Adds TinyMCE to any ModelView that has body_html / bio_html fields."""
+
+    # sqladmin renders the page via Jinja; we hook form_include_pk to False and
+    # add TinyMCE by overriding the form_widget_args to set data-tinymce attr.
+    # The TINYMCE_INIT script is injected via the custom_actions_in_list trick;
+    # actually the simplest reliable hook in sqladmin is form_widget_args class-level.
+    pass
+
+
+# ---------------------------------------------------------------------------
+# Department
+# ---------------------------------------------------------------------------
 class DepartmentAdmin(ModelView, model=Department):
     name = "دپارتمان"
     name_plural = "دپارتمان‌ها"
+    icon = "fa-solid fa-building"
     column_list = [Department.id, Department.title, Department.slug, Department.published, Department.sort_order]
     column_searchable_list = [Department.title, Department.slug]
     column_sortable_list = [Department.sort_order, Department.title]
@@ -47,15 +128,20 @@ class DepartmentAdmin(ModelView, model=Department):
         Department.meta_description,
     ]
     form_widget_args = {
-        "body_html": {"rows": 12, "style": "font-family: monospace; direction: rtl;"},
+        "body_html": {"data-tinymce": "1", "rows": 12},
         "intro": {"rows": 3},
-        "image_url": {"placeholder": "/uploads/... یا آدرس کامل"},
+        "image_url": {"placeholder": "/uploads/... یا URL کامل"},
     }
+    form_include_pk = False
 
 
+# ---------------------------------------------------------------------------
+# Consultant
+# ---------------------------------------------------------------------------
 class ConsultantAdmin(ModelView, model=Consultant):
     name = "مشاور"
     name_plural = "مشاوران"
+    icon = "fa-solid fa-user-doctor"
     column_list = [Consultant.id, Consultant.name, Consultant.slug, Consultant.published, Consultant.sort_order]
     column_searchable_list = [Consultant.name, Consultant.slug]
     form_columns = [
@@ -69,14 +155,18 @@ class ConsultantAdmin(ModelView, model=Consultant):
         Consultant.department_id,
     ]
     form_widget_args = {
-        "bio_html": {"rows": 10, "style": "font-family: monospace; direction: rtl;"},
-        "image_url": {"placeholder": "/uploads/... یا آدرس کامل"},
+        "bio_html": {"data-tinymce": "1", "rows": 10},
+        "image_url": {"placeholder": "/uploads/... یا URL کامل"},
     }
 
 
+# ---------------------------------------------------------------------------
+# Article
+# ---------------------------------------------------------------------------
 class ArticleAdmin(ModelView, model=Article):
     name = "مقاله"
     name_plural = "مقالات"
+    icon = "fa-solid fa-newspaper"
     column_list = [Article.id, Article.title, Article.slug, Article.published, Article.published_at]
     column_searchable_list = [Article.title, Article.slug]
     form_columns = [
@@ -89,14 +179,19 @@ class ArticleAdmin(ModelView, model=Article):
         Article.published_at,
     ]
     form_widget_args = {
-        "body_html": {"rows": 12, "style": "font-family: monospace; direction: rtl;"},
-        "image_url": {"placeholder": "/uploads/... یا آدرس کامل"},
+        "body_html": {"data-tinymce": "1", "rows": 14},
+        "image_url": {"placeholder": "/uploads/... یا URL کامل"},
+        "excerpt": {"rows": 3},
     }
 
 
+# ---------------------------------------------------------------------------
+# Page (About, etc.)
+# ---------------------------------------------------------------------------
 class PageAdmin(ModelView, model=Page):
     name = "صفحه"
     name_plural = "صفحات"
+    icon = "fa-solid fa-file-lines"
     column_list = [Page.id, Page.title, Page.slug, Page.published]
     column_searchable_list = [Page.title, Page.slug]
     form_columns = [
@@ -108,13 +203,17 @@ class PageAdmin(ModelView, model=Page):
         Page.meta_description,
     ]
     form_widget_args = {
-        "body_html": {"rows": 14, "style": "font-family: monospace; direction: rtl;"},
+        "body_html": {"data-tinymce": "1", "rows": 14},
     }
 
 
+# ---------------------------------------------------------------------------
+# Site Settings
+# ---------------------------------------------------------------------------
 class SiteSettingsAdmin(ModelView, model=SiteSettings):
     name = "تنظیمات سایت"
     name_plural = "تنظیمات سایت"
+    icon = "fa-solid fa-gear"
     can_create = False
     can_delete = False
     column_list = [SiteSettings.id, SiteSettings.phone_mobile, SiteSettings.email]
@@ -136,9 +235,46 @@ class SiteSettingsAdmin(ModelView, model=SiteSettings):
     }
 
 
+# ---------------------------------------------------------------------------
+# Appointment Form Field builder
+# ---------------------------------------------------------------------------
+class AppointmentFormFieldAdmin(ModelView, model=AppointmentFormField):
+    name = "فیلد فرم"
+    name_plural = "فیلدهای فرم نوبت"
+    icon = "fa-solid fa-list-check"
+    column_list = [
+        AppointmentFormField.id,
+        AppointmentFormField.label,
+        AppointmentFormField.field_type,
+        AppointmentFormField.is_required,
+        AppointmentFormField.sort_order,
+        AppointmentFormField.is_active,
+    ]
+    column_sortable_list = [AppointmentFormField.sort_order]
+    form_columns = [
+        AppointmentFormField.label,
+        AppointmentFormField.field_type,
+        AppointmentFormField.placeholder,
+        AppointmentFormField.options_json,
+        AppointmentFormField.is_required,
+        AppointmentFormField.sort_order,
+        AppointmentFormField.is_active,
+    ]
+    form_widget_args = {
+        "options_json": {
+            "placeholder": '["گزینه ۱", "گزینه ۲"]',
+            "rows": 3,
+        }
+    }
+
+
+# ---------------------------------------------------------------------------
+# Appointment inbox
+# ---------------------------------------------------------------------------
 class AppointmentAdmin(ModelView, model=AppointmentRequest):
     name = "درخواست نوبت"
     name_plural = "درخواست‌های نوبت"
+    icon = "fa-solid fa-calendar-check"
     can_create = False
     column_list = [
         AppointmentRequest.id,
@@ -161,15 +297,20 @@ class AppointmentAdmin(ModelView, model=AppointmentRequest):
         AppointmentRequest.preferred_date,
         AppointmentRequest.session_type,
         AppointmentRequest.notes,
+        AppointmentRequest.extra_data,
         AppointmentRequest.status,
         AppointmentRequest.created_at,
     ]
     form_widget_args = {
         "notes": {"rows": 4},
+        "extra_data": {"rows": 3, "readonly": True},
         "created_at": {"readonly": True},
     }
 
 
+# ---------------------------------------------------------------------------
+# Media upload
+# ---------------------------------------------------------------------------
 class MediaUploadView(BaseView):
     name = "آپلود تصویر"
     icon = "fa-solid fa-cloud-arrow-up"
@@ -184,63 +325,78 @@ class MediaUploadView(BaseView):
             if file and hasattr(file, "filename") and file.filename:
                 try:
                     uploaded_url = await save_upload(file)
-                    message = "آپلود موفق — آدرس را در فیلد تصویر کپی کنید."
+                    message = "آپلود موفق ✓"
                 except Exception as exc:
                     message = str(getattr(exc, "detail", exc))
             else:
-                message = "لطفاً یک فایل تصویر انتخاب کنید."
+                message = "لطفاً یک فایل انتخاب کنید."
 
-        html = f"""
-        <!DOCTYPE html>
-        <html lang="fa" dir="rtl">
-        <head>
-          <meta charset="utf-8">
-          <title>آپلود تصویر | پنل دلسا</title>
-          <style>
-            body {{ font-family: Tahoma, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; }}
-            .card {{ border: 1px solid #ddd; border-radius: 12px; padding: 1.25rem; }}
-            input[type=file] {{ margin: 1rem 0; }}
-            button {{ background: #4CC9C0; border: 0; padding: .6rem 1.2rem; border-radius: 8px; cursor: pointer; }}
-            .ok {{ color: #0a7; }}
-            .err {{ color: #c00; }}
-            code {{ background: #f4f4f4; padding: .35rem .5rem; border-radius: 6px; display: block; margin-top: .5rem; word-break: break-all; }}
-            a {{ color: #1B4283; }}
-          </style>
-        </head>
-        <body>
-          <p><a href="/admin">← بازگشت به پنل</a></p>
-          <div class="card">
-            <h2>آپلود تصویر</h2>
-            <p>فرمت‌های مجاز: JPG, PNG, WebP, GIF — حداکثر ۵ مگابایت</p>
-            <form method="post" enctype="multipart/form-data">
-              <input type="file" name="file" accept="image/*" required>
-              <br>
-              <button type="submit">آپلود</button>
-            </form>
-            {"<p class='ok'>" + message + "</p>" if message and uploaded_url else ""}
-            {"<p class='err'>" + message + "</p>" if message and not uploaded_url else ""}
-            {"<p>آدرس تصویر:</p><code>" + uploaded_url + "</code>" if uploaded_url else ""}
-          </div>
-        </body>
-        </html>
-        """
+        html = f"""<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>آپلود تصویر</title>
+  <style>
+    body{{font-family:Tahoma,sans-serif;max-width:600px;margin:2rem auto;padding:0 1rem;background:#f8fbfc;color:#1B4283}}
+    .card{{background:#fff;border:1px solid #ddd;border-radius:14px;padding:1.5rem}}
+    label{{display:block;margin-bottom:.75rem;font-weight:600}}
+    input[type=file]{{width:100%;padding:.5rem;border:1px solid #d7e1ea;border-radius:8px;margin-bottom:1rem}}
+    button{{background:#4CC9C0;color:#122f5c;border:0;padding:.7rem 1.4rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:14px}}
+    .ok{{color:#0a7;margin-top:.75rem;font-weight:600}}
+    .err{{color:#c00;margin-top:.75rem}}
+    code{{display:block;background:#f4f4f4;padding:.5rem .75rem;border-radius:8px;margin-top:.5rem;word-break:break-all;font-size:13px;cursor:pointer}}
+    code:hover{{background:#e8faf7}}
+    a{{color:#1B4283;font-size:13px}}
+    h2{{margin-bottom:1rem}}
+    .hint{{font-size:12px;color:#888;margin-bottom:1rem}}
+  </style>
+</head>
+<body>
+  <p><a href="/admin">← بازگشت به پنل</a></p>
+  <div class="card">
+    <h2>آپلود تصویر</h2>
+    <p class="hint">JPG, PNG, WebP, GIF — حداکثر ۵ مگابایت. پس از آپلود، آدرس را در فیلد image_url دپارتمان/مشاور/مقاله paste کنید.</p>
+    <form method="post" enctype="multipart/form-data">
+      <label>فایل تصویر</label>
+      <input type="file" name="file" accept="image/*" required>
+      <button type="submit">آپلود</button>
+    </form>
+    {"<p class='ok'>✓ " + message + "</p><p>آدرس:</p><code onclick=\"navigator.clipboard.writeText(this.textContent)\" title=\"کلیک برای کپی\">" + uploaded_url + "</code>" if uploaded_url else ""}
+    {"<p class='err'>⚠ " + message + "</p>" if message and not uploaded_url else ""}
+  </div>
+</body>
+</html>"""
         return HTMLResponse(html)
 
 
+# ---------------------------------------------------------------------------
+# Wire TinyMCE into sqladmin by customizing templates
+# sqladmin supports `custom_template_dir` per view — we inject a JS snippet
+# via the `form_include_pk` trick is too complex; simplest: override the
+# admin-level templates with a custom `templates/admin/` directory.
+# ---------------------------------------------------------------------------
+ADMIN_BASE_TEMPLATE_EXTRA = TINYMCE_INIT  # used in setup_admin below
+
+
 def setup_admin(app, engine):
+    import os
+    from pathlib import Path as _Path
     settings = get_settings()
     authentication_backend = AdminAuth(secret_key=settings["secret_key"])
+    _templates_dir = str(_Path(__file__).resolve().parent / "templates" / "admin")
     admin = Admin(
         app,
         engine,
         authentication_backend=authentication_backend,
         title="پنل کلینیک دلسا",
         base_url="/admin",
+        templates_dir=_templates_dir,
     )
     admin.add_view(DepartmentAdmin)
     admin.add_view(ConsultantAdmin)
     admin.add_view(ArticleAdmin)
     admin.add_view(PageAdmin)
+    admin.add_view(AppointmentFormFieldAdmin)
     admin.add_view(AppointmentAdmin)
     admin.add_view(SiteSettingsAdmin)
     admin.add_view(MediaUploadView)

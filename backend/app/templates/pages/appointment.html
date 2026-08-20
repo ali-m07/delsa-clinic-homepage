@@ -14,24 +14,25 @@
   <div class="container container--narrow">
     {% if success %}
     <div class="alert alert--success">
-      درخواست شما ثبت شد. به‌زودی با شما تماس می‌گیریم.
+      ✓ درخواست شما با موفقیت ثبت شد. به‌زودی با شما تماس می‌گیریم.
     </div>
-    {% endif %}
+    {% else %}
+
     {% if error %}
-    <div class="alert alert--error">{{ error }}</div>
+    <div class="alert alert--error">⚠ {{ error }}</div>
     {% endif %}
 
-    {% if not success %}
-    <form class="appointment-form card" method="post" action="{{ book_url }}">
+    <form class="appointment-form card" method="post" action="/فرم-نوبت-دهی">
+      {# ── ثابت ──────────────────────────────────────────────── #}
       <div class="form-row">
-        <label for="full_name">نام و نام خانوادگی *</label>
+        <label for="full_name">نام و نام خانوادگی <span class="req">*</span></label>
         <input class="form-input" type="text" id="full_name" name="full_name" required
-               value="{{ form.full_name if form else '' }}">
+               value="{{ form.full_name if form else '' }}" placeholder="مثلاً: علی محمدی">
       </div>
       <div class="form-row">
-        <label for="phone">شماره تماس *</label>
+        <label for="phone">شماره تماس <span class="req">*</span></label>
         <input class="form-input" type="tel" id="phone" name="phone" required dir="ltr"
-               value="{{ form.phone if form else '' }}">
+               value="{{ form.phone if form else '' }}" placeholder="09xxxxxxxxx">
       </div>
       <div class="form-row">
         <label for="email">ایمیل</label>
@@ -44,7 +45,7 @@
           <option value="">انتخاب کنید</option>
           {% for dept in departments %}
           <option value="{{ dept.nav_label or dept.title }}"
-            {% if form and form.department == (dept.nav_label or dept.title) %}selected{% endif %}>
+            {% if form and form.get('department') == (dept.nav_label or dept.title) %}selected{% endif %}>
             {{ dept.nav_label or dept.title }}
           </option>
           {% endfor %}
@@ -73,16 +74,53 @@
         <select class="form-input" id="session_type" name="session_type">
           <option value="">انتخاب کنید</option>
           {% for opt in ['حضوری', 'تلفنی', 'آنلاین'] %}
-          <option value="{{ opt }}" {% if form and form.session_type == opt %}selected{% endif %}>{{ opt }}</option>
+          <option value="{{ opt }}" {% if form and form.get('session_type') == opt %}selected{% endif %}>{{ opt }}</option>
           {% endfor %}
         </select>
       </div>
       <div class="form-row">
         <label for="notes">توضیحات</label>
-        <textarea class="form-input" id="notes" name="notes" rows="4">{{ form.notes if form else '' }}</textarea>
+        <textarea class="form-input" id="notes" name="notes" rows="3">{{ form.notes if form else '' }}</textarea>
       </div>
+
+      {# ── فیلدهای Dynamic (اضافه‌شده از ادمین) ──────────────── #}
+      {% if dynamic_fields %}
+      <div class="form-divider">فیلدهای تکمیلی</div>
+      {% for field in dynamic_fields %}
+      <div class="form-row">
+        <label for="field_{{ field.id }}">
+          {{ field.label }}{% if field.is_required %} <span class="req">*</span>{% endif %}
+        </label>
+
+        {% if field.field_type == 'textarea' %}
+        <textarea class="form-input" id="field_{{ field.id }}" name="field_{{ field.id }}"
+                  {% if field.is_required %}required{% endif %}
+                  placeholder="{{ field.placeholder }}" rows="3">{{ (form or {}).get('field_' ~ field.id, '') }}</textarea>
+
+        {% elif field.field_type == 'select' %}
+        <select class="form-input" id="field_{{ field.id }}" name="field_{{ field.id }}"
+                {% if field.is_required %}required{% endif %}>
+          <option value="">انتخاب کنید</option>
+          {% for opt in field.options_json | from_json %}
+          <option value="{{ opt }}" {% if (form or {}).get('field_' ~ field.id) == opt %}selected{% endif %}>{{ opt }}</option>
+          {% endfor %}
+        </select>
+
+        {% else %}
+        <input class="form-input" type="{{ field.field_type }}"
+               id="field_{{ field.id }}" name="field_{{ field.id }}"
+               {% if field.is_required %}required{% endif %}
+               placeholder="{{ field.placeholder }}"
+               value="{{ (form or {}).get('field_' ~ field.id, '') }}"
+               {% if field.field_type == 'tel' or field.field_type == 'email' %}dir="ltr"{% endif %}>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% endif %}
+
       <button class="btn btn--primary btn--block" type="submit">ارسال درخواست</button>
     </form>
+
     {% endif %}
 
     <p class="form-help">

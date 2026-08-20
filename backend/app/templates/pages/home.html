@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 {% block title %}کلینیک دلسا | مشاوره و روان‌درمانی{% endblock %}
 {% block content %}
-<section class="home-hero" style="background-image: url('{{ settings.hero_image_url }}')">
-  <div class="home-hero__overlay"></div>
-  <div class="container home-hero__inner">
-    <p class="hero__label">کلینیک تخصصی</p>
-    <h1>به کلینیک دلسا خوش آمدید</h1>
-    <p class="hero__lead">همراه شما در مسیر سلامت روان</p>
-    <div class="home-hero__actions">
-      <a class="btn btn--primary" href="{{ book_url }}">درخواست وقت ملاقات</a>
-      <a class="btn btn--outline" href="tel:{{ settings.phone_mobile|replace('-','')|replace('۰','0') }}">تماس مستقیم</a>
+
+<!-- HERO -->
+<section id="hero" class="hero-section hero-bg" style="background-image:url('{{ settings.hero_image_url }}')">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-main">
+      <div class="hero-main__content">
+        <h1>به کلینیک دلسا خوش آمدید</h1>
+        <p>همراه شما در مسیر سلامت روان</p>
+        <div class="hero-cta-row">
+          <a href="{{ book_url }}" class="btn-primary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            درخواست وقت ملاقات
+          </a>
+          <a href="tel:{{ settings.phone_mobile }}" class="btn-outline">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            تماس مستقیم
+          </a>
+        </div>
+        <a href="#services" class="hero-explore-btn">مشاهده خدمات کلینیک ↓</a>
+      </div>
     </div>
-    <ul class="home-trust">
+    <ul class="hero-trust">
       <li><strong>+۱۵ سال</strong><span>سابقه در سلامت روان</span></li>
       <li><strong>{{ departments|length }} دپارتمان</strong><span>تیم چندتخصصی</span></li>
       <li><strong>پشتیبانی سریع</strong><span>هماهنگی در اسرع وقت</span></li>
@@ -19,37 +31,52 @@
   </div>
 </section>
 
-<section class="section" id="services">
+<!-- SERVICES -->
+<section id="services" class="section bg-sand">
   <div class="container">
-    <p class="section__label">خدمات تخصصی</p>
-    <h2 class="section__title">خدمات اصلی کلینیک</h2>
-    <div class="dept-grid">
-      {% for dept in departments[:5] %}
-      <a class="dept-card dept-card--service" href="/دپارتمان-{{ dept.slug }}">
-        <span class="dept-card__num">{% set nums = ['۰۱','۰۲','۰۳','۰۴','۰۵','۰۶','۰۷'] %}{{ nums[loop.index0] }}</span>
+    <div class="section-head" data-aos="fade-up">
+      <p class="section-label">خدمات تخصصی</p>
+      <h2>خدمات اصلی کلینیک</h2>
+    </div>
+    <div class="services-grid" data-aos="fade-up" data-aos-delay="80">
+      {% for dept in departments %}
+      <a href="/دپارتمان-{{ dept.slug }}" class="service-card">
+        <span class="service-card__num">{{ '%02d'|format(loop.index) | replace('01','۰۱') | replace('02','۰۲') | replace('03','۰۳') | replace('04','۰۴') | replace('05','۰۵') | replace('06','۰۶') }}</span>
         <h3>{{ dept.nav_label or dept.title }}</h3>
-        <p>{{ dept.intro[:100] }}{% if dept.intro|length > 100 %}…{% endif %}</p>
-        <span class="dept-card__link">مشاهده دپارتمان</span>
+        <p>{{ dept.intro[:90] }}{% if dept.intro|length > 90 %}…{% endif %}</p>
+        <span class="service-card__cta">مشاهده دپارتمان ←</span>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="section section--white">
+<!-- WHY DELSA -->
+<section id="why-delsa" class="section bg-white">
   <div class="container">
-    <p class="section__label section__label--center">چرا دلسا</p>
-    <h2 class="section__title section__title--center">اعتماد، تخصص و دسترسی آسان</h2>
+    <div class="section-head section-head--center" data-aos="fade-up">
+      <p class="section-label">چرا دلسا</p>
+      <h2>اعتماد، تخصص و دسترسی آسان</h2>
+    </div>
     <div class="why-grid">
-      <div class="why-card">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="why-card__icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
+        </div>
         <h3>تیم تخصصی و با تجربه</h3>
         <p>روان‌شناسان و روان‌پزشکان مجرب با رویکردی علمی و انسانی</p>
       </div>
-      <div class="why-card">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="60">
+        <div class="why-card__icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5"/></svg>
+        </div>
         <h3>نوبت‌دهی آنلاین و پشتیبانی سریع</h3>
         <p>ثبت درخواست آنلاین و هماهنگی سریع — پاسخگویی در اسرع وقت</p>
       </div>
-      <div class="why-card">
+      <div class="why-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="why-card__icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+        </div>
         <h3>خدمات حضوری، تلفنی و آنلاین</h3>
         <p>انتخاب روش مشاوره متناسب با شرایط و نیاز شما</p>
       </div>
@@ -57,75 +84,99 @@
   </div>
 </section>
 
-<div class="testimonial-band">
+<!-- TESTIMONIAL -->
+<div class="testimonial-band" data-aos="fade-up">
   <div class="container">
-    <blockquote>
+    <blockquote class="testimonial-quote">
       <p>«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
       <cite>— مراجع کلینیک دلسا</cite>
     </blockquote>
   </div>
 </div>
 
-<section class="section">
+<!-- HOW IT WORKS -->
+<section id="how-it-works" class="section bg-sand">
   <div class="container">
-    <p class="section__label section__label--center">مسیر دریافت خدمت</p>
-    <h2 class="section__title section__title--center">چطور کار می‌کند؟</h2>
+    <div class="section-head section-head--center" data-aos="fade-up">
+      <p class="section-label">مسیر دریافت خدمت</p>
+      <h2>چطور کار می‌کند؟</h2>
+      <p class="section-sub">سه قدم ساده تا شروع همراهی تخصصی</p>
+    </div>
     <div class="steps-grid">
-      <div class="step-card">
-        <span class="step-card__num">۱</span>
+      <div class="step-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="step-card__num">۱</div>
         <h3>درخواست وقت</h3>
         <p>فرم آنلاین را پر کنید یا تماس بگیرید</p>
-        <a href="tel:{{ settings.phone_mobile }}">{{ settings.phone_mobile }}</a>
+        <a href="tel:{{ settings.phone_mobile }}" class="dir-ltr">{{ settings.phone_mobile }}</a>
       </div>
-      <div class="step-card">
-        <span class="step-card__num">۲</span>
+      <div class="step-card" data-aos="fade-up" data-aos-delay="70">
+        <div class="step-card__num">۲</div>
         <h3>هماهنگی جلسه</h3>
-        <p>تیم پذیرش با شما تماس می‌گیرد و زمان مناسب را هماهنگ می‌کند</p>
+        <p>تیم پذیرش با شما تماس می‌گیرد و زمان و دپارتمان مناسب را هماهنگ می‌کند</p>
       </div>
-      <div class="step-card">
-        <span class="step-card__num">۳</span>
+      <div class="step-card" data-aos="fade-up" data-aos-delay="140">
+        <div class="step-card__num">۳</div>
         <h3>شروع جلسات</h3>
-        <p>مشاوره حضوری، تلفنی یا آنلاین — متناسب با نیاز شما</p>
+        <p>مشاوره حضوری، تلفنی یا آنلاین — متناسب با نیاز و شرایط شما</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--white">
+<!-- FAQ -->
+<section id="faq" class="section bg-white">
   <div class="container container--narrow">
-    <p class="section__label section__label--center">سوالات متداول</p>
-    <h2 class="section__title section__title--center">پرسش‌های رایج</h2>
-    <div class="faq-list">
+    <div class="section-head section-head--center" data-aos="fade-up">
+      <p class="section-label">سوالات متداول</p>
+      <h2>پرسش‌های رایج</h2>
+    </div>
+    <div class="faq-list" data-aos="fade-up">
       <details class="faq-item">
         <summary>اولین جلسه چطور برگزار می‌شود؟</summary>
-        <p>در جلسه اول، مشاور با شما گفت‌وگو می‌کند تا نیازتان را بشناسد و مسیر درمان را توضیح دهد. فضای کلینیک آرام، محرمانه و بدون قضاوت است.</p>
+        <p>در جلسه اول، مشاور یا درمانگر با شما گفت‌وگو می‌کند تا نیازتان را بشناسد، تاریخچه را مرور کند و مسیر درمان را توضیح دهد. فضای کلینیک آرام، محرمانه و بدون قضاوت است.</p>
       </details>
       <details class="faq-item">
         <summary>محرمانگی اطلاعات چگونه حفظ می‌شود؟</summary>
-        <p>تمام اطلاعات شما طبق اصول حرفه‌ای روان‌شناسی محرمانه باقی می‌ماند.</p>
+        <p>تمام اطلاعات شما طبق اصول حرفه‌ای روان‌شناسی محرمانه باقی می‌ماند. جزئیات جلسات بدون رضایت شما با شخص ثالث به اشتراک گذاشته نمی‌شود.</p>
       </details>
       <details class="faq-item">
         <summary>مشاوره آنلاین دارید یا فقط حضوری؟</summary>
-        <p>هر سه روش حضوری، تلفنی و آنلاین در دسترس است. هنگام هماهنگی نوبت، روش مناسب را انتخاب می‌کنید.</p>
+        <p>هر سه روش حضوری، تلفنی و آنلاین در دسترس است. هنگام هماهنگی نوبت، روشی را انتخاب می‌کنید که برایتان راحت‌تر باشد.</p>
       </details>
     </div>
   </div>
 </section>
 
 {% if articles %}
-<section class="section">
+<!-- BLOG PREVIEW -->
+<section class="section bg-sand">
   <div class="container">
-    <h2 class="section__title">آخرین مقالات</h2>
+    <div class="section-head section-head--between">
+      <div>
+        <p class="section-label">وبلاگ</p>
+        <h2>آخرین مقالات</h2>
+      </div>
+      <a href="/blog" class="btn-link">همه مقالات ←</a>
+    </div>
     <div class="dept-grid">
       {% for article in articles %}
       <a class="dept-card" href="/blog/{{ article.slug }}">
+        {% if article.image_url %}
+        <img src="{{ article.image_url }}" alt="{{ article.title }}" loading="lazy">
+        {% endif %}
         <h3>{{ article.title }}</h3>
-        <p>{{ article.excerpt[:120] }}{% if article.excerpt|length > 120 %}…{% endif %}</p>
+        <p>{{ article.excerpt[:130] }}{% if article.excerpt|length > 130 %}…{% endif %}</p>
       </a>
       {% endfor %}
     </div>
-    <p class="text-center" style="margin-top:1rem"><a href="/blog">همه مقالات ←</a></p>
   </div>
 </section>
 {% endif %}
+
+<!-- Mobile CTA -->
+<div id="mobile-cta-bar" class="mobile-cta-bar">
+  <a href="tel:{{ settings.phone_mobile }}" class="mobile-cta-bar__call">تماس</a>
+  <a href="{{ book_url }}" class="mobile-cta-bar__book">درخواست وقت</a>
+</div>
+
 {% endblock %}

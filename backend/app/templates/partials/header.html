@@ -1,54 +1,59 @@
-<header id="delsa-site-header" class="site-header">
-  <div class="delsa-h__wrap">
-    <div class="delsa-h__bar">
-      <a class="delsa-h__logo" href="/">
-        <img src="{{ settings.logo_url }}" alt="کلینیک دلسا" width="40" height="40">
-        <span>
-          <span class="delsa-h__title">کلینیک دلسا</span>
-          <span class="delsa-h__tag">مشاوره و روان‌درمانی</span>
-        </span>
-      </a>
-      <nav class="delsa-h__nav" aria-label="منوی اصلی">
-        <a href="/">خانه</a>
-        <a href="/درباره-ما">درباره ما</a>
-        <div class="delsa-h__drop">
-          <button type="button">دپارتمان‌ها ▾</button>
-          <div class="delsa-h__menu">
-            {% for dept in departments %}
-            <a href="/دپارتمان-{{ dept.slug }}">{{ dept.nav_label or dept.title }}</a>
-            {% endfor %}
-          </div>
+<!-- ─── HEADER ─────────────────────────────────────────── -->
+<header id="site-header" class="site-header">
+  <div class="hdr-wrap">
+    <a class="hdr-logo" href="/">
+      <img src="{{ settings.logo_url }}" alt="کلینیک دلسا" width="40" height="40" loading="eager">
+      <span>
+        <span class="hdr-logo__name">کلینیک دلسا</span>
+        <span class="hdr-logo__tag">مشاوره و روان‌درمانی</span>
+      </span>
+    </a>
+
+    <nav class="hdr-nav" aria-label="منوی اصلی">
+      <a href="/" class="hdr-nav__link">خانه</a>
+      <a href="/درباره-ما" class="hdr-nav__link">درباره ما</a>
+      <div class="nav-dropdown">
+        <button class="hdr-nav__link hdr-nav__drop-btn" type="button">دپارتمان‌ها
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          {% for dept in departments %}
+          <a href="/دپارتمان-{{ dept.slug }}" role="menuitem">{{ dept.nav_label or dept.title }}</a>
+          {% endfor %}
         </div>
-        <a href="/مشاوران">مشاوران</a>
-        <a href="/blog">وبلاگ</a>
-      </nav>
-      <div class="delsa-h__actions">
-        <a class="delsa-h__cta" href="{{ book_url }}">درخواست وقت ملاقات</a>
-        <button class="delsa-h__burger" type="button" aria-label="منو" data-sidebar-open>☰</button>
       </div>
+      <a href="/مشاوران" class="hdr-nav__link">مشاوران</a>
+      <a href="/blog" class="hdr-nav__link">وبلاگ</a>
+    </nav>
+
+    <div class="hdr-actions">
+      <a href="{{ book_url }}" class="hdr-cta">درخواست وقت ملاقات</a>
+      <button class="hdr-burger" id="sidebar-open" type="button" aria-label="منوی موبایل" aria-expanded="false">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
 </header>
-<div id="delsa-sidebar-backdrop" data-sidebar-backdrop></div>
-<aside id="delsa-sidebar" aria-label="منوی موبایل">
-  <div class="delsa-s__head">
-    <div class="delsa-s__row">
-      <a class="delsa-s__brand" href="/">
-        <img src="{{ settings.logo_url }}" alt="">
-        کلینیک دلسا
-      </a>
-      <button class="delsa-s__close" type="button" data-sidebar-close>✕</button>
-    </div>
+
+<!-- ─── MOBILE SIDEBAR ─────────────────────────────────── -->
+<div id="sidebar-backdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+<aside id="sidebar" class="sidebar-panel" aria-hidden="true" aria-label="منوی موبایل">
+  <div class="sidebar-head">
+    <a class="sidebar-brand" href="/">
+      <img src="{{ settings.logo_url }}" alt="" width="36" height="36">
+      کلینیک دلسا
+    </a>
+    <button id="sidebar-close" class="sidebar-close" type="button" aria-label="بستن منو">✕</button>
   </div>
-  <nav class="delsa-s__nav">
-    <a href="/">خانه</a>
-    <a href="/درباره-ما">درباره ما</a>
-    <span class="delsa-s__label">دپارتمان‌ها</span>
+  <nav class="sidebar-nav">
+    <a href="/" class="sidebar-link">خانه</a>
+    <a href="/درباره-ما" class="sidebar-link">درباره ما</a>
+    <span class="sidebar-section-label">دپارتمان‌ها</span>
     {% for dept in departments %}
-    <a class="sub" href="/دپارتمان-{{ dept.slug }}">{{ dept.nav_label or dept.title }}</a>
+    <a href="/دپارتمان-{{ dept.slug }}" class="sidebar-sublink">{{ dept.nav_label or dept.title }}</a>
     {% endfor %}
-    <a href="/مشاوران">مشاوران</a>
-    <a href="/blog">وبلاگ</a>
-    <a href="{{ book_url }}">درخواست وقت</a>
+    <a href="/مشاوران" class="sidebar-link">مشاوران</a>
+    <a href="/blog" class="sidebar-link">وبلاگ</a>
+    <a href="{{ book_url }}" class="sidebar-cta">درخواست وقت ملاقات</a>
   </nav>
 </aside>

@@ -33,3 +33,4 @@ docs/consultants/
 *.pem
 *.key
 credentials.json
+backend/test.db

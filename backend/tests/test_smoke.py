@@ -10,6 +10,7 @@ from sqlmodel import Session, select, text
 
 TABLES = (
     "appointmentrequest",
+    "appointmentformfield",
     "consultant",
     "department",
     "article",

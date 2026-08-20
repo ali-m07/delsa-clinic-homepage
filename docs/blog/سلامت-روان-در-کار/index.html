@@ -7,85 +7,93 @@
   <title>سلامت روان در محیط کار | کلینیک دلسا</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://ali-m07.github.io/delsa-clinic-homepage/static/css/site.css">
+  
 </head>
 <body>
-  <header id="delsa-site-header" class="site-header">
-  <div class="delsa-h__wrap">
-    <div class="delsa-h__bar">
-      <a class="delsa-h__logo" href="https://ali-m07.github.io/delsa-clinic-homepage/">
-        <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="کلینیک دلسا" width="40" height="40">
-        <span>
-          <span class="delsa-h__title">کلینیک دلسا</span>
-          <span class="delsa-h__tag">مشاوره و روان‌درمانی</span>
-        </span>
-      </a>
-      <nav class="delsa-h__nav" aria-label="منوی اصلی">
-        <a href="https://ali-m07.github.io/delsa-clinic-homepage/">خانه</a>
-        <a href="https://ali-m07.github.io/delsa-clinic-homepage/درباره-ما">درباره ما</a>
-        <div class="delsa-h__drop">
-          <button type="button">دپارتمان‌ها ▾</button>
-          <div class="delsa-h__menu">
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روان-درمانی">روان‌درمانی</a>
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-زوج-و-خانواده">زوج و خانواده</a>
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-کودک-و-نوجوان">کودک و نوجوان</a>
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روانپزشکی">روان‌پزشکی</a>
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-ترک-اعتیاد">ترک اعتیاد</a>
-            
-            <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-مشاوره-شغلی">مشاوره شغلی</a>
-            
-          </div>
+  <!-- ─── HEADER ─────────────────────────────────────────── -->
+<header id="site-header" class="site-header">
+  <div class="hdr-wrap">
+    <a class="hdr-logo" href="https://ali-m07.github.io/delsa-clinic-homepage/">
+      <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="کلینیک دلسا" width="40" height="40" loading="eager">
+      <span>
+        <span class="hdr-logo__name">کلینیک دلسا</span>
+        <span class="hdr-logo__tag">مشاوره و روان‌درمانی</span>
+      </span>
+    </a>
+
+    <nav class="hdr-nav" aria-label="منوی اصلی">
+      <a href="https://ali-m07.github.io/delsa-clinic-homepage/" class="hdr-nav__link">خانه</a>
+      <a href="https://ali-m07.github.io/delsa-clinic-homepage/درباره-ما" class="hdr-nav__link">درباره ما</a>
+      <div class="nav-dropdown">
+        <button class="hdr-nav__link hdr-nav__drop-btn" type="button">دپارتمان‌ها
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روان-درمانی" role="menuitem">روان‌درمانی</a>
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-زوج-و-خانواده" role="menuitem">زوج و خانواده</a>
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-کودک-و-نوجوان" role="menuitem">کودک و نوجوان</a>
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روانپزشکی" role="menuitem">روان‌پزشکی</a>
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-ترک-اعتیاد" role="menuitem">ترک اعتیاد</a>
+          
+          <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-مشاوره-شغلی" role="menuitem">مشاوره شغلی</a>
+          
         </div>
-        <a href="https://ali-m07.github.io/delsa-clinic-homepage/مشاوران">مشاوران</a>
-        <a href="https://ali-m07.github.io/delsa-clinic-homepage/blog">وبلاگ</a>
-      </nav>
-      <div class="delsa-h__actions">
-        <a class="delsa-h__cta" href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی">درخواست وقت ملاقات</a>
-        <button class="delsa-h__burger" type="button" aria-label="منو" data-sidebar-open>☰</button>
       </div>
+      <a href="https://ali-m07.github.io/delsa-clinic-homepage/مشاوران" class="hdr-nav__link">مشاوران</a>
+      <a href="https://ali-m07.github.io/delsa-clinic-homepage/blog" class="hdr-nav__link">وبلاگ</a>
+    </nav>
+
+    <div class="hdr-actions">
+      <a href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی" class="hdr-cta">درخواست وقت ملاقات</a>
+      <button class="hdr-burger" id="sidebar-open" type="button" aria-label="منوی موبایل" aria-expanded="false">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
     </div>
   </div>
 </header>
-<div id="delsa-sidebar-backdrop" data-sidebar-backdrop></div>
-<aside id="delsa-sidebar" aria-label="منوی موبایل">
-  <div class="delsa-s__head">
-    <div class="delsa-s__row">
-      <a class="delsa-s__brand" href="https://ali-m07.github.io/delsa-clinic-homepage/">
-        <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="">
-        کلینیک دلسا
-      </a>
-      <button class="delsa-s__close" type="button" data-sidebar-close>✕</button>
-    </div>
+
+<!-- ─── MOBILE SIDEBAR ─────────────────────────────────── -->
+<div id="sidebar-backdrop" class="sidebar-backdrop" aria-hidden="true"></div>
+<aside id="sidebar" class="sidebar-panel" aria-hidden="true" aria-label="منوی موبایل">
+  <div class="sidebar-head">
+    <a class="sidebar-brand" href="https://ali-m07.github.io/delsa-clinic-homepage/">
+      <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="" width="36" height="36">
+      کلینیک دلسا
+    </a>
+    <button id="sidebar-close" class="sidebar-close" type="button" aria-label="بستن منو">✕</button>
   </div>
-  <nav class="delsa-s__nav">
-    <a href="https://ali-m07.github.io/delsa-clinic-homepage/">خانه</a>
-    <a href="https://ali-m07.github.io/delsa-clinic-homepage/درباره-ما">درباره ما</a>
-    <span class="delsa-s__label">دپارتمان‌ها</span>
+  <nav class="sidebar-nav">
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/" class="sidebar-link">خانه</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/درباره-ما" class="sidebar-link">درباره ما</a>
+    <span class="sidebar-section-label">دپارتمان‌ها</span>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روان-درمانی">روان‌درمانی</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روان-درمانی" class="sidebar-sublink">روان‌درمانی</a>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-زوج-و-خانواده">زوج و خانواده</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-زوج-و-خانواده" class="sidebar-sublink">زوج و خانواده</a>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-کودک-و-نوجوان">کودک و نوجوان</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-کودک-و-نوجوان" class="sidebar-sublink">کودک و نوجوان</a>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روانپزشکی">روان‌پزشکی</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روانپزشکی" class="sidebar-sublink">روان‌پزشکی</a>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-ترک-اعتیاد">ترک اعتیاد</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-ترک-اعتیاد" class="sidebar-sublink">ترک اعتیاد</a>
     
-    <a class="sub" href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-مشاوره-شغلی">مشاوره شغلی</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-مشاوره-شغلی" class="sidebar-sublink">مشاوره شغلی</a>
     
-    <a href="https://ali-m07.github.io/delsa-clinic-homepage/مشاوران">مشاوران</a>
-    <a href="https://ali-m07.github.io/delsa-clinic-homepage/blog">وبلاگ</a>
-    <a href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی">درخواست وقت</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/مشاوران" class="sidebar-link">مشاوران</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/blog" class="sidebar-link">وبلاگ</a>
+    <a href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی" class="sidebar-cta">درخواست وقت ملاقات</a>
   </nav>
 </aside>
-  <main class="site-main">
+  <main id="main-content">
     
 <article class="section">
   <div class="container card prose">
@@ -96,16 +104,19 @@
 </article>
 
   </main>
-  <footer id="delsa-site-footer">
-  <div class="delsa-f__inner">
-    <div class="delsa-f__grid">
-      <div>
-        <div class="delsa-f__brand-row">
-          <img class="delsa-f__logo" src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="">
-          <p class="delsa-f__name">کلینیک دلسا</p>
+  <!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer id="contact" class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <div class="footer-brand-row">
+          <img src="https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png" alt="کلینیک دلسا" width="48" height="48">
+          <p class="footer-brand-name">کلینیک دلسا</p>
         </div>
-        <p class="delsa-f__desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
-        <ul class="delsa-f__quick">
+        <p class="footer-brand-desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+        <h4>دسترسی سریع</h4>
+        <ul class="footer-quick">
           <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/">خانه</a></li>
           <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/مشاوران">مشاوران</a></li>
           <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/blog">وبلاگ</a></li>
@@ -113,45 +124,48 @@
           <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی">فرم نوبت‌دهی</a></li>
         </ul>
       </div>
-      <div>
-        <h4>دپارتمان‌ها</h4>
-        <ul>
+
+      <div class="footer-col">
+        <h4>ارتباط با ما</h4>
+        <p class="footer-clinic-title">کلینیک دلسا — سعادت‌آباد</p>
+        <p class="footer-address">سعادت‌آباد، خیابان علامه جنوبی، نبش خیابان حق‌طلب غربی، پلاک ۸۰، ساختمان علامه، طبقه ۶، واحد ۴</p>
+        <a href="https://maps.google.com/?q=35.779,51.375" target="_blank" rel="noopener" class="footer-maps-btn">
+          مسیریابی در Google Maps
+        </a>
+        <div class="footer-phones">
+          <p class="footer-phones-label">تلفن</p>
+          <a href="tel:۰۹۰۲-۵۶۸۰۳۷۲" class="footer-phone-main dir-ltr">۰۹۰۲-۵۶۸۰۳۷۲</a>
+          <a href="tel:۰۲۱-۸۸۶۸۲۰۰۳" class="footer-phone-sub dir-ltr">۰۲۱-۸۸۶۸۲۰۰۳</a>
           
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روان-درمانی">روان‌درمانی</a></li>
+          <a href="tel:۰۲۱-۲۲۰۹۱۷۴۳" class="footer-phone-sub dir-ltr">۰۲۱-۲۲۰۹۱۷۴۳</a>
           
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-زوج-و-خانواده">زوج و خانواده</a></li>
-          
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-کودک-و-نوجوان">کودک و نوجوان</a></li>
-          
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-روانپزشکی">روان‌پزشکی</a></li>
-          
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-ترک-اعتیاد">ترک اعتیاد</a></li>
-          
-          <li><a href="https://ali-m07.github.io/delsa-clinic-homepage/دپارتمان-مشاوره-شغلی">مشاوره شغلی</a></li>
-          
-        </ul>
+        </div>
+        <div class="footer-email">
+          <p class="footer-phones-label">ایمیل</p>
+          <a href="mailto:info@delsaclinic.com" class="dir-ltr">info@delsaclinic.com</a>
+        </div>
       </div>
-      <div>
-        <h4>تماس</h4>
-        <p class="delsa-f__address">سعادت‌آباد، خیابان علامه جنوبی، نبش خیابان حق‌طلب غربی، پلاک ۸۰، ساختمان علامه، طبقه ۶، واحد ۴</p>
-        <p><a href="tel:۰۹۰۲-۵۶۸۰۳۷۲">۰۹۰۲-۵۶۸۰۳۷۲</a></p>
-        <p><a href="tel:۰۲۱-۸۸۶۸۲۰۰۳">۰۲۱-۸۸۶۸۲۰۰۳</a></p>
-        
-        <p><a href="tel:۰۲۱-۲۲۰۹۱۷۴۳">۰۲۱-۲۲۰۹۱۷۴۳</a></p>
-        
-        <p><a href="mailto:info@delsaclinic.com">info@delsaclinic.com</a></p>
-        <p><a href="https://ali-m07.github.io/delsa-clinic-homepage/فرم-نوبت-دهی">رزرو نوبت آنلاین</a></p>
-      </div>
+
       
-      <div class="delsa-f__map">
+      <div class="footer-col footer-col--map">
         <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=51.365%2C35.774%2C51.385%2C35.784&amp;layer=mapnik&amp;marker=35.779%2C51.375" loading="lazy" title="موقعیت کلینیک دلسا"></iframe>
       </div>
       
+
     </div>
-    <p class="delsa-f__copy">© کلینیک دلسا</p>
+    <div class="footer-bottom">
+      <p>© 2026 Delsa Clinic. All Rights Reserved</p>
+    </div>
   </div>
 </footer>
-<a href="https://wa.me/989025680372" class="whatsapp-float" target="_blank" rel="noopener" aria-label="واتساپ">💬</a>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/989025680372" class="whatsapp-float" id="whatsapp-float"
+   target="_blank" rel="noopener" aria-label="پیام در واتساپ">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="https://ali-m07.github.io/delsa-clinic-homepage/static/js/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,53 @@
+{% extends "sqladmin/base.html" %}
+
+{% block head %}
+<style>
+  /* RTL tweaks for Persian admin */
+  body { direction: rtl; }
+  .navbar-brand { font-family: Tahoma, sans-serif; }
+  .sidebar { text-align: right; }
+  .tox-tinymce { direction: rtl; }
+</style>
+{% endblock %}
+
+{% block tail %}
+{{ super() }}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+(function() {
+  function initTiny() {
+    document.querySelectorAll('textarea[data-tinymce]').forEach(function(el) {
+      if (el.tinymce_init_done) return;
+      el.tinymce_init_done = true;
+      tinymce.init({
+        target: el,
+        language: 'fa',
+        directionality: 'rtl',
+        plugins: 'lists link image media table code fullscreen wordcount',
+        toolbar: 'undo redo | blocks | bold italic underline | '
+          + 'alignright aligncenter alignleft | bullist numlist | '
+          + 'link image media | table | code fullscreen',
+        content_style: 'body{font-family:Tahoma,sans-serif;direction:rtl;text-align:right;font-size:14px;line-height:1.8}',
+        height: 420,
+        branding: false,
+        promotion: false,
+        images_upload_url: '/admin/api/upload',
+        images_upload_credentials: true,
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        setup: function(editor) {
+          editor.on('change', function(){ editor.save(); });
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiny);
+  } else {
+    initTiny();
+  }
+  // Re-run when sqladmin might navigate (for single-page patterns)
+  document.addEventListener('htmx:afterSettle', initTiny);
+})();
+</script>
+{% endblock %}

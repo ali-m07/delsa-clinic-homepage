@@ -77,6 +77,18 @@ class SiteSettings(SQLModel, table=True):
     )
 
 
+class AppointmentFormField(SQLModel, table=True):
+    """A configurable field on the appointment booking form."""
+    id: Optional[int] = Field(default=None, primary_key=True)
+    label: str                              # label shown to visitor
+    field_type: str = "text"               # text | textarea | tel | email | select | date
+    placeholder: str = ""
+    options_json: str = "[]"               # JSON array of strings for select fields
+    is_required: bool = False
+    sort_order: int = 0
+    is_active: bool = True
+
+
 class AppointmentRequest(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     full_name: str
@@ -88,5 +100,6 @@ class AppointmentRequest(SQLModel, table=True):
     preferred_date: str = ""
     session_type: str = ""
     notes: str = ""
+    extra_data: str = ""    # JSON: values for dynamic AppointmentFormFields
     status: str = "new"
     created_at: datetime = Field(default_factory=datetime.utcnow)
