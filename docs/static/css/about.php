@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 
 final class Delsa_About_Page {
   const CPT = 'delsa_consultant';
-  const VERSION = '3.1.0';
+  const VERSION = '3.5.0';
 
   public static function init() {
     add_shortcode('delsa_about', [__CLASS__, 'shortcode_about']);
@@ -70,12 +70,12 @@ final class Delsa_About_Page {
   }
 
   private static function img($file) {
-    // عکس‌های جدید کلینیک روی GitHub Pages + fallback وردپرس
     $map = [
       'hero' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png',
-      'intro' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png',
-      'space' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png',
-      'calm' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png',
+      'story' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png',
+      'a' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png',
+      'b' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png',
+      'c' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png',
     ];
     return $map[$file] ?? $map['hero'];
   }
@@ -113,14 +113,14 @@ final class Delsa_About_Page {
       if ($role === '') {
         $role = trim(wp_strip_all_tags((string) $p->post_excerpt));
       }
-      if (mb_strlen($role) > 80) {
-        $role = mb_substr($role, 0, 80) . '…';
+      if (mb_strlen($role) > 70) {
+        $role = mb_substr($role, 0, 70) . '…';
       }
       $items[] = [
         'name' => get_the_title($p),
         'url' => get_permalink($p),
         'role' => $role,
-        'image' => get_the_post_thumbnail_url($p, 'large') ?: '',
+        'image' => get_the_post_thumbnail_url($p, 'medium_large') ?: get_the_post_thumbnail_url($p, 'large') ?: '',
       ];
     }
     wp_reset_postdata();
@@ -141,129 +141,98 @@ final class Delsa_About_Page {
     <div class="delsa-about" dir="rtl" data-da-version="<?php echo esc_attr(self::VERSION); ?>">
       <section class="da-hero" aria-labelledby="da-title">
         <div class="da-hero__media" aria-hidden="true">
-          <img class="da-hero__photo" src="<?php echo esc_url(self::img('hero')); ?>" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
+          <img class="da-hero__photo" src="<?php echo esc_url(self::img('hero')); ?>" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
         </div>
         <div class="da-hero__veil" aria-hidden="true"></div>
         <div class="da-hero__inner">
-          <p class="da-hero__brand" data-da-reveal>کلینیک دلسا</p>
-          <h1 id="da-title" data-da-reveal>درباره ما</h1>
-          <p class="da-hero__lead" data-da-reveal>گروه تخصصی مشاوره و خدمات روان‌شناختی در سعادت‌آباد — همراه شما در مسیر شناخت، تغییر و بهتر زندگی کردن.</p>
+          <h1 id="da-title" data-da-reveal>کلینیک دلسا</h1>
+          <p class="da-hero__lead" data-da-reveal>جایی برای شنیده شدن، بدون قضاوت. مشاوره و روان‌شناسی در سعادت‌آباد.</p>
           <div class="da-hero__actions" data-da-reveal>
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
-            <a class="da-btn da-btn--ghost" href="<?php echo esc_url($list); ?>">مشاهده مشاوران</a>
+            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">رزرو وقت</a>
+            <a class="da-btn da-btn--ghost" href="<?php echo esc_url($list); ?>">مشاوران</a>
           </div>
         </div>
       </section>
 
-      <section class="da-section da-intro" data-da-reveal>
-        <div class="da-wrap">
-          <div class="da-intro__grid">
-            <div class="da-intro__copy">
-              <h2>مرکز تخصصی مشاوره و روان‌شناسی</h2>
-              <p>در کلینیک دلسا، خدمات روان‌شناسی و مشاوره — فردی، زوج، خانواده، کودک و نوجوان — توسط متخصصین با تجربه و فارغ‌التحصیل رشته‌های روان‌شناسی و مشاوره ارائه می‌شود.</p>
-              <p>تیم ما با رویکردهای به‌روز، سنجش دقیق و فضای امن و محرمانه، کنار شماست تا مسیر تغییر را قدم‌به‌قدم طی کنید.</p>
+      <div class="da-body">
+        <div class="da-wrap da-stack">
+          <section class="da-panel" data-da-reveal aria-labelledby="da-story-title">
+            <header class="da-panel__head">
+              <span class="da-panel__idx" aria-hidden="true">۰۱</span>
+              <div>
+                <p class="da-kicker">درباره ما</p>
+                <h2 id="da-story-title">اینجا کنار شماییم</h2>
+              </div>
+            </header>
+            <div class="da-story__grid">
+              <div class="da-story__copy">
+                <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی.</p>
+                <p>فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
+              </div>
+              <figure class="da-story__media">
+                <img src="<?php echo esc_url(self::img('story')); ?>" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
+              </figure>
             </div>
-            <figure class="da-intro__media">
-              <img src="<?php echo esc_url(self::img('intro')); ?>" alt="فضای کلینیک دلسا" width="900" height="720" loading="lazy" decoding="async">
-            </figure>
-          </div>
-        </div>
-      </section>
+            <div class="da-gallery" aria-label="فضای کلینیک">
+              <img src="<?php echo esc_url(self::img('a')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+              <img src="<?php echo esc_url(self::img('b')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+              <img src="<?php echo esc_url(self::img('c')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+            </div>
+          </section>
 
-      <section class="da-section da-pillars" data-da-reveal>
-        <div class="da-wrap">
-          <h2 class="da-section-title">چرا دلسا</h2>
-          <p class="da-section-lead">سه اصل ساده که کار ما را شکل می‌دهد.</p>
-          <div class="da-pillars__grid">
-            <article class="da-pillar">
-              <h3>علم و تجربه</h3>
-              <p>مداخلات مبتنی بر رویکردهای معتبر روان‌شناسی، با تیمی که سال‌ها در دانشگاه و کلینیک کار کرده است.</p>
-            </article>
-            <article class="da-pillar">
-              <h3>فضای امن</h3>
-              <p>محرمانگی، احترام و بدون قضاوت — تا بتوانید با خیال راحت حرف بزنید و دیده شوید.</p>
-            </article>
-            <article class="da-pillar">
-              <h3>همراهی واقعی</h3>
-              <p>از اولین تماس تا ادامه مسیر درمان، همراهی شفاف و قابل اتکا برای شما و خانواده‌تان.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="da-section da-space" data-da-reveal>
-        <div class="da-wrap da-space__grid">
-          <figure class="da-space__shot">
-            <img src="<?php echo esc_url(self::img('space')); ?>" alt="اتاق مشاوره کلینیک دلسا" width="800" height="600" loading="lazy" decoding="async">
-          </figure>
-          <figure class="da-space__shot da-space__shot--offset">
-            <img src="<?php echo esc_url(self::img('calm')); ?>" alt="فضای آرام کلینیک دلسا" width="800" height="600" loading="lazy" decoding="async">
-          </figure>
-          <div class="da-space__copy">
-            <h2>فضایی آرام برای شروع</h2>
-            <p>کلینیک در سعادت‌آباد، خیابان علامه جنوبی قرار دارد؛ محیطی آرام و حرفه‌ای برای جلسات حضوری، با امکان هماهنگی نوبت آنلاین.</p>
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">رزرو نوبت</a>
-          </div>
-        </div>
-      </section>
-
-      <?php if ($team) : ?>
-      <section class="da-section da-team" data-da-reveal>
-        <div class="da-wrap">
-          <div class="da-team__head">
-            <h2>تیم مشاوران</h2>
-            <p>متخصصین دلسا با سوابق دانشگاهی و بالینی، آماده همراهی شما هستند.</p>
-          </div>
-          <div class="da-team__grid">
-            <?php foreach ($team as $person) : ?>
-              <article class="da-person">
-                <a class="da-person__link" href="<?php echo esc_url($person['url']); ?>">
-                  <div class="da-person__photo">
+          <?php if ($team) : ?>
+          <section class="da-panel" data-da-reveal aria-labelledby="da-team-title">
+            <header class="da-panel__head da-panel__head--row">
+              <div class="da-panel__head-main">
+                <span class="da-panel__idx" aria-hidden="true">۰۲</span>
+                <div>
+                  <p class="da-kicker">مشاوران</p>
+                  <h2 id="da-team-title">تیم ما</h2>
+                </div>
+              </div>
+              <a class="da-textlink" href="<?php echo esc_url($list); ?>">همه مشاوران</a>
+            </header>
+            <div class="da-team__row">
+              <?php foreach ($team as $person) : ?>
+                <a class="da-face" href="<?php echo esc_url($person['url']); ?>">
+                  <span class="da-face__photo">
                     <?php if ($person['image'] !== '') : ?>
-                      <img src="<?php echo esc_url($person['image']); ?>" alt="<?php echo esc_attr($person['name']); ?>" width="320" height="400" loading="lazy" decoding="async">
+                      <img src="<?php echo esc_url($person['image']); ?>" alt="<?php echo esc_attr($person['name']); ?>" width="200" height="240" loading="lazy" decoding="async">
                     <?php endif; ?>
-                  </div>
-                  <h3><?php echo esc_html($person['name']); ?></h3>
-                  <?php if ($person['role'] !== '') : ?>
-                    <p><?php echo esc_html($person['role']); ?></p>
-                  <?php endif; ?>
+                  </span>
+                  <span class="da-face__meta">
+                    <span class="da-face__name"><?php echo esc_html($person['name']); ?></span>
+                    <?php if ($person['role'] !== '') : ?>
+                      <span class="da-face__role"><?php echo esc_html($person['role']); ?></span>
+                    <?php endif; ?>
+                  </span>
                 </a>
-              </article>
-            <?php endforeach; ?>
-          </div>
-          <div class="da-team__more">
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($list); ?>">همه مشاوران</a>
-          </div>
-        </div>
-      </section>
-      <?php else : ?>
-      <section class="da-section da-team da-team--cta-only" data-da-reveal>
-        <div class="da-wrap da-cta-band">
-          <h2>مشاوران دلسا</h2>
-          <p>معرفی کامل متخصصین، سوابق و حوزه‌های کاری را در صفحه مشاوران ببینید.</p>
-          <div class="da-hero__actions">
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($list); ?>">مشاهده مشاوران</a>
-            <a class="da-btn da-btn--ghost-dark" href="<?php echo esc_url($book); ?>">درخواست وقت</a>
-          </div>
-        </div>
-      </section>
-      <?php endif; ?>
+              <?php endforeach; ?>
+            </div>
+          </section>
+          <?php endif; ?>
 
-      <section class="da-section da-final" data-da-reveal>
-        <div class="da-wrap da-final__inner">
-          <h2>آماده‌اید شروع کنید؟</h2>
-          <p>برای رزرو وقت، فرم نوبت‌دهی را پر کنید یا با کلینیک تماس بگیرید.</p>
-          <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">فرم نوبت‌دهی</a>
+          <section class="da-panel da-panel--cta" data-da-reveal aria-labelledby="da-cta-title">
+            <header class="da-panel__head da-panel__head--center">
+              <span class="da-panel__idx" aria-hidden="true">۰۳</span>
+              <div>
+                <p class="da-kicker">نوبت‌دهی</p>
+                <h2 id="da-cta-title">وقت یک گفت‌وگوی امن است؟</h2>
+              </div>
+            </header>
+            <p class="da-cta__lead">نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
+            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
+          </section>
         </div>
-      </section>
+      </div>
     </div>
+
     <?php
     return ob_get_clean();
   }
 
   private static function css() {
     return <<<'CSS'
-/* Full-bleed about — warm light, matches homepage craft */
 body.delsa-about-page .entry-header,
 body.delsa-about-page .page-header,
 body.delsa-about-page .breadcrumb,
@@ -292,137 +261,141 @@ body.delsa-about-page #content,
 body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0 !important}
 
 .delsa-about{
-  --navy:#0F2740;--navy-deep:#0A1B2E;--teal:#1FA8A0;--teal-deep:#178F88;
-  --ivory:#F7F8FA;--ivory-2:#EEF1F4;--muted:#5B6B7C;--line:rgba(15,39,64,.1);
-  --font:Vazirmatn,Tahoma,sans-serif;--radius:18px;--ease:cubic-bezier(.22,1,.36,1);
-  --shadow:0 16px 40px rgba(15,39,64,.08);
+  --navy:#0F2740;--teal:#1FA8A0;--teal-deep:#178F88;
+  --ivory:#F3F5F7;--panel:#FFFFFF;--muted:#5B6B7C;--line:rgba(15,39,64,.12);
+  --font:Vazirmatn,Tahoma,sans-serif;--radius:16px;--ease:cubic-bezier(.22,1,.36,1);
   font-family:var(--font);color:var(--navy);background:var(--ivory);
   width:100vw;max-width:100vw;margin-right:calc(50% - 50vw);margin-left:calc(50% - 50vw);
-  overflow-x:clip;box-sizing:border-box;line-height:1.75;letter-spacing:-.01em
+  overflow-x:clip;box-sizing:border-box;line-height:1.7;letter-spacing:-.01em
 }
 .delsa-about *,.delsa-about *::before,.delsa-about *::after{box-sizing:border-box}
 .delsa-about img{max-width:100%;height:auto;display:block}
-.delsa-about .da-wrap{width:min(1120px,calc(100% - 2.5rem));margin:0 auto}
-.delsa-about .da-section{padding:3.25rem 0}
-@media(min-width:900px){.delsa-about .da-section{padding:4.25rem 0}}
-.delsa-about .da-section-title{margin:0 0 .65rem;font-size:clamp(1.45rem,1.2rem + .7vw,1.85rem);font-weight:700;color:var(--navy);line-height:1.4}
-.delsa-about .da-section-lead{margin:0 0 2rem;max-width:36rem;font-size:1rem;color:var(--muted);line-height:1.85}
+.delsa-about .da-wrap{width:min(1080px,calc(100% - 1.75rem));margin:0 auto}
 
 .delsa-about .da-hero{
-  position:relative !important;
-  height:340px !important;
-  min-height:340px !important;
-  max-height:340px !important;
-  display:flex !important;
-  align-items:flex-end !important;
-  color:#fff;
-  overflow:hidden !important
+  position:relative !important;height:280px !important;min-height:280px !important;max-height:280px !important;
+  display:flex !important;align-items:flex-end !important;color:#fff;overflow:hidden !important
 }
 .delsa-about .da-hero__media{position:absolute;inset:0;overflow:hidden}
 .delsa-about .da-hero__photo{
   width:100%;height:100%;object-fit:cover;object-position:center 40%;
-  transform:scale(1.12);transform-origin:50% 42%;
-  will-change:transform;
-  animation:da-ken 14s ease-in-out infinite alternate
+  transform:scale(1.08);transform-origin:50% 42%;will-change:transform;
+  animation:da-ken 12s ease-in-out infinite alternate
 }
 .delsa-about .da-hero__veil{position:absolute;inset:0;background:
-  linear-gradient(105deg,rgba(10,27,46,.82) 0%,rgba(15,39,64,.55) 42%,rgba(15,39,64,.22) 72%,rgba(15,39,64,.08) 100%),
-  linear-gradient(0deg,rgba(10,27,46,.5) 0%,transparent 48%);
-  opacity:0;animation:da-fade .9s var(--ease) .1s forwards
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(31,168,160,.12),transparent 55%),
+  linear-gradient(90deg,transparent 0%,transparent 40%,rgba(18,42,50,.24) 70%,rgba(18,42,50,.5) 100%);
+  opacity:0;animation:da-fade .75s var(--ease) .05s forwards
 }
-.delsa-about .da-hero__inner{position:relative;z-index:1;width:min(1120px,calc(100% - 2.5rem));margin:0 auto;padding:1.75rem 0 1.5rem}
-.delsa-about .da-hero__brand{margin:0 0 .55rem;font-size:clamp(1.05rem,.95rem + .4vw,1.25rem);font-weight:700;letter-spacing:-.02em}
-.delsa-about .da-hero h1{margin:0 0 .55rem;font-size:clamp(1.65rem,1.35rem + 1vw,2.15rem);font-weight:700;line-height:1.25}
-.delsa-about .da-hero__lead{margin:0 0 1rem;max-width:34rem;font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.86)}
-.delsa-about .da-hero__actions{display:flex;flex-wrap:wrap;gap:.65rem}
-@keyframes da-ken{from{transform:scale(1.12)}to{transform:scale(1.04)}}
+.delsa-about .da-hero__inner{
+  position:relative;z-index:1;width:min(1080px,calc(100% - 1.75rem));margin:0 auto;
+  padding:1.25rem 0 1.2rem;text-shadow:0 6px 22px rgba(8,18,24,.25)
+}
+.delsa-about .da-hero h1{
+  margin:0 0 .4rem;font-size:clamp(2.2rem,1.5rem + 2.4vw,3.4rem);font-weight:800;
+  letter-spacing:-.05em;line-height:.98;text-wrap:balance
+}
+.delsa-about .da-hero__lead{
+  margin:0 0 1rem;max-width:34rem;font-size:clamp(1.02rem,.98rem + .2vw,1.12rem);
+  line-height:1.75;color:rgba(255,255,255,.93)
+}
+.delsa-about .da-hero__actions{display:flex;flex-wrap:wrap;gap:.6rem}
+@keyframes da-ken{from{transform:scale(1.08)}to{transform:scale(1.02)}}
 @keyframes da-fade{from{opacity:0}to{opacity:1}}
-@keyframes da-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.delsa-about [data-da-reveal]{opacity:0;transform:translateY(18px)}
-.delsa-about [data-da-reveal].is-in{animation:da-up .7s var(--ease) forwards}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(1){animation-delay:.05s}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(2){animation-delay:.14s}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(3){animation-delay:.24s}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(4){animation-delay:.34s}
+@keyframes da-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.delsa-about [data-da-reveal]{opacity:0;transform:translateY(12px)}
+.delsa-about [data-da-reveal].is-in{animation:da-up .55s var(--ease) forwards}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(1){animation-delay:.04s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(2){animation-delay:.1s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(3){animation-delay:.16s}
 @media(prefers-reduced-motion:reduce){
   .delsa-about .da-hero__photo{animation:none;transform:none}
-  .delsa-about .da-hero__veil,[data-da-reveal]{opacity:1;transform:none;animation:none}
+  .delsa-about .da-hero__veil,.delsa-about [data-da-reveal]{opacity:1;transform:none;animation:none}
 }
 
-.delsa-about .da-btn{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 1.45rem;border-radius:14px;font-size:.9rem;font-weight:700;font-family:inherit;text-decoration:none;transition:transform .25s var(--ease),background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
-.delsa-about .da-btn--primary{background:var(--teal);color:#fff}
+.delsa-about .da-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:.78rem 1.3rem;border-radius:12px;font-size:1rem;font-weight:700;font-family:inherit;
+  text-decoration:none;transition:transform .2s var(--ease),background .2s,border-color .2s
+}
+.delsa-about .da-btn--primary{background:var(--teal);color:#fff;box-shadow:0 10px 22px rgba(31,168,160,.25)}
 .delsa-about .da-btn--primary:hover{background:var(--teal-deep);transform:translateY(-1px)}
-.delsa-about .da-btn--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
-.delsa-about .da-btn--ghost:hover{background:rgba(255,255,255,.1)}
-.delsa-about .da-btn--ghost-dark{background:transparent;color:var(--navy);border:1.5px solid var(--line)}
-.delsa-about .da-btn--soft{background:rgba(31,168,160,.12);color:var(--teal-deep);border:1.5px solid rgba(31,168,160,.28)}
-.delsa-about .da-btn--soft:hover{background:rgba(31,168,160,.18)}
+.delsa-about .da-btn--ghost{background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.55);backdrop-filter:blur(8px)}
+.delsa-about .da-btn--ghost:hover{background:rgba(255,255,255,.24)}
+.delsa-about .da-textlink{font-size:.98rem;font-weight:700;color:var(--teal-deep);text-decoration:none;white-space:nowrap}
 
-.delsa-about .da-intro{background:
-  radial-gradient(ellipse 60% 50% at 100% 0%,rgba(31,168,160,.08),transparent 55%),
-  var(--ivory)}
-.delsa-about .da-intro__grid{display:grid;gap:2rem;align-items:center}
-@media(min-width:900px){.delsa-about .da-intro__grid{grid-template-columns:1.05fr .95fr;gap:3rem}}
-.delsa-about .da-intro__copy h2{margin:0 0 1rem;font-size:clamp(1.45rem,1.2rem + .7vw,1.9rem);font-weight:700;line-height:1.4}
-.delsa-about .da-intro__copy p{margin:0 0 1rem;font-size:1.02rem;line-height:2;color:rgba(15,39,64,.78)}
-.delsa-about .da-intro__copy p:last-child{margin-bottom:0}
-.delsa-about .da-intro__media{margin:0;border-radius:var(--radius);overflow:hidden;aspect-ratio:5/4;box-shadow:var(--shadow);background:#d7e2ea}
-.delsa-about .da-intro__media img{width:100%;height:100%;object-fit:cover}
-
-.delsa-about .da-pillars{background:var(--ivory-2)}
-.delsa-about .da-pillars__grid{display:grid;gap:1.5rem}
-@media(min-width:760px){.delsa-about .da-pillars__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.75rem}}
-.delsa-about .da-pillar{padding:0;border:0;background:transparent}
-.delsa-about .da-pillar h3{margin:0 0 .55rem;font-size:1.1rem;font-weight:700}
-.delsa-about .da-pillar p{margin:0;font-size:.95rem;line-height:1.9;color:var(--muted)}
-
-.delsa-about .da-space{background:var(--ivory)}
-.delsa-about .da-space__grid{display:grid;gap:1.25rem;align-items:center}
-@media(min-width:900px){
-  .delsa-about .da-space__grid{grid-template-columns:1fr 1fr 1.05fr;gap:1.5rem}
-  .delsa-about .da-space__shot--offset{transform:translateY(1.25rem)}
+.delsa-about .da-body{padding:1.15rem 0 1.75rem;background:var(--ivory)}
+.delsa-about .da-stack{display:grid;gap:1rem}
+.delsa-about .da-panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.15rem 1.15rem 1.25rem;box-shadow:0 8px 24px rgba(15,39,64,.04)
 }
-.delsa-about .da-space__shot{margin:0;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow);background:#d7e2ea}
-.delsa-about .da-space__shot img{width:100%;height:100%;object-fit:cover}
-.delsa-about .da-space__copy h2{margin:0 0 .85rem;font-size:clamp(1.35rem,1.15rem + .55vw,1.7rem);font-weight:700}
-.delsa-about .da-space__copy p{margin:0;font-size:1rem;line-height:1.95;color:rgba(15,39,64,.78)}
-.delsa-about .da-space__copy .da-btn{margin-top:1rem}
-
-.delsa-about .da-team{background:
-  radial-gradient(ellipse 55% 40% at 0% 0%,rgba(31,168,160,.1),transparent 55%),
-  var(--ivory-2)}
-.delsa-about .da-team__head{max-width:36rem;margin:0 0 2rem}
-.delsa-about .da-team__head h2{margin:0 0 .65rem;font-size:clamp(1.45rem,1.2rem + .7vw,1.85rem);font-weight:700}
-.delsa-about .da-team__head p{margin:0;color:var(--muted);line-height:1.85}
-.delsa-about .da-team__grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media(min-width:560px){.delsa-about .da-team__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(min-width:980px){.delsa-about .da-team__grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem}}
-.delsa-about .da-person{min-width:0}
-.delsa-about .da-person__link{display:block;color:inherit;text-decoration:none}
-.delsa-about .da-person__photo{margin:0 0 .85rem;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#d7e2ea;box-shadow:var(--shadow)}
-.delsa-about .da-person__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .55s var(--ease)}
-.delsa-about .da-person__link:hover .da-person__photo img{transform:scale(1.04)}
-.delsa-about .da-person h3{margin:0 0 .35rem;font-size:1rem;font-weight:700}
-.delsa-about .da-person p{margin:0;font-size:.8125rem;line-height:1.7;color:var(--muted)}
-.delsa-about .da-team__more{margin-top:2rem;text-align:center}
-.delsa-about .da-cta-band{text-align:center;max-width:36rem;margin:0 auto}
-.delsa-about .da-cta-band h2{margin:0 0 .65rem;font-size:clamp(1.45rem,1.2rem + .7vw,1.85rem);font-weight:700}
-.delsa-about .da-cta-band p{margin:0 0 1.35rem;color:var(--muted);line-height:1.85}
-.delsa-about .da-cta-band .da-hero__actions{justify-content:center}
-
-.delsa-about .da-final{padding-bottom:4.5rem;background:var(--ivory)}
-.delsa-about .da-final__inner{
-  text-align:center;padding:2.75rem 1.5rem;border-radius:22px;
-  background:linear-gradient(135deg,rgba(15,39,64,.96),rgba(23,100,110,.92)),
-    url("https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png") center/cover;
-  color:#fff;box-shadow:var(--shadow)
+.delsa-about .da-panel--cta{text-align:center;padding:1.4rem 1.2rem 1.5rem;
+  background:linear-gradient(160deg,#FFFFFF 0%,#F4F8F8 100%)}
+.delsa-about .da-panel__head{display:flex;align-items:flex-start;gap:.85rem;margin:0 0 1rem;padding-bottom:.85rem;border-bottom:1px solid var(--line)}
+.delsa-about .da-panel__head--row{align-items:center;justify-content:space-between;gap:1rem}
+.delsa-about .da-panel__head--center{flex-direction:column;align-items:center;text-align:center;border-bottom:0;padding-bottom:0;margin-bottom:.65rem}
+.delsa-about .da-panel__head-main{display:flex;align-items:flex-start;gap:.85rem;min-width:0}
+.delsa-about .da-panel__idx{
+  flex:0 0 auto;width:2.35rem;height:2.35rem;border-radius:10px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(31,168,160,.12);color:var(--teal-deep);
+  font-size:.92rem;font-weight:800;letter-spacing:-.02em
 }
-.delsa-about .da-final__inner h2{margin:0 0 .65rem;font-size:clamp(1.4rem,1.2rem + .6vw,1.8rem);font-weight:700}
-.delsa-about .da-final__inner p{margin:0 0 1.35rem;color:rgba(255,255,255,.82);line-height:1.85}
+.delsa-about .da-kicker{margin:0 0 .25rem;font-size:.82rem;font-weight:700;color:var(--teal-deep);letter-spacing:.03em}
+.delsa-about .da-panel__head h2{
+  margin:0;font-size:clamp(1.35rem,1.15rem + .7vw,1.85rem);font-weight:800;
+  letter-spacing:-.035em;line-height:1.2
+}
+
+.delsa-about .da-story__grid{display:grid;gap:1rem;align-items:stretch}
+@media(min-width:860px){.delsa-about .da-story__grid{grid-template-columns:1.05fr .95fr;gap:1.15rem}}
+.delsa-about .da-story__copy p{
+  margin:0 0 .75rem;font-size:1.02rem;line-height:1.85;color:rgba(15,39,64,.8)
+}
+.delsa-about .da-story__copy p:last-child{margin-bottom:0}
+.delsa-about .da-story__media{
+  margin:0;border-radius:12px;overflow:hidden;aspect-ratio:5/4;background:#d7e2ea;
+  border:1px solid var(--line)
+}
+.delsa-about .da-story__media img{width:100%;height:100%;object-fit:cover}
+
+.delsa-about .da-gallery{
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:.55rem
+}
+.delsa-about .da-gallery img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#d7e2ea;
+  border:1px solid var(--line)
+}
 @media(max-width:640px){
-  .delsa-about .da-hero{height:300px !important;min-height:300px !important;max-height:300px !important}
-  .delsa-about .da-hero__inner{padding:1.35rem 0 1.25rem}
-  .delsa-about .da-btn{width:100%}
+  .delsa-about .da-gallery{grid-template-columns:1fr 1fr}
+  .delsa-about .da-gallery img:last-child{display:none}
+}
+
+.delsa-about .da-team__row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem}
+@media(max-width:980px){.delsa-about .da-team__row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.delsa-about .da-team__row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}}
+.delsa-about .da-face{
+  display:flex;flex-direction:column;min-width:0;color:inherit;text-decoration:none;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#FAFBFC;
+  transition:border-color .2s,transform .2s var(--ease),box-shadow .2s
+}
+.delsa-about .da-face:hover{border-color:rgba(31,168,160,.45);transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,39,64,.08)}
+.delsa-about .da-face__photo{display:block;aspect-ratio:4/5;background:#d7e2ea;overflow:hidden}
+.delsa-about .da-face__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .45s var(--ease)}
+.delsa-about .da-face:hover .da-face__photo img{transform:scale(1.04)}
+.delsa-about .da-face__meta{padding:.65rem .7rem .75rem}
+.delsa-about .da-face__name{display:block;font-size:.98rem;font-weight:750;line-height:1.3;letter-spacing:-.02em}
+.delsa-about .da-face__role{display:block;margin-top:.25rem;font-size:.82rem;line-height:1.5;color:var(--muted)}
+
+.delsa-about .da-cta__lead{margin:0 auto 1rem;max-width:32rem;color:var(--muted);font-size:1.02rem;line-height:1.8}
+@media(max-width:640px){
+  .delsa-about .da-hero{height:250px !important;min-height:250px !important;max-height:250px !important}
+  .delsa-about .da-hero__inner{padding:1.05rem 0 1rem}
+  .delsa-about .da-btn{flex:1 1 auto}
+  .delsa-about .da-panel{padding:1rem}
+  .delsa-about .da-panel__head--row{flex-wrap:wrap}
 }
 CSS;
   }
@@ -439,9 +412,8 @@ CSS;
     nodes.forEach(show);
     return;
   }
-  // hero copy in immediately
   root.querySelectorAll(".da-hero [data-da-reveal]").forEach(function (el, i) {
-    window.setTimeout(function () { show(el); }, 80 + i * 90);
+    window.setTimeout(function () { show(el); }, 60 + i * 80);
   });
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -449,7 +421,7 @@ CSS;
       show(entry.target);
       io.unobserve(entry.target);
     });
-  }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+  }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
   nodes.forEach(function (el) {
     if (el.closest(".da-hero")) return;
     io.observe(el);

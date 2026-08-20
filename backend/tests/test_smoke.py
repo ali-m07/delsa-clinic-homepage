@@ -62,7 +62,7 @@ def test_about(client):
     response = client.get("/درباره-ما")
     assert response.status_code == 200
     assert "درباره ما" in response.text
-    assert "مرکز تخصصی مشاوره و روان‌شناسی" in response.text
+    assert "اینجا کنار شماییم" in response.text
     assert "delsa-about" in response.text
 
 

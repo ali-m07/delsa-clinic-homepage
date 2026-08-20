@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 
 final class Delsa_About_Page {
   const CPT = 'delsa_consultant';
-  const VERSION = '3.2.0';
+  const VERSION = '3.5.0';
 
   public static function init() {
     add_shortcode('delsa_about', [__CLASS__, 'shortcode_about']);
@@ -154,61 +154,79 @@ final class Delsa_About_Page {
         </div>
       </section>
 
-      <section class="da-section da-story" data-da-reveal>
-        <div class="da-wrap da-story__grid">
-          <div class="da-story__copy">
-            <h2>اینجا کنار شماییم</h2>
-            <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی.</p>
-            <p>فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
-          </div>
-          <figure class="da-story__media">
-            <img src="<?php echo esc_url(self::img('story')); ?>" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
-          </figure>
-        </div>
-      </section>
+      <div class="da-body">
+        <div class="da-wrap da-stack">
+          <section class="da-panel" data-da-reveal aria-labelledby="da-story-title">
+            <header class="da-panel__head">
+              <span class="da-panel__idx" aria-hidden="true">۰۱</span>
+              <div>
+                <p class="da-kicker">درباره ما</p>
+                <h2 id="da-story-title">اینجا کنار شماییم</h2>
+              </div>
+            </header>
+            <div class="da-story__grid">
+              <div class="da-story__copy">
+                <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی.</p>
+                <p>فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
+              </div>
+              <figure class="da-story__media">
+                <img src="<?php echo esc_url(self::img('story')); ?>" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="da-gallery" aria-label="فضای کلینیک">
+              <img src="<?php echo esc_url(self::img('a')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+              <img src="<?php echo esc_url(self::img('b')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+              <img src="<?php echo esc_url(self::img('c')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+            </div>
+          </section>
 
-      <section class="da-strip" data-da-reveal aria-label="فضای کلینیک">
-        <div class="da-strip__track">
-          <img src="<?php echo esc_url(self::img('a')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(self::img('b')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(self::img('c')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
-        </div>
-      </section>
+          <?php if ($team) : ?>
+          <section class="da-panel" data-da-reveal aria-labelledby="da-team-title">
+            <header class="da-panel__head da-panel__head--row">
+              <div class="da-panel__head-main">
+                <span class="da-panel__idx" aria-hidden="true">۰۲</span>
+                <div>
+                  <p class="da-kicker">مشاوران</p>
+                  <h2 id="da-team-title">تیم ما</h2>
+                </div>
+              </div>
+              <a class="da-textlink" href="<?php echo esc_url($list); ?>">همه مشاوران</a>
+            </header>
+            <div class="da-team__row">
+              <?php foreach ($team as $person) : ?>
+                <a class="da-face" href="<?php echo esc_url($person['url']); ?>">
+                  <span class="da-face__photo">
+                    <?php if ($person['image'] !== '') : ?>
+                      <img src="<?php echo esc_url($person['image']); ?>" alt="<?php echo esc_attr($person['name']); ?>" width="200" height="240" loading="lazy" decoding="async">
+                    <?php endif; ?>
+                  </span>
+                  <span class="da-face__meta">
+                    <span class="da-face__name"><?php echo esc_html($person['name']); ?></span>
+                    <?php if ($person['role'] !== '') : ?>
+                      <span class="da-face__role"><?php echo esc_html($person['role']); ?></span>
+                    <?php endif; ?>
+                  </span>
+                </a>
+              <?php endforeach; ?>
+            </div>
+          </section>
+          <?php endif; ?>
 
-      <?php if ($team) : ?>
-      <section class="da-section da-team" data-da-reveal>
-        <div class="da-wrap">
-          <div class="da-team__head">
-            <h2>تیم ما</h2>
-            <a class="da-textlink" href="<?php echo esc_url($list); ?>">همه مشاوران</a>
-          </div>
-          <div class="da-team__row">
-            <?php foreach ($team as $person) : ?>
-              <a class="da-face" href="<?php echo esc_url($person['url']); ?>">
-                <span class="da-face__photo">
-                  <?php if ($person['image'] !== '') : ?>
-                    <img src="<?php echo esc_url($person['image']); ?>" alt="<?php echo esc_attr($person['name']); ?>" width="200" height="240" loading="lazy" decoding="async">
-                  <?php endif; ?>
-                </span>
-                <span class="da-face__name"><?php echo esc_html($person['name']); ?></span>
-                <?php if ($person['role'] !== '') : ?>
-                  <span class="da-face__role"><?php echo esc_html($person['role']); ?></span>
-                <?php endif; ?>
-              </a>
-            <?php endforeach; ?>
-          </div>
+          <section class="da-panel da-panel--cta" data-da-reveal aria-labelledby="da-cta-title">
+            <header class="da-panel__head da-panel__head--center">
+              <span class="da-panel__idx" aria-hidden="true">۰۳</span>
+              <div>
+                <p class="da-kicker">نوبت‌دهی</p>
+                <h2 id="da-cta-title">وقت یک گفت‌وگوی امن است؟</h2>
+              </div>
+            </header>
+            <p class="da-cta__lead">نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
+            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
+          </section>
         </div>
-      </section>
-      <?php endif; ?>
-
-      <section class="da-section da-close" data-da-reveal>
-        <div class="da-wrap da-close__box">
-          <h2>وقت یک گفت‌وگوی امن است؟</h2>
-          <p>نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
-          <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
-        </div>
-      </section>
+      </div>
     </div>
+
     <?php
     return ob_get_clean();
   }
@@ -243,47 +261,53 @@ body.delsa-about-page #content,
 body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0 !important}
 
 .delsa-about{
-  --navy:#0F2740;--navy-deep:#0A1B2E;--teal:#1FA8A0;--teal-deep:#178F88;
-  --ivory:#F7F8FA;--ivory-2:#EEF1F4;--muted:#5B6B7C;--line:rgba(15,39,64,.1);
+  --navy:#0F2740;--teal:#1FA8A0;--teal-deep:#178F88;
+  --ivory:#F3F5F7;--panel:#FFFFFF;--muted:#5B6B7C;--line:rgba(15,39,64,.12);
   --font:Vazirmatn,Tahoma,sans-serif;--radius:16px;--ease:cubic-bezier(.22,1,.36,1);
-  --shadow:0 14px 36px rgba(15,39,64,.08);
   font-family:var(--font);color:var(--navy);background:var(--ivory);
   width:100vw;max-width:100vw;margin-right:calc(50% - 50vw);margin-left:calc(50% - 50vw);
   overflow-x:clip;box-sizing:border-box;line-height:1.7;letter-spacing:-.01em
 }
 .delsa-about *,.delsa-about *::before,.delsa-about *::after{box-sizing:border-box}
 .delsa-about img{max-width:100%;height:auto;display:block}
-.delsa-about .da-wrap{width:min(1080px,calc(100% - 2rem));margin:0 auto}
-.delsa-about .da-section{padding:2.25rem 0}
-@media(min-width:900px){.delsa-about .da-section{padding:2.75rem 0}}
+.delsa-about .da-wrap{width:min(1080px,calc(100% - 1.75rem));margin:0 auto}
 
 .delsa-about .da-hero{
-  position:relative !important;height:260px !important;min-height:260px !important;max-height:260px !important;
+  position:relative !important;height:280px !important;min-height:280px !important;max-height:280px !important;
   display:flex !important;align-items:flex-end !important;color:#fff;overflow:hidden !important
 }
 .delsa-about .da-hero__media{position:absolute;inset:0;overflow:hidden}
 .delsa-about .da-hero__photo{
-  width:100%;height:100%;object-fit:cover;object-position:center 38%;
-  transform:scale(1.1);transform-origin:50% 40%;will-change:transform;
+  width:100%;height:100%;object-fit:cover;object-position:center 40%;
+  transform:scale(1.08);transform-origin:50% 42%;will-change:transform;
   animation:da-ken 12s ease-in-out infinite alternate
 }
 .delsa-about .da-hero__veil{position:absolute;inset:0;background:
-  linear-gradient(100deg,rgba(10,27,46,.78) 0%,rgba(15,39,64,.45) 48%,rgba(15,39,64,.12) 100%),
-  linear-gradient(0deg,rgba(10,27,46,.42) 0%,transparent 55%);
-  opacity:0;animation:da-fade .8s var(--ease) .05s forwards
+  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(31,168,160,.12),transparent 55%),
+  linear-gradient(90deg,transparent 0%,transparent 40%,rgba(18,42,50,.24) 70%,rgba(18,42,50,.5) 100%);
+  opacity:0;animation:da-fade .75s var(--ease) .05s forwards
 }
-.delsa-about .da-hero__inner{position:relative;z-index:1;width:min(1080px,calc(100% - 2rem));margin:0 auto;padding:1.35rem 0 1.2rem}
-.delsa-about .da-hero h1{margin:0 0 .45rem;font-size:clamp(1.55rem,1.3rem + .9vw,2rem);font-weight:750;line-height:1.25;letter-spacing:-.03em}
-.delsa-about .da-hero__lead{margin:0 0 .9rem;max-width:28rem;font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.88)}
-.delsa-about .da-hero__actions{display:flex;flex-wrap:wrap;gap:.55rem}
-@keyframes da-ken{from{transform:scale(1.1)}to{transform:scale(1.03)}}
+.delsa-about .da-hero__inner{
+  position:relative;z-index:1;width:min(1080px,calc(100% - 1.75rem));margin:0 auto;
+  padding:1.25rem 0 1.2rem;text-shadow:0 6px 22px rgba(8,18,24,.25)
+}
+.delsa-about .da-hero h1{
+  margin:0 0 .4rem;font-size:clamp(2.2rem,1.5rem + 2.4vw,3.4rem);font-weight:800;
+  letter-spacing:-.05em;line-height:.98;text-wrap:balance
+}
+.delsa-about .da-hero__lead{
+  margin:0 0 1rem;max-width:34rem;font-size:clamp(1.02rem,.98rem + .2vw,1.12rem);
+  line-height:1.75;color:rgba(255,255,255,.93)
+}
+.delsa-about .da-hero__actions{display:flex;flex-wrap:wrap;gap:.6rem}
+@keyframes da-ken{from{transform:scale(1.08)}to{transform:scale(1.02)}}
 @keyframes da-fade{from{opacity:0}to{opacity:1}}
-@keyframes da-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.delsa-about [data-da-reveal]{opacity:0;transform:translateY(14px)}
-.delsa-about [data-da-reveal].is-in{animation:da-up .65s var(--ease) forwards}
+@keyframes da-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.delsa-about [data-da-reveal]{opacity:0;transform:translateY(12px)}
+.delsa-about [data-da-reveal].is-in{animation:da-up .55s var(--ease) forwards}
 .delsa-about .da-hero [data-da-reveal].is-in:nth-child(1){animation-delay:.04s}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(2){animation-delay:.12s}
-.delsa-about .da-hero [data-da-reveal].is-in:nth-child(3){animation-delay:.2s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(2){animation-delay:.1s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(3){animation-delay:.16s}
 @media(prefers-reduced-motion:reduce){
   .delsa-about .da-hero__photo{animation:none;transform:none}
   .delsa-about .da-hero__veil,.delsa-about [data-da-reveal]{opacity:1;transform:none;animation:none}
@@ -291,67 +315,87 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
 
 .delsa-about .da-btn{
   display:inline-flex;align-items:center;justify-content:center;
-  padding:.72rem 1.2rem;border-radius:12px;font-size:.875rem;font-weight:700;font-family:inherit;
-  text-decoration:none;transition:transform .22s var(--ease),background .22s var(--ease),border-color .22s var(--ease)
+  padding:.78rem 1.3rem;border-radius:12px;font-size:1rem;font-weight:700;font-family:inherit;
+  text-decoration:none;transition:transform .2s var(--ease),background .2s,border-color .2s
 }
-.delsa-about .da-btn--primary{background:var(--teal);color:#fff}
+.delsa-about .da-btn--primary{background:var(--teal);color:#fff;box-shadow:0 10px 22px rgba(31,168,160,.25)}
 .delsa-about .da-btn--primary:hover{background:var(--teal-deep);transform:translateY(-1px)}
-.delsa-about .da-btn--ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.42)}
-.delsa-about .da-btn--ghost:hover{background:rgba(255,255,255,.1)}
-.delsa-about .da-textlink{font-size:.875rem;font-weight:700;color:var(--teal-deep);text-decoration:none;white-space:nowrap}
+.delsa-about .da-btn--ghost{background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.55);backdrop-filter:blur(8px)}
+.delsa-about .da-btn--ghost:hover{background:rgba(255,255,255,.24)}
+.delsa-about .da-textlink{font-size:.98rem;font-weight:700;color:var(--teal-deep);text-decoration:none;white-space:nowrap}
 
-.delsa-about .da-story{background:var(--ivory)}
-.delsa-about .da-story__grid{display:grid;gap:1.5rem;align-items:center}
-@media(min-width:860px){.delsa-about .da-story__grid{grid-template-columns:1fr .92fr;gap:2.25rem}}
-.delsa-about .da-story__copy h2{margin:0 0 .75rem;font-size:clamp(1.3rem,1.15rem + .5vw,1.65rem);font-weight:750;line-height:1.35}
-.delsa-about .da-story__copy p{margin:0 0 .85rem;font-size:.98rem;line-height:1.95;color:rgba(15,39,64,.78)}
+.delsa-about .da-body{padding:1.15rem 0 1.75rem;background:var(--ivory)}
+.delsa-about .da-stack{display:grid;gap:1rem}
+.delsa-about .da-panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.15rem 1.15rem 1.25rem;box-shadow:0 8px 24px rgba(15,39,64,.04)
+}
+.delsa-about .da-panel--cta{text-align:center;padding:1.4rem 1.2rem 1.5rem;
+  background:linear-gradient(160deg,#FFFFFF 0%,#F4F8F8 100%)}
+.delsa-about .da-panel__head{display:flex;align-items:flex-start;gap:.85rem;margin:0 0 1rem;padding-bottom:.85rem;border-bottom:1px solid var(--line)}
+.delsa-about .da-panel__head--row{align-items:center;justify-content:space-between;gap:1rem}
+.delsa-about .da-panel__head--center{flex-direction:column;align-items:center;text-align:center;border-bottom:0;padding-bottom:0;margin-bottom:.65rem}
+.delsa-about .da-panel__head-main{display:flex;align-items:flex-start;gap:.85rem;min-width:0}
+.delsa-about .da-panel__idx{
+  flex:0 0 auto;width:2.35rem;height:2.35rem;border-radius:10px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(31,168,160,.12);color:var(--teal-deep);
+  font-size:.92rem;font-weight:800;letter-spacing:-.02em
+}
+.delsa-about .da-kicker{margin:0 0 .25rem;font-size:.82rem;font-weight:700;color:var(--teal-deep);letter-spacing:.03em}
+.delsa-about .da-panel__head h2{
+  margin:0;font-size:clamp(1.35rem,1.15rem + .7vw,1.85rem);font-weight:800;
+  letter-spacing:-.035em;line-height:1.2
+}
+
+.delsa-about .da-story__grid{display:grid;gap:1rem;align-items:stretch}
+@media(min-width:860px){.delsa-about .da-story__grid{grid-template-columns:1.05fr .95fr;gap:1.15rem}}
+.delsa-about .da-story__copy p{
+  margin:0 0 .75rem;font-size:1.02rem;line-height:1.85;color:rgba(15,39,64,.8)
+}
 .delsa-about .da-story__copy p:last-child{margin-bottom:0}
-.delsa-about .da-story__media{margin:0;border-radius:var(--radius);overflow:hidden;aspect-ratio:5/4;box-shadow:var(--shadow);background:#d7e2ea}
+.delsa-about .da-story__media{
+  margin:0;border-radius:12px;overflow:hidden;aspect-ratio:5/4;background:#d7e2ea;
+  border:1px solid var(--line)
+}
 .delsa-about .da-story__media img{width:100%;height:100%;object-fit:cover}
 
-.delsa-about .da-strip{padding:0 0 .25rem;background:var(--ivory)}
-.delsa-about .da-strip__track{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem;
-  width:min(1080px,calc(100% - 2rem));margin:0 auto
+.delsa-about .da-gallery{
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:.55rem
 }
-.delsa-about .da-strip__track img{
-  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:#d7e2ea
+.delsa-about .da-gallery img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#d7e2ea;
+  border:1px solid var(--line)
 }
 @media(max-width:640px){
-  .delsa-about .da-strip__track{grid-template-columns:1.1fr 1fr;gap:.45rem}
-  .delsa-about .da-strip__track img:last-child{display:none}
+  .delsa-about .da-gallery{grid-template-columns:1fr 1fr}
+  .delsa-about .da-gallery img:last-child{display:none}
 }
 
-.delsa-about .da-team{background:var(--ivory-2)}
-.delsa-about .da-team__head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin:0 0 1.15rem}
-.delsa-about .da-team__head h2{margin:0;font-size:clamp(1.25rem,1.1rem + .45vw,1.5rem);font-weight:750}
-.delsa-about .da-team__row{
-  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.85rem
-}
+.delsa-about .da-team__row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem}
 @media(max-width:980px){.delsa-about .da-team__row{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:560px){.delsa-about .da-team__row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}}
-.delsa-about .da-face{display:flex;flex-direction:column;min-width:0;color:inherit;text-decoration:none}
-.delsa-about .da-face__photo{
-  display:block;margin:0 0 .55rem;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:#d7e2ea;box-shadow:var(--shadow)
+@media(max-width:560px){.delsa-about .da-team__row{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}}
+.delsa-about .da-face{
+  display:flex;flex-direction:column;min-width:0;color:inherit;text-decoration:none;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#FAFBFC;
+  transition:border-color .2s,transform .2s var(--ease),box-shadow .2s
 }
-.delsa-about .da-face__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s var(--ease)}
+.delsa-about .da-face:hover{border-color:rgba(31,168,160,.45);transform:translateY(-2px);box-shadow:0 10px 22px rgba(15,39,64,.08)}
+.delsa-about .da-face__photo{display:block;aspect-ratio:4/5;background:#d7e2ea;overflow:hidden}
+.delsa-about .da-face__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .45s var(--ease)}
 .delsa-about .da-face:hover .da-face__photo img{transform:scale(1.04)}
-.delsa-about .da-face__name{font-size:.9rem;font-weight:750;line-height:1.35}
-.delsa-about .da-face__role{margin-top:.2rem;font-size:.75rem;line-height:1.55;color:var(--muted)}
+.delsa-about .da-face__meta{padding:.65rem .7rem .75rem}
+.delsa-about .da-face__name{display:block;font-size:.98rem;font-weight:750;line-height:1.3;letter-spacing:-.02em}
+.delsa-about .da-face__role{display:block;margin-top:.25rem;font-size:.82rem;line-height:1.5;color:var(--muted)}
 
-.delsa-about .da-close{padding-bottom:2.75rem}
-.delsa-about .da-close__box{
-  text-align:center;padding:1.75rem 1.25rem;border-radius:18px;
-  background:linear-gradient(135deg,rgba(15,39,64,.95),rgba(23,100,110,.9)),
-    url("https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png") center/cover;
-  color:#fff;box-shadow:var(--shadow)
-}
-.delsa-about .da-close__box h2{margin:0 0 .45rem;font-size:clamp(1.2rem,1.05rem + .45vw,1.45rem);font-weight:750}
-.delsa-about .da-close__box p{margin:0 0 1rem;color:rgba(255,255,255,.84);font-size:.92rem;line-height:1.75}
+.delsa-about .da-cta__lead{margin:0 auto 1rem;max-width:32rem;color:var(--muted);font-size:1.02rem;line-height:1.8}
 @media(max-width:640px){
-  .delsa-about .da-hero{height:240px !important;min-height:240px !important;max-height:240px !important}
-  .delsa-about .da-hero__inner{padding:1.1rem 0 1rem}
+  .delsa-about .da-hero{height:250px !important;min-height:250px !important;max-height:250px !important}
+  .delsa-about .da-hero__inner{padding:1.05rem 0 1rem}
   .delsa-about .da-btn{flex:1 1 auto}
+  .delsa-about .da-panel{padding:1rem}
+  .delsa-about .da-panel__head--row{flex-wrap:wrap}
 }
 CSS;
   }
