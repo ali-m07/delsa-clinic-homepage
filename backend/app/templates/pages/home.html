@@ -68,7 +68,7 @@
       <a href="/دپارتمان-{{ dept.slug }}" class="service-card">
         <h3>{{ dept.nav_label or dept.title }}</h3>
         <p>{{ dept.intro[:110] }}{% if dept.intro|length > 110 %}…{% endif %}</p>
-        <span class="service-card__cta">مشاهده دپارتمان ←</span>
+        <span class="service-card__cta">مشاهده دپارتمان</span>
       </a>
       {% endfor %}
     </div>
@@ -167,7 +167,7 @@
       <div>
         <h2>آخرین مقالات</h2>
       </div>
-      <a href="/blog" class="btn-link">همه مقالات ←</a>
+      <a href="/blog" class="btn-link">همه مقالات</a>
     </div>
     <div class="dept-grid">
       {% for article in articles %}
