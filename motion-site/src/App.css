@@ -381,19 +381,31 @@
   display: grid;
   gap: 0.5rem;
   grid-template-columns: 1fr 1fr;
-  overflow: hidden;
+  grid-auto-rows: minmax(140px, auto);
 }
 
 @media (min-width: 800px) {
   .space-mosaic {
-    grid-template-columns: 1.45fr 1fr 1fr 1fr;
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-    height: clamp(340px, 44vw, 460px);
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-rows: minmax(190px, 1fr) minmax(190px, 1fr);
+    grid-template-areas:
+      'main a b c'
+      'main d e f';
+    height: auto;
+    min-height: 400px;
+    overflow: visible;
   }
 
   .space-mosaic__main {
-    grid-row: span 2;
+    grid-area: main;
   }
+
+  .space-mosaic figure:nth-child(2) { grid-area: a; }
+  .space-mosaic figure:nth-child(3) { grid-area: b; }
+  .space-mosaic figure:nth-child(4) { grid-area: c; }
+  .space-mosaic figure:nth-child(5) { grid-area: d; }
+  .space-mosaic figure:nth-child(6) { grid-area: e; }
+  .space-mosaic figure:nth-child(7) { grid-area: f; }
 
   .space-mosaic figure {
     aspect-ratio: auto;
