@@ -596,7 +596,11 @@ export default function App() {
                   {CLINIC.map((src, i) => (
                     <figure
                       key={src}
-                      className={i === 0 ? 'space-mosaic__main' : undefined}
+                      className={
+                        i === 0
+                          ? 'space-mosaic__main'
+                          : `space-mosaic__cell space-mosaic__cell--${i}`
+                      }
                     >
                       <motion.img
                         src={src}
