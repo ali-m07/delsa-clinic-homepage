@@ -7,7 +7,7 @@
  * فقط UI درباره ما — CPT مشاوران را ثبت نمی‌کند.
  * تیم از پست‌های publish نوع delsa_consultant خوانده می‌شود.
  *
- * VERSION 3.6.3 — گالری تمام‌عرض با ارتفاع کم
+ * VERSION 3.6.4 — عکس‌های جدید کلینیک (Aug 2026)
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 final class Delsa_About_Page {
   const CPT = 'delsa_consultant';
-  const VERSION = '3.6.3';
+  const VERSION = '3.6.4';
 
   public static function init() {
     add_shortcode('delsa_about', [__CLASS__, 'shortcode_about']);
@@ -72,15 +72,16 @@ final class Delsa_About_Page {
   }
 
   private static function img($file) {
+    $base = 'https://delsaclinic.com/wp-content/uploads/2026/08/';
     $map = [
-      'hero' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png',
-      'story' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png',
-      'a' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png',
-      'b' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png',
-      'c' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png',
-      'd' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-07.png',
-      'e' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png',
-      'f' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-04.png',
+      'hero' => $base . '20260819_150534-scaled.jpg',
+      'story' => $base . '20260819_150534-scaled.jpg',
+      'a' => $base . '20260819_151844-scaled.jpg',
+      'b' => $base . 'IMG_20260819_180527_618-scaled.jpg',
+      'c' => $base . 'IMG_20260819_180503_498-scaled.jpg',
+      'd' => $base . '20260819_150736-scaled.jpg',
+      'e' => $base . '20260819_150725-scaled.jpg',
+      'f' => $base . '20260819_150627-scaled.jpg',
     ];
     return $map[$file] ?? $map['hero'];
   }
@@ -212,12 +213,15 @@ final class Delsa_About_Page {
                   <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
                     <img src="<?php echo esc_url(self::img('e')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
                   </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('f')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
                 </div>
                 <button type="button" class="da-gallery__nav da-gallery__nav--prev" id="da-gal-prev" aria-label="عکس قبلی">‹</button>
                 <button type="button" class="da-gallery__nav da-gallery__nav--next" id="da-gal-next" aria-label="عکس بعدی">›</button>
               </div>
               <div class="da-gallery__bar">
-                <p class="da-gallery__count" id="da-gal-count" aria-live="polite">۱ / ۶</p>
+                <p class="da-gallery__count" id="da-gal-count" aria-live="polite">۱ / ۷</p>
                 <div class="da-gallery__dots" id="da-gal-dots" role="tablist" aria-label="انتخاب عکس"></div>
               </div>
             </div>

@@ -1,5 +1,5 @@
-<!-- DELSA homepage · Elementor HTML Widget · v3.7.2 -->
-<!-- پنل‌های کادر‌دار، فشرده، روشن — کل محتوا را یک‌جا پیست کنید -->
+<!-- DELSA homepage · Elementor HTML Widget · v3.7.5 -->
+<!-- پنل‌های کادر‌دار + عکس‌های جدید کلینیک (Aug 2026) — کل محتوا را یک‌جا پیست کنید -->
 <!-- اگر انیمیشن کار نکرد: همین اسکریپت پایین را در Elementor → Custom Code → Footer هم بگذارید -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,57 +265,103 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .why-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; font-weight: 750; }
 .why-card p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; }
 .testimonials {
-  margin: .95rem 0 0;
-  padding: 1.15rem 1.2rem 1rem;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
   border-radius: 14px;
-  background: #F4F8F8;
-  border: 1px solid rgba(58,143,138,.18);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 18px rgba(15,39,64,.04);
   position: relative;
   overflow: hidden;
 }
 .testimonials__label {
-  margin: 0 0 .65rem;
-  font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  margin: 0;
+  padding: .7rem 1.05rem .55rem;
+  font-size: .78rem; font-weight: 700; letter-spacing: .04em;
   color: var(--teal-deep);
+  border-bottom: 1px solid var(--line);
+  background: #FAFBFC;
 }
-.testimonials__viewport { position: relative; min-height: 7.5rem; }
+.testimonials__viewport {
+  position: relative;
+  min-height: 0;
+  padding: 1rem 1.05rem .85rem;
+}
 .testimonials__slide {
-  position: absolute; inset: 0;
-  opacity: 0; transform: translateY(10px);
+  display: none;
+  opacity: 0;
+  transform: translateY(6px);
   pointer-events: none;
-  transition: opacity .45s var(--ease), transform .45s var(--ease);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
 }
 .testimonials__slide.is-active {
-  opacity: 1; transform: none; pointer-events: auto; position: relative;
+  display: block;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
 }
 .testimonials__slide blockquote {
-  margin: 0; padding: 0; border: 0 !important; border-inline-start: 0 !important;
-  box-shadow: none; quotes: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-inline-start: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  quotes: none;
 }
 .testimonials__slide blockquote::before,
-.testimonials__slide blockquote::after { content: none !important; display: none !important; }
+.testimonials__slide blockquote::after {
+  content: none !important;
+  display: none !important;
+}
 .testimonials__text {
-  margin: 0 0 .55rem; font-size: 1.06rem; font-weight: 550; line-height: 1.8; color: var(--navy);
+  margin: 0 0 .75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.85;
+  color: var(--navy);
+  position: relative;
+  padding-inline-start: .15rem;
 }
 .testimonials__meta {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .75rem;
-  font-size: .88rem; color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem .65rem;
+  padding-top: .7rem;
+  border-top: 1px dashed var(--line);
+  font-size: .86rem;
+  color: var(--muted);
 }
-.testimonials__name { font-weight: 700; color: #3F4F5E; }
-.testimonials__role { opacity: .9; }
+.testimonials__name { font-weight: 700; color: #2F3F4E; }
+.testimonials__role::before {
+  content: "·";
+  margin-inline-end: .55rem;
+  opacity: .55;
+}
 .testimonials__dots {
-  display: flex; justify-content: center; gap: .45rem; margin-top: .85rem; padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: .4rem;
+  margin: 0;
+  padding: 0 1.05rem 1rem;
 }
 .testimonials__dot {
-  width: 8px; height: 8px; border-radius: 999px; border: 0; padding: 0;
-  background: rgba(15,39,64,.18); cursor: pointer;
+  width: 7px; height: 7px; border-radius: 999px; border: 0; padding: 0;
+  background: rgba(15,39,64,.16); cursor: pointer;
   transform: scaleX(1);
   transform-origin: center;
   transition: transform .25s var(--ease), background .25s;
 }
 .testimonials__dot.is-active {
   background: var(--teal);
-  transform: scaleX(2.4);
+  transform: scaleX(2.2);
+}
+.testimonials__dot:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
   .testimonials__slide { transition: none; }
@@ -325,9 +371,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .space-mosaic { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
 @media (min-width: 800px) {
   .space-mosaic {
-    grid-template-columns: 1.55fr 1fr 1fr;
+    grid-template-columns: 1.45fr 1fr 1fr 1fr;
     grid-template-rows: repeat(2, minmax(0, 1fr));
-    height: clamp(320px, 42vw, 420px);
+    height: clamp(340px, 44vw, 460px);
   }
   .space-mosaic__main { grid-row: span 2; }
 }
@@ -450,16 +496,18 @@ a.step .step__hint {
 }
 </style>
 
-<div class="delsa-home" id="delsa-home" data-home-version="3.7.2" dir="rtl" lang="fa">
+<div class="delsa-home" id="delsa-home" data-home-version="3.7.5" dir="rtl" lang="fa">
 <main id="main">
   <section class="hero" id="hero">
     <div class="hero__media" aria-hidden="true">
       <div class="hero__reel" id="hero-reel">
-        <img class="hero__photo is-active" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="">
-        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="">
-        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="">
-        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="">
-        <img class="hero__photo" data-hero-slide src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="">
+        <img class="hero__photo is-active" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150534-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_151844-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/IMG_20260819_180527_618-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/IMG_20260819_180503_498-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150736-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150725-scaled.jpg" alt="">
+        <img class="hero__photo" data-hero-slide src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150627-scaled.jpg" alt="">
       </div>
       <div class="hero__mesh"></div>
       <div class="hero__veil"></div>
@@ -608,11 +656,13 @@ a.step .step__hint {
           </div>
         </header>
         <div class="space-mosaic">
-          <figure class="space-mosaic__main"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-07.png" alt="اتاق مشاوره" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-04.png" alt="" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png" alt="" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="" loading="lazy"></figure>
+          <figure class="space-mosaic__main"><img src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150534-scaled.jpg" alt="فضای کلینیک دلسا" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_151844-scaled.jpg" alt="" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/IMG_20260819_180527_618-scaled.jpg" alt="" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/IMG_20260819_180503_498-scaled.jpg" alt="" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150736-scaled.jpg" alt="" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150725-scaled.jpg" alt="" loading="lazy"></figure>
+          <figure><img src="https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150627-scaled.jpg" alt="" loading="lazy"></figure>
         </div>
       </section>
 

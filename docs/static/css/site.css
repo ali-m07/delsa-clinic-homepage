@@ -1035,7 +1035,7 @@ html:not(.js-gsap) .hero__dots { opacity: 1; }
 .dept-hero {
   background:
     linear-gradient(135deg, rgba(19,42,55,.88), rgba(58,143,138,.5)),
-    url('/static/img/clinic/room-02.png') center/cover;
+    url('https://delsaclinic.com/wp-content/uploads/2026/08/IMG_20260819_180527_618-scaled.jpg') center/cover;
   color: #fff; padding: 2.5rem 0; margin-top: calc(-1 * var(--hdr-h));
   padding-top: calc(var(--hdr-h) + 2.25rem);
 }
@@ -1273,7 +1273,7 @@ html:not(.js-gsap) .hero__dots { opacity: 1; }
 .form-hero {
   background:
     linear-gradient(135deg, rgba(19,42,55,.9), rgba(58,143,138,.5)),
-    url('/static/img/clinic/room-06.png') center/cover;
+    url('https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150736-scaled.jpg') center/cover;
   color: #fff; padding: 2.5rem 0; margin-top: calc(-1 * var(--hdr-h));
   padding-top: calc(var(--hdr-h) + 2rem); text-align: center;
 }

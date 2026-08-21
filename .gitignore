@@ -33,3 +33,7 @@ docs/دپارتمان-*/
 *.key
 credentials.json
 backend/test.db
+
+# Node
+node_modules/
+motion-site/dist/

@@ -1,0 +1,456 @@
+<!-- DELSA FORM PAGE · v1.1.2 — فول‌صفحه | فقط ویجت HTML المنتور -->
+<!-- shortcode Gravity Forms را دست نزنید: [gravityform id="1" ...] -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style id="delsa-form-css">
+/* ── ریست تم / المنتور ── */
+body:has(.delsa-form-page) #main,
+body:has(.delsa-form-page) .site-main,
+body:has(.delsa-form-page) .page_spacing {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #F3F5F7 !important;
+}
+body:has(.delsa-form-page) #main > .container,
+body:has(.delsa-form-page) .site-main > .container,
+body:has(.delsa-form-page) .container.no-padding {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body:has(.delsa-form-page) .page-title,
+body:has(.delsa-form-page) .page-title-block,
+body:has(.delsa-form-page) .page-banner,
+body:has(.delsa-form-page) .title-header,
+body:has(.delsa-form-page) .page-breadcrumb,
+body:has(.delsa-form-page) .entry-title,
+body:has(.delsa-form-page) .main-title-section-wrapper {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body:has(.delsa-form-page) .elementor-section,
+body:has(.delsa-form-page) .elementor-container,
+body:has(.delsa-form-page) .elementor-column,
+body:has(.delsa-form-page) .elementor-widget-wrap,
+body:has(.delsa-form-page) .elementor-widget-container,
+body:has(.delsa-form-page) .elementor-widget-html {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.delsa-form-page,
+.delsa-form-page * {
+  box-sizing: border-box;
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+}
+
+.delsa-form-page {
+  --navy: #0F2740;
+  --navy-deep: #0A1B2E;
+  --teal: #1FA8A0;
+  --teal-deep: #178F88;
+  --sand: #F3F5F7;
+  --muted: #5B6B7C;
+  --line: rgba(15, 39, 64, 0.12);
+  --header-h: 64px;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: calc(100dvh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  color: var(--navy);
+  background: var(--sand);
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page { --header-h: 72px; }
+  .delsa-form-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    min-height: calc(100dvh - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
+  }
+}
+
+/* ── هیرو ── */
+.delsa-form-page .df-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  padding: 2.5rem 1.5rem 2rem;
+  color: #fff;
+  background:
+    linear-gradient(115deg, rgba(10, 27, 46, 0.92) 0%, rgba(15, 39, 64, 0.86) 55%, rgba(23, 143, 136, 0.72) 100%),
+    url("https://delsaclinic.com/wp-content/uploads/2026/08/20260819_150534-scaled.jpg") center 38% / cover no-repeat;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-hero {
+    min-height: calc(100dvh - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
+    padding: 3rem 3.5rem;
+  }
+}
+.delsa-form-page .df-hero__inner {
+  max-width: 34rem;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-hero__inner {
+    margin: 0;
+    margin-inline-start: 0;
+    margin-inline-end: auto;
+    text-align: right;
+  }
+}
+.delsa-form-page .df-hero__label {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--teal);
+  border-radius: var(--radius-sm);
+}
+.delsa-form-page .df-hero h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.625rem, 1.4rem + 1vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+  color: #fff;
+}
+.delsa-form-page .df-hero__lead {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 450;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-hero__lead { max-width: 28rem; }
+}
+.delsa-form-page .df-hero__meta {
+  display: none;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  gap: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-hero__meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.delsa-form-page .df-hero__meta-item { text-align: center; }
+.delsa-form-page .df-hero__meta-value {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.delsa-form-page .df-hero__meta-label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 600;
+}
+
+/* ── بخش فرم ── */
+.delsa-form-page .df-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.35rem 1.25rem 2.25rem;
+  background: var(--sand);
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-body {
+    min-height: calc(100dvh - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
+    padding: 2.5rem 3rem;
+    overflow-y: auto;
+  }
+}
+.delsa-form-page .df-wrap {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-wrap { max-width: 100%; }
+}
+
+/* کارت کادر‌دار — هم‌سبک هوم‌پیج */
+.delsa-form-page .df-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.25rem 1.65rem;
+  box-shadow: 0 8px 24px rgba(15, 39, 64, 0.05);
+}
+@media (min-width: 640px) {
+  .delsa-form-page .df-card { padding: 1.85rem 2rem; }
+}
+@media (min-width: 1024px) {
+  .delsa-form-page .df-card {
+    padding: 2.1rem 2.25rem;
+  }
+}
+.delsa-form-page .df-card__head {
+  margin: 0 0 1.15rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.delsa-form-page .df-card__kicker {
+  margin: 0 0 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--teal-deep);
+  letter-spacing: 0.03em;
+}
+.delsa-form-page .df-card__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* ── Gravity Forms ── */
+.delsa-form-page .gf-page-form .gform_wrapper { margin: 0 !important; }
+.delsa-form-page .gf-page-form .gform_heading,
+.delsa-form-page .gf-page-form .gform_description { display: none !important; }
+.delsa-form-page .gf-page-form .gfield {
+  margin-bottom: 1rem !important;
+}
+.delsa-form-page .gf-page-form .gfield_label,
+.delsa-form-page .gf-page-form .gform-field-label {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: var(--navy) !important;
+  margin-bottom: 0.4rem !important;
+}
+.delsa-form-page .gf-page-form input[type="text"],
+.delsa-form-page .gf-page-form input[type="tel"],
+.delsa-form-page .gf-page-form input[type="email"],
+.delsa-form-page .gf-page-form input[type="number"],
+.delsa-form-page .gf-page-form select,
+.delsa-form-page .gf-page-form textarea {
+  width: 100% !important;
+  padding: 0.78rem 1rem !important;
+  font-size: 0.95rem !important;
+  font-family: inherit !important;
+  color: var(--navy) !important;
+  background: #FAFBFC !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-sm) !important;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s !important;
+}
+.delsa-form-page .gf-page-form input:focus,
+.delsa-form-page .gf-page-form select:focus,
+.delsa-form-page .gf-page-form textarea:focus {
+  outline: none !important;
+  border-color: rgba(31, 168, 160, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(31, 168, 160, 0.18) !important;
+  background: #fff !important;
+}
+.delsa-form-page .gf-page-form .gform_footer {
+  margin-top: 1.25rem !important;
+  padding: 0 !important;
+}
+.delsa-form-page .gf-page-form .gform_footer input[type="submit"],
+.delsa-form-page .gf-page-form .gform_button {
+  width: 100% !important;
+  padding: 0.9rem 1.5rem !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  font-family: inherit !important;
+  color: #fff !important;
+  background: var(--teal) !important;
+  border: 0 !important;
+  border-radius: var(--radius-sm) !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 22px rgba(31, 168, 160, 0.22) !important;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease) !important;
+}
+.delsa-form-page .gf-page-form .gform_footer input[type="submit"]:hover,
+.delsa-form-page .gf-page-form .gform_button:hover {
+  background: var(--teal-deep) !important;
+  transform: translateY(-1px);
+}
+.delsa-form-page .gf-page-form .gform_footer input[type="submit"]:active,
+.delsa-form-page .gf-page-form .gform_button:active {
+  transform: translateY(1px) scale(0.99);
+}
+.delsa-form-page .gf-page-form .ginput_container_address {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+.delsa-form-page .gf-page-form .ginput_address_state { order: 1 !important; }
+.delsa-form-page .gf-page-form .ginput_address_city { order: 2 !important; }
+
+#ui-datepicker-div,
+.ui-datepicker,
+.gform-theme-datepicker,
+.pwt-datepicker-container,
+.gdatepicker {
+  z-index: 999999 !important;
+}
+
+.delsa-form-page .df-help {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.85;
+}
+.delsa-form-page .df-help a {
+  color: var(--teal-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+.delsa-form-page .df-help a:hover { text-decoration: underline; }
+.delsa-form-page .dir-ltr {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .delsa-form-page .gf-page-form .gform_button:hover {
+    transform: none;
+  }
+}
+</style>
+
+<div class="delsa-form-page" data-form-version="1.1.2" dir="rtl" lang="fa">
+
+  <section class="df-hero" aria-labelledby="df-form-title">
+    <div class="df-hero__inner">
+      <p class="df-hero__label">رزرو وقت</p>
+      <h1 id="df-form-title">فرم نوبت‌دهی آنلاین</h1>
+      <p class="df-hero__lead">فرم را تکمیل کنید؛ تیم پذیرش با شما تماس می‌گیرد و زمان مناسب را هماهنگ می‌کند.</p>
+      <div class="df-hero__meta" aria-hidden="true">
+        <div class="df-hero__meta-item">
+          <span class="df-hero__meta-value">+۱۵</span>
+          <span class="df-hero__meta-label">سال تجربه</span>
+        </div>
+        <div class="df-hero__meta-item">
+          <span class="df-hero__meta-value">۶ دپارتمان</span>
+          <span class="df-hero__meta-label">تخصصی</span>
+        </div>
+        <div class="df-hero__meta-item">
+          <span class="df-hero__meta-value">سعادت‌آباد</span>
+          <span class="df-hero__meta-label">تهران</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="df-body" id="appointment-form-section">
+    <div class="df-wrap">
+      <div class="df-card">
+        <header class="df-card__head">
+          <p class="df-card__kicker">نوبت‌دهی</p>
+          <h2 class="df-card__title">درخواست وقت ملاقات</h2>
+        </header>
+        <div class="gf-page-form">
+          [gravityform id="1" title="false" description="false" ajax="false"]
+        </div>
+      </div>
+      <p class="df-help">
+        سوالی دارید؟
+        <a href="tel:+989025680372" class="dir-ltr">۰۹۰۲-۵۶۸۰۳۷۲</a>
+        یا
+        <a href="https://wa.me/989025680372" target="_blank" rel="noopener noreferrer">واتساپ</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var GF_FORM_ID = 1;
+
+  function reorderProvinceCityFields() {
+    var form = document.querySelector(".delsa-form-page .gform_fields") || document.querySelector(".gform_fields");
+    if (!form) return;
+    var fields = Array.prototype.slice.call(form.querySelectorAll(":scope > .gfield"));
+    function findField(keyword) {
+      return fields.find(function (field) {
+        var label = field.querySelector(".gfield_label, .gform-field-label");
+        if (!label) return false;
+        return label.textContent.replace(/\*/g, "").trim().indexOf(keyword) !== -1;
+      });
+    }
+    var province = findField("استان");
+    var city = findField("شهر");
+    if (province && city && (province.compareDocumentPosition(city) & Node.DOCUMENT_POSITION_PRECEDING)) {
+      form.insertBefore(province, city);
+    }
+    form.querySelectorAll(".ginput_container_address").forEach(function (container) {
+      var state = container.querySelector(".ginput_address_state");
+      var cityEl = container.querySelector(".ginput_address_city");
+      if (state && cityEl && (state.compareDocumentPosition(cityEl) & Node.DOCUMENT_POSITION_PRECEDING)) {
+        container.insertBefore(state, cityEl);
+      }
+    });
+  }
+
+  function init() {
+    reorderProvinceCityFields();
+    if (typeof jQuery === "undefined") return;
+    var $ = jQuery;
+    $("#gform_" + GF_FORM_ID).find("select").filter(function () {
+      var label = $(this).closest(".gfield").find("label").first().text() || "";
+      return label.indexOf("استان") !== -1;
+    }).first().off("change.dfCity").on("change.dfCity", reorderProvinceCityFields);
+  }
+
+  if (typeof jQuery !== "undefined") {
+    jQuery(document).on("gform_post_render", function (e, formId) {
+      if (Number(formId) === GF_FORM_ID) init();
+    });
+    jQuery(function () {
+      [0, 300, 800].forEach(function (ms) { setTimeout(init, ms); });
+    });
+  } else {
+    document.addEventListener("DOMContentLoaded", function () {
+      [0, 300, 800].forEach(function (ms) { setTimeout(init, ms); });
+    });
+  }
+})();
+</script>
