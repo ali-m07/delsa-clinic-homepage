@@ -1,0 +1,239 @@
+/**
+ * WPCode → CSS Snippet (جایگزین CSS قبلی که فقط page-id-761 بود)
+ * این را فعال کنید و snippet قدیمیِ page-id-761 را خاموش/حذف کنید.
+ *
+ * صفحه روانپزشکی = 676 — نه 761 (761 = مشاوره شغلی)
+ * بهتر: به‌جای این، کل department-delsa.php (نسخه 2.2.0) را به‌صورت PHP Snippet بچسبانید.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
+
+body.page-id-676,
+body.page-id-752,
+body.page-id-755,
+body.page-id-3225,
+body.page-id-759,
+body.page-id-761 {
+  --dp-ink: #0F2740;
+  --dp-teal: #1FA8A0;
+  --dp-sand: #F3F6F8;
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+}
+
+body.page-id-676 *,
+body.page-id-752 *,
+body.page-id-755 *,
+body.page-id-3225 *,
+body.page-id-759 *,
+body.page-id-761 * {
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+}
+
+body.page-id-676 .page-banner,
+body.page-id-752 .page-banner,
+body.page-id-755 .page-banner,
+body.page-id-3225 .page-banner,
+body.page-id-759 .page-banner,
+body.page-id-761 .page-banner,
+body.page-id-676 .page-title-block,
+body.page-id-752 .page-title-block,
+body.page-id-755 .page-title-block,
+body.page-id-3225 .page-title-block,
+body.page-id-759 .page-title-block,
+body.page-id-761 .page-title-block {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.page-id-676 #main,
+body.page-id-752 #main,
+body.page-id-755 #main,
+body.page-id-3225 #main,
+body.page-id-759 #main,
+body.page-id-761 #main,
+body.page-id-676 .site-main,
+body.page-id-752 .site-main,
+body.page-id-755 .site-main,
+body.page-id-3225 .site-main,
+body.page-id-759 .site-main,
+body.page-id-761 .site-main {
+  padding: 0.35rem 0 1.25rem !important;
+  margin: 0 !important;
+  background:
+    radial-gradient(ellipse 70% 40% at 100% 0%, rgba(31, 168, 160, 0.14), transparent 55%),
+    var(--dp-sand, #F3F6F8) !important;
+}
+
+body.page-id-676 #main > .container,
+body.page-id-752 #main > .container,
+body.page-id-755 #main > .container,
+body.page-id-3225 #main > .container,
+body.page-id-759 #main > .container,
+body.page-id-761 #main > .container {
+  max-width: 1360px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 1.15rem !important;
+}
+
+body.page-id-676 .about-section,
+body.page-id-752 .about-section,
+body.page-id-755 .about-section,
+body.page-id-3225 .about-section,
+body.page-id-759 .about-section,
+body.page-id-761 .about-section {
+  margin: 0 0 0.85rem !important;
+  padding: 1rem 1.05rem !important;
+  background: linear-gradient(145deg, #f8fbfc 0%, #fff 55%) !important;
+  border: 1px solid #e4ebf1 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 22px rgba(15, 39, 64, 0.05) !important;
+}
+
+body.page-id-676 .about-content,
+body.page-id-752 .about-content,
+body.page-id-755 .about-content,
+body.page-id-3225 .about-content,
+body.page-id-759 .about-content,
+body.page-id-761 .about-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+body.page-id-676 .about-section .row::before,
+body.page-id-752 .about-section .row::before,
+body.page-id-755 .about-section .row::before,
+body.page-id-3225 .about-section .row::before,
+body.page-id-759 .about-section .row::before,
+body.page-id-761 .about-section .row::before,
+body.page-id-676 .about-section .row::after,
+body.page-id-752 .about-section .row::after,
+body.page-id-755 .about-section .row::after,
+body.page-id-3225 .about-section .row::after,
+body.page-id-759 .about-section .row::after,
+body.page-id-761 .about-section .row::after {
+  display: none !important;
+  content: none !important;
+}
+
+body.page-id-676 .about-section .container,
+body.page-id-752 .about-section .container,
+body.page-id-755 .about-section .container,
+body.page-id-3225 .about-section .container,
+body.page-id-759 .about-section .container,
+body.page-id-761 .about-section .container {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body.page-id-676 .about-section .row,
+body.page-id-752 .about-section .row,
+body.page-id-755 .about-section .row,
+body.page-id-3225 .about-section .row,
+body.page-id-759 .about-section .row,
+body.page-id-761 .about-section .row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 1.15rem 1.35rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+body.page-id-676 .about-section .row > [class*="col-"],
+body.page-id-752 .about-section .row > [class*="col-"],
+body.page-id-755 .about-section .row > [class*="col-"],
+body.page-id-3225 .about-section .row > [class*="col-"],
+body.page-id-759 .about-section .row > [class*="col-"],
+body.page-id-761 .about-section .row > [class*="col-"] {
+  float: none !important;
+  width: auto !important;
+  max-width: none !important;
+  padding: 0 !important;
+  flex: 1 1 240px !important;
+}
+
+body.page-id-676 .about-section .row > .about-img,
+body.page-id-752 .about-section .row > .about-img,
+body.page-id-755 .about-section .row > .about-img,
+body.page-id-3225 .about-section .row > .about-img,
+body.page-id-759 .about-section .row > .about-img,
+body.page-id-761 .about-section .row > .about-img {
+  flex: 0.9 1 220px !important;
+  max-width: 380px !important;
+}
+
+body.page-id-676 .about-content h5,
+body.page-id-752 .about-content h5,
+body.page-id-755 .about-content h5,
+body.page-id-3225 .about-content h5,
+body.page-id-759 .about-content h5,
+body.page-id-761 .about-content h5 {
+  margin: 0 0 0.85rem !important;
+  padding: 0 0 0.45rem !important;
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.7rem) !important;
+  font-weight: 800 !important;
+  color: #0F2740 !important;
+  border-bottom: 3px solid #1FA8A0 !important;
+  line-height: 1.4 !important;
+}
+
+body.page-id-676 .about-img img,
+body.page-id-752 .about-img img,
+body.page-id-755 .about-img img,
+body.page-id-3225 .about-img img,
+body.page-id-759 .about-img img,
+body.page-id-761 .about-img img {
+  border-radius: 16px !important;
+  box-shadow: 0 12px 28px rgba(15, 39, 64, 0.12) !important;
+  width: 100% !important;
+}
+
+body.page-id-676 .wpb_wrapper h2,
+body.page-id-752 .wpb_wrapper h2,
+body.page-id-755 .wpb_wrapper h2,
+body.page-id-3225 .wpb_wrapper h2,
+body.page-id-759 .wpb_wrapper h2,
+body.page-id-761 .wpb_wrapper h2 {
+  color: #0F2740 !important;
+  border-bottom: 3px solid #1FA8A0 !important;
+  padding-bottom: 0.4rem !important;
+  margin: 1.25rem 0 0.75rem !important;
+  font-size: 1.25rem !important;
+}
+
+body.page-id-676 .wpb_wrapper ul,
+body.page-id-752 .wpb_wrapper ul,
+body.page-id-755 .wpb_wrapper ul,
+body.page-id-3225 .wpb_wrapper ul,
+body.page-id-759 .wpb_wrapper ul,
+body.page-id-761 .wpb_wrapper ul {
+  padding-right: 1.2rem !important;
+  margin: 0.5rem 0 1rem !important;
+}
+
+body.page-id-676 .swiper-wrapper,
+body.page-id-752 .swiper-wrapper,
+body.page-id-755 .swiper-wrapper,
+body.page-id-3225 .swiper-wrapper,
+body.page-id-759 .swiper-wrapper,
+body.page-id-761 .swiper-wrapper,
+body.page-id-676 .team-carousel,
+body.page-id-752 .team-carousel,
+body.page-id-755 .team-carousel,
+body.page-id-3225 .team-carousel,
+body.page-id-759 .team-carousel,
+body.page-id-761 .team-carousel {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+}

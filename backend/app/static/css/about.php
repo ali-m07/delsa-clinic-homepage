@@ -7,7 +7,7 @@
  * فقط UI درباره ما — CPT مشاوران را ثبت نمی‌کند.
  * تیم از پست‌های publish نوع delsa_consultant خوانده می‌شود.
  *
- * VERSION 3.5.9 — داستان تمام‌عرض جاستیفای
+ * VERSION 3.6.3 — گالری تمام‌عرض با ارتفاع کم
  */
 
 if (!defined('ABSPATH')) {
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 final class Delsa_About_Page {
   const CPT = 'delsa_consultant';
-  const VERSION = '3.5.9';
+  const VERSION = '3.6.3';
 
   public static function init() {
     add_shortcode('delsa_about', [__CLASS__, 'shortcode_about']);
@@ -78,6 +78,9 @@ final class Delsa_About_Page {
       'a' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png',
       'b' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png',
       'c' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png',
+      'd' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-07.png',
+      'e' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png',
+      'f' => 'https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-04.png',
     ];
     return $map[$file] ?? $map['hero'];
   }
@@ -156,10 +159,12 @@ final class Delsa_About_Page {
         </div>
         <div class="da-hero__veil" aria-hidden="true"></div>
         <div class="da-hero__inner">
-          <h1 id="da-title" data-da-reveal>کلینیک دلسا</h1>
-          <p class="da-hero__lead" data-da-reveal>جایی برای شنیده شدن، بدون قضاوت. مشاوره و روان‌شناسی در سعادت‌آباد.</p>
+          <p class="da-hero__brand" data-da-reveal>کلینیک دلسا</p>
+          <p class="da-hero__kicker" data-da-reveal>نوبت‌دهی</p>
+          <h1 id="da-title" data-da-reveal>وقت یک گفت‌وگوی امن است؟</h1>
+          <p class="da-hero__lead" data-da-reveal>نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
           <div class="da-hero__actions" data-da-reveal>
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">رزرو وقت</a>
+            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
             <a class="da-btn da-btn--ghost" href="<?php echo esc_url($list); ?>">مشاوران</a>
           </div>
         </div>
@@ -177,12 +182,43 @@ final class Delsa_About_Page {
             <div class="da-story__copy">
               <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی. فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
             </div>
-            <div class="da-mosaic" aria-label="فضای کلینیک">
-              <img class="da-mosaic__main" src="<?php echo esc_url(self::img('story')); ?>" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
-              <div class="da-mosaic__stack">
-                <img src="<?php echo esc_url(self::img('a')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
-                <img src="<?php echo esc_url(self::img('b')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
-                <img src="<?php echo esc_url(self::img('c')); ?>" alt="" width="640" height="420" loading="lazy" decoding="async">
+          </section>
+
+          <section class="da-panel" data-da-reveal aria-labelledby="da-space-title">
+            <header class="da-panel__head">
+              <div>
+                <p class="da-kicker">محیط</p>
+                <h2 id="da-space-title">فضای کلینیک دلسا</h2>
+              </div>
+            </header>
+            <div class="da-gallery" id="da-gallery" aria-roledescription="carousel" aria-label="گالری فضای کلینیک">
+              <div class="da-gallery__frame">
+                <div class="da-gallery__track">
+                  <figure class="da-gallery__slide is-active" data-da-slide>
+                    <img src="<?php echo esc_url(self::img('story')); ?>" alt="فضای کلینیک دلسا" width="1200" height="750" loading="eager" decoding="async">
+                  </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('a')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('b')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('c')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('d')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
+                  <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                    <img src="<?php echo esc_url(self::img('e')); ?>" alt="" width="1200" height="750" loading="lazy" decoding="async">
+                  </figure>
+                </div>
+                <button type="button" class="da-gallery__nav da-gallery__nav--prev" id="da-gal-prev" aria-label="عکس قبلی">‹</button>
+                <button type="button" class="da-gallery__nav da-gallery__nav--next" id="da-gal-next" aria-label="عکس بعدی">›</button>
+              </div>
+              <div class="da-gallery__bar">
+                <p class="da-gallery__count" id="da-gal-count" aria-live="polite">۱ / ۶</p>
+                <div class="da-gallery__dots" id="da-gal-dots" role="tablist" aria-label="انتخاب عکس"></div>
               </div>
             </div>
           </section>
@@ -218,17 +254,6 @@ final class Delsa_About_Page {
             <?php else : ?>
             <p class="da-team__empty">مشاوران از فهرست کلینیک بارگذاری می‌شوند. <a class="da-textlink" href="<?php echo esc_url($list); ?>">مشاهده همه مشاوران</a></p>
             <?php endif; ?>
-          </section>
-
-          <section class="da-panel da-panel--cta" data-da-reveal aria-labelledby="da-cta-title">
-            <header class="da-panel__head da-panel__head--center">
-              <div>
-                <p class="da-kicker">نوبت‌دهی</p>
-                <h2 id="da-cta-title">وقت یک گفت‌وگوی امن است؟</h2>
-              </div>
-            </header>
-            <p class="da-cta__lead">نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
-            <a class="da-btn da-btn--primary" href="<?php echo esc_url($book); ?>">درخواست وقت ملاقات</a>
           </section>
         </div>
       </div>
@@ -276,10 +301,11 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
 }
 .delsa-about *,.delsa-about *::before,.delsa-about *::after{box-sizing:border-box}
 .delsa-about img{max-width:100%;height:auto;display:block}
-.delsa-about .da-wrap{width:min(1180px,calc(100% - 1.25rem));margin:0 auto}
+.delsa-about .da-wrap{width:min(1360px,calc(100% - 2.5rem));margin:0 auto}
+@media(min-width:1600px){.delsa-about .da-wrap{width:min(1480px,calc(100% - 3.5rem))}}
 
 .delsa-about .da-hero{
-  position:relative !important;height:280px !important;min-height:280px !important;max-height:280px !important;
+  position:relative !important;height:auto !important;min-height:360px !important;max-height:none !important;
   display:flex !important;align-items:flex-end !important;color:#fff;overflow:hidden !important
 }
 .delsa-about .da-hero__media{position:absolute;inset:0;overflow:hidden}
@@ -289,20 +315,29 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
   animation:da-ken 12s ease-in-out infinite alternate
 }
 .delsa-about .da-hero__veil{position:absolute;inset:0;background:
-  radial-gradient(ellipse 50% 40% at 20% 80%,rgba(31,168,160,.12),transparent 55%),
-  linear-gradient(90deg,transparent 0%,transparent 40%,rgba(18,42,50,.24) 70%,rgba(18,42,50,.5) 100%);
+  linear-gradient(0deg,rgba(10,27,46,.55) 0%,rgba(10,27,46,.28) 45%,rgba(10,27,46,.35) 100%),
+  linear-gradient(90deg,rgba(10,27,46,.15) 0%,rgba(10,27,46,.28) 42%,rgba(10,27,46,.58) 100%);
   opacity:0;animation:da-fade .75s var(--ease) .05s forwards
 }
 .delsa-about .da-hero__inner{
-  position:relative;z-index:1;width:min(1180px,calc(100% - 1.25rem));margin:0 auto;
-  padding:1.25rem 0 1.2rem;text-shadow:0 6px 22px rgba(8,18,24,.25)
+  position:relative;z-index:1;width:min(1360px,calc(100% - 2.5rem));margin:0 auto;
+  padding:1.6rem 0 1.55rem;text-shadow:0 2px 18px rgba(8,18,24,.4),0 8px 28px rgba(8,18,24,.3)
+}
+@media(min-width:1600px){.delsa-about .da-hero__inner{width:min(1480px,calc(100% - 3.5rem))}}
+.delsa-about .da-hero__brand{
+  margin:0 0 .35rem;font-size:clamp(1.55rem,1.2rem + 1.2vw,2.35rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1.05;color:#fff
+}
+.delsa-about .da-hero__kicker{
+  margin:0 0 .35rem;font-size:.88rem;font-weight:700;letter-spacing:.04em;
+  color:rgba(159,214,210,.95)
 }
 .delsa-about .da-hero h1{
-  margin:0 0 .4rem;font-size:clamp(2.2rem,1.5rem + 2.4vw,3.4rem);font-weight:800;
-  letter-spacing:-.05em;line-height:.98;text-wrap:balance
+  margin:0 0 .45rem;font-size:clamp(1.55rem,1.25rem + 1.1vw,2.35rem);font-weight:800;
+  letter-spacing:-.04em;line-height:1.15;text-wrap:balance;max-width:22ch
 }
 .delsa-about .da-hero__lead{
-  margin:0 0 1rem;max-width:34rem;font-size:clamp(1.02rem,.98rem + .2vw,1.12rem);
+  margin:0 0 1.1rem;max-width:36rem;font-size:clamp(1.02rem,.98rem + .2vw,1.12rem);
   line-height:1.75;color:rgba(255,255,255,.93)
 }
 .delsa-about .da-hero__actions{display:flex;flex-wrap:wrap;gap:.6rem}
@@ -314,6 +349,8 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
 .delsa-about .da-hero [data-da-reveal].is-in:nth-child(1){animation-delay:.04s}
 .delsa-about .da-hero [data-da-reveal].is-in:nth-child(2){animation-delay:.1s}
 .delsa-about .da-hero [data-da-reveal].is-in:nth-child(3){animation-delay:.16s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(4){animation-delay:.22s}
+.delsa-about .da-hero [data-da-reveal].is-in:nth-child(5){animation-delay:.28s}
 @media(prefers-reduced-motion:reduce){
   .delsa-about .da-hero__photo{animation:none;transform:none}
   .delsa-about .da-hero__veil,.delsa-about [data-da-reveal]{opacity:1;transform:none;animation:none}
@@ -349,7 +386,7 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
 }
 
 .delsa-about .da-story__copy{
-  margin:0 0 1rem;display:block;width:100%;max-width:none;
+  margin:0;display:block;width:100%;max-width:none;
   text-align:justify;text-align-last:right;text-justify:inter-word
 }
 .delsa-about .da-story__copy p{
@@ -358,25 +395,53 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
   text-align:justify;text-align-last:right;text-justify:inter-word;text-wrap:pretty
 }
 
-.delsa-about .da-mosaic{
-  display:grid;grid-template-columns:1.25fr 1fr;gap:.5rem;
-  height:clamp(300px,38vw,400px)
+.delsa-about .da-gallery{margin:0;max-width:640px}
+.delsa-about .da-gallery__frame{
+  position:relative;overflow:hidden;border-radius:12px;background:#d7e2ea;
+  border:1px solid var(--line);height:220px
 }
-.delsa-about .da-mosaic__main{
-  width:100%;height:100%;object-fit:cover;border-radius:10px;background:#d7e2ea;
-  border:1px solid var(--line)
+.delsa-about .da-gallery__track{position:relative;width:100%;height:100%}
+.delsa-about .da-gallery__slide{
+  position:absolute;inset:0;margin:0;opacity:0;transform:translateX(-12px);
+  pointer-events:none;transition:opacity .45s var(--ease),transform .45s var(--ease)
 }
-.delsa-about .da-mosaic__stack{
-  display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:.5rem;min-height:0;height:100%
+.delsa-about .da-gallery__slide.is-active{
+  opacity:1;transform:none;pointer-events:auto;z-index:1
 }
-.delsa-about .da-mosaic__stack img{
-  width:100%;height:100%;min-height:0;object-fit:cover;border-radius:10px;background:#d7e2ea;
-  border:1px solid var(--line)
+.delsa-about .da-gallery__slide img{
+  width:100%;height:100%;object-fit:cover;object-position:center;display:block
 }
-@media(max-width:720px){
-  .delsa-about .da-mosaic{grid-template-columns:1fr;height:auto}
-  .delsa-about .da-mosaic__main{height:200px}
-  .delsa-about .da-mosaic__stack{grid-template-rows:none;grid-template-columns:repeat(3,1fr);height:110px}
+.delsa-about .da-gallery__nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  width:36px;height:36px;border-radius:50%;border:0;padding:0;
+  background:rgba(15,39,64,.72);color:#fff;font-size:1.25rem;line-height:1;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s var(--ease)
+}
+.delsa-about .da-gallery__nav:hover{background:rgba(15,39,64,.88)}
+.delsa-about .da-gallery__nav--prev{right:.65rem}
+.delsa-about .da-gallery__nav--next{left:.65rem}
+.delsa-about .da-gallery__bar{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:.55rem
+}
+.delsa-about .da-gallery__count{
+  margin:0;font-size:.86rem;font-weight:650;color:var(--muted);font-variant-numeric:tabular-nums
+}
+.delsa-about .da-gallery__dots{display:flex;gap:.35rem;flex-wrap:wrap}
+.delsa-about .da-gallery__dot{
+  width:7px;height:7px;border-radius:999px;border:0;padding:0;cursor:pointer;
+  background:rgba(15,39,64,.18);transform:scaleX(1);transform-origin:center;
+  transition:transform .25s var(--ease),background .25s
+}
+.delsa-about .da-gallery__dot.is-active{background:var(--teal);transform:scaleX(2.2)}
+@media(max-width:640px){
+  .delsa-about .da-gallery{max-width:none}
+  .delsa-about .da-gallery__frame{height:180px}
+  .delsa-about .da-gallery__nav{width:32px;height:32px;font-size:1.1rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .delsa-about .da-gallery__slide{transition:none}
 }
 
 .delsa-about .da-team__row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.65rem}
@@ -398,8 +463,8 @@ body.delsa-about-page .container-fluid{padding-left:0 !important;padding-right:0
 
 .delsa-about .da-cta__lead{margin:0 auto 1rem;max-width:32rem;color:var(--muted);font-size:1.02rem;line-height:1.8}
 @media(max-width:640px){
-  .delsa-about .da-hero{height:250px !important;min-height:250px !important;max-height:250px !important}
-  .delsa-about .da-hero__inner{padding:1.05rem 0 1rem}
+  .delsa-about .da-hero{min-height:320px !important}
+  .delsa-about .da-hero__inner{padding:1.2rem 0 1.15rem}
   .delsa-about .da-btn{flex:1 1 auto}
   .delsa-about .da-panel{padding:1rem}
   .delsa-about .da-panel__head--row{flex-wrap:wrap}
@@ -417,22 +482,73 @@ CSS;
   function show(el) { el.classList.add("is-in"); }
   if (reduce || !("IntersectionObserver" in window)) {
     nodes.forEach(show);
-    return;
-  }
-  root.querySelectorAll(".da-hero [data-da-reveal]").forEach(function (el, i) {
-    window.setTimeout(function () { show(el); }, 60 + i * 80);
-  });
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      show(entry.target);
-      io.unobserve(entry.target);
+  } else {
+    root.querySelectorAll(".da-hero [data-da-reveal]").forEach(function (el, i) {
+      window.setTimeout(function () { show(el); }, 60 + i * 80);
     });
-  }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
-  nodes.forEach(function (el) {
-    if (el.closest(".da-hero")) return;
-    io.observe(el);
-  });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        show(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -6% 0px" });
+    nodes.forEach(function (el) {
+      if (el.closest(".da-hero")) return;
+      io.observe(el);
+    });
+  }
+
+  /* گالری فضای کلینیک — عوض‌صفحه */
+  (function initGallery() {
+    var gal = document.getElementById("da-gallery");
+    if (!gal) return;
+    var slides = Array.prototype.slice.call(gal.querySelectorAll("[data-da-slide]"));
+    var dotsWrap = document.getElementById("da-gal-dots");
+    var countEl = document.getElementById("da-gal-count");
+    var prev = document.getElementById("da-gal-prev");
+    var next = document.getElementById("da-gal-next");
+    if (slides.length < 2) return;
+    var idx = 0, timer = null, gap = 5500;
+    var fa = "۰۱۲۳۴۵۶۷۸۹";
+    function toFa(n) { return String(n).replace(/\d/g, function (d) { return fa[d]; }); }
+    function go(n) {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        var on = i === idx;
+        slide.classList.toggle("is-active", on);
+        slide.setAttribute("aria-hidden", on ? "false" : "true");
+      });
+      if (dotsWrap) {
+        Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+          dot.classList.toggle("is-active", i === idx);
+          dot.setAttribute("aria-selected", i === idx ? "true" : "false");
+        });
+      }
+      if (countEl) countEl.textContent = toFa(idx + 1) + " / " + toFa(slides.length);
+    }
+    function arm() {
+      if (timer) clearInterval(timer);
+      if (!reduce) timer = setInterval(function () { go(idx + 1); }, gap);
+    }
+    if (dotsWrap) {
+      slides.forEach(function (_, i) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "da-gallery__dot" + (i === 0 ? " is-active" : "");
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-label", "عکس " + (i + 1));
+        btn.addEventListener("click", function () { go(i); arm(); });
+        dotsWrap.appendChild(btn);
+      });
+    }
+    if (prev) prev.addEventListener("click", function () { go(idx - 1); arm(); });
+    if (next) next.addEventListener("click", function () { go(idx + 1); arm(); });
+    gal.addEventListener("mouseenter", function () { if (timer) clearInterval(timer); });
+    gal.addEventListener("mouseleave", arm);
+    go(0);
+    arm();
+  })();
 })();
 JS;
   }

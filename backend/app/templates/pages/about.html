@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block title %}{{ page.meta_title or page.title }} | کلینیک دلسا{% endblock %}
 {% block content %}
-<div class="delsa-about" dir="rtl" data-da-version="3.5.9">
+<div class="delsa-about" dir="rtl" data-da-version="3.6.3">
   <section class="da-hero" aria-labelledby="da-title">
     <div class="da-hero__media" aria-hidden="true">
       <img class="da-hero__photo" src="/static/img/clinic/room-01.png" alt="" width="1600" height="900" decoding="async" fetchpriority="high">
     </div>
     <div class="da-hero__veil" aria-hidden="true"></div>
     <div class="da-hero__inner">
-      <h1 id="da-title" data-da-reveal>کلینیک دلسا</h1>
-      <p class="da-hero__lead" data-da-reveal>جایی برای شنیده شدن، بدون قضاوت. مشاوره و روان‌شناسی در سعادت‌آباد.</p>
+      <p class="da-hero__brand" data-da-reveal>کلینیک دلسا</p>
+      <p class="da-hero__kicker" data-da-reveal>نوبت‌دهی</p>
+      <h1 id="da-title" data-da-reveal>وقت یک گفت‌وگوی امن است؟</h1>
+      <p class="da-hero__lead" data-da-reveal>نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
       <div class="da-hero__actions" data-da-reveal>
-        <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">رزرو وقت</a>
+        <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">درخواست وقت ملاقات</a>
         <a class="da-btn da-btn--ghost" href="/مشاوران">مشاوران</a>
       </div>
     </div>
@@ -29,12 +31,43 @@
         <div class="da-story__copy">
           <p>دلسا گروهی از مشاوران و روان‌شناسان است که در مسیر فردی، زوجی و خانواده همراهتان می‌مانند. کارمان علمی است، اما زبانش انسانی. فضای کلینیک آرام و محرمانه است تا بتوانید راحت حرف بزنید و قدم‌به‌قدم جلو بروید.</p>
         </div>
-        <div class="da-mosaic" aria-label="فضای کلینیک">
-          <img class="da-mosaic__main" src="/static/img/clinic/room-08.png" alt="فضای کلینیک دلسا" width="880" height="660" loading="lazy" decoding="async">
-          <div class="da-mosaic__stack">
-            <img src="/static/img/clinic/room-05.png" alt="" width="640" height="420" loading="lazy" decoding="async">
-            <img src="/static/img/clinic/room-02.png" alt="" width="640" height="420" loading="lazy" decoding="async">
-            <img src="/static/img/clinic/room-06.png" alt="" width="640" height="420" loading="lazy" decoding="async">
+      </section>
+
+      <section class="da-panel" data-da-reveal aria-labelledby="da-space-title">
+        <header class="da-panel__head">
+          <div>
+            <p class="da-kicker">محیط</p>
+            <h2 id="da-space-title">فضای کلینیک دلسا</h2>
+          </div>
+        </header>
+        <div class="da-gallery" id="da-gallery" aria-roledescription="carousel" aria-label="گالری فضای کلینیک">
+          <div class="da-gallery__frame">
+            <div class="da-gallery__track">
+              <figure class="da-gallery__slide is-active" data-da-slide>
+                <img src="/static/img/clinic/room-08.png" alt="فضای کلینیک دلسا" width="1200" height="750" loading="eager" decoding="async">
+              </figure>
+              <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                <img src="/static/img/clinic/room-05.png" alt="" width="1200" height="750" loading="lazy" decoding="async">
+              </figure>
+              <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                <img src="/static/img/clinic/room-02.png" alt="" width="1200" height="750" loading="lazy" decoding="async">
+              </figure>
+              <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                <img src="/static/img/clinic/room-06.png" alt="" width="1200" height="750" loading="lazy" decoding="async">
+              </figure>
+              <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                <img src="/static/img/clinic/room-07.png" alt="" width="1200" height="750" loading="lazy" decoding="async">
+              </figure>
+              <figure class="da-gallery__slide" data-da-slide aria-hidden="true">
+                <img src="/static/img/clinic/room-03.png" alt="" width="1200" height="750" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <button type="button" class="da-gallery__nav da-gallery__nav--prev" id="da-gal-prev" aria-label="عکس قبلی">‹</button>
+            <button type="button" class="da-gallery__nav da-gallery__nav--next" id="da-gal-next" aria-label="عکس بعدی">›</button>
+          </div>
+          <div class="da-gallery__bar">
+            <p class="da-gallery__count" id="da-gal-count" aria-live="polite">۱ / ۶</p>
+            <div class="da-gallery__dots" id="da-gal-dots" role="tablist" aria-label="انتخاب عکس"></div>
           </div>
         </div>
       </section>
@@ -66,17 +99,6 @@
           </a>
           {% endfor %}
         </div>
-      </section>
-
-      <section class="da-panel da-panel--cta" data-da-reveal aria-labelledby="da-cta-title">
-        <header class="da-panel__head da-panel__head--center">
-          <div>
-            <p class="da-kicker">نوبت‌دهی</p>
-            <h2 id="da-cta-title">وقت یک گفت‌وگوی امن است؟</h2>
-          </div>
-        </header>
-        <p class="da-cta__lead">نوبت حضوری یا هماهنگی از طریق فرم، هر طور راحت‌ترید.</p>
-        <a class="da-btn da-btn--primary" href="/فرم-نوبت-دهی">درخواست وقت ملاقات</a>
       </section>
     </div>
   </div>

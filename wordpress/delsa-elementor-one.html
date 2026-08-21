@@ -1,4 +1,4 @@
-<!-- DELSA homepage · Elementor HTML Widget · v3.6.1 -->
+<!-- DELSA homepage · Elementor HTML Widget · v3.7.2 -->
 <!-- پنل‌های کادر‌دار، فشرده، روشن — کل محتوا را یک‌جا پیست کنید -->
 <!-- اگر انیمیشن کار نکرد: همین اسکریپت پایین را در Elementor → Custom Code → Footer هم بگذارید -->
 
@@ -38,10 +38,13 @@ a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 .wrap {
-  width: min(1080px, calc(100% - 1.75rem));
+  width: min(1360px, calc(100% - 2.5rem));
   margin-inline: auto;
 }
-.wrap--narrow { width: min(720px, calc(100% - 1.75rem)); }
+@media (min-width: 1600px) {
+  .wrap { width: min(1480px, calc(100% - 3.5rem)); }
+}
+.wrap--narrow { width: min(820px, calc(100% - 2rem)); }
 .dir-ltr { direction: ltr; display: inline-block; unicode-bidi: embed; }
 
 .elementor-widget-html,
@@ -111,7 +114,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   margin-inline: auto;
 }
 .hero__copy {
-  max-width: 36rem; position: relative; z-index: 6;
+  max-width: min(40rem, 100%); position: relative; z-index: 6;
   text-shadow: 0 2px 18px rgba(8,18,24,.45), 0 10px 36px rgba(8,18,24,.35);
 }
 @media (max-width: 767px) {
@@ -149,19 +152,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .hero__dot.is-active { background: #fff; transform: scaleX(1); }
 
 
-.home-contact {
-  background: #fff; border-bottom: 1px solid var(--line);
-}
-.home-contact__inner {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: .45rem .85rem; padding: .7rem 0; font-size: .95rem;
-}
-.home-contact__phone {
-  font-weight: 750; color: var(--navy); text-decoration: underline; text-underline-offset: 3px;
-}
-.home-contact__phone:hover { color: var(--teal-deep); }
-.home-contact__sep { color: rgba(15,39,64,.35); }
-.home-contact__note { color: #3F4F5E; font-weight: 500; }
 
 /* Body stack — framed panels */
 .home-body { padding: 1.4rem 0 5.25rem; background: var(--ivory); }
@@ -229,7 +219,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (min-width: 980px) { .services-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 .tile {
-  display: flex; flex-direction: column; border-radius: 14px; overflow: hidden;
+  display: flex; flex-direction: column; height: 100%; border-radius: 14px; overflow: hidden;
   background: #FAFBFC; border: 1px solid var(--line);
   transition: transform .25s var(--ease), box-shadow .25s, border-color .25s;
 }
@@ -239,17 +229,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-color: rgba(31,168,160,.4);
 }
 .tile__media { position: relative; aspect-ratio: 16/11; overflow: hidden; background: #ddd5c8; }
-.tile__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.tile__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); filter: saturate(.75) contrast(1.05) brightness(.92) sepia(.12); }
 .tile:hover .tile__media img { transform: scale(1.05); }
 .tile__shade {
   position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, transparent 55%, rgba(26,47,58,.22) 100%);
+  background:
+    linear-gradient(180deg, rgba(15,39,64,.08) 0%, rgba(15,39,64,.38) 100%),
+    linear-gradient(135deg, rgba(31,168,160,.25), transparent 55%);
 }
 .tile__body { padding: .9rem 1rem 1.05rem; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
 .tile__body h3 { margin: 0; font-size: 1.08rem; font-weight: 750; }
 .tile__body p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; flex: 1; }
 .tile__cta {
-  margin-top: .6rem; align-self: flex-start;
+  margin-top: auto; align-self: flex-start;
   display: inline-flex; align-items: center; justify-content: center;
   padding: .5rem 1.05rem; border-radius: 12px;
   font-size: .92rem; font-weight: 700; color: #fff;
@@ -265,36 +257,88 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border: 1px solid var(--line);
 }
 .why-card__icon {
-  width: 42px; height: 42px; border-radius: 12px; margin-bottom: .6rem;
+  width: 44px; height: 44px; border-radius: 12px; margin-bottom: .65rem;
   display: inline-flex; align-items: center; justify-content: center;
-  background: rgba(196,132,106,.2); color: #A86B52; font-size: 1.15rem;
-  font-weight: 700;
+  background: rgba(31,168,160,.12); color: var(--teal-deep);
 }
+.why-card__icon svg { width: 22px; height: 22px; display: block; }
 .why-card h3 { margin: 0 0 .35rem; font-size: 1.05rem; font-weight: 750; }
 .why-card p { margin: 0; font-size: .95rem; color: var(--muted); line-height: 1.7; }
-.quote {
-  margin: .85rem 0 0; padding: 1.05rem 1.15rem; border-radius: 12px;
-  background: #F4F8F8; border: 1px solid rgba(58,143,138,.18);
+.testimonials {
+  margin: .95rem 0 0;
+  padding: 1.15rem 1.2rem 1rem;
+  border-radius: 14px;
+  background: #F4F8F8;
+  border: 1px solid rgba(58,143,138,.18);
+  position: relative;
+  overflow: hidden;
 }
-.quote p {
-  margin: 0 0 .45rem; font-size: 1.05rem; font-weight: 550; line-height: 1.75;
+.testimonials__label {
+  margin: 0 0 .65rem;
+  font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  color: var(--teal-deep);
 }
-.quote figcaption { font-size: .88rem; color: var(--muted); }
+.testimonials__viewport { position: relative; min-height: 7.5rem; }
+.testimonials__slide {
+  position: absolute; inset: 0;
+  opacity: 0; transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.testimonials__slide.is-active {
+  opacity: 1; transform: none; pointer-events: auto; position: relative;
+}
+.testimonials__slide blockquote {
+  margin: 0; padding: 0; border: 0 !important; border-inline-start: 0 !important;
+  box-shadow: none; quotes: none;
+}
+.testimonials__slide blockquote::before,
+.testimonials__slide blockquote::after { content: none !important; display: none !important; }
+.testimonials__text {
+  margin: 0 0 .55rem; font-size: 1.06rem; font-weight: 550; line-height: 1.8; color: var(--navy);
+}
+.testimonials__meta {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem .75rem;
+  font-size: .88rem; color: var(--muted);
+}
+.testimonials__name { font-weight: 700; color: #3F4F5E; }
+.testimonials__role { opacity: .9; }
+.testimonials__dots {
+  display: flex; justify-content: center; gap: .45rem; margin-top: .85rem; padding: 0;
+}
+.testimonials__dot {
+  width: 8px; height: 8px; border-radius: 999px; border: 0; padding: 0;
+  background: rgba(15,39,64,.18); cursor: pointer;
+  transform: scaleX(1);
+  transform-origin: center;
+  transition: transform .25s var(--ease), background .25s;
+}
+.testimonials__dot.is-active {
+  background: var(--teal);
+  transform: scaleX(2.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__slide { transition: none; }
+}
 
 /* Space */
 .space-mosaic { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; }
 @media (min-width: 800px) {
   .space-mosaic {
     grid-template-columns: 1.55fr 1fr 1fr;
-    grid-template-rows: 170px 170px;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    height: clamp(320px, 42vw, 420px);
   }
   .space-mosaic__main { grid-row: span 2; }
 }
 .space-mosaic figure {
-  margin: 0; overflow: hidden; border-radius: 12px; min-height: 120px;
-  border: 1px solid var(--line);
+  margin: 0; overflow: hidden; border-radius: 12px;
+  aspect-ratio: 4 / 3; border: 1px solid var(--line); min-height: 0;
 }
-.space-mosaic img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 800px) {
+  .space-mosaic figure { aspect-ratio: auto; height: 100%; }
+}
+.space-mosaic img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
 /* CTA */
 .cta-lead {
@@ -336,20 +380,21 @@ a.step .step__hint {
   background: #FAFBFC; overflow: hidden;
 }
 .faq summary {
-  cursor: pointer; list-style: none; padding: 1.1rem 1.2rem;
-  font-weight: 750; font-size: 1.1rem; color: var(--navy);
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  cursor: pointer; list-style: none; padding: 1.05rem 1.1rem;
+  font-weight: 750; font-size: 1.05rem; color: var(--navy);
+  display: flex; align-items: center; gap: .85rem;
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
   content: "+"; width: 40px; height: 40px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(31,168,160,.18); color: var(--teal-deep); flex: 0 0 auto;
+  margin-inline-start: auto;
   font-size: 1.45rem; font-weight: 700; line-height: 1;
-  transition: transform .3s var(--ease), background .25s;
+  transition: transform .3s var(--ease), background .25s, content .01s;
 }
 .faq details[open] summary::after {
-  content: "–"; background: rgba(31,168,160,.28); transform: rotate(180deg);
+  content: "×"; background: rgba(31,168,160,.28); transform: rotate(90deg);
 }
 .faq__body {
   display: grid; grid-template-rows: 0fr;
@@ -362,22 +407,23 @@ a.step .step__hint {
 }
 
 .wa-dock {
-  position: fixed; left: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-  z-index: 9000; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem;
+  position: fixed; left: 1rem; bottom: calc(1.1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 9000; width: 56px; height: 56px;
 }
 @media (max-width: 1023px) {
-  .wa-dock { bottom: calc(5.1rem + env(safe-area-inset-bottom, 0px)); left: .85rem; }
+  .wa-dock { bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); left: .85rem; }
 }
 .whatsapp-float {
-  width: 52px; height: 52px; border-radius: 50%;
+  width: 56px; height: 56px; border-radius: 50%;
   background: #25D366; color: #fff;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 12px 28px rgba(37,211,102,.35);
 }
 .wa-dock__close {
-  width: 22px; height: 22px; border-radius: 50%; border: 0; padding: 0;
-  background: rgba(15,39,64,.72); color: #fff; font-size: 12px; line-height: 1;
-  cursor: pointer; align-self: flex-end;
+  position: absolute; top: -4px; right: -4px; z-index: 2;
+  width: 20px; height: 20px; border-radius: 50%; border: 2px solid #fff; padding: 0;
+  background: #0F2740; color: #fff; font-size: 11px; line-height: 1;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
 }
 .wa-dock.is-hidden { display: none; }
 .mobile-cta {
@@ -404,7 +450,7 @@ a.step .step__hint {
 }
 </style>
 
-<div class="delsa-home" id="delsa-home" data-home-version="3.6.1" dir="rtl" lang="fa">
+<div class="delsa-home" id="delsa-home" data-home-version="3.7.2" dir="rtl" lang="fa">
 <main id="main">
   <section class="hero" id="hero">
     <div class="hero__media" aria-hidden="true">
@@ -426,29 +472,20 @@ a.step .step__hint {
         <p class="hero__lead" data-hero-item>مسیر سلامت روان را ساده، امن و تخصصی طی کنید؛ با تیمی که واقعاً کنارتان می‌ماند.</p>
         <div class="hero__actions" data-hero-item>
           <a class="btn btn--primary" href="https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/">درخواست وقت ملاقات</a>
-          <a class="btn btn--ghost" href="tel:+989025680372" aria-label="تماس مستقیم تلفنی با شماره ۰۹۰۲۵۶۸۰۳۷۲">تماس مستقیم ۰۹۰۲-۵۶۸۰۳۷۲</a>
+          <a class="btn btn--ghost" href="tel:+989025680372" aria-label="تماس تلفنی با پذیرش کلینیک دلسا">تماس تلفنی</a>
         </div>
       </div>
     </div>
     <div class="hero__dots" id="hero-dots" role="tablist" aria-label="اسلایدهای فضای کلینیک"></div>
   </section>
 
-  <div class="home-contact" data-reveal>
-    <div class="wrap home-contact__inner">
-      <a class="home-contact__phone dir-ltr" href="tel:+989025680372">۰۹۰۲-۵۶۸۰۳۷۲</a>
-      <span class="home-contact__sep" aria-hidden="true">·</span>
-      <a class="home-contact__phone dir-ltr" href="tel:+982188682003">۰۲۱-۸۸۶۸۲۰۰۳</a>
-      <span class="home-contact__note">تماس مستقیم با پذیرش</span>
-    </div>
-  </div>
-
   <div class="home-body">
     <div class="wrap home-stack">
 
       <ul class="trust-row" aria-label="آمار کلینیک" data-reveal>
-        <li><strong data-count="15" data-prefix="+">۰</strong><span>سال تجربه تخصصی</span></li>
-        <li><strong data-count="6">۰</strong><span>دپارتمان چندتخصصی</span></li>
-        <li><strong data-count="24" data-suffix="/۷">۰</strong><span>پشتیبانی هماهنگی</span></li>
+        <li><strong data-count="15" data-prefix="+">+۱۵</strong><span>سال تجربه تخصصی</span></li>
+        <li><strong data-count="6">۶</strong><span>دپارتمان چندتخصصی</span></li>
+        <li><strong data-count="24" data-suffix="/7">۲۴/۷</strong><span>پشتیبانی هماهنگی</span></li>
       </ul>
 
       <section class="home-panel" id="services" data-reveal aria-labelledby="home-services-title">
@@ -497,27 +534,69 @@ a.step .step__hint {
         </header>
         <div class="why-grid">
           <article class="why-card">
-            <div class="why-card__icon" aria-hidden="true">✦</div>
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
             <h3>تیم تخصصی</h3>
             <p>روان‌شناسان و روان‌پزشکان مجرب با رویکرد علمی و انسانی</p>
           </article>
           <article class="why-card">
-            <div class="why-card__icon" aria-hidden="true">◷</div>
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg>
+            </div>
             <h3>هماهنگی سریع</h3>
             <p>ثبت درخواست آنلاین و پاسخگویی تیم پذیرش در اسرع وقت</p>
           </article>
           <article class="why-card">
-            <div class="why-card__icon" aria-hidden="true">◎</div>
+            <div class="why-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><circle cx="12" cy="14" r="2"/></svg>
+            </div>
             <h3>حضوری و آنلاین</h3>
             <p>انتخاب روش مشاوره متناسب با شرایط و نیاز شما</p>
           </article>
         </div>
-        <figure class="quote">
-          <blockquote>
-            <p>«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
-            <figcaption>مراجع کلینیک دلسا</figcaption>
-          </blockquote>
-        </figure>
+        <div class="testimonials" id="home-testimonials" data-testimonials aria-roledescription="carousel" aria-label="نظر مراجعان">
+          <p class="testimonials__label">نظر مراجعان</p>
+          <div class="testimonials__viewport">
+            <article class="testimonials__slide is-active" data-t-slide aria-hidden="false">
+              <blockquote>
+                <p class="testimonials__text">«فضای کلینیک آرام بود و برای اولین بار احساس کردم واقعاً شنیده می‌شوم.»</p>
+                <footer class="testimonials__meta">
+                  <span class="testimonials__name">سارا م.</span>
+                  <span class="testimonials__role">مراجع روان‌درمانی</span>
+                </footer>
+              </blockquote>
+            </article>
+            <article class="testimonials__slide" data-t-slide aria-hidden="true">
+              <blockquote>
+                <p class="testimonials__text">«هماهنگی نوبت سریع بود و مشاور با دقت و احترام مسیر را برامون روشن کرد.»</p>
+                <footer class="testimonials__meta">
+                  <span class="testimonials__name">امیر و ن.</span>
+                  <span class="testimonials__role">مراجع زوج‌درمانی</span>
+                </footer>
+              </blockquote>
+            </article>
+            <article class="testimonials__slide" data-t-slide aria-hidden="true">
+              <blockquote>
+                <p class="testimonials__text">«برای فرزندمان فضای امن و صمیمی بود؛ بعد از چند جلسه آرامش بیشتری در خانه حس کردیم.»</p>
+                <footer class="testimonials__meta">
+                  <span class="testimonials__name">مریم ک.</span>
+                  <span class="testimonials__role">والد مراجع کودک</span>
+                </footer>
+              </blockquote>
+            </article>
+            <article class="testimonials__slide" data-t-slide aria-hidden="true">
+              <blockquote>
+                <p class="testimonials__text">«هم حضوری و هم آنلاین کیفیت یکسانی داشت؛ حس می‌کنم تیم واقعاً کنارم است.»</p>
+                <footer class="testimonials__meta">
+                  <span class="testimonials__name">رضا پ.</span>
+                  <span class="testimonials__role">مراجع مشاوره شغلی</span>
+                </footer>
+              </blockquote>
+            </article>
+          </div>
+          <div class="testimonials__dots" id="testimonials-dots" role="tablist" aria-label="انتخاب نظر"></div>
+        </div>
       </section>
 
       <section class="home-panel" id="space" data-reveal aria-labelledby="home-space-title">
@@ -529,11 +608,11 @@ a.step .step__hint {
           </div>
         </header>
         <div class="space-mosaic">
-          <figure class="space-mosaic__main"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="اتاق مشاوره" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-02.png" alt="" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-05.png" alt="" loading="lazy"></figure>
-          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-06.png" alt="" loading="lazy"></figure>
+          <figure class="space-mosaic__main"><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-07.png" alt="اتاق مشاوره" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-04.png" alt="" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-08.png" alt="" loading="lazy"></figure>
           <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-03.png" alt="" loading="lazy"></figure>
+          <figure><img src="https://ali-m07.github.io/delsa-clinic-homepage/static/img/clinic/room-01.png" alt="" loading="lazy"></figure>
         </div>
       </section>
 
@@ -606,10 +685,10 @@ a.step .step__hint {
 </main>
 
   <div class="wa-dock" id="wa-dock">
-    <button type="button" class="wa-dock__close" id="wa-close" aria-label="بستن واتساپ">×</button>
     <a class="whatsapp-float" href="https://wa.me/989025680372" target="_blank" rel="noopener" aria-label="گفت‌وگو در واتساپ">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     </a>
+    <button type="button" class="wa-dock__close" id="wa-close" aria-label="بستن واتساپ">×</button>
   </div>
   <div class="mobile-cta" id="mobile-cta">
     <a class="mobile-cta__call" href="tel:09025680372">تماس</a>
@@ -649,6 +728,55 @@ a.step .step__hint {
         try { localStorage.setItem("delsa_wa_hidden", "1"); } catch (e) {}
       });
     }
+
+    /* نظرات مراجعان — آماده اتصال بعدی به دیتابیس/API */
+    (function initTestimonials() {
+      var root = document.getElementById("home-testimonials");
+      if (!root) return;
+      var slides = Array.prototype.slice.call(root.querySelectorAll("[data-t-slide]"));
+      var dotsWrap = document.getElementById("testimonials-dots");
+      if (slides.length < 2) return;
+      var idx = 0, timer = null, gap = 5200;
+
+      function go(n) {
+        idx = (n + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+          var on = i === idx;
+          slide.classList.toggle("is-active", on);
+          slide.setAttribute("aria-hidden", on ? "false" : "true");
+        });
+        if (dotsWrap) {
+          Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+            dot.classList.toggle("is-active", i === idx);
+            dot.setAttribute("aria-selected", i === idx ? "true" : "false");
+          });
+        }
+      }
+      function next() { go(idx + 1); }
+      function arm() {
+        if (timer) clearInterval(timer);
+        if (!reduceMotion) timer = setInterval(next, gap);
+      }
+
+      if (dotsWrap) {
+        slides.forEach(function (_, i) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "testimonials__dot" + (i === 0 ? " is-active" : "");
+          btn.setAttribute("role", "tab");
+          btn.setAttribute("aria-label", "نظر " + (i + 1));
+          btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          btn.addEventListener("click", function () { go(i); arm(); });
+          dotsWrap.appendChild(btn);
+        });
+      }
+
+      root.addEventListener("mouseenter", function () { if (timer) clearInterval(timer); });
+      root.addEventListener("mouseleave", arm);
+      root.addEventListener("focusin", function () { if (timer) clearInterval(timer); });
+      root.addEventListener("focusout", arm);
+      arm();
+    })();
 
     var mobileCta = document.getElementById("mobile-cta");
     var hero = document.getElementById("hero");
@@ -801,17 +929,27 @@ a.step .step__hint {
       var target = parseInt(el.getAttribute("data-count"), 10);
       var prefix = el.getAttribute("data-prefix") || "";
       var suffix = el.getAttribute("data-suffix") || "";
-      if (reduceMotion) { el.textContent = prefix + toFa(target) + suffix; return; }
+      if (reduceMotion) { el.textContent = toFa(prefix) + toFa(target) + toFa(suffix); return; }
       var start = null, dur = 1100;
       function frame(ts) {
         if (!start) start = ts;
         var p = Math.min(1, (ts - start) / dur);
         var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = prefix + toFa(Math.round(target * eased)) + suffix;
+        el.textContent = toFa(prefix) + toFa(Math.round(target * eased)) + toFa(suffix);
         if (p < 1) requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
     }
+    /* Persian digits in WP footer / copyright if present */
+    try {
+      document.querySelectorAll("footer#contact, .site-footer, .delsa-footer-wrap").forEach(function (foot) {
+        foot.querySelectorAll("p, span, a, li").forEach(function (node) {
+          if (!node.children.length && /\d/.test(node.textContent || "")) {
+            node.textContent = toFa(node.textContent);
+          }
+        });
+      });
+    } catch (e) {}
     var counters = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
     if ("IntersectionObserver" in window && !reduceMotion) {
       var cObs = new IntersectionObserver(function (entries) {

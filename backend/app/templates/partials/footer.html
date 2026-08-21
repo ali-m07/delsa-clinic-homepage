@@ -12,10 +12,10 @@
         <h4>دسترسی سریع</h4>
         <ul class="footer-quick">
           <li><a href="/">خانه</a></li>
-          <li><a href="/مشاوران">مشاوران</a></li>
-          <li><a href="/blog">وبلاگ</a></li>
-          <li><a href="/درباره-ما">درباره ما</a></li>
           <li><a href="{{ book_url }}">فرم نوبت‌دهی</a></li>
+          <li><a href="/درباره-ما">درباره ما</a></li>
+          <li><a href="/blog">وبلاگ</a></li>
+          <li><a href="/مشاوران">مشاوران</a></li>
         </ul>
       </div>
 
@@ -42,15 +42,17 @@
         </div>
       </div>
 
-      {% if settings.map_embed_url %}
       <div class="footer-col footer-col--map">
-        <iframe src="{{ settings.map_embed_url }}" loading="lazy" title="موقعیت کلینیک دلسا"></iframe>
+        <iframe
+          src="{{ settings.map_embed_url or 'https://www.openstreetmap.org/export/embed.html?bbox=51.365%2C35.774%2C51.385%2C35.784&layer=mapnik&marker=35.779%2C51.375' }}"
+          loading="lazy"
+          title="موقعیت کلینیک دلسا"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-      {% endif %}
 
     </div>
     <div class="footer-bottom">
-      <p>© {{ now().year if now is defined else '2026' }} Delsa Clinic. All Rights Reserved</p>
+      <p>© ۲۰۲۶ Delsa Clinic. All Rights Reserved</p>
     </div>
   </div>
 </footer>
