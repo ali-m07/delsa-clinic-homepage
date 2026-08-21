@@ -81,6 +81,213 @@ const TESTIMONIALS = [
 
 const BOOK =
   'https://delsaclinic.com/%D9%81%D8%B1%D9%85-%D9%86%D9%88%D8%A8%D8%AA-%D8%AF%D9%87%DB%8C/'
+const LIVE = 'https://delsaclinic.com'
+const LOGO =
+  'https://delsaclinic.com/wp-content/uploads/2021/12/DelsaClinicLogo-120x120.png'
+
+const DEPTS = [
+  { label: 'روان‌درمانی', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86-%D8%AF%D8%B1%D9%85%D8%A7%D9%86%DB%8C/` },
+  { label: 'زوج و خانواده', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B2%D9%88%D8%AC-%D9%88-%D8%AE%D8%A7%D9%86%D9%88%D8%A7%D8%AF%D9%87/` },
+  { label: 'کودک و نوجوان', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%DA%A9%D9%88%D8%AF%DA%A9-%D9%88-%D9%86%D9%88%D8%AC%D9%88%D8%A7%D9%86/` },
+  { label: 'روان‌پزشکی', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%B1%D9%88%D8%A7%D9%86%D9%BE%D8%B2%D8%B4%DA%A9%DB%8C/` },
+  { label: 'ترک اعتیاد', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D8%AA%D8%B1%DA%A9-%D8%A7%D8%B9%D8%AA%DB%8C%D8%A7%D8%AF/` },
+  { label: 'مشاوره شغلی', href: `${LIVE}/%D8%AF%D9%BE%D8%A7%D8%B1%D8%AA%D9%85%D8%A7%D9%86-%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D9%87-%D8%B4%D8%BA%D9%84%DB%8C/` },
+] as const
+
+function SiteHeader() {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  return (
+    <>
+      <header className="site-header" id="site-header">
+        <div className="hdr-wrap">
+          <a className="hdr-logo" href={LIVE}>
+            <img src={LOGO} alt="کلینیک دلسا" width={40} height={40} />
+            <span>
+              <span className="hdr-logo__name">کلینیک دلسا</span>
+              <span className="hdr-logo__tag">مشاوره و روان‌درمانی</span>
+            </span>
+          </a>
+
+          <nav className="hdr-nav" aria-label="منوی اصلی">
+            <a className="hdr-nav__link" href={LIVE}>
+              خانه
+            </a>
+            <a className="hdr-nav__link" href={`${LIVE}/%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D9%85%D8%A7/`}>
+              درباره ما
+            </a>
+            <div className="nav-dropdown">
+              <span className="hdr-nav__link hdr-nav__drop">دپارتمان‌ها</span>
+              <div className="nav-dropdown-menu" role="menu">
+                {DEPTS.map((d) => (
+                  <a key={d.label} href={d.href} role="menuitem">
+                    {d.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <a className="hdr-nav__link" href={`${LIVE}/%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D8%A7%D9%86/`}>
+              مشاوران
+            </a>
+            <a className="hdr-nav__link" href={`${LIVE}/blog/`}>
+              وبلاگ
+            </a>
+          </nav>
+
+          <div className="hdr-actions">
+            <a href="tel:+989025680372" className="hdr-phone dir-ltr">
+              ۰۹۰۲-۵۶۸۰۳۷۲
+            </a>
+            <a href={BOOK} className="hdr-cta">
+              درخواست وقت ملاقات
+            </a>
+            <button
+              type="button"
+              className="hdr-burger"
+              aria-label="منوی موبایل"
+              aria-expanded={open}
+              onClick={() => setOpen(true)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div
+        className={`sidebar-backdrop${open ? ' is-open' : ''}`}
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      />
+      <aside
+        className={`sidebar-panel${open ? ' is-open' : ''}`}
+        aria-hidden={!open}
+        aria-label="منوی موبایل"
+      >
+        <div className="sidebar-head">
+          <a className="sidebar-brand" href={LIVE} onClick={() => setOpen(false)}>
+            <img src={LOGO} alt="" width={36} height={36} />
+            کلینیک دلسا
+          </a>
+          <button type="button" className="sidebar-close" aria-label="بستن منو" onClick={() => setOpen(false)}>
+            ×
+          </button>
+        </div>
+        <nav className="sidebar-nav">
+          <a href={LIVE} onClick={() => setOpen(false)}>
+            خانه
+          </a>
+          <a href={`${LIVE}/%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D9%85%D8%A7/`} onClick={() => setOpen(false)}>
+            درباره ما
+          </a>
+          <span className="sidebar-section-label">دپارتمان‌ها</span>
+          {DEPTS.map((d) => (
+            <a key={d.label} className="sidebar-sublink" href={d.href} onClick={() => setOpen(false)}>
+              {d.label}
+            </a>
+          ))}
+          <a href={`${LIVE}/%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D8%A7%D9%86/`} onClick={() => setOpen(false)}>
+            مشاوران
+          </a>
+          <a href={`${LIVE}/blog/`} onClick={() => setOpen(false)}>
+            وبلاگ
+          </a>
+          <a className="sidebar-cta" href={BOOK} onClick={() => setOpen(false)}>
+            درخواست وقت ملاقات
+          </a>
+        </nav>
+      </aside>
+    </>
+  )
+}
+
+function SiteFooter() {
+  return (
+    <footer id="contact" className="site-footer">
+      <div className="footer-inner">
+        <div className="footer-grid">
+          <div className="footer-col">
+            <div className="footer-brand-row">
+              <img src={LOGO} alt="کلینیک دلسا" width={48} height={48} />
+              <p className="footer-brand-name">کلینیک دلسا</p>
+            </div>
+            <p className="footer-brand-desc">گروه تخصصی مشاوره و خدمات روان‌شناختی</p>
+            <h4>دسترسی سریع</h4>
+            <ul className="footer-quick">
+              <li>
+                <a href={LIVE}>خانه</a>
+              </li>
+              <li>
+                <a href={`${LIVE}/%D9%85%D8%B4%D8%A7%D9%88%D8%B1%D8%A7%D9%86/`}>مشاوران</a>
+              </li>
+              <li>
+                <a href={`${LIVE}/blog/`}>وبلاگ</a>
+              </li>
+              <li>
+                <a href={`${LIVE}/%D8%AF%D8%B1%D8%A8%D8%A7%D8%B1%D9%87-%D9%85%D8%A7/`}>درباره ما</a>
+              </li>
+              <li>
+                <a href={BOOK}>فرم نوبت‌دهی</a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>ارتباط با ما</h4>
+            <p className="footer-clinic-title">کلینیک دلسا — سعادت‌آباد</p>
+            <p className="footer-address">
+              سعادت‌آباد، خیابان علامه جنوبی، نبش خیابان حق‌طلب غربی، پلاک ۸۰، ساختمان علامه، طبقه ۶،
+              واحد ۴
+            </p>
+            <a
+              href="https://maps.google.com/?q=35.779,51.375"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-maps-btn"
+            >
+              مسیریابی در Google Maps
+            </a>
+            <div className="footer-phones">
+              <p className="footer-phones-label">تلفن</p>
+              <a href="tel:+989025680372" className="footer-phone-main dir-ltr">
+                ۰۹۰۲-۵۶۸۰۳۷۲
+              </a>
+              <a href="tel:+982122091743" className="footer-phone-sub dir-ltr">
+                ۰۲۱-۲۲۰۹۱۷۴۳
+              </a>
+            </div>
+            <div className="footer-email">
+              <p className="footer-phones-label">ایمیل</p>
+              <a href="mailto:info@delsaclinic.com" className="dir-ltr">
+                info@delsaclinic.com
+              </a>
+            </div>
+          </div>
+
+          <div className="footer-col footer-col--map">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=51.365%2C35.774%2C51.385%2C35.784&layer=mapnik&marker=35.779%2C51.375"
+              loading="lazy"
+              title="موقعیت کلینیک دلسا"
+            />
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>© 2026 Delsa Clinic. All Rights Reserved</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
 
 function Reveal({
   children,
@@ -134,9 +341,9 @@ function Hero() {
             className="hero__photo"
             src={CLINIC[index]}
             alt=""
-            initial={reduce ? false : { opacity: 0, scale: 1.08 }}
+            initial={reduce ? false : { opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={reduce ? undefined : { opacity: 0, scale: 1.02 }}
+            exit={reduce ? undefined : { opacity: 0 }}
             transition={fade}
           />
         </AnimatePresence>
@@ -277,10 +484,11 @@ export default function App() {
   const reduce = useReducedMotion()
 
   return (
-    <div className="delsa-home" data-home-version="motion-1.0">
+    <div className="delsa-home" data-home-version="motion-1.1">
       <a className="skip" href="#main">
         رفتن به محتوا
       </a>
+      <SiteHeader />
       <main id="main">
         <Hero />
 
@@ -386,14 +594,18 @@ export default function App() {
                 </header>
                 <div className="space-mosaic">
                   {CLINIC.map((src, i) => (
-                    <motion.figure
+                    <figure
                       key={src}
                       className={i === 0 ? 'space-mosaic__main' : undefined}
-                      whileHover={reduce ? undefined : { scale: 1.015 }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 24 }}
                     >
-                      <img src={src} alt={i === 0 ? 'فضای کلینیک دلسا' : ''} loading="lazy" />
-                    </motion.figure>
+                      <motion.img
+                        src={src}
+                        alt={i === 0 ? 'فضای کلینیک دلسا' : ''}
+                        loading="lazy"
+                        whileHover={reduce ? undefined : { scale: 1.04 }}
+                        transition={{ type: 'spring', stiffness: 280, damping: 26 }}
+                      />
+                    </figure>
                   ))}
                 </div>
               </section>
@@ -421,6 +633,15 @@ export default function App() {
           </div>
         </div>
       </main>
+      <SiteFooter />
+      <div className="mobile-cta-bar">
+        <a href="tel:+989025680372" className="mobile-cta-bar__call">
+          تماس
+        </a>
+        <a href={BOOK} className="mobile-cta-bar__book">
+          درخواست وقت
+        </a>
+      </div>
     </div>
   )
 }
